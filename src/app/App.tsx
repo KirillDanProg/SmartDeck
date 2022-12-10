@@ -10,6 +10,8 @@ function App() {
 
     <AppRoutes/>
 
+    <h1>register</h1>
+
   </div>;
 }
 
