@@ -11,8 +11,6 @@ function App() {
         <AppRoutes/>
       <h1>KIRILL</h1>
       <h1>KIRILL</h1>
-      <h1>KIRILL</h1>
-      <h1>KIRILL</h1>
     </div>;
 }
 
