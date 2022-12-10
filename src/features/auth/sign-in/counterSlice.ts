@@ -17,6 +17,8 @@ const initialState: CounterState = {
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
+
+//DIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 export const incrementAsync = createAsyncThunk(
   "sign-in/fetchCount",
   async (amount: number) => {
