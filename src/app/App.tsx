@@ -11,7 +11,7 @@ function App() {
     <AppRoutes/>
     <h2>Login</h2>
 
-    <h1>Kirill</h1>
+    <h1>Alex</h1>
 
   </div>;
 }
