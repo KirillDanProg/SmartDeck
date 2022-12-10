@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
+import { RootState } from "../../../app/store";
+import { fetchCount } from "./counterAPI";
 
 export interface CounterState {
   value: number;
@@ -11,42 +12,45 @@ const initialState: CounterState = {
   status: "idle",
 };
 
-
-export const getUserData = createAsyncThunk(
-  "sign-in/fetchCount",
+export const incrementAsync = createAsyncThunk(
+  "auth/register",
   async (amount: number) => {
+    const response = await fetchCount(amount);
+    return response.data;
   }
 );
 
 export const counterSlice = createSlice({
-  name: "counter",
+  name: "profile",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    changeAvatar: (state) => {
+
     },
     decrement: (state) => {
-      state.value -= 1;
+
     },
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
   },
+
   extraReducers: (builder) => {
     builder
-      .addCase(getUserData.pending, (state) => {
+      .addCase(incrementAsync.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(getUserData.fulfilled, (state, action) => {
+      .addCase(incrementAsync.fulfilled, (state, action) => {
         state.status = "idle";
+        state.value += action.payload;
       })
-      .addCase(getUserData.rejected, (state) => {
+      .addCase(incrementAsync.rejected, (state) => {
         state.status = "failed";
       });
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { changeAvatar, decrement, incrementByAmount } = counterSlice.actions;
 
 export const selectCount = (state: RootState) => state.counter.value;
 
