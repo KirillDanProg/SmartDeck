@@ -10,7 +10,7 @@ function App() {
 
     <AppRoutes/>
 
-    <h1>Kirill</h1>
+    <h1>Alex</h1>
 
   </div>;
 }
