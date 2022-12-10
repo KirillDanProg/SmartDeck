@@ -9,6 +9,7 @@ function App() {
     <Header/>
 
     <AppRoutes/>
+    <h2>Login</h2>
 
     <h1>Kirill</h1>
 
