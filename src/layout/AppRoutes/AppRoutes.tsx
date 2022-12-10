@@ -1,0 +1,24 @@
+import React from 'react'
+
+import { Navigate, Route, Routes } from 'react-router-dom'
+import {Main} from "../Main/Main";
+import {PATH} from "./routes";
+import {Page404} from "../404-page/Page404";
+import {Profile} from "../Profile/Profile";
+
+
+export const AppRoutes = () => {
+    return (
+        <>
+            <Routes>
+                <Route  path={PATH.MAIN}  element={<Main />}>
+                    <Route path={PATH.PROFILE} element={<Profile />} />
+                    {/*<Route path={PATH.SIGN_IN} element={<SignIn />} />*/}
+                    {/*<Route path={PATH.SIGN_UP} element={<SignUp />} />*/}
+                    <Route path="404" element={<Page404 />} />
+                    <Route path="*" element={<Navigate to="404" />} />
+                </Route>
+            </Routes>
+        </>
+    )
+}
