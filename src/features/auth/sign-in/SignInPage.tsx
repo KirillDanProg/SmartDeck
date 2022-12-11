@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -15,8 +14,6 @@ import {useFormik} from 'formik';
 import {InputAdornment} from '@mui/material';
 import {PasswordVisibleIcon} from '../../../common/components/PasswordVisible';
 import {BasicModal} from '../../../common/components/ModalWindow';
-import {Simulate} from 'react-dom/test-utils';
-import error = Simulate.error;
 import {validationSchema} from '../../../app/utils/yupValidation';
 import s from './SignInPage.module.css'
 
