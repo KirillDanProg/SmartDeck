@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {AppRoutes} from '../layout/AppRoutes/AppRoutes';
 import {Header} from '../layout/Header/Header';
+import {SignInPage} from '../features/auth/sign-in/SignInPage';
 
 function App() {
     return <div className="App">
@@ -9,7 +10,7 @@ function App() {
         <Header/>
 
         <AppRoutes/>
-
+        <SignInPage/>
     </div>;
 }
 
