@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import {useRegisterMutation} from "./counterAPI";
+import {useRegisterMutation} from "./authApi";
 import {useFormik} from "formik";
 import {BasicModal} from "../../common/components/ModalWindow";
 import { useState} from "react";
