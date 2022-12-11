@@ -11,36 +11,20 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import {useRegisterMutation} from "./counterAPI";
-import * as yup from 'yup';
 import {useFormik} from "formik";
 import {BasicModal} from "../../common/components/ModalWindow";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useState} from "react";
 import {PATH} from "../../layout/AppRoutes/routes";
 import {PasswordVisibleIcon} from "../../common/components/PasswordVisible";
 import {InputAdornment} from "@mui/material";
+import {validationSchema} from "../../app/utils/yupValidation";
+import {useRedirectTo} from "../../app/hooks/useRedirectTo";
 
-
-const validationSchema = yup.object({
-    email: yup
-        .string()
-        .email('Enter a valid email')
-        .required('Email is required'),
-    password: yup
-        .string()
-        .min(7, 'Password should be of minimum 7 characters length')
-        .required('Password is required'),
-    passwordConfirm: yup
-        .string()
-        .oneOf([yup.ref('password'), null], 'Passwords must match')
-});
 
 export const SignUpPage = () => {
     const [register, {error, isSuccess, isLoading}] = useRegisterMutation()
 
     const [isShown, setIsShown] = useState(false)
-
-    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -48,7 +32,7 @@ export const SignUpPage = () => {
             password: '',
             passwordConfirm: ''
         },
-        validationSchema: validationSchema,
+        validationSchema,
         onSubmit: async (values) => {
             await register(values)
         },
@@ -56,11 +40,7 @@ export const SignUpPage = () => {
 
     const passwordType = isShown ? "text" : "password"
 
-    useEffect(() => {
-        if (isSuccess) {
-            navigate(`/${PATH.LOGIN}`)
-        }
-    }, [isLoading])
+    useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isLoading])
 
     return (
         <Grid container component="main" sx={{height: '100vh'}}>
