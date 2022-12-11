@@ -9,11 +9,7 @@ function App() {
         <Header/>
 
         <AppRoutes/>
-      <h1>Ilya</h1>
-      <h1>KIRILL</h1>
-      <h1>DIMA</h1>
-      <h1>KIRILL</h1>
-      <h1>KIRILL</h1>
+
     </div>;
 }
 
