@@ -1,0 +1,26 @@
+.title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: right;
+    color: #000000;
+}
+
+.email {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000000;
+    opacity: 0.5;
+}
+
+.topText {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
