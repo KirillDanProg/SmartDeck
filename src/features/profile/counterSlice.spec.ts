@@ -5,7 +5,7 @@ import counterReducer, {
   incrementByAmount,
 } from "./counterSlice";
 
-describe("sign-in reducer", () => {
+describe("auth reducer", () => {
   const initialState: CounterState = {
     value: 3,
     status: "idle",
