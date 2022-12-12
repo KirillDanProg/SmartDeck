@@ -14,7 +14,7 @@ import {useFormik} from 'formik';
 import {InputAdornment} from '@mui/material';
 import {PasswordVisibleIcon} from '../../../common/components/PasswordVisible';
 import {BasicModal} from '../../../common/components/ModalWindow';
-import {validationSchema} from '../../../app/utils/yupValidation';
+import {validationSchema} from '../../../common/components/form/yupValidation';
 import s from './SignInPage.module.css'
 
 
