@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 type InitialStateType = {
     token: string | null
@@ -12,8 +12,14 @@ const initialState: InitialStateType = {
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {},
+    reducers: {
+    setIsLoggedIn(state,action:PayloadAction<{}>){
+
+    }
+    },
 })
 
 export const {} = authSlice.actions
 
+export const authReducer = authSlice.reducer;
+// export const {setIsLoggedIn} = authSlice.actions;

@@ -10,40 +10,64 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import {useState} from 'react';
-import {useFormik} from 'formik';
+import {FormikErrors, useFormik} from 'formik';
 import {InputAdornment} from '@mui/material';
 import {PasswordVisibleIcon} from '../../../common/components/PasswordVisible';
-import {BasicModal} from '../../../common/components/ModalWindow';
 import {validationSchema} from '../../../app/utils/yupValidation';
 import s from './SignInPage.module.css'
 
 
+export type ResponseLoginType = {
+    _id: string;
+    email: string;
+    name: string;
+    avatar?: string;
+    publicCardPacksCount: number;
+// количество колод
+
+    created: Date;
+    updated: Date;
+    isAdmin: boolean;
+    verified: boolean; // подтвердил ли почту
+    rememberMe: boolean;
+
+    error?: string;
+}
+
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+}
+
+
 export const SignInPage = () => {
-    // const [register, {error, isSuccess, isLoading}] = useRegisterMutation()
-
     const [isShown, setIsShown] = useState(false)
-
     const formik = useFormik({
+        validate: (values: LoginParamsType) => {
+            let errors: FormikErrors<LoginParamsType> = {};
+            if (!values.email) {
+                errors.email = 'Email is required!'
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                errors.email = 'Invalid email address'
+            }
+            if (!values.password) {
+                errors.password = 'Password is required!'
+            }
+            return errors
+        },
         initialValues: {
             email: '',
             password: '',
-            passwordConfirm: ''
+            rememberMe: false
         },
         validationSchema,
         onSubmit: async (values) => {
             // await register(values)
         }
     });
-
-    // const passwordType = isShown ? "text" : "password"
-
-    // useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isLoading])
-
     return (
         <Grid container component="main" sx={{height: '80vh'}}>
-            {/*{error && <BasicModal modalTitle="Something went wrong"*/}
-            {/*                      modalText="Invalid email or password"*/}
-            {/*/>}*/}
             <CssBaseline/>
             <Grid
                 item
