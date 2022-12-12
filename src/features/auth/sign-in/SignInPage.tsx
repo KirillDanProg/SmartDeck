@@ -13,7 +13,6 @@ import {useState} from 'react';
 import {useFormik} from 'formik';
 import {InputAdornment} from '@mui/material';
 import {PasswordVisibleIcon} from '../../../common/components/PasswordVisible';
-import {BasicModal} from '../../../common/components/ModalWindow';
 import {validationSchema} from '../../../common/components/form/yupValidation';
 import s from './SignInPage.module.css'
 
@@ -40,17 +39,17 @@ export const SignInPage = () => {
     // useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isLoading])
 
     return (
-        <Grid container component="main" sx={{height: '80vh'}}>
+        <Grid container component="main" sx={{height: '80vh'}} justifyContent="center" >
             {/*{error && <BasicModal modalTitle="Something went wrong"*/}
             {/*                      modalText="Invalid email or password"*/}
             {/*/>}*/}
             <CssBaseline/>
-            <Grid
-                item
-                xs={false}
-                sm={4}
-                md={4}
-            />
+            {/*<Grid*/}
+            {/*    item*/}
+            {/*    xs={false}*/}
+            {/*    sm={4}*/}
+            {/*    md={4}*/}
+            {/*/>*/}
             <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
                 <div className={s.container}>
                     <Box
