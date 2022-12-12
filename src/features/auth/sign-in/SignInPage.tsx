@@ -66,8 +66,16 @@ export const SignInPage = () => {
             // await register(values)
         }
     });
+
+    // const passwordType = isShown ? "text" : "password"
+
+    // useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isLoading])
+
     return (
         <Grid container component="main" sx={{height: '80vh'}}>
+            {/*{error && <BasicModal modalTitle="Something went wrong"*/}
+            {/*                      modalText="Invalid email or password"*/}
+            {/*/>}*/}
             <CssBaseline/>
             <Grid
                 item

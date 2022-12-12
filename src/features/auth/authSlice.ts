@@ -1,4 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from "@reduxjs/toolkit";
+import {RootState} from "../../app/store";
+import {authAPI} from "./authAPI";
 
 type InitialStateType = {
     token: string | null
@@ -12,14 +14,15 @@ const initialState: InitialStateType = {
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {
-    setIsLoggedIn(state,action:PayloadAction<{}>){
-
+    reducers: {},
+    extraReducers: builder => {
+        builder
+            .addMatcher(authAPI.endpoints.register.matchFulfilled,
+                (state, {payload}) => {
+                    state.userId = payload._id
+                }
+            )
     }
-    },
 })
 
-export const {} = authSlice.actions
-
-export const authReducer = authSlice.reducer;
-// export const {setIsLoggedIn} = authSlice.actions;
+export const selectCurrentUser = (state: RootState) => state.auth.userId
