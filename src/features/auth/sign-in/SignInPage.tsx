@@ -13,6 +13,7 @@ import {useState} from 'react';
 import {FormikErrors, useFormik} from 'formik';
 import {InputAdornment} from '@mui/material';
 import {PasswordVisibleIcon} from '../../../common/components/PasswordVisible';
+import {validationSchema} from '../../../app/utils/yupValidation';
 import {validationSchema} from '../../../common/components/form/yupValidation';
 import s from './SignInPage.module.css'
 
@@ -69,12 +70,12 @@ export const SignInPage = () => {
     return (
         <Grid container component="main" sx={{height: '80vh'}}>
             <CssBaseline/>
-            {/*<Grid*/}
-            {/*    item*/}
-            {/*    xs={false}*/}
-            {/*    sm={4}*/}
-            {/*    md={4}*/}
-            {/*/>*/}
+            <Grid
+                item
+                xs={false}
+                sm={4}
+                md={4}
+            />
             <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
                 <div className={s.container}>
                     <Box
