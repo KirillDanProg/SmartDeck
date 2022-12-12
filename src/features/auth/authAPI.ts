@@ -36,8 +36,14 @@ export const authAPI = createApi({
                 body: body
             }),
             transformResponse: (response: IRegisterResponse) => response.addedUser
-        })
+        }),
+        logout: build.mutation(({
+            query: (token: string) => ({
+                url: `auth/me`,
+                method: 'DELETE'
+            })
+        }))
     })
 })
 
-export const {useRegisterMutation} = authAPI
+export const {useRegisterMutation, useLogoutMutation} = authAPI
