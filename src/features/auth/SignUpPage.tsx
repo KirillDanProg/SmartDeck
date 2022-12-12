@@ -10,21 +10,29 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import {useRegisterMutation} from "./counterAPI";
+import {useRegisterMutation} from "./authAPI";
 import {useFormik} from "formik";
 import {BasicModal} from "../../common/components/ModalWindow";
-import { useState} from "react";
+import {useEffect, useState} from "react";
 import {PATH} from "../../layout/AppRoutes/routes";
 import {PasswordVisibleIcon} from "../../common/components/PasswordVisible";
 import {InputAdornment} from "@mui/material";
 import {validationSchema} from "../../app/utils/yupValidation";
 import {useRedirectTo} from "../../app/hooks/useRedirectTo";
-
+import {saveToLocalStorage} from "../../app/utils/local-storage";
+import {useAppSelector} from "../../app/hooks";
+import {selectCurrentUser} from "./authSlice";
 
 export const SignUpPage = () => {
+
     const [register, {error, isSuccess, isLoading}] = useRegisterMutation()
 
+    const userId = useAppSelector(selectCurrentUser)
+
     const [isShown, setIsShown] = useState(false)
+
+    const passwordType = isShown ? "text" : "password"
+
 
     const formik = useFormik({
         initialValues: {
@@ -34,13 +42,15 @@ export const SignUpPage = () => {
         },
         validationSchema,
         onSubmit: async (values) => {
-            await register(values)
+            await register(values).unwrap()
         },
     });
 
-    const passwordType = isShown ? "text" : "password"
+    useRedirectTo(`/${PATH.LOGIN}`, !!userId, [isLoading])
 
-    useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isLoading])
+    useEffect(() => {
+        saveToLocalStorage("id", userId)
+    }, [isSuccess])
 
     return (
         <Grid container component="main" sx={{height: '100vh'}}>
@@ -109,13 +119,6 @@ export const SignUpPage = () => {
                             type={passwordType}
                             id="passwordConfirm"
                             {...formik.getFieldProps('passwordConfirm')}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <PasswordVisibleIcon isShown={isShown} setShown={setIsShown}/>
-                                    </InputAdornment>
-                                )
-                            }}
                         />
 
                         <FormControlLabel
