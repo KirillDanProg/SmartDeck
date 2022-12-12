@@ -2,14 +2,20 @@ import React from 'react';
 import './App.css';
 import {AppRoutes} from '../layout/AppRoutes/AppRoutes';
 import {Header} from '../layout/Header/Header';
+import {ThemeProvider} from "@mui/material";
+import {theme} from "./theme/theme";
+
 
 function App() {
-    return <div className="App">
+    return (
+        <ThemeProvider theme={theme}>
 
-        <Header/>
+            <Header/>
 
-        <AppRoutes/>
-    </div>;
+            <AppRoutes/>
+
+        </ThemeProvider>
+    )
 }
 
 export default App;
