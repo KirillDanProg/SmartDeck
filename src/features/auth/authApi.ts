@@ -32,8 +32,14 @@ export const authAPI = createApi({
                 method: 'POST',
                 body: body
             })
-        })
+        }),
+        logout: build.mutation(({
+            query: (token: string) => ({
+                url: `auth/me`,
+                method: 'DELETE'
+            })
+        }))
     })
 })
 
-export const {useRegisterMutation} = authAPI
+export const {useRegisterMutation, useLogoutMutation} = authAPI

@@ -10,10 +10,21 @@ import avatar from "../../assets/user/userImg.png"
 import {UserName} from "./User/UserName/UserName"
 import {LogoutBtn} from "./Button/LogoutBtn"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import {useLogoutMutation} from "../auth/authApi";
+import {useRedirectTo} from "../../app/hooks/useRedirectTo";
+import {PATH} from "../../layout/AppRoutes/routes";
 
 
 export const Profile = () => {
     const email = "incubator@mail.ru" // come from server
+    const [logout, {isSuccess, isLoading}]= useLogoutMutation()
+
+    const logoutHandler = async(token: string) => {
+        await logout(token).unwrap()
+
+    }
+    //todo: how work useRedirect
+    useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isLoading])
     return (
         <>
             <div className={s.topText}>
@@ -52,6 +63,7 @@ export const Profile = () => {
                             {email}
                         </Typography>
                         <br/>
+                        <button onClick={() =>logoutHandler("")}>log out</button>
                         <LogoutBtn/>
                     </Stack>
                 </Paper>
