@@ -1,18 +1,18 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { useRegisterMutation, IRegisterRequest} from "./authAPI";
-import {BasicModal} from "../../common/components/ModalWindow";
-import {useEffect} from "react";
-import {PATH} from "../../layout/AppRoutes/routes";
-import {useRedirectTo} from "../../app/hooks/useRedirectTo";
-import {saveToLocalStorage} from "../../app/utils/local-storage";
-import {useAppSelector} from "../../app/hooks";
-import {selectCurrentUser} from "./authSlice";
+import {IRegisterRequest, useRegisterMutation} from './authAPI';
+import {BasicModal} from '../../common/components/ModalWindow';
+import {PATH} from '../../layout/AppRoutes/routes';
+import {useRedirectTo} from '../../app/hooks/useRedirectTo';
+import {saveToLocalStorage} from '../../app/utils/local-storage';
+import {useAppSelector} from '../../app/hooks';
+import {selectCurrentUser} from './authSlice';
 import {Form} from '../../common/components/form/Form';
 
 
@@ -23,14 +23,14 @@ export const SignUpPage = () => {
     const userId = useAppSelector(selectCurrentUser)
 
     //todo: types
-   async function signUpHandler(data: IRegisterRequest) {
-       await register(data)
+    async function signUpHandler(data: IRegisterRequest) {
+        await register(data)
     }
 
     useRedirectTo(`/${PATH.LOGIN}`, !!userId, [isLoading])
 
     useEffect(() => {
-        saveToLocalStorage("id", userId)
+        saveToLocalStorage('id', userId)
     }, [isSuccess])
 
     return (

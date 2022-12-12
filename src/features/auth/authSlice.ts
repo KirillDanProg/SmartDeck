@@ -24,10 +24,11 @@ export const authSlice = createSlice({
             )
             .addMatcher(authAPI.endpoints.login.matchFulfilled,
                 (state, {payload}) => {
-                    state.token = payload._id
+                   state.token = payload.token
                 }
             )
     }
 })
 
-export const selectCurrentUser = (state: RootState) => state.auth.userId
+export const selectCurrentUser = (state: RootState) => state.auth.userId;
+export const  selectToken= (state: RootState) => state.auth.token;

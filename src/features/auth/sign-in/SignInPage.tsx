@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect} from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -7,21 +7,26 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import s from './SignInPage.module.css'
 import {Form} from '../../../common/components/form/Form';
-import {IRegisterRequest, useRegisterMutation} from '../authAPI';
-import {PATH} from '../../../layout/AppRoutes/routes';
-import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
+import {ILoginRequest, useLoginMutation} from '../authAPI';
 import {BasicModal} from '../../../common/components/ModalWindow';
-import {useAppSelector} from '../../../app/hooks';
-import {selectCurrentUser} from '../authSlice';
+import {saveToLocalStorage} from '../../../app/utils/local-storage';
+import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
+import {PATH} from '../../../layout/AppRoutes/routes';
 
 
 export const SignInPage = () => {
-    const [login, {error, isLoading}] = useRegisterMutation()
-    async function signInHandler(data: IRegisterRequest) {
-        await login(data)
+
+    const [login, {error, isSuccess, data}] = useLoginMutation();
+
+    async function signInHandler(formData: ILoginRequest) {
+        await login(formData)
     }
-    const userId = useAppSelector(selectCurrentUser)
-    useRedirectTo(`/${PATH.PROFILE}`, !!userId, [isLoading])
+
+    const token = data?.token;
+    useRedirectTo(`/${PATH.PROFILE}`, !!token, [isSuccess]);
+    useEffect(() => {
+        saveToLocalStorage('token', token)
+    }, [isSuccess])
     return (
         <Grid container component="main" sx={{height: '80vh'}}>
             {error && <BasicModal modalTitle="Something went wrong"
