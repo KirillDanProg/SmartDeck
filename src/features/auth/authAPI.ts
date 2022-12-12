@@ -63,6 +63,12 @@ export const authAPI = createApi({
             }),
             transformResponse: (response: IRegisterResponse) => response.addedUser
         }),
+        logout: build.mutation({
+            query: (token: string) => ({
+                url: `auth/me`,
+                method: 'DELETE'
+            })
+        }),
         login: build.mutation<IMainLoginResponse, ILoginRequest>({
             query: (body) => ({
                 url: `auth/login`,
@@ -74,4 +80,4 @@ export const authAPI = createApi({
     })
 })
 
-export const {useRegisterMutation} = authAPI
+export const {useRegisterMutation, useLogoutMutation} = authAPI
