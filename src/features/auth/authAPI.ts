@@ -2,6 +2,9 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {baseUrlGeneration} from "../../app/utils/baseUrlGeneration";
 
 export interface IRegisterResponse {
+    addedUser: IUser
+}
+export interface IUser {
     _id: string;
     email: string;
     rememberMe: boolean;
@@ -26,12 +29,13 @@ export const authAPI = createApi({
         baseUrl: baseUrlGeneration(),
     }),
     endpoints: (build) => ({
-        register: build.mutation<IRegisterResponse, IRegisterRequest>({
+        register: build.mutation<IUser, IRegisterRequest>({
             query: (body) => ({
                 url: `auth/register`,
                 method: 'POST',
                 body: body
-            })
+            }),
+            transformResponse: (response: IRegisterResponse) => response.addedUser
         })
     })
 })
