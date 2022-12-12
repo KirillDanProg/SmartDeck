@@ -8,7 +8,7 @@ import {selectCurrentUser} from "../../features/auth/authSlice";
 export const Main = () => {
     const userId = useAppSelector(selectCurrentUser)
 
-    useRedirectTo(PATH.SIGN_UP, !userId, [])
+    // useRedirectTo(PATH.SIGN_UP, !userId, [])
 
     return (
         <div>

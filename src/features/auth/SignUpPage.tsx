@@ -13,7 +13,8 @@ import {useRedirectTo} from "../../app/hooks/useRedirectTo";
 import {saveToLocalStorage} from "../../app/utils/local-storage";
 import {useAppSelector} from "../../app/hooks";
 import {selectCurrentUser} from "./authSlice";
-import {Form} from "../../common/components/form/Form";
+import {Form} from '../../common/components/form/Form';
+
 
 export const SignUpPage = () => {
 

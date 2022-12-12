@@ -17,11 +17,37 @@ export interface IUser {
     __v: number;
 }
 
+export interface ILoginResponse {
+    createdUserSession: IMainLoginResponse
+}
+
+export interface IMainLoginResponse {
+    _id: string;
+    email: string;
+    name: string;
+    avatar?: string;
+    publicCardPacksCount: number;
+// количество колод
+
+    created: Date;
+    updated: Date;
+    isAdmin: boolean;
+    verified: boolean; // подтвердил ли почту
+    rememberMe: boolean;
+
+    error?: string;
+}
+
 export interface IRegisterRequest {
     email: string
     password: string
 }
 
+export interface ILoginRequest {
+    email: string
+    password: string
+    rememberMe: boolean
+}
 
 export const authAPI = createApi({
     reducerPath: "authApi",
@@ -36,7 +62,15 @@ export const authAPI = createApi({
                 body: body
             }),
             transformResponse: (response: IRegisterResponse) => response.addedUser
-        })
+        }),
+        login: build.mutation<IMainLoginResponse, ILoginRequest>({
+            query: (body) => ({
+                url: `auth/login`,
+                method: 'POST',
+                body: body
+            }),
+            transformResponse: (response: ILoginResponse) => response.createdUserSession
+        }),
     })
 })
 

@@ -22,6 +22,11 @@ export const authSlice = createSlice({
                     state.userId = payload._id
                 }
             )
+            .addMatcher(authAPI.endpoints.login.matchFulfilled,
+                (state, {payload}) => {
+                    state.token = payload._id
+                }
+            )
     }
 })
 
