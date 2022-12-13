@@ -4,12 +4,12 @@ import {PasswordVisibleIcon} from "../PasswordVisible";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import {useFormik} from "formik";
 import {validationSchema} from "./yupValidation";
 import Button from "@mui/material/Button";
+import {Link} from "react-router-dom";
 
 
 type FormPropsType = {
@@ -45,7 +45,6 @@ export const Form: FC<FormPropsType> = ({callback, formType}) => {
                 id="email"
                 label="Email Address"
                 {...formik.getFieldProps('email')}
-                autoFocus
             />
             <TextField
                 margin="normal"
@@ -94,15 +93,26 @@ export const Form: FC<FormPropsType> = ({callback, formType}) => {
                 Sign In
             </Button>
             <Grid container>
-                <Grid item xs>
-                    <Link href="#" variant="body2">
-                        Forgot password?
-                    </Link>
-                </Grid>
+                {
+                    formType === "sign-in" &&
+                    <Grid item xs>
+                        <Button component={Link} to="/signup">
+                            {" Forgot password?"}
+                        </Button>
+                    </Grid>
+                }
+                {/*todo: review*/}
                 <Grid item>
-                    <Link href="#" variant="body2">
-                        {"Don't have an account? Sign Up"}
-                    </Link>
+                    <Button to={formType === "sign-in"
+                        ? "/signup"
+                        : "/login"}
+                            component={Link}
+
+                    >
+                        {formType === "sign-in"
+                            ? "Don't have an account? Sign Up"
+                            : "Already have an account? Sign In"}
+                    </Button>
                 </Grid>
             </Grid>
         </Box>
