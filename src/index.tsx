@@ -12,8 +12,8 @@ const root = createRoot(container);
 root.render(
     <BrowserRouter>
       <Provider store={store}>
-        <ForgotPassword />
-        {/*<App />*/}
+        {/*<ForgotPassword />*/}
+        <App />
       </Provider>
     </BrowserRouter>
 );

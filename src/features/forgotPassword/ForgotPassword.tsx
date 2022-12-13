@@ -40,7 +40,6 @@ export const ForgotPassword = () => {
             >
                 <Stack sx={{alignItems: 'center'}}
                        className={s.container}
-
                 >
                     <Typography variant={"inherit"}
                                 className={s.title}

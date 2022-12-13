@@ -13,6 +13,7 @@ import {useRedirectTo} from "../../app/hooks/useRedirectTo";
 import {PATH} from "../../layout/AppRoutes/routes";
 import {useLogoutMutation} from "../auth/appAPI";
 import {useAppSelector} from "../../app/hooks";
+import {ReturnComponent} from "../../common/components/returnComponent/ReturnComponent";
 
 
 export const Profile = () => {
@@ -26,10 +27,7 @@ export const Profile = () => {
     useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isLoading])
     return (
         <>
-            <div className={s.topText}>
-                <ArrowBackIcon/>
-                <span className={s.topText}> Back to Packs List</span>
-            </div>
+           <ReturnComponent/>
             <Container
                 maxWidth="sm"
                 sx={{
