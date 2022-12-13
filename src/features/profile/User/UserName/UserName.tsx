@@ -7,6 +7,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor'
 import Box from '@mui/material/Box'
 import {Button} from "@mui/material";
 import {useAppSelector} from "../../../../app/hooks";
+import {changeName} from "../../profileSlice";
 
 
 
@@ -22,7 +23,10 @@ export const UserName = () => {
         setUserName(e.currentTarget.value)
     }
 
-    const changeEditeMode = () => setIsEditing(!isEditing)
+    const changeEditeMode = async () => {
+
+        setIsEditing(!isEditing)
+    }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' || e.key === 'Escape') changeEditeMode()
