@@ -45,7 +45,7 @@ export const CreatePassword = () => {
                 <Stack sx={{alignItems: 'center'}}
                        className={s.container}
                 >
-                <h2 className={s.h2}>Create new password</h2>
+                <Typography variant={"inherit"} className={s.title}>Create new password</Typography>
                     <TextField
                         margin="normal"
                         required
@@ -66,7 +66,7 @@ export const CreatePassword = () => {
                         }}
                     />
                 <Typography variant={"inherit"}
-                            className={s.p}>
+                            className={s.textAfterEmail}>
                     Create new password and we will send you
                     <br />
                     further instructions to email
