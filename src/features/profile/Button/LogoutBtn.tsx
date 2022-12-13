@@ -5,7 +5,7 @@ import s from "./LogoutBtn.module.css"
 
 export const LogoutBtn: FC<LogoutBtnT> = ({callBack}) => {
     return (
-        <Button  className={s.main} onClick={() =>callBack("")}>
+        <Button className={s.main} onClick={() => callBack("")}>
             <LogoutIcon color={"action"} fontSize={"small"}/>
             <span className={s.text}>Log out</span>
         </Button>

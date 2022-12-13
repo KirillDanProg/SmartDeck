@@ -8,14 +8,13 @@ export const profileAPI = createApi({
         baseUrl: baseUrlGeneration(),
     }),
     endpoints: (build) => ({
-        // register: build.mutation<IUser, IRegisterRequest>({
-        //     query: (body) => ({
-        //         url: `auth/register`,
-        //         method: 'POST',
-        //         body: body
-        //     }),
-        //     transformResponse: (response: IRegisterResponse) => response.addedUser
-        // }),
+        changeName: build.mutation({
+            query: (body) => ({
+                url: `/auth/me`,
+                method: 'PUT',
+                body
+            }),
+        }),
     })
 })
 

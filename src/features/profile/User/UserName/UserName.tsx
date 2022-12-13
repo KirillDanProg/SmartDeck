@@ -6,12 +6,13 @@ import DoneIcon from '@mui/icons-material/Done'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
 import Box from '@mui/material/Box'
 import {Button} from "@mui/material";
+import {useAppSelector} from "../../../../app/hooks";
 
 
 
 export const UserName = () => {
 
-    const profileUserName = "Ivan" // come from server
+    const profileUserName = useAppSelector(state => state.profile.name)
 
 
     const [userName, setUserName] = useState(profileUserName)
@@ -57,7 +58,7 @@ export const UserName = () => {
                         onDoubleClick={changeEditeMode} // no working
                     />
                     <IconButton color="default" aria-label="save changed name" onClick={changeEditeMode} >
-                        <Button size={"small"} >save</Button>
+                        <Button size={"small"} onClick={()=>{}} >save</Button>
                     </IconButton>
                 </div>
             )}

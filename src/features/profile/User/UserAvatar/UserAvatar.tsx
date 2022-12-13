@@ -2,8 +2,12 @@ import React, {FC} from "react";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
 import {UserPhotoChangeBtn} from "../UserPhotoChangeBtn/UserPhotoCahngeBtn";
+import {useAppSelector} from "../../../../app/hooks";
+import defaultImage from "../../../../assets/user/userImg.png"
 
-export const UserAvatar: FC<UserAvatarT> = ({src}) => {
+export const UserAvatar = () => {
+    const avatar = useAppSelector(state => state.profile.avatar)
+    const useAvatar = avatar ? avatar : defaultImage
     return (
         <Badge
             anchorOrigin={{
@@ -14,7 +18,7 @@ export const UserAvatar: FC<UserAvatarT> = ({src}) => {
             badgeContent={<UserPhotoChangeBtn  />}
         >
             <Avatar sx={{ width: 96, height: 96 }} alt="user avatar"
-                    src={src}
+                    src={useAvatar}
             />
         </Badge>
     );

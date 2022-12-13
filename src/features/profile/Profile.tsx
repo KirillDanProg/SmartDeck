@@ -6,20 +6,20 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import s from "./Profile.module.css"
 import {UserAvatar} from "./User/UserAvatar/UserAvatar"
-import avatar from "../../assets/user/userImg.png"
 import {UserName} from "./User/UserName/UserName"
 import {LogoutBtn} from "./Button/LogoutBtn"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {useRedirectTo} from "../../app/hooks/useRedirectTo";
 import {PATH} from "../../layout/AppRoutes/routes";
 import {useLogoutMutation} from "../auth/authAPI";
+import {useAppSelector} from "../../app/hooks";
 
 
 export const Profile = () => {
-    const email = "incubator@mail.ru" // come from server
+    const email = useAppSelector(state => state.profile.email)
     const [logout, {isSuccess, isLoading}] = useLogoutMutation()
 
-    const logoutHandler = async(token: string) => {
+    const logoutHandler = async (token: string) => {
         await logout(token).unwrap()
 
     }
@@ -53,16 +53,13 @@ export const Profile = () => {
                             Personal Information
                         </Typography>
                         <Box marginTop={2} marginBottom={2}>
-                            <UserAvatar
-                                src={avatar}
-                            />
+                            <UserAvatar />
                         </Box>
                         <UserName/>
                         <Typography className={s.email}>
                             {email}
                         </Typography>
                         <br/>
-                        {/*<button onClick={() =>logoutHandler("")}>log out</button>*/}
                         <LogoutBtn callBack={logoutHandler}/>
                     </Stack>
                 </Paper>
