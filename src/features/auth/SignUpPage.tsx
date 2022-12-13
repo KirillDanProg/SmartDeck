@@ -1,50 +1,27 @@
 import * as React from 'react';
-import {useEffect} from 'react';
 import Avatar from '@mui/material/Avatar';
-import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import {IRegisterRequest, useRegisterMutation} from './authAPI';
-import {BasicModal} from '../../common/components/ModalWindow';
 import {PATH} from '../../layout/AppRoutes/routes';
 import {useRedirectTo} from '../../app/hooks/useRedirectTo';
-import {saveToLocalStorage} from '../../app/utils/local-storage';
-import {useAppSelector} from '../../app/hooks';
-import {selectCurrentUser} from './authSlice';
 import {Form} from '../../common/components/form/Form';
 
 
 export const SignUpPage = () => {
 
-    const [register, {error, isSuccess, isLoading}] = useRegisterMutation()
-
-    const userId = useAppSelector(selectCurrentUser)
+    const [register, {isSuccess}] = useRegisterMutation()
 
     //todo: types
     async function signUpHandler(data: IRegisterRequest) {
-        await register(data)
+        await register(data).unwrap()
     }
 
-    useRedirectTo(`/${PATH.LOGIN}`, !!userId, [isLoading])
-
-    useEffect(() => {
-        saveToLocalStorage('id', userId)
-    }, [isSuccess])
+    useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isSuccess])
 
     return (
-        <Grid container component="main" sx={{height: '100vh'}}>
-            {error && <BasicModal modalTitle="Something went wrong"
-                                  modalText="Invalid email or password"
-            />}
-            <CssBaseline/>
-            <Grid
-                item
-                xs={false}
-                sm={4}
-                md={7}
-            />
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                 <Box
                     sx={{
@@ -55,14 +32,12 @@ export const SignUpPage = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-                    </Avatar>
+                    <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}/>
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
                     <Form formType="sign-up" callback={signUpHandler}/>
                 </Box>
             </Grid>
-        </Grid>
     );
 }
