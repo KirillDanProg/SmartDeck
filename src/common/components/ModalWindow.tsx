@@ -19,7 +19,7 @@ const style = {
 
 type BasicModalPropsType = {
     modalTitle: string
-    modalText: string
+    modalText?: string
 }
 
 export const BasicModal: FC<BasicModalPropsType> = ({modalTitle,modalText}) => {
