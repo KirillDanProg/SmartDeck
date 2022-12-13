@@ -1,9 +1,11 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {baseUrlGeneration} from "../../app/utils/baseUrlGeneration";
+import {RootState} from "../../app/store";
 
 export interface IRegisterResponse {
     addedUser: IUser
 }
+
 export interface IUser {
     _id: string;
     email: string;
@@ -51,6 +53,14 @@ export const authAPI = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
         baseUrl: baseUrlGeneration(),
+        credentials: "include",
+        prepareHeaders: (headers, { getState }) => {
+            const token = (getState() as RootState).auth.token;
+            if (token) {
+                headers.set("token", `${token}`);
+            }
+            return headers;
+        }
     }),
     endpoints: (build) => ({
         register: build.mutation<IUser, IRegisterRequest>({
@@ -73,9 +83,19 @@ export const authAPI = createApi({
                 method: 'POST',
                 body: body
             }),
-           // transformResponse: (response: ILoginResponse) => response.createdUserSession
         }),
+        authMe: build.mutation({
+            query: (token: string) => ({
+                url: "auth/me",
+                method: "POST",
+                body: {token}
+            })
+        })
     })
 })
 
-export const {useRegisterMutation, useLogoutMutation,useLoginMutation} = authAPI
+export const {
+    useRegisterMutation,
+    useLogoutMutation,
+    useLoginMutation,
+    useAuthMeMutation} = authAPI
