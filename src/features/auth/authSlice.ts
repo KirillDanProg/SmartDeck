@@ -31,4 +31,3 @@ export const authSlice = createSlice({
 })
 
 export const selectCurrentUser = (state: RootState) => state.auth.userId;
-export const  selectToken= (state: RootState) => state.auth.token;
