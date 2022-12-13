@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
+import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
@@ -9,9 +9,11 @@ import {Button} from "@mui/material";
 import {useAppSelector} from "../../../../app/hooks";
 import {changeName} from "../../profileSlice";
 
+type UserNameT = {
+    changeNameCB: (newName: string) => void
+}
 
-
-export const UserName = () => {
+export const UserName: FC<UserNameT> = ({changeNameCB}) => {
 
     const profileUserName = useAppSelector(state => state.profile.name)
 
@@ -23,7 +25,8 @@ export const UserName = () => {
         setUserName(e.currentTarget.value)
     }
 
-    const changeEditeMode = async () => {
+    const changeEditeMode =  () => {
+        changeNameCB(userName)
         setIsEditing(!isEditing)
     }
 

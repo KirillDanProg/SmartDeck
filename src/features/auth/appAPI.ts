@@ -85,4 +85,5 @@ export const appAPI = createApi({
     })
 })
 
-export const {useRegisterMutation, useLogoutMutation,useLoginMutation} = appAPI
+export const {useRegisterMutation, useLogoutMutation,
+    useLoginMutation, useChangeNameMutation} = appAPI

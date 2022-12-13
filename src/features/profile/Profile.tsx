@@ -11,7 +11,7 @@ import {LogoutBtn} from "./Button/LogoutBtn"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {useRedirectTo} from "../../app/hooks/useRedirectTo";
 import {PATH} from "../../layout/AppRoutes/routes";
-import {useLogoutMutation} from "../auth/appAPI";
+import {appAPI, useChangeNameMutation, useLogoutMutation} from "../auth/appAPI";
 import {useAppSelector} from "../../app/hooks";
 import {ReturnComponent} from "../../common/components/returnComponent/ReturnComponent";
 
@@ -19,11 +19,16 @@ import {ReturnComponent} from "../../common/components/returnComponent/ReturnCom
 export const Profile = () => {
     const email = useAppSelector(state => state.profile.email)
     const [logout, {isSuccess, isLoading}] = useLogoutMutation()
+    const [changeName, {}] = useChangeNameMutation()
 
     const logoutHandler = async (token: string) => {
         await logout(token).unwrap()
-
     }
+
+    const changeNameHandler = async (newName: string) => {
+       await changeName(newName)
+    }
+
     useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isLoading])
     return (
         <>
@@ -53,7 +58,7 @@ export const Profile = () => {
                         <Box marginTop={2} marginBottom={2}>
                             <UserAvatar />
                         </Box>
-                        <UserName/>
+                        <UserName changeNameCB={changeNameHandler}/>
                         <Typography className={s.email}>
                             {email}
                         </Typography>
