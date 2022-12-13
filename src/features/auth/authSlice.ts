@@ -1,6 +1,7 @@
-import { createSlice} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
 import {authAPI} from "./authAPI";
+import {removeFromLocalStorage, saveToLocalStorage} from "../../app/utils/local-storage";
 
 type StatusType = "idle" | "loading" | "succeeded" | "failed"
 type InitialStateType = {
@@ -19,7 +20,7 @@ type SerializedError = {
 const initialState: InitialStateType = {
     token: null,
     userId: null,
-    status: "idle",
+    status: "loading",
     error: null
 }
 
@@ -29,6 +30,29 @@ export const authSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
+            .addMatcher<string>(authAPI.endpoints.authMe.matchRejected,
+                (state, {payload}) => {
+                    state.error = payload?.data.error
+                    state.status = "failed"
+                }
+            )
+            .addMatcher(authAPI.endpoints.authMe.matchFulfilled,
+                (state, {payload}) => {
+                    const {_id, token} = payload
+                    if (_id && token) {
+                        state.token = token
+                        state.userId = _id
+                        state.status = "succeeded"
+                    }
+                }
+            )
+            //register
+            .addMatcher(authAPI.endpoints.register.matchFulfilled,
+                (state) => {
+                    state.status = "succeeded"
+                    state.error = null
+                }
+            )
             //login
             .addMatcher(authAPI.endpoints.login.matchPending,
                 (state) => {
@@ -43,6 +67,8 @@ export const authSlice = createSlice({
                     state.error = null
                     state.token = token
                     state.userId = _id
+                    saveToLocalStorage("id", _id)
+                    saveToLocalStorage("token", token)
                 }
             )
             .addMatcher(authAPI.endpoints.login.matchRejected,
@@ -63,6 +89,8 @@ export const authSlice = createSlice({
                     state.status = "succeeded"
                     state.userId = null
                     state.token = null
+                    removeFromLocalStorage("id")
+                    removeFromLocalStorage("token")
                 }
             )
     }
@@ -71,3 +99,4 @@ export const authSlice = createSlice({
 export const selectCurrentUser = (state: RootState) => state.auth.userId;
 export const selectToken = (state: RootState) => state.auth.token;
 export const selectCurrentError = (state: RootState) => state.auth.error
+export const selectCurrentStatus = (state: RootState) => state.auth.status
