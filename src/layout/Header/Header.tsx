@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import {DarkModeSwitch} from "./DarkModeSwitch";
 import {PaletteMode} from "@mui/material";
+import incubatorLogo from '../../assets/logo/incubatorLogo.png'
 
 export const Header = () => {
     const [auth, setAuth] = React.useState(true);
@@ -68,6 +69,7 @@ export const Header = () => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Photos
                     </Typography>
+                    <img src={incubatorLogo}/>
                     {auth && (
                         <div>
                             <IconButton
