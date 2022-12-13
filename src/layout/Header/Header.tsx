@@ -11,6 +11,7 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import {DarkModeSwitch} from "./DarkModeSwitch";
+import {PaletteMode} from "@mui/material";
 
 export const Header = () => {
     const [auth, setAuth] = React.useState(true);
@@ -27,6 +28,21 @@ export const Header = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    //==========theme=========
+    //todo: change theme
+    const [mode, setMode] = React.useState<PaletteMode>('light');
+    const colorMode = React.useMemo(
+        () => ({
+            // The dark mode switch would invoke this method
+            toggleColorMode: () => {
+                setMode((prevMode: PaletteMode) =>
+                    prevMode === 'light' ? 'dark' : 'light',
+                );
+            },
+        }),
+        [],
+    );
 
     return (
         <Box sx={{ flexGrow: 1 }}>

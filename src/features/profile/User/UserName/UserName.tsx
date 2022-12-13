@@ -24,7 +24,6 @@ export const UserName = () => {
     }
 
     const changeEditeMode = async () => {
-
         setIsEditing(!isEditing)
     }
 
@@ -59,10 +58,11 @@ export const UserName = () => {
                         onChange={onChangeHandler}
                         onKeyDown={onKeyDownHandler}
                         onBlur={changeEditeMode}
-                        onDoubleClick={changeEditeMode} // no working
+                        //todo: ask Valera 'why its not working'
+                        onDoubleClick={changeEditeMode}
                     />
-                    <IconButton color="default" aria-label="save changed name" onClick={changeEditeMode} >
-                        <Button size={"small"} onClick={()=>{}} >save</Button>
+                    <IconButton color="default" size={"small"} aria-label="save changed name" onClick={changeEditeMode} >
+                            save
                     </IconButton>
                 </div>
             )}
