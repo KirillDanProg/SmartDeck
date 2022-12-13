@@ -26,6 +26,10 @@ export const UserName: FC<UserNameT> = ({changeNameCB}) => {
     }
 
     const changeEditeMode =  () => {
+        setIsEditing(!isEditing)
+    }
+
+    const saveName = () => {
         changeNameCB(userName)
         setIsEditing(!isEditing)
     }
@@ -64,7 +68,7 @@ export const UserName: FC<UserNameT> = ({changeNameCB}) => {
                         //todo: ask Valera 'why its not working'
                         onDoubleClick={changeEditeMode}
                     />
-                    <IconButton color="default" size={"small"} aria-label="save changed name" onClick={changeEditeMode} >
+                    <IconButton color="default" size={"small"} aria-label="save changed name" onClick={saveName} >
                             save
                     </IconButton>
                 </div>
