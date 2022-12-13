@@ -1,6 +1,4 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {baseUrlGeneration} from "../../app/utils/baseUrlGeneration";
-import {RootState} from "../../app/store";
+import {apiSlice} from "../api/apiSlice";
 
 export interface IRegisterResponse {
     addedUser: IUser
@@ -49,19 +47,7 @@ export interface ILoginRequest {
     rememberMe: boolean
 }
 
-export const authAPI = createApi({
-    reducerPath: "authApi",
-    baseQuery: fetchBaseQuery({
-        baseUrl: baseUrlGeneration(),
-        credentials: "include",
-        prepareHeaders: (headers, { getState }) => {
-            const token = (getState() as RootState).auth.token;
-            if (token) {
-                headers.set("token", `${token}`);
-            }
-            return headers;
-        }
-    }),
+export const authAPI = apiSlice.injectEndpoints({
     endpoints: (build) => ({
         register: build.mutation<IUser, IRegisterRequest>({
             query: (body) => ({
@@ -92,7 +78,7 @@ export const authAPI = createApi({
             })
         })
     })
-})
+});
 
 export const {
     useRegisterMutation,
