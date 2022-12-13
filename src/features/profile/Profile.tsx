@@ -62,8 +62,8 @@ export const Profile = () => {
                             {email}
                         </Typography>
                         <br/>
-                        <button onClick={() =>logoutHandler("")}>log out</button>
-                        <LogoutBtn/>
+                        {/*<button onClick={() =>logoutHandler("")}>log out</button>*/}
+                        <LogoutBtn callBack={logoutHandler}/>
                     </Stack>
                 </Paper>
             </Container>
