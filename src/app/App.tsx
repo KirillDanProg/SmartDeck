@@ -7,34 +7,38 @@ import {theme} from "./theme/theme";
 import {useAppSelector} from "./hooks";
 import {useAuthMeMutation} from "../features/auth/authAPI";
 import {BasicModal} from "../common/components/ModalWindow";
-import {selectCurrentError} from "../features/auth/authSlice";
+import {selectCurrentError, selectCurrentStatus} from "../features/auth/authSlice";
 import CssBaseline from "@mui/material/CssBaseline";
+import {serverErrorHandler} from "./utils/serverErrorTransformed";
+import {Preloader} from "../common/components/Preloader";
 
 function App() {
 
-    const token = useAppSelector(state => state.auth.token)
+    const error = useAppSelector(selectCurrentError)
 
-    const errorMessage = useAppSelector(selectCurrentError)?.message
+    const status = useAppSelector(selectCurrentStatus)
 
     const [authMe] = useAuthMeMutation()
 
     useEffect(() => {
-        if(token) {
-            authMe(token).unwrap()
-        }
+        authMe("").unwrap()
     }, [])
 
     return (
         <ThemeProvider theme={theme}>
 
-                <CssBaseline/>
-                {errorMessage && <BasicModal modalTitle="Something went wrong"
-                                             modalText={errorMessage}/>}
+            <CssBaseline/>
+            {error && <BasicModal modalTitle="Something went wrong"
+                                  modalText={serverErrorHandler(error)}/>}
 
-                <Header/>
+            {status === "loading"
+                ? <Preloader/>
+                : <>
+                    <Header/>
 
-                <AppRoutes/>
-
+                    <AppRoutes/>
+                </>
+            }
         </ThemeProvider>
     )
 }
