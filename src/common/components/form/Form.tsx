@@ -79,8 +79,6 @@ export const Form: FC<FormPropsType> = ({callback, formType}) => {
                     {...formik.getFieldProps('passwordConfirm')}
                 />
             }
-
-
             <FormControlLabel
                 control={<Checkbox value="remember" color="primary"/>}
                 label="Remember me"

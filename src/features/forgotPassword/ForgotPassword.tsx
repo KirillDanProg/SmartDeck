@@ -9,14 +9,29 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {NavLink} from "react-router-dom";
+import { useForgotPasswordMutation} from "../auth/appAPI";
+
+type FormikErrorType = {
+    email: string
+}
 
 export const ForgotPassword = () => {
+    const [returnPassword, {}] = useForgotPasswordMutation()
     const formik = useFormik({
         initialValues: {
             email: '',
         },
-        validationSchema,
-        onSubmit: (email) => {
+        validate: (values) => {
+            const errors: Partial<FormikErrorType> = {}
+            if (!values.email) {
+                errors.email = 'Email Required'
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                errors.email = 'Invalid email address'
+            }
+            return errors
+        },
+        onSubmit: async (data) => {
+            await returnPassword(data.email)
             formik.resetForm()
         },
     })
@@ -44,6 +59,8 @@ export const ForgotPassword = () => {
                     <Typography variant={"inherit"}
                                 className={s.title}
                     >Forgot your password?</Typography>
+                    <form onSubmit={formik.handleSubmit}>
+
                     <TextField
                         sx={{m: 1, width: '40ch'}}
                         id="standard-basic"
@@ -54,14 +71,15 @@ export const ForgotPassword = () => {
                     <Typography variant={"inherit"} className={s.textAfterEmail}>
                         Enter your email address and we will send you further instructions
                     </Typography>
-                    <form onSubmit={formik.handleSubmit}>
                         <Button
+                            type={"submit"}
                             variant={"contained"}
                             color={"primary"}
                         >
                             Send Instruction
                         </Button>
                     </form>
+
                     <Typography variant={"inherit"}
                                 className={s.pSmall}
                     >Did you remember your password?</Typography>

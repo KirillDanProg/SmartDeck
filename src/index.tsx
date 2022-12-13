@@ -14,9 +14,8 @@ const root = createRoot(container);
 root.render(
     <BrowserRouter>
       <Provider store={store}>
-        {/*<ForgotPassword />*/}
+        <ForgotPassword />
         {/*<App />*/}
-          <CreatePassword/>
       </Provider>
     </BrowserRouter>
 );

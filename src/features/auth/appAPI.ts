@@ -4,6 +4,7 @@ import {baseUrlGeneration} from "../../app/utils/baseUrlGeneration";
 export interface IRegisterResponse {
     addedUser: IUser
 }
+
 export interface IUser {
     _id: string;
     email: string;
@@ -50,7 +51,8 @@ export interface ILoginRequest {
 export const appAPI = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: baseUrlGeneration(),
+        baseUrl: `https://neko-back.herokuapp.com/2.0`
+            // baseUrlGeneration(),
     }),
     endpoints: (build) => ({
         register: build.mutation<IUser, IRegisterRequest>({
@@ -73,7 +75,7 @@ export const appAPI = createApi({
                 method: 'POST',
                 body: body
             }),
-           // transformResponse: (response: ILoginResponse) => response.createdUserSession
+            // transformResponse: (response: ILoginResponse) => response.createdUserSession
         }),
         changeName: build.mutation({
             query: (body) => ({
@@ -82,8 +84,28 @@ export const appAPI = createApi({
                 body
             }),
         }),
+        forgotPassword: build.mutation({
+            query: (body) => ({
+                url: `/auth/forgot`,
+                method: 'POST',
+                body: {
+                    email: body,
+                    from: "test-front-admin <ai73a@yandex.by>",
+                    // можно указать разработчика фронта
+                    message: `<div style="background-color: lime; padding: 15px">
+                        password recovery link: 
+                    <a href='http://localhost:3000/#/set-new-password/$token$'>
+                    link</a>
+                    </div>`
+                }
+            }),
+            // transformResponse: (response: ILoginResponse) => response.createdUserSession
+        }),
     })
 })
 
-export const {useRegisterMutation, useLogoutMutation,
-    useLoginMutation, useChangeNameMutation} = appAPI
+export const {
+    useRegisterMutation, useLogoutMutation,
+    useLoginMutation, useChangeNameMutation,
+    useForgotPasswordMutation
+} = appAPI
