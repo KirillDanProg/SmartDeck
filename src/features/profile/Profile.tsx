@@ -11,7 +11,7 @@ import {LogoutBtn} from "./Button/LogoutBtn"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {useRedirectTo} from "../../app/hooks/useRedirectTo";
 import {PATH} from "../../layout/AppRoutes/routes";
-import {useLogoutMutation} from "../auth/authAPI";
+import {useLogoutMutation} from "../auth/appAPI";
 import {useAppSelector} from "../../app/hooks";
 
 

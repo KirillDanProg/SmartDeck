@@ -1,22 +1,19 @@
 import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit";
-import {authAPI} from "../features/auth/authAPI";
+import {appAPI} from "../features/auth/appAPI";
 import {authSlice} from "../features/auth/authSlice";
 import {profileSlice} from "../features/profile/profileSlice";
-import {profileAPI} from "../features/profile/profileAPI";
 
 export const store = configureStore({
     reducer: {
         auth: authSlice.reducer,
-        [authAPI.reducerPath]: authAPI.reducer,
         profile: profileSlice.reducer,
-        [profileAPI.reducerPath]: profileAPI.reducer
+        [appAPI.reducerPath]: appAPI.reducer
     },
     devTools: process.env.NODE_ENV === 'development',
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
             .concat([
-                authAPI.middleware,
-                profileAPI.middleware
+                appAPI.middleware
                 ]),
 });
 

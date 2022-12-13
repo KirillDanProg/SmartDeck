@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import s from './SignInPage.module.css'
 import {Form} from '../../../common/components/form/Form';
-import {ILoginRequest, useLoginMutation} from '../authAPI';
+import {ILoginRequest, useLoginMutation} from '../appAPI';
 import {BasicModal} from '../../../common/components/ModalWindow';
 import {saveToLocalStorage} from '../../../app/utils/local-storage';
 import {useRedirectTo} from '../../../app/hooks/useRedirectTo';

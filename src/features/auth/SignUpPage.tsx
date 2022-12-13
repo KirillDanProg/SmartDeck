@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import {IRegisterRequest, useRegisterMutation} from './authAPI';
+import {IRegisterRequest, useRegisterMutation} from './appAPI';
 import {BasicModal} from '../../common/components/ModalWindow';
 import {PATH} from '../../layout/AppRoutes/routes';
 import {useRedirectTo} from '../../app/hooks/useRedirectTo';

@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
-import {authAPI} from "./authAPI";
+import {appAPI} from "./appAPI";
 
 type InitialStateType = {
     token: string | null
@@ -17,12 +17,12 @@ export const authSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
-            .addMatcher(authAPI.endpoints.register.matchFulfilled,
+            .addMatcher(appAPI.endpoints.register.matchFulfilled,
                 (state, {payload}) => {
                     state.userId = payload._id
                 }
             )
-            .addMatcher(authAPI.endpoints.login.matchFulfilled,
+            .addMatcher(appAPI.endpoints.login.matchFulfilled,
                 (state, {payload}) => {
                    state.token = payload.token
                 }

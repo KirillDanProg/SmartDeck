@@ -47,7 +47,7 @@ export interface ILoginRequest {
     rememberMe: boolean
 }
 
-export const authAPI = createApi({
+export const appAPI = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
         baseUrl: baseUrlGeneration(),
@@ -75,8 +75,14 @@ export const authAPI = createApi({
             }),
            // transformResponse: (response: ILoginResponse) => response.createdUserSession
         }),
+        changeName: build.mutation({
+            query: (body) => ({
+                url: `/auth/me`,
+                method: 'PUT',
+                body
+            }),
+        }),
     })
 })
 
-// @ts-ignore
-export const {useRegisterMutation, useLogoutMutation,useLoginMutation} = authAPI
+export const {useRegisterMutation, useLogoutMutation,useLoginMutation} = appAPI
