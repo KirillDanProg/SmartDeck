@@ -6,9 +6,9 @@ export const saveToLocalStorage = (key: string, value: unknown) => {
     }
 }
 
-export const getFromLocalStorage = (key: string) => {
+export const getFromLocalStorage =  (key: string) => {
     try {
-        const storedValue = localStorage.getItem(key)
+        const storedValue =  localStorage.getItem(key)
 
         if (storedValue) JSON.parse(storedValue)
 
@@ -17,5 +17,13 @@ export const getFromLocalStorage = (key: string) => {
     } catch (e) {
         console.log(e)
         return undefined
+    }
+}
+
+export const removeFromLocalStorage =  (key: string) => {
+    try {
+        localStorage.removeItem(key)
+    } catch (e) {
+        console.log(e)
     }
 }
