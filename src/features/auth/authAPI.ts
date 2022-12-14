@@ -1,5 +1,5 @@
 import {apiSlice} from "../api/apiSlice";
-import {resetPasswordPageGen} from "../../app/utils/resetPasswordPageGen";
+import {resetPasswordHTMLGeneration} from "../../app/utils/resetPasswordHTMLGeneration";
 
 export interface IRegisterResponse {
     addedUser: IUser
@@ -96,7 +96,7 @@ export const authAPI = apiSlice.injectEndpoints({
                 body: {
                     email,
                     from: "test-front-admin <ai73a@yandex.by>",
-                    message: resetPasswordPageGen()
+                    message: resetPasswordHTMLGeneration()
                 }
             })
         })
