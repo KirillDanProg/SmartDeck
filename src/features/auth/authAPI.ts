@@ -4,6 +4,10 @@ export interface IRegisterResponse {
     addedUser: IUser
 }
 
+export interface IResetPasswordData {
+    password: string
+    resetPasswordToken: string
+}
 export interface IUser {
     _id: string;
     email: string;
@@ -67,7 +71,7 @@ export const authAPI = apiSlice.injectEndpoints({
             query: (body) => ({
                 url: `auth/login`,
                 method: 'POST',
-                body: body
+                body
             }),
         }),
         authMe: build.mutation({
@@ -76,7 +80,33 @@ export const authAPI = apiSlice.injectEndpoints({
                 method: "POST",
                 body: {token}
             })
-        })
+        }),
+        setNewPassword: build.mutation({
+            query: (resetData: string) => ({
+                url: "auth/set-new-password",
+                method: "POST",
+                body: {
+                    password: "qwer1234",
+                    resetPasswordToken: "e3df2fc0-7b23-11ed-8a8b-218216d7f0d3"
+                }
+            })
+        }),
+//         resetPassword: build.mutation({
+//             query: (email: string) => ({
+//                 url: "auth/set-new-password",
+//                 method: "POST",
+//                 body: {
+//                     email,
+//                     from: "test-front-admin <ai73a@yandex.by>",
+//                     message: `<div style="background-color: lime; padding: 15px">
+// password recovery link:
+// <a href='http://localhost:3000/set-new-password/$token$'>
+// link</a>
+// </div>`
+//                 }
+//             })
+//         })
+
     })
 });
 
@@ -84,4 +114,7 @@ export const {
     useRegisterMutation,
     useLogoutMutation,
     useLoginMutation,
-    useAuthMeMutation} = authAPI
+    useAuthMeMutation,
+    // useResetPasswordMutation,
+    useSetNewPasswordMutation
+} = authAPI

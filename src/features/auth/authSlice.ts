@@ -83,5 +83,5 @@ export const authSlice = createSlice({
 })
 
 export const selectCurrentUser = (state: RootState) => state.auth.userId;
-export const selectCurrentError = (state: RootState) => state.auth.error
-export const selectCurrentStatus = (state: RootState) => state.auth.status
+export const selectCurrentError = (state: RootState) => state.auth.error;
+export const selectCurrentStatus = (state: RootState) => state.auth.status;

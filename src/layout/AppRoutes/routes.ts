@@ -2,5 +2,6 @@ export const PATH = {
     MAIN: '/',
     LOGIN: "login",
     SIGN_UP: "signup",
-    PROFILE: "profile"
+    PROFILE: "profile",
+    RESET_PASSWORD: `/set-new-password/:token`
 }
