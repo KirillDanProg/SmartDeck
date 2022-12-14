@@ -44,7 +44,7 @@ export interface ILoginRequest {
     rememberMe: boolean
 }
 
-export let authApi = apiSlice.injectEndpoints({
+export const authApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
         register: build.mutation<IUser, IRegisterRequest>({
             query: (body) => ({
@@ -114,7 +114,7 @@ export let authApi = apiSlice.injectEndpoints({
     })
 });
 
-export let {
+export const {
     useRegisterMutation,
     useLogoutMutation,
     useLoginMutation,
