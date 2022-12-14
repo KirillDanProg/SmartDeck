@@ -25,7 +25,7 @@ export const AppRoutes = () => {
                 </Route>
 
                 <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage/>}/>
-                <Route path={`${PATH.SET_PASSWORD}/:token`} element={<CreatePassword/>}/>
+                <Route path={`${PATH.SET_PASSWORD}/:resetPasswordToken`} element={<CreatePassword/>}/>
                 <Route path={PATH.FORGOT_PASSWORD} element={<ForgotPassword/>}/>
 
             </Routes>
