@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -8,33 +8,24 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import checkEmail from '../../../assets/icons/checkEmail.png'
 import Button from '@mui/material/Button';
-// import {IDataRequest, useMeMutation} from '../authAPI';
-// import {selectUserEmail} from '../authSlice';
-import {useAppSelector} from '../../../app/hooks';
-import {Navigate} from 'react-router-dom';
+import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
 import {PATH} from '../../../layout/AppRoutes/routes';
+import {getFromLocalStorage} from '../../../app/utils/local-storage';
 
 
 export const CheckEmailPage = () => {
 
-    // const [me, {error, isSuccess, isLoading}] = useMeMutation();
-
-    // const email = useAppSelector(selectUserEmail)
-
-    // const data:IDataRequest = {
-    //     name: 'new name',
-    //     avatar: 'https//avatar-url.img' // url or base64
-    // }
-
+    const [email,setEmail] = useState<string>();
     const onBactTologinHandler = () => {
-        <Navigate to={PATH.LOGIN}/>
+        useRedirectTo(`/${PATH.LOGIN}`, !!email, [])
     }
-    //useRedirectTo(`/${PATH.LOGIN}`, !!userId, [isLoading])
 
-    // useEffect(() => {
-    //     me(data);
-    //     // saveToLocalStorage('email', email)
-    // }, [isSuccess])
+
+    useEffect(() => {
+        let receivedEmail =  getFromLocalStorage('email');
+        setEmail(receivedEmail)
+    }, [])
+
 
     return (
         <Grid container component="main" sx={{height: '80vh'}}>
@@ -69,7 +60,7 @@ export const CheckEmailPage = () => {
                             We`ve sent an Email with instructions to
                         </Typography>
                         <Typography component="h3" variant="h5">
-                            {/*{email ? email : <h3>error</h3>}*/}
+                            {email ? email : <h3>error</h3>}
                         </Typography>
                         <Button
                             type="submit"
