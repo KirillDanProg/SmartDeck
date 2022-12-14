@@ -4,12 +4,11 @@ import s from "./ForgotPassword.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {useFormik} from "formik";
-import {validationSchema} from "../../common/components/form/yupValidation";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {NavLink} from "react-router-dom";
-import { useForgotPasswordMutation} from "../auth/appAPI";
+import {useForgotPasswordMutation} from "../auth/authApi";
 
 type FormikErrorType = {
     email: string
@@ -21,6 +20,7 @@ export const ForgotPassword = () => {
         initialValues: {
             email: '',
         },
+        //todo: fix validation
         validate: (values) => {
             const errors: Partial<FormikErrorType> = {}
             if (!values.email) {

@@ -4,13 +4,13 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import {Form} from '../../../common/components/form/Form';
-import { useLoginMutation} from '../authAPI';
 import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
 import {PATH} from '../../../layout/AppRoutes/routes';
 import {useAppSelector} from "../../../app/hooks";
 import {selectCurrentUser} from "../authSlice";
 import Avatar from "@mui/material/Avatar";
 import {ILoginRequest} from "../authModels";
+import {useLoginMutation} from "../authApi";
 
 export const SignInPage = () => {
 

@@ -1,7 +1,7 @@
 import {AsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
-import {authAPI} from "./authAPI";
 import {removeFromLocalStorage, saveToLocalStorage} from "../../app/utils/local-storage";
+import {authApi} from "./authApi";
 
 type StatusType = "idle" | "loading" | "succeeded" | "failed"
 type InitialStateType = {
@@ -45,7 +45,7 @@ export const authSlice = createSlice({
                     state.error = null
                 }
             )
-            .addMatcher(authAPI.endpoints.authMe.matchFulfilled,
+            .addMatcher(authApi.endpoints.authMe.matchFulfilled,
                 (state, {payload}) => {
                     const {_id, token} = payload
                     if (_id && token) {
@@ -56,13 +56,13 @@ export const authSlice = createSlice({
                 }
             )
             //login
-            .addMatcher(authAPI.endpoints.login.matchPending,
+            .addMatcher(authApi.endpoints.login.matchPending,
                 (state) => {
                     state.status = "loading"
                     state.error = null
                 }
             )
-            .addMatcher(authAPI.endpoints.login.matchFulfilled,
+            .addMatcher(authApi.endpoints.login.matchFulfilled,
                 (state, {payload}) => {
                     const {_id, token} = payload
                     state.token = token
@@ -72,7 +72,7 @@ export const authSlice = createSlice({
                 }
             )
             //logout
-            .addMatcher(authAPI.endpoints.logout.matchFulfilled,
+            .addMatcher(authApi.endpoints.logout.matchFulfilled,
                 (state) => {
                     state.token = null
                     state.userId = null

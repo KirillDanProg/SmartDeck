@@ -12,4 +12,4 @@ export const validationSchema = yup.object({
     passwordConfirm: yup
         .string()
         .oneOf([yup.ref('password'), null], 'Passwords must match')
-});
+}, );

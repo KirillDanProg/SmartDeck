@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import checkEmail from '../../../assets/icons/checkEmail.png'
 import Button from '@mui/material/Button';
 // import {IDataRequest, useMeMutation} from '../authAPI';
-import {selectUserEmail} from '../authSlice';
+// import {selectUserEmail} from '../authSlice';
 import {useAppSelector} from '../../../app/hooks';
 import {Navigate} from 'react-router-dom';
 import {PATH} from '../../../layout/AppRoutes/routes';
@@ -19,7 +19,7 @@ export const CheckEmailPage = () => {
 
     // const [me, {error, isSuccess, isLoading}] = useMeMutation();
 
-    const email = useAppSelector(selectUserEmail)
+    // const email = useAppSelector(selectUserEmail)
 
     // const data:IDataRequest = {
     //     name: 'new name',
@@ -69,7 +69,7 @@ export const CheckEmailPage = () => {
                             We`ve sent an Email with instructions to
                         </Typography>
                         <Typography component="h3" variant="h5">
-                            {email ? email : <h3>error</h3>}
+                            {/*{email ? email : <h3>error</h3>}*/}
                         </Typography>
                         <Button
                             type="submit"

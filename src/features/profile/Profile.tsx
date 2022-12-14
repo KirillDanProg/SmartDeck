@@ -8,12 +8,11 @@ import s from "./Profile.module.css"
 import {UserAvatar} from "./User/UserAvatar/UserAvatar"
 import {UserName} from "./User/UserName/UserName"
 import {LogoutBtn} from "./Button/LogoutBtn"
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {useRedirectTo} from "../../app/hooks/useRedirectTo";
 import {PATH} from "../../layout/AppRoutes/routes";
-import {appAPI, useChangeNameMutation, useLogoutMutation} from "../auth/appAPI";
 import {useAppSelector} from "../../app/hooks";
 import {ReturnComponent} from "../../common/components/returnComponent/ReturnComponent";
+import {useChangeNameMutation, useLogoutMutation} from "../auth/authApi";
 
 
 export const Profile = () => {

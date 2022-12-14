@@ -1,5 +1,4 @@
 import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit";
-import {appAPI} from "../features/auth/appAPI";
 import {authSlice} from "../features/auth/authSlice";
 import {apiSlice} from "../features/api/apiSlice";
 import {profileSlice} from "../features/profile/profileSlice";
@@ -9,7 +8,6 @@ export const store = configureStore({
         auth: authSlice.reducer,
         [apiSlice.reducerPath]: apiSlice.reducer,
         profile: profileSlice.reducer,
-        // [appAPI.reducerPath]: appAPI.reducer
     },
     devTools: process.env.NODE_ENV === 'development',
     middleware: (getDefaultMiddleware) =>
