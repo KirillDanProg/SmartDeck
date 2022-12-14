@@ -10,6 +10,7 @@ import {useFormik} from "formik";
 import {validationSchema} from "./yupValidation";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
+import {PATH} from "../../../layout/AppRoutes/routes";
 
 
 type FormPropsType = {
@@ -94,7 +95,7 @@ export const Form: FC<FormPropsType> = ({callback, formType}) => {
                 {
                     formType === "sign-in" &&
                     <Grid item xs>
-                        <Button component={Link} to="/reset-password">
+                        <Button component={Link} to={PATH.FORGOT_PASSWORD}>
                             {" Forgot password?"}
                         </Button>
                     </Grid>

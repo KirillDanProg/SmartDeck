@@ -7,15 +7,20 @@ import {useFormik} from "formik";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useForgotPasswordMutation} from "../auth/authApi";
+import {useRedirectTo} from "../../app/hooks/useRedirectTo";
+import {PATH} from "../../layout/AppRoutes/routes";
+import {saveToLocalStorage} from "../../app/utils/local-storage";
 
 type FormikErrorType = {
     email: string
 }
 
 export const ForgotPassword = () => {
-    const [returnPassword, {}] = useForgotPasswordMutation()
+    const [resetPassword, {isSuccess, data}] = useForgotPasswordMutation()
+    const navigate = useNavigate()
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -31,7 +36,9 @@ export const ForgotPassword = () => {
             return errors
         },
         onSubmit: async (data) => {
-            await returnPassword(data.email)
+            saveToLocalStorage("email", data.email)
+            await resetPassword(data.email)
+            navigate(PATH.CHECK_EMAIL)
             formik.resetForm()
         },
     })
