@@ -4,10 +4,11 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import {IRegisterRequest, useRegisterMutation} from './authAPI';
-import {PATH} from '../../layout/AppRoutes/routes';
-import {useRedirectTo} from '../../app/hooks/useRedirectTo';
-import {Form} from '../../common/components/form/Form';
+import { useRegisterMutation} from '../authAPI';
+import {PATH} from '../../../layout/AppRoutes/routes';
+import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
+import {Form} from '../../../common/components/form/Form';
+import {IRegisterRequest} from "../authModels";
 
 
 export const SignUpPage = () => {
