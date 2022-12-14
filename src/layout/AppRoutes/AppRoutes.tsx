@@ -7,6 +7,7 @@ import {SignUpPage} from "../../features/auth/SignUpPage";
 import {SignInPage} from "../../features/auth/sign-in/SignInPage";
 import {Main} from "../Main/Main";
 import {Profile} from "../../features/profile/Profile";
+import {CheckEmailPage} from '../../features/auth/ckeck-email/CheckEmailPage';
 
 
 export const AppRoutes = () => {
@@ -17,6 +18,7 @@ export const AppRoutes = () => {
                     <Route path={PATH.PROFILE} element={<Profile/>} />
                     <Route path={PATH.LOGIN} element={<SignInPage />} />
                     <Route path={PATH.SIGN_UP} element={<SignUpPage />} />
+                    <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage />} />
                     <Route path="404" element={<Page404 />} />
                     <Route path="*" element={<Navigate to="404" />} />
                 </Route>

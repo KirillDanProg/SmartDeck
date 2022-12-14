@@ -1,9 +1,9 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import {baseUrlGeneration} from "../../app/utils/baseUrlGeneration";
 
 export interface IRegisterResponse {
     addedUser: IUser
 }
-
 export interface IUser {
     _id: string;
     email: string;

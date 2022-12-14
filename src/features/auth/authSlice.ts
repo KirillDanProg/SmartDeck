@@ -5,10 +5,12 @@ import {appAPI} from "./appAPI";
 type InitialStateType = {
     token: string | null
     userId: string | null
+    email: string | null
 }
 const initialState: InitialStateType = {
     token: null,
-    userId: null
+    userId: null,
+    email:null
 }
 
 export const authSlice = createSlice({
@@ -27,8 +29,13 @@ export const authSlice = createSlice({
                    state.token = payload.token
                 }
             )
+            .addMatcher(authAPI.endpoints.me.matchFulfilled,
+                (state, {payload}) => {
+                    // state.email = payload
+                }
+            )
     }
 })
 
 export const selectCurrentUser = (state: RootState) => state.auth.userId;
-export const  selectToken= (state: RootState) => state.auth.token;
+export const selectUserEmail = (state: RootState) => state.auth.email;
