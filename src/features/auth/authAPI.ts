@@ -47,6 +47,16 @@ export interface ILoginRequest {
     rememberMe: boolean
 }
 
+
+export interface IDataRequest {
+    name: string
+    avatar: string
+}
+
+// export interface IDataResponse {
+//     email:any
+// }
+
 export const authAPI = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
@@ -74,7 +84,7 @@ export const authAPI = createApi({
                 body: body
             }),
         }),
-        me: build.mutation<IMainLoginResponse, ILoginRequest>({
+        me: build.mutation<any, IDataRequest>({
             query: (body) => ({
                 url: `auth/me`,
                 method: 'PUT',

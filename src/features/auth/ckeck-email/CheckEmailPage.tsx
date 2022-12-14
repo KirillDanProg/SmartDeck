@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -7,26 +8,32 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import checkEmail from '../../../assets/icons/checkEmail.png'
 import Button from '@mui/material/Button';
-import {useMeMutation} from '../authAPI';
+import {IDataRequest, useMeMutation} from '../authAPI';
 import {selectUserEmail} from '../authSlice';
 import {useAppSelector} from '../../../app/hooks';
-import {useEffect} from 'react';
-import {saveToLocalStorage} from '../../../app/utils/local-storage';
+import {Navigate} from 'react-router-dom';
+import {PATH} from '../../../layout/AppRoutes/routes';
 
 
 export const CheckEmailPage = () => {
 
-     const [me, {error, isSuccess, isLoading}] = useMeMutation();
+    const [me, {error, isSuccess, isLoading}] = useMeMutation();
 
     const email = useAppSelector(selectUserEmail)
 
+    const data:IDataRequest = {
+        name: 'new name',
+        avatar: 'https//avatar-url.img' // url or base64
+    }
 
-
-    // useRedirectTo(`/${PATH.LOGIN}`, !!userId, [isLoading])
+    const onBactTologinHandler = () => {
+        <Navigate to={PATH.LOGIN}/>
+    }
+    //useRedirectTo(`/${PATH.LOGIN}`, !!userId, [isLoading])
 
     useEffect(() => {
-       // me(data);
-        saveToLocalStorage('email', email)
+        me(data);
+        // saveToLocalStorage('email', email)
     }, [isSuccess])
 
     return (
@@ -48,8 +55,8 @@ export const CheckEmailPage = () => {
                             my: 10,
                             mx: 4,
                             display: 'grid',
-                            gridTemplateColumns:'1fr',
-                            gridTemplateRows:'100px 230px 50px 50px 80px 1fr',
+                            gridTemplateColumns: '1fr',
+                            gridTemplateRows: '100px 230px 50px 50px 80px 1fr',
                             alignItems: 'center',
                             justifyItems: 'center'
                         }}
@@ -57,18 +64,19 @@ export const CheckEmailPage = () => {
                         <Typography component="h1" variant="h3">
                             Check email
                         </Typography>
-                        <img style={{maxWidth:'200px'}} src={checkEmail} alt=""/>
+                        <img style={{maxWidth: '200px'}} src={checkEmail} alt=""/>
                         <Typography component="h3" variant="h5">
                             We`ve sent an Email with instructions to
                         </Typography>
                         <Typography component="h3" variant="h5">
-                           // {email ? email : <h3>error</h3>}
+                            {email ? email : <h3>error</h3>}
                         </Typography>
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
+                            onClick={onBactTologinHandler}
                         >Back to login</Button>
 
                     </Box>
