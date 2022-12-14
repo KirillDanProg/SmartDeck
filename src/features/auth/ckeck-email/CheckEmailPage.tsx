@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import checkEmail from '../../../assets/icons/checkEmail.png'
 import Button from '@mui/material/Button';
-import {IDataRequest, useMeMutation} from '../authAPI';
+// import {IDataRequest, useMeMutation} from '../authAPI';
 import {selectUserEmail} from '../authSlice';
 import {useAppSelector} from '../../../app/hooks';
 import {Navigate} from 'react-router-dom';
@@ -17,24 +17,24 @@ import {PATH} from '../../../layout/AppRoutes/routes';
 
 export const CheckEmailPage = () => {
 
-    const [me, {error, isSuccess, isLoading}] = useMeMutation();
+    // const [me, {error, isSuccess, isLoading}] = useMeMutation();
 
     const email = useAppSelector(selectUserEmail)
 
-    const data:IDataRequest = {
-        name: 'new name',
-        avatar: 'https//avatar-url.img' // url or base64
-    }
+    // const data:IDataRequest = {
+    //     name: 'new name',
+    //     avatar: 'https//avatar-url.img' // url or base64
+    // }
 
     const onBactTologinHandler = () => {
         <Navigate to={PATH.LOGIN}/>
     }
     //useRedirectTo(`/${PATH.LOGIN}`, !!userId, [isLoading])
 
-    useEffect(() => {
-        me(data);
-        // saveToLocalStorage('email', email)
-    }, [isSuccess])
+    // useEffect(() => {
+    //     me(data);
+    //     // saveToLocalStorage('email', email)
+    // }, [isSuccess])
 
     return (
         <Grid container component="main" sx={{height: '80vh'}}>

@@ -29,11 +29,6 @@ export const authSlice = createSlice({
                    state.token = payload.token
                 }
             )
-            .addMatcher(authAPI.endpoints.me.matchFulfilled,
-                (state, {payload}) => {
-                    // state.email = payload
-                }
-            )
     }
 })
 
