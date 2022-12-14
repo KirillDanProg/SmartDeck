@@ -96,7 +96,7 @@ export const Form: FC<FormPropsType> = ({callback, formType}) => {
                 {
                     formType === "sign-in" &&
                     <Grid item xs>
-                        <Button component={Link} to="/signup">
+                        <Button component={Link} to="/reset-password">
                             {" Forgot password?"}
                         </Button>
                     </Grid>
