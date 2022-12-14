@@ -73,9 +73,15 @@ export const authAPI = createApi({
                 method: 'POST',
                 body: body
             }),
-           // transformResponse: (response: ILoginResponse) => response.createdUserSession
+        }),
+        me: build.mutation<IMainLoginResponse, ILoginRequest>({
+            query: (body) => ({
+                url: `auth/me`,
+                method: 'PUT',
+                body: body
+            }),
         }),
     })
 })
 
-export const {useRegisterMutation, useLogoutMutation,useLoginMutation} = authAPI
+export const {useRegisterMutation, useLogoutMutation,useLoginMutation,useMeMutation} = authAPI

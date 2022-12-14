@@ -7,24 +7,27 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import checkEmail from '../../../assets/icons/checkEmail.png'
 import Button from '@mui/material/Button';
+import {useMeMutation} from '../authAPI';
+import {selectUserEmail} from '../authSlice';
+import {useAppSelector} from '../../../app/hooks';
+import {useEffect} from 'react';
+import {saveToLocalStorage} from '../../../app/utils/local-storage';
 
 
 export const CheckEmailPage = () => {
 
-    // const [register, {error, isSuccess, isLoading}] = useRegisterMutation()
-    //
-    // const userId = useAppSelector(selectCurrentUser)
-    //
-    // //todo: types
-    // async function signUpHandler(data: IRegisterRequest) {
-    //     await register(data)
-    // }
+     const [me, {error, isSuccess, isLoading}] = useMeMutation();
+
+    const email = useAppSelector(selectUserEmail)
+
+
 
     // useRedirectTo(`/${PATH.LOGIN}`, !!userId, [isLoading])
 
-    // useEffect(() => {
-    //     saveToLocalStorage('id', userId)
-    // }, [isSuccess])
+    useEffect(() => {
+       // me(data);
+        saveToLocalStorage('email', email)
+    }, [isSuccess])
 
     return (
         <Grid container component="main" sx={{height: '80vh'}}>
@@ -42,11 +45,13 @@ export const CheckEmailPage = () => {
                 <div className={s.container}>
                     <Box
                         sx={{
-                            my: 8,
+                            my: 10,
                             mx: 4,
-                            display: 'flex',
-                            flexDirection: 'column',
+                            display: 'grid',
+                            gridTemplateColumns:'1fr',
+                            gridTemplateRows:'100px 230px 50px 50px 80px 1fr',
                             alignItems: 'center',
+                            justifyItems: 'center'
                         }}
                     >
                         <Typography component="h1" variant="h3">
@@ -57,7 +62,7 @@ export const CheckEmailPage = () => {
                             We`ve sent an Email with instructions to
                         </Typography>
                         <Typography component="h3" variant="h5">
-                            dimakurgan123789@gmail.com
+                           // {email ? email : <h3>error</h3>}
                         </Typography>
                         <Button
                             type="submit"
