@@ -75,6 +75,7 @@ export const authSlice = createSlice({
             .addMatcher(authAPI.endpoints.logout.matchFulfilled,
                 (state) => {
                     state.token = null
+                    state.userId = null
                     removeFromLocalStorage("id")
                     removeFromLocalStorage("token")
                 }
