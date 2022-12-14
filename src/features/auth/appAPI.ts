@@ -1,5 +1,4 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {baseUrlGeneration} from "../../app/utils/baseUrlGeneration";
 
 export interface IRegisterResponse {
     addedUser: IUser
@@ -47,6 +46,10 @@ export interface ILoginRequest {
     password: string
     rememberMe: boolean
 }
+export interface ILogoOutResponse {
+    info: string
+    error: string
+}
 
 export const appAPI = createApi({
     reducerPath: "authApi",
@@ -63,8 +66,8 @@ export const appAPI = createApi({
             }),
             transformResponse: (response: IRegisterResponse) => response.addedUser
         }),
-        logout: build.mutation({
-            query: (token: string) => ({
+        logout: build.mutation< ILogoOutResponse, string>({
+            query: () => ({
                 url: `auth/me`,
                 method: 'DELETE'
             })
@@ -77,14 +80,14 @@ export const appAPI = createApi({
             }),
             // transformResponse: (response: ILoginResponse) => response.createdUserSession
         }),
-        changeName: build.mutation({
+        changeName: build.mutation<any, string>({
             query: (body) => ({
                 url: `/auth/me`,
                 method: 'PUT',
                 body
             }),
         }),
-        forgotPassword: build.mutation({
+        forgotPassword: build.mutation<any, string>({
             query: (body) => ({
                 url: `/auth/forgot`,
                 method: 'POST',
@@ -109,3 +112,4 @@ export const {
     useLoginMutation, useChangeNameMutation,
     useForgotPasswordMutation
 } = appAPI
+
