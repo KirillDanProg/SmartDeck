@@ -1,62 +1,46 @@
 import * as React from 'react';
-import {useEffect} from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import s from './SignInPage.module.css'
 import {Form} from '../../../common/components/form/Form';
-import {ILoginRequest, useLoginMutation} from '../appAPI';
-import {BasicModal} from '../../../common/components/ModalWindow';
-import {saveToLocalStorage} from '../../../app/utils/local-storage';
+import { useLoginMutation} from '../authAPI';
 import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
 import {PATH} from '../../../layout/AppRoutes/routes';
-
+import {useAppSelector} from "../../../app/hooks";
+import {selectCurrentUser} from "../authSlice";
+import Avatar from "@mui/material/Avatar";
+import {ILoginRequest} from "../authModels";
 
 export const SignInPage = () => {
 
-    const [login, {error, isSuccess, data}] = useLoginMutation();
+    const [login, {isSuccess}] = useLoginMutation();
+
+    const userId = useAppSelector(selectCurrentUser)
 
     async function signInHandler(formData: ILoginRequest) {
-        await login(formData)
+        await login(formData).unwrap()
     }
 
-    const token = data?.token;
-    useRedirectTo(`/${PATH.PROFILE}`, !!token, [isSuccess]);
-    useEffect(() => {
-        saveToLocalStorage('token', token)
-    }, [isSuccess])
+    useRedirectTo(`/${PATH.PROFILE}`, !!userId, [isSuccess]);
+
     return (
-        <Grid container component="main" sx={{height: '80vh'}}>
-            {error && <BasicModal modalTitle="Something went wrong"
-                                  modalText="Invalid email or password"
-            />}
-            <CssBaseline/>
-            <Grid
-                item
-                xs={false}
-                sm={4}
-                md={4}
-            />
-            <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
-                <div className={s.container}>
-                    <Box
-                        sx={{
-                            my: 8,
-                            mx: 4,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Typography component="h1" variant="h3">
-                            Sign in
-                        </Typography>
-                        <Form formType="sign-in" callback={signInHandler}/>
-                    </Box>
-                </div>
-            </Grid>
+        <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
+            <Box
+                sx={{
+                    my: 8,
+                    mx: 4,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+            >
+                <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}/>
+                <Typography component="h1" variant="h5">
+                    Sign in
+                </Typography>
+                <Form formType="sign-in" callback={signInHandler}/>
+            </Box>
         </Grid>
     );
 }

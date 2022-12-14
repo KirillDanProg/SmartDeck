@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Navigate, Route, Routes } from 'react-router-dom'
+import {Navigate, Route, Routes} from 'react-router-dom'
 import {PATH} from "./routes";
 import {Page404} from "../404-page/Page404";
-import {SignUpPage} from "../../features/auth/SignUpPage";
+import {SignUpPage} from "../../features/auth/sign-up/SignUpPage";
 import {SignInPage} from "../../features/auth/sign-in/SignInPage";
 import {Main} from "../Main/Main";
 import {Profile} from "../../features/profile/Profile";
