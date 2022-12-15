@@ -8,30 +8,30 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import checkEmail from '../../../assets/icons/checkEmail.png'
 import Button from '@mui/material/Button';
-import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
 import {PATH} from '../../../layout/AppRoutes/routes';
 import {getFromLocalStorage} from '../../../app/utils/local-storage';
+import {Link} from 'react-router-dom';
+import {useLoginMutation} from '../authApi';
+import {BasicModal} from '../../../common/components/ModalWindow';
 
 
 export const CheckEmailPage = () => {
-
-    const [email,setEmail] = useState<string>();
-    const onBactTologinHandler = () => {
-        useRedirectTo(`/${PATH.LOGIN}`, !!email, [])
-    }
-
+    const [login, {error}] = useLoginMutation();
+    const [email, setEmail] = useState<string>('');
 
     useEffect(() => {
-        let receivedEmail =  getFromLocalStorage('email');
-        setEmail(receivedEmail)
-    }, [])
-
+        const getEmail = async () => {
+            let result = await getFromLocalStorage('email');
+            setEmail(String(result))
+        }
+        getEmail();
+    }, [email])
 
     return (
         <Grid container component="main" sx={{height: '80vh'}}>
-            {/*{error && <BasicModal modalTitle="Something went wrong"*/}
-            {/*                      modalText="Invalid email or password"*/}
-            {/*/>}*/}
+            {error && <BasicModal modalTitle="Something went wrong"
+                                  modalText="Invalid email or password"
+            />}
             <CssBaseline/>
             <Grid
                 item
@@ -60,16 +60,17 @@ export const CheckEmailPage = () => {
                             We`ve sent an Email with instructions to
                         </Typography>
                         <Typography component="h3" variant="h5">
-                            {email ? email : <h3>error</h3>}
+                            {email ? <a style={{textDecoration: 'none', color: 'black', fontWeight: 'bold'}}
+                                        href={`mailto:${email}`}>{email}</a> : <h3>Something went wrong...</h3>}
                         </Typography>
                         <Button
-                            type="submit"
+                            component={Link}
+                            to={PATH.LOGIN}
+                            type="button"
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
-                            onClick={onBactTologinHandler}
                         >Back to login</Button>
-
                     </Box>
                 </div>
             </Grid>
