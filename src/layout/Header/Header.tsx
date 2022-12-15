@@ -18,6 +18,7 @@ import TransgenderIcon from '@mui/icons-material/Transgender';
 import {NavLink} from "react-router-dom";
 import s from "./Header.module.css"
 import {useLogoutMutation} from "../../features/auth/authApi";
+import {PATH} from "../AppRoutes/routes";
 
 export const Header = () => {
     const [auth, setAuth] = React.useState(true);
@@ -77,10 +78,12 @@ export const Header = () => {
                             label={""}
                         />
                     </FormGroup>
-                    <CardMedia component="img" sx={{
-                        width: 209,
-                        height: 48,
-                    }} src={incubatorLogo}/>
+                    <NavLink to={PATH.LOGIN}>
+                        <CardMedia component="img" sx={{
+                            width: 209,
+                            height: 48,
+                        }} src={incubatorLogo}/>
+                    </NavLink>
                     {auth && (
                         <div>
                             <IconButton
@@ -109,12 +112,12 @@ export const Header = () => {
                                 onClose={handleClose}
                             >
                                 <MenuItem onClick={handleClose}>
-                                  <NavLink to={"/profile"} className={s.link}>
-                                      <TransgenderIcon fontSize={"small"} sx={{
-                                        paddingRight: 1
-                                    }}  />
-                                    Profile
-                                  </NavLink>
+                                    <NavLink to={"/profile"} className={s.link}>
+                                        <TransgenderIcon fontSize={"small"} sx={{
+                                            paddingRight: 1
+                                        }}/>
+                                        Profile
+                                    </NavLink>
                                 </MenuItem>
                                 <MenuItem onClick={logOutHandler}>
                                     <DirectionsRunIcon fontSize={"small"} sx={{
