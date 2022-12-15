@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import s from '../sign-in/SignInPage.module.css';
+import s from '../../auth/sign-in/SignInPage.module.css';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import checkEmail from '../../../assets/icons/checkEmail.png'
@@ -11,19 +11,19 @@ import Button from '@mui/material/Button';
 import {PATH} from '../../../layout/AppRoutes/routes';
 import {getFromLocalStorage} from '../../../app/utils/local-storage';
 import {Link} from 'react-router-dom';
-import {useLoginMutation} from '../authApi';
 import {BasicModal} from '../../../common/components/ModalWindow';
+import {useAppSelector} from "../../../app/hooks";
+import {selectCurrentError} from "../../auth/authSlice";
 
 
 export const CheckEmailPage = () => {
-    const [login, {error}] = useLoginMutation();
+    //todo: fix error
+    const error = useAppSelector(selectCurrentError)
+    // const [login, {error}] = useLoginMutation();
     const [email, setEmail] = useState<string>('');
     useEffect(() => {
-        const getEmail = async () => {
-            let result = await getFromLocalStorage('email');
-            setEmail(String(result))
-        }
-        getEmail();
+        let result = getFromLocalStorage('email');
+        setEmail(String(result))
     }, [email])
 
     return (
@@ -59,8 +59,12 @@ export const CheckEmailPage = () => {
                             We`ve sent an Email with instructions to
                         </Typography>
                         <Typography component="h3" variant="h5">
-                            {email ? <a style={{textDecoration: 'none', color: 'black', fontWeight: 'bold'}}
-                                        href={`mailto:${email}`}>{email}</a> : <h3>Something went wrong...</h3>}
+                            {
+                                email
+                                    ? <a style={{textDecoration: 'none', color: 'black', fontWeight: 'bold'}}
+                                         href={`mailto:${email}`}>{email}</a>
+                                    : "Something went wrong..."
+                            }
                         </Typography>
                         <Button
                             component={Link}
