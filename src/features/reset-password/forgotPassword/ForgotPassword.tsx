@@ -8,34 +8,28 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {NavLink, useNavigate} from "react-router-dom";
-import {useForgotPasswordMutation} from "../auth/authApi";
-import {useRedirectTo} from "../../app/hooks/useRedirectTo";
-import {PATH} from "../../layout/AppRoutes/routes";
-import {saveToLocalStorage} from "../../app/utils/local-storage";
-import {CustomGridContainer} from "../../app/utils/CustomGridContainer";
+import {useForgotPasswordMutation} from "../../auth/authApi";
+import {PATH} from "../../../layout/AppRoutes/routes";
+import {saveToLocalStorage} from "../../../app/utils/local-storage";
+import * as yup from "yup";
+import Box from "@mui/material/Box";
 
-type FormikErrorType = {
-    email: string
-}
+export const validationSchema = yup.object({
+    email: yup
+        .string()
+        .email('Enter a valid email')
+        .required('Email is required'),
+},);
 
 export const ForgotPassword = () => {
-    const [resetPassword, {isSuccess, data, isError}] = useForgotPasswordMutation()
+    const [resetPassword] = useForgotPasswordMutation()
     const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
             email: '',
         },
-        //todo: fix validation
-        validate: (values) => {
-            const errors: Partial<FormikErrorType> = {}
-            if (!values.email) {
-                errors.email = 'Email Required'
-            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = 'Invalid email address'
-            }
-            return errors
-        },
+        validationSchema,
         onSubmit: async (data) => {
             saveToLocalStorage("email", data.email)
             await resetPassword(data.email)
@@ -54,12 +48,12 @@ export const ForgotPassword = () => {
                     id="standard-basic"
                     label="Email"
                     variant="standard"
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
                     {...formik.getFieldProps('email')}
                 />
                 <Typography variant={"inherit"} className={s.textAfterEmail}>
                     Enter your email address and we will send you further instructions
-                    error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
                 </Typography>
                 <Button
                     type={"submit"}
@@ -68,7 +62,6 @@ export const ForgotPassword = () => {
                 >
                     Send Instruction
                 </Button>
-
                 <Typography variant={"inherit"}
                             className={s.pSmall}
                 >Did you remember your password?</Typography>
