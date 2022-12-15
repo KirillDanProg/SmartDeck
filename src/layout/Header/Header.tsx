@@ -122,6 +122,7 @@ export const Header = () => {
                                 <MenuItem onClick={logOutHandler}>
                                     <DirectionsRunIcon fontSize={"small"} sx={{
                                         paddingRight: 1
+
                                     }}/>
                                     Log out</MenuItem>
                             </Menu>
