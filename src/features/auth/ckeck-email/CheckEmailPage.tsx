@@ -18,7 +18,6 @@ import {BasicModal} from '../../../common/components/ModalWindow';
 export const CheckEmailPage = () => {
     const [login, {error}] = useLoginMutation();
     const [email, setEmail] = useState<string>('');
-
     useEffect(() => {
         const getEmail = async () => {
             let result = await getFromLocalStorage('email');

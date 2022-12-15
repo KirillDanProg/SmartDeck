@@ -9,6 +9,7 @@ import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
 import {Form} from '../../../common/components/form/Form';
 import {IRegisterRequest} from "../authModels";
 import {useRegisterMutation} from "../authApi";
+import {CustomGridContainer} from "../../../app/utils/CustomGridContainer";
 
 
 export const SignUpPage = () => {
@@ -23,7 +24,7 @@ export const SignUpPage = () => {
     useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isSuccess])
 
     return (
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <CustomGridContainer>
                 <Box
                     sx={{
                         my: 8,
@@ -39,6 +40,6 @@ export const SignUpPage = () => {
                     </Typography>
                     <Form formType="sign-up" callback={signUpHandler}/>
                 </Box>
-            </Grid>
+        </CustomGridContainer>
     );
 }

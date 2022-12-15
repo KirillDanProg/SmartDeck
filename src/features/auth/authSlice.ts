@@ -9,6 +9,9 @@ type InitialStateType = {
     userId: string | null
     status: StatusType
     error: SerializedError | null
+    userName: string
+    email: string
+    avatar: string
 }
 type SerializedError = {
     name?: string
@@ -22,7 +25,10 @@ const initialState: InitialStateType = {
     token: null,
     userId: null,
     status: "loading",
-    error: null
+    error: null,
+    userName: "new name",
+    email: "",
+    avatar: ""
 }
 
 export const authSlice = createSlice({
@@ -46,11 +52,15 @@ export const authSlice = createSlice({
                 }
             )
             .addMatcher(authApi.endpoints.authMe.matchFulfilled,
-                (state, {payload}) => {
-                    const {_id, token} = payload
+                (state: InitialStateType, {payload}) => {
+                debugger
+                    const {_id, token, email, name, avatar} = payload
                     if (_id && token) {
                         state.token = token
                         state.userId = _id
+                        state.email = email
+                        state.userName = name
+                        state.avatar = avatar
                         state.status = "succeeded"
                     }
                 }
@@ -63,10 +73,12 @@ export const authSlice = createSlice({
                 }
             )
             .addMatcher(authApi.endpoints.login.matchFulfilled,
-                (state, {payload}) => {
-                    const {_id, token} = payload
+                (state: InitialStateType, {payload}) => {
+                    const {_id, token, email, name } = payload
                     state.token = token
                     state.userId = _id
+                    state.email = email
+                    state.userName = name
                     saveToLocalStorage("id", _id)
                     saveToLocalStorage("token", token)
                 }
@@ -78,6 +90,15 @@ export const authSlice = createSlice({
                     state.userId = null
                     removeFromLocalStorage("id")
                     removeFromLocalStorage("token")
+                }
+            )
+            //change Name
+            .addMatcher(authApi.endpoints.changeName.matchFulfilled,
+                (state, {payload}) => {
+                    console.log(payload)
+                    state.userName = payload.updatedUser.name
+                    state.email = payload.updatedUser.email
+                    state.avatar = payload.updatedUser.avatar
                 }
             )
     }

@@ -5,5 +5,6 @@ export const PATH = {
     PROFILE: "profile",
     CHECK_EMAIL: "/check",
     FORGOT_PASSWORD: "/forgot-password",
-    SET_PASSWORD: "set-new-password"
+    SET_PASSWORD: "set-new-password",
+    PACK_LISTS: '/pack-lists'
 }

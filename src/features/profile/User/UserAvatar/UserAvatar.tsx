@@ -6,8 +6,10 @@ import {useAppSelector} from "../../../../app/hooks";
 import defaultImage from "../../../../assets/user/userImg.png"
 
 export const UserAvatar = () => {
-    const avatar = useAppSelector(state => state.profile.avatar)
+    const avatar = useAppSelector(state => state.auth.avatar)
+    debugger
     const useAvatar = avatar ? avatar : defaultImage
+
     return (
         <Badge
             anchorOrigin={{
@@ -24,6 +26,3 @@ export const UserAvatar = () => {
     );
 };
 
-type UserAvatarT = {
-    src: string
-}

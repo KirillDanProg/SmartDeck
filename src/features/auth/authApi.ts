@@ -97,7 +97,10 @@ export const authApi = apiSlice.injectEndpoints({
             query: (body) => ({
                 url: `/auth/me`,
                 method: 'PUT',
-                body
+                body: {
+                    name: body,
+                    avatar: '',
+                }
             }),
         }),
         forgotPassword: build.mutation<any, string>({
