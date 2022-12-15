@@ -10,6 +10,9 @@ import {useAppSelector} from "../../../app/hooks";
 import {selectCurrentError} from "../../auth/authSlice";
 import {CustomGridContainer} from "../../../common/components/CustomGridContainer";
 import {getRefFromEmail} from "../../../app/utils/getRefFromEmail";
+import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
+import {NavLink} from "react-router-dom";
+import s from "./CheckEmailPage.module.css"
 
 
 export const CheckEmailPage = () => {
@@ -30,14 +33,14 @@ export const CheckEmailPage = () => {
             />}
             <CssBaseline/>
             <CustomGridContainer>
-                <Typography component="h1" variant="h3">
+                <Typography  variant="inherit" className={s.title}>
                     Check email
                 </Typography>
                 <img style={{maxWidth: '200px'}} src={checkEmail} alt=""/>
-                <Typography component="h3" variant="h5">
+                <Typography  variant="inherit" className={s.text}>
                     We`ve sent an Email with instructions to
                 </Typography>
-                <Typography component="h3" variant="h5">
+                <Typography variant="inherit" className={s.text}>
                     {
                         email
                             ? <a style={{textDecoration: 'none', color: 'black', fontWeight: 'bold'}}
@@ -45,10 +48,13 @@ export const CheckEmailPage = () => {
                             : "Something went wrong..."
                     }
                 </Typography>
-                <a
-                    href={refToMail}
+                <NavLink
+                    to={refToMail}
                     target="_blank"
-                >Check your email</a>
+                    className={s.link}
+                >
+                    <FollowTheSignsIcon fontSize={"small"}/>
+                    Check your email</NavLink>
             </CustomGridContainer>
         </Grid>
     );

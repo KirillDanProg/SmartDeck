@@ -1,0 +1,22 @@
+.link {
+    color: #366EFF;
+    text-decoration: none;
+    display: flex;
+}
+
+.text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    color: #000000;
+    opacity: 0.5;
+}
+
+.title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 32px;
+    color: #000000;
+}
