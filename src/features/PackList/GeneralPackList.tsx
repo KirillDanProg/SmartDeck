@@ -59,7 +59,7 @@ export const GeneralPackList = () => {
                                 }}
                             >
                                 <FilterAltOffOutlinedIcon
-
+                                onClick={()=>{alert("Thank you for dinner")}}
                                 />
                             </Box>
                         </Box>
