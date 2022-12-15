@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import './App.css';
 import {AppRoutes} from '../layout/AppRoutes/AppRoutes';
 import {Header} from '../layout/Header/Header';
@@ -11,6 +11,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import {serverErrorHandler} from "./utils/serverErrorTransformed";
 import {Preloader} from "../common/components/Preloader";
 import {useAuthMeMutation} from "../features/auth/authApi";
+import {ColorModelContex, ColorModelContextProvider} from "../layout/Header/ColorModeContext";
 
 function App() {
 
@@ -20,12 +21,13 @@ function App() {
 
     const [authMe] = useAuthMeMutation()
 
+
     useEffect(() => {
         authMe("").unwrap()
     }, [])
 
     return (
-        <ThemeProvider theme={theme}>
+        <ColorModelContextProvider>
 
             <CssBaseline/>
             {error && <BasicModal modalTitle="Something went wrong"
@@ -39,7 +41,7 @@ function App() {
                     <AppRoutes/>
                 </>
             }
-        </ThemeProvider>
+        </ColorModelContextProvider>
     )
 }
 
