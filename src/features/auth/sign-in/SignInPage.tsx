@@ -11,6 +11,7 @@ import {selectCurrentUser} from "../authSlice";
 import Avatar from "@mui/material/Avatar";
 import {ILoginRequest} from "../authModels";
 import {useLoginMutation} from "../authApi";
+import {CustomGridContainer} from "../../../app/utils/CustomGridContainer";
 
 export const SignInPage = () => {
 
@@ -25,7 +26,7 @@ export const SignInPage = () => {
     useRedirectTo(`/${PATH.PROFILE}`, !!userId, [isSuccess]);
 
     return (
-        <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
+        <CustomGridContainer>
             <Box
                 sx={{
                     my: 8,
@@ -41,6 +42,6 @@ export const SignInPage = () => {
                 </Typography>
                 <Form formType="sign-in" callback={signInHandler}/>
             </Box>
-        </Grid>
+        </CustomGridContainer>
     );
 }

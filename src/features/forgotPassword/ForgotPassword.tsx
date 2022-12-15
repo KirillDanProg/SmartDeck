@@ -12,13 +12,14 @@ import {useForgotPasswordMutation} from "../auth/authApi";
 import {useRedirectTo} from "../../app/hooks/useRedirectTo";
 import {PATH} from "../../layout/AppRoutes/routes";
 import {saveToLocalStorage} from "../../app/utils/local-storage";
+import {CustomGridContainer} from "../../app/utils/CustomGridContainer";
 
 type FormikErrorType = {
     email: string
 }
 
 export const ForgotPassword = () => {
-    const [resetPassword, {isSuccess, data}] = useForgotPasswordMutation()
+    const [resetPassword, {isSuccess, data, isError}] = useForgotPasswordMutation()
     const navigate = useNavigate()
 
     const formik = useFormik({
@@ -43,61 +44,41 @@ export const ForgotPassword = () => {
         },
     })
     return (
-        <Container
-            maxWidth="sm"
-            sx={{
-                display: 'flex',
-                height: '100vh',
-                justifyContent: 'center',
-            }}
-        >
-            <Paper sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                mt: 7,
-                p: 3,
-                width: 400,
-                height: 350,
-            }}
-            >
-                <Stack sx={{alignItems: 'center'}}
-                       className={s.container}
+        <form onSubmit={formik.handleSubmit}>
+            <CustomGridContainer>
+                <Typography variant={"inherit"}
+                            className={s.title}
+                >Forgot your password?</Typography>
+                <TextField
+                    sx={{m: 1, width: '40ch'}}
+                    id="standard-basic"
+                    label="Email"
+                    variant="standard"
+                    {...formik.getFieldProps('email')}
+                />
+                <Typography variant={"inherit"} className={s.textAfterEmail}>
+                    Enter your email address and we will send you further instructions
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
+                </Typography>
+                <Button
+                    type={"submit"}
+                    variant={"contained"}
+                    color={"primary"}
                 >
-                    <Typography variant={"inherit"}
-                                className={s.title}
-                    >Forgot your password?</Typography>
-                    <form onSubmit={formik.handleSubmit}>
+                    Send Instruction
+                </Button>
 
-                    <TextField
-                        sx={{m: 1, width: '40ch'}}
-                        id="standard-basic"
-                        label="Email"
-                        variant="standard"
-                        {...formik.getFieldProps('email')}
-                    />
-                    <Typography variant={"inherit"} className={s.textAfterEmail}>
-                        Enter your email address and we will send you further instructions
-                    </Typography>
-                        <Button
-                            type={"submit"}
-                            variant={"contained"}
-                            color={"primary"}
-                        >
-                            Send Instruction
-                        </Button>
-                    </form>
-
-                    <Typography variant={"inherit"}
-                                className={s.pSmall}
-                    >Did you remember your password?</Typography>
-                    <NavLink to={'/login'}
-                             className={s.pToLogin} onClick={() => {
-                    }}>
-                        Try logging in
-                    </NavLink>
-                </Stack>
-            </Paper>
-        </Container>
+                <Typography variant={"inherit"}
+                            className={s.pSmall}
+                >Did you remember your password?</Typography>
+                <NavLink to={'/login'}
+                         className={s.pToLogin} onClick={() => {
+                }}>
+                    Try logging in
+                </NavLink>
+            </CustomGridContainer>
+        </form>
     );
 };
 

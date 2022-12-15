@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {InputAdornment} from "@mui/material";
 import {PasswordVisibleIcon} from "../../common/components/PasswordVisible";
+import {CustomGridContainer} from "../../app/utils/CustomGridContainer";
 
 export const CreatePassword = () => {
     const [isShown, setIsShown] = useState(false)
@@ -25,26 +26,7 @@ export const CreatePassword = () => {
         },
     })
     return (
-        <Container
-            maxWidth="sm"
-            sx={{
-                display: 'flex',
-                height: '100vh',
-                justifyContent: 'center',
-            }}
-        >
-            <Paper sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                mt: 7,
-                p: 3,
-                width: 400,
-                height: 350,
-            }}
-            >
-                <Stack sx={{alignItems: 'center'}}
-                       className={s.container}
-                >
+        <CustomGridContainer >
                 <Typography variant={"inherit"} className={s.title}>Create new password</Typography>
                     <TextField
                         margin="normal"
@@ -79,9 +61,7 @@ export const CreatePassword = () => {
                         Create new password
                     </Button>
                 </form>
-                </Stack>
-            </Paper>
-        </Container>
+        </CustomGridContainer>
     );
 };
 
