@@ -21,7 +21,6 @@ function App() {
 
     const [authMe] = useAuthMeMutation()
 
-
     useEffect(() => {
         authMe("").unwrap()
     }, [])
