@@ -13,14 +13,20 @@ import {getRefFromEmail} from "../../../app/utils/getRefFromEmail";
 import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
 import {NavLink} from "react-router-dom";
 import s from "./CheckEmailPage.module.css"
+import {useNavigate} from "react-router-dom";
 
 
 export const CheckEmailPage = () => {
-    //todo: fix error
+    const navigate = useNavigate()
     const error = useAppSelector(selectCurrentError)
     const [email, setEmail] = useState<string>('');
 
     const refToMail = getRefFromEmail(email)
+
+    const redirectToLoginHandler = () => {
+        navigate("/login")
+    }
+
     useEffect(() => {
         let result = getFromLocalStorage('email');
         setEmail(String(result))
@@ -48,13 +54,15 @@ export const CheckEmailPage = () => {
                             : "Something went wrong..."
                     }
                 </Typography>
-                <NavLink
-                    to={refToMail}
+                <a
+                    href={refToMail}
                     target="_blank"
+                    onClick={redirectToLoginHandler}
                     className={s.link}
+                    rel="noreferrer"
                 >
                     <FollowTheSignsIcon fontSize={"small"}/>
-                    Check your email</NavLink>
+                    Check your email</a>
             </CustomGridContainer>
         </Grid>
     );
