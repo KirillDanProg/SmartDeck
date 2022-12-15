@@ -25,7 +25,7 @@ export const resetPasswordHTMLGeneration = () => {
     <td style="text-align:center">
 <h1 style="font-size: 30px; color: #202225; margin-top: 0;">Hello</h1>
 <p style="font-size: 18px; margin-bottom: 30px; color: #202225; max-width: 60ch; margin-left: auto; margin-right: auto">A request has been received to change the password for your account</p>
-<a href='http://localhost:3000/${PATH.SET_PASSWORD}/$token$' style="background-color: #1755F5; color: #fff; padding: 8px 24px; border-radius: 4px; border-style: solid; border-color: #1755F5; font-size: 14px; text-decoration: none; cursor: pointer">Reset Password </a>
+<a href='https://cards-friday-project.vercel.app/${PATH.SET_PASSWORD}/$token$' style="background-color: #1755F5; color: #fff; padding: 8px 24px; border-radius: 4px; border-style: solid; border-color: #1755F5; font-size: 14px; text-decoration: none; cursor: pointer">Reset Password </a>
 </td>
 </tr>
 </table>
