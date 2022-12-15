@@ -5,7 +5,7 @@ import { store } from "./app/store";
 import { BrowserRouter } from "react-router-dom";
 import App from "./app/App";
 import {Profile} from "./features/profile/Profile";
-import {PackList} from "./features/PackList/PackList";
+import {GeneralPackList} from "./features/PackList/GeneralPackList";
 import {CreatePassword} from "./features/createPassword/CreatePassword";
 import {ForgotPassword} from "./features/forgotPassword/ForgotPassword";
 import {SignInPage} from "./features/auth/sign-in/SignInPage";
@@ -19,13 +19,13 @@ root.render(
     <BrowserRouter>
       <Provider store={store}>
         {/*<App />*/}
-        {/*  <PackList/>*/}
+          <GeneralPackList/>
         {/*  <SignUpPage/>*/}
         {/*  <SignInPage/>*/}
         {/*  <ForgotPassword/>*/}
         {/*  <CreatePassword/>*/}
         {/*  <CheckEmailPage/>*/}
-          <Profile/>
+        {/*  <Profile/>*/}
       </Provider>
     </BrowserRouter>
 );

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import { InputAdornment } from '@mui/material'
@@ -6,29 +6,20 @@ import SearchSharpIcon from '@mui/icons-material/SearchSharp'
 import Box from '@mui/material/Box'
 
 
-export const InputSearchPacksCard: React.FC<{ width?: number | string }> = ({ width }) => {
+export const SearchPacksCard = () => {
 
-    const namePack = "newPack"
-    const requestStatus = "idle"
+    let namePack = ""
 
     const [inputValue, setInputValue] = useState(namePack)
-    useEffect(() => {
-        setInputValue(namePack)
-    }, [namePack])
-    // const debouncedValue = useDebounce<string>(inputValue, 500)
-    //
-    // useEffect(() => {
-    //     dispatch(setPackNameAC(inputValue))
-    // }, [debouncedValue])
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value)
     }
+
     return (
         <Box
             sx={{
-                width,
-                display: 'flex',
+                display:    'flex',
                 flexDirection: 'column',
                 gap: '5px',
             }}

@@ -1,17 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Typography from '@mui/material/Typography'
 import { Button, ButtonGroup } from '@mui/material'
 import Box from '@mui/material/Box'
 
 
 export const ShowPacksCards = () => {
-    const whosePackCard = 'My'
-    const maxCardsCount = 10
-    const minCardsCount = 1
 
+    const [ownerPack, setOwnerPack] = useState('My')
 
     const onClickShowPacksHandler = (changeButton: 'All' | 'My') => {
-
+        setOwnerPack(changeButton)
     }
 
     return (
@@ -40,7 +38,7 @@ export const ShowPacksCards = () => {
                             width: '196px',
                             height: '39px',
                         }}
-                        variant={whosePackCard === 'My' ? 'contained' : 'outlined'}
+                        variant={ownerPack === 'My' ? 'contained' : 'outlined'}
                     >
                         My
                     </Button>
@@ -51,7 +49,7 @@ export const ShowPacksCards = () => {
                             width: '196px',
                             height: '39px',
                         }}
-                        variant={'outlined'}
+                        variant={ownerPack === 'My' ? 'outlined' : 'contained'}
                     >
                         All
                     </Button>

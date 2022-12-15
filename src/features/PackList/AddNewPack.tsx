@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-// import { AddEditPackModal } from './modal/AddEditPackModal'
-import imageNotFound from './../../assets/notImage.jpg'
-import {Button} from "@mui/material";
+import Button from "@mui/material/Button";
+
 
 export const AddNewPack = () => {
     const [addPackModalOpen, setAddPackModalOpen] = useState(false)
@@ -19,13 +18,6 @@ export const AddNewPack = () => {
 
     return (
         <>
-            {/*<AddEditPackModal
-                image={imageNotFound}
-                name=""
-                title="Add new pack"
-                open={addPackModalOpen}
-                closeModal={closeModalAddPack}
-            />*/}
             <Box
                 sx={{
                     width: '100%',

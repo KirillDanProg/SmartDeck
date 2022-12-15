@@ -1,15 +1,11 @@
 import React from 'react';
-import Paper from "@mui/material/Paper";
 import s from "./ForgotPassword.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {useFormik} from "formik";
-import Container from "@mui/material/Container";
-import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useForgotPasswordMutation} from "../auth/authApi";
-import {useRedirectTo} from "../../app/hooks/useRedirectTo";
 import {PATH} from "../../layout/AppRoutes/routes";
 import {saveToLocalStorage} from "../../app/utils/local-storage";
 import {CustomGridContainer} from "../../app/utils/CustomGridContainer";
@@ -19,7 +15,7 @@ type FormikErrorType = {
 }
 
 export const ForgotPassword = () => {
-    const [resetPassword, {isSuccess, data, isError}] = useForgotPasswordMutation()
+    const [resetPassword, {}] = useForgotPasswordMutation()
     const navigate = useNavigate()
 
     const formik = useFormik({
