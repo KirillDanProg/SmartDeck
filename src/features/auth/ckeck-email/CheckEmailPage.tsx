@@ -10,21 +10,28 @@ import checkEmail from '../../../assets/icons/checkEmail.png'
 import Button from '@mui/material/Button';
 import {PATH} from '../../../layout/AppRoutes/routes';
 import {getFromLocalStorage} from '../../../app/utils/local-storage';
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
+import {useLoginMutation} from '../authApi';
+import {BasicModal} from '../../../common/components/ModalWindow';
 
 
 export const CheckEmailPage = () => {
-    const [email, setEmail] = useState<string>();
+    const [login, {error}] = useLoginMutation();
+    const [email, setEmail] = useState<string>('');
 
     useEffect(() => {
-        let receivedEmail = getFromLocalStorage('email');
-        if (receivedEmail) {
-            setEmail(receivedEmail)
+        const getEmail = async () => {
+            let result = await getFromLocalStorage('email');
+            setEmail(String(result))
         }
-    }, [])
+        getEmail();
+    }, [email])
 
     return (
         <Grid container component="main" sx={{height: '80vh'}}>
+            {error && <BasicModal modalTitle="Something went wrong"
+                                  modalText="Invalid email or password"
+            />}
             <CssBaseline/>
             <Grid
                 item
@@ -45,28 +52,25 @@ export const CheckEmailPage = () => {
                             justifyItems: 'center'
                         }}
                     >
-                                    <Typography component="h1" variant="h3">
-                                        Check email
-                                    </Typography>
-                                <img style={{maxWidth: '200px'}} src={checkEmail} alt=""/>
-                                <Typography component="h3" variant="h5">
-                                We`ve sent an Email with instructions to
-                                </Typography>
-                                <Typography component="h3" variant="h5">
-                            {
-                                email ? email : <h3>error</h3>
-                            }
-                                </Typography>
-                                <Button
-                                component={Link}
-                                to={PATH.LOGIN}
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                sx={{mt: 3, mb: 2}}
-                                >
-                                Back to login
-                                </Button>
+                        <Typography component="h1" variant="h3">
+                            Check email
+                        </Typography>
+                        <img style={{maxWidth: '200px'}} src={checkEmail} alt=""/>
+                        <Typography component="h3" variant="h5">
+                            We`ve sent an Email with instructions to
+                        </Typography>
+                        <Typography component="h3" variant="h5">
+                            {email ? <a style={{textDecoration: 'none', color: 'black', fontWeight: 'bold'}}
+                                        href={`mailto:${email}`}>{email}</a> : <h3>Something went wrong...</h3>}
+                        </Typography>
+                        <Button
+                            component={Link}
+                            to={PATH.LOGIN}
+                            type="button"
+                            fullWidth
+                            variant="contained"
+                            sx={{mt: 3, mb: 2}}
+                        >Back to login</Button>
                     </Box>
                 </div>
             </Grid>

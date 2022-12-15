@@ -41,7 +41,7 @@ export const authSlice = createSlice({
                 (action): action is GenericAsyncThunk => action.type.endsWith('/rejected'),
                 (state, action) => {
                     state.status = "failed"
-                    state.error = action.payload.data.error
+                    state.error = action.payload.error
                 }
             )
             .addMatcher(
