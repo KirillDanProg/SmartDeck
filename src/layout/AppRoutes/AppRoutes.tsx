@@ -10,6 +10,7 @@ import {CheckEmailPage} from '../../features/auth/ckeck-email/CheckEmailPage';
 import {SignUpPage} from "../../features/auth/sign-up/SignUpPage";
 import {CreatePassword} from "../../features/createPassword/CreatePassword";
 import {ForgotPassword} from "../../features/forgotPassword/ForgotPassword";
+import {GeneralPackList} from "../../features/PackList/GeneralPackList";
 
 
 export const AppRoutes = () => {
@@ -20,6 +21,7 @@ export const AppRoutes = () => {
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
                     <Route path={PATH.LOGIN} element={<SignInPage/>}/>
                     <Route path={PATH.SIGN_UP} element={<SignUpPage/>}/>
+                    <Route path={PATH.PACK_LISTS} element={<GeneralPackList/>}/>
                     <Route path="404" element={<Page404/>}/>
                     <Route path="*" element={<Navigate to="404"/>}/>
                 </Route>
