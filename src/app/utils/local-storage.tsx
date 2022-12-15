@@ -11,11 +11,10 @@ export const getFromLocalStorage = (key: string) => {
         const storedValue = localStorage.getItem(key)
 
         if (storedValue) {
-            return JSON.parse(storedValue)
+           return JSON.parse(storedValue)
         }
 
         return undefined
-
     } catch (e) {
         console.log(e)
         return undefined
