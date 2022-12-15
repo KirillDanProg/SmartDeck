@@ -11,6 +11,8 @@ import {SignUpPage} from "../../features/auth/sign-up/SignUpPage";
 import {CreatePassword} from "../../features/createPassword/CreatePassword";
 import {ForgotPassword} from "../../features/forgotPassword/ForgotPassword";
 import {GeneralPackList} from "../../features/PackList/GeneralPackList";
+import {CreatePassword} from "../../features/reset-password/createPassword/CreatePassword";
+import {ForgotPassword} from "../../features/reset-password/forgotPassword/ForgotPassword";
 
 
 export const AppRoutes = () => {
@@ -27,7 +29,7 @@ export const AppRoutes = () => {
                 </Route>
 
                 <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage/>}/>
-                <Route path={`${PATH.SET_PASSWORD}/:token`} element={<CreatePassword/>}/>
+                <Route path={`${PATH.SET_PASSWORD}/:resetPasswordToken`} element={<CreatePassword/>}/>
                 <Route path={PATH.FORGOT_PASSWORD} element={<ForgotPassword/>}/>
 
             </Routes>

@@ -18,8 +18,8 @@ export const Profile = () => {
     const [logout, {isSuccess, isLoading}] = useLogoutMutation()
     const [changeName, {}] = useChangeNameMutation()
 
-    const logoutHandler = async (token: string) => {
-        await logout(token).unwrap()
+    const logoutHandler = async () => {
+        await logout().unwrap()
     }
 
     const changeNameHandler = async (newName: string) => {

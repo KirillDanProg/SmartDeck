@@ -54,8 +54,8 @@ export const authApi = apiSlice.injectEndpoints({
             }),
             transformResponse: (response: IRegisterResponse) => response.addedUser
         }),
-        logout: build.mutation({
-            query: (token: string) => ({
+        logout: build.mutation<unknown, void>({
+            query: () => ({
                 url: `auth/me`,
                 method: 'DELETE'
             })
@@ -113,7 +113,6 @@ export const authApi = apiSlice.injectEndpoints({
                     message: resetPasswordHTMLGeneration()
                 }
             }),
-            // transformResponse: (response: ILoginResponse) => response.createdUserSession
         }),
     })
 });
@@ -123,8 +122,7 @@ export const {
     useLogoutMutation,
     useLoginMutation,
     useAuthMeMutation,
-    useResetPasswordMutation,
     useSetNewPasswordMutation,
     useChangeNameMutation,
-    useForgotPasswordMutation
-} = authApi
+    useForgotPasswordMutation,
+} = authApi;
