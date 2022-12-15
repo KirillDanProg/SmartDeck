@@ -53,6 +53,27 @@ export const CheckEmailPage = () => {
                 </Typography>
                 <a
                     href={refToMail}
+                    target="_blank"
+                >Check your email</a>
+            </CustomGridContainer>
+            <CustomGridContainer>
+                <Typography component="h1" variant="h3">
+                    Check email
+                </Typography>
+                <img style={{maxWidth: '200px'}} src={checkEmail} alt=""/>
+                <Typography component="h3" variant="h5">
+                    We`ve sent an Email with instructions to
+                </Typography>
+                <Typography component="h3" variant="h5">
+                    {
+                        email
+                            ? <a style={{textDecoration: 'none', color: 'black', fontWeight: 'bold'}}
+                                 href={`mailto:${email}`}>{email}</a>
+                            : "Something went wrong..."
+                    }
+                </Typography>
+                <a
+                    href={refToMail}
                     onClick={redirectToLoginHandler}
                     target="_blank"
                 >Check your email</a>
