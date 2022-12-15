@@ -1,18 +1,15 @@
 import React from 'react';
-import Paper from "@mui/material/Paper";
 import s from "./ForgotPassword.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {useFormik} from "formik";
-import Container from "@mui/material/Container";
-import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useForgotPasswordMutation} from "../../auth/authApi";
 import {PATH} from "../../../layout/AppRoutes/routes";
 import {saveToLocalStorage} from "../../../app/utils/local-storage";
 import * as yup from "yup";
-import Box from "@mui/material/Box";
+import {CustomGridContainer} from "../../../app/utils/CustomGridContainer";
 
 export const validationSchema = yup.object({
     email: yup
