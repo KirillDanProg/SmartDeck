@@ -1,7 +1,5 @@
 import * as React from 'react';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import {Form} from '../../../common/components/form/Form';
 import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
@@ -11,7 +9,7 @@ import {selectCurrentUser} from "../authSlice";
 import Avatar from "@mui/material/Avatar";
 import {ILoginRequest} from "../authModels";
 import {useLoginMutation} from "../authApi";
-import {CustomGridContainer} from "../../../app/utils/CustomGridContainer";
+import {CustomGridContainer} from "../../../common/components/CustomGridContainer";
 
 export const SignInPage = () => {
 

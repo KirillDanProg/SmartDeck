@@ -9,7 +9,7 @@ import {useForgotPasswordMutation} from "../../auth/authApi";
 import {PATH} from "../../../layout/AppRoutes/routes";
 import {saveToLocalStorage} from "../../../app/utils/local-storage";
 import * as yup from "yup";
-import {CustomGridContainer} from "../../../app/utils/CustomGridContainer";
+import {CustomGridContainer} from "../../../common/components/CustomGridContainer";
 
 export const validationSchema = yup.object({
     email: yup
