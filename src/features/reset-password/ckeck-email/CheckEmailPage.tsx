@@ -54,6 +54,7 @@ export const CheckEmailPage = () => {
                 <a
                     href={refToMail}
                     target="_blank"
+                    rel="noreferrer"
                 >Check your email</a>
             </CustomGridContainer>
             <CustomGridContainer>
@@ -76,6 +77,7 @@ export const CheckEmailPage = () => {
                     href={refToMail}
                     onClick={redirectToLoginHandler}
                     target="_blank"
+                    rel="noreferrer"
                 >Check your email</a>
             </CustomGridContainer>
         </Grid>
