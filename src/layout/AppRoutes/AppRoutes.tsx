@@ -6,7 +6,7 @@ import {Page404} from "../404-page/Page404";
 import {SignInPage} from "../../features/auth/sign-in/SignInPage";
 import {Main} from "../Main/Main";
 import {Profile} from "../../features/profile/Profile";
-import {CheckEmailPage} from '../../features/auth/ckeck-email/CheckEmailPage';
+import {CheckEmailPage} from '../../features/reset-password/ckeck-email/CheckEmailPage';
 import {SignUpPage} from "../../features/auth/sign-up/SignUpPage";
 import {CreatePassword} from "../../features/reset-password/createPassword/CreatePassword";
 import {ForgotPassword} from "../../features/reset-password/forgotPassword/ForgotPassword";
