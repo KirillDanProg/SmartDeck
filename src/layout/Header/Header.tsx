@@ -19,11 +19,16 @@ import {NavLink} from "react-router-dom";
 import s from "./Header.module.css"
 import {useLogoutMutation} from "../../features/auth/authApi";
 import {PATH} from "../AppRoutes/routes";
+import {useContext} from "react";
+import {ColorModelContex} from "./ColorModeContext";
 
 export const Header = () => {
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [logout, {}] = useLogoutMutation()
+
+    const {mode, toggleColorMode} = useContext(ColorModelContex)
+    console.log(mode)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setAuth(event.target.checked);
@@ -42,20 +47,6 @@ export const Header = () => {
         await logout().unwrap()
     }
 
-    //==========theme=========
-    //todo: change theme
-    const [mode, setMode] = React.useState<PaletteMode>('light');
-    const colorMode = React.useMemo(
-        () => ({
-            // The dark mode switch would invoke this method
-            toggleColorMode: () => {
-                setMode((prevMode: PaletteMode) =>
-                    prevMode === 'light' ? 'dark' : 'light',
-                );
-            },
-        }),
-        [],
-    );
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -71,12 +62,7 @@ export const Header = () => {
                         <MenuIcon/>
                     </IconButton>
                     <FormGroup sx={{flexGrow: 1}}>
-                        <FormControlLabel
-                            control={
-                                <DarkModeSwitch/>
-                            }
-                            label={""}
-                        />
+                        <DarkModeSwitch onClick={toggleColorMode} />
                     </FormGroup>
                     <NavLink to={PATH.LOGIN}>
                         <CardMedia component="img" sx={{
