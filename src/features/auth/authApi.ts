@@ -99,7 +99,7 @@ export const authApi = apiSlice.injectEndpoints({
                 method: 'PUT',
                 body: {
                     name: body,
-                    avatar: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdcextendeduniverse.fandom.com%2Fwiki%2FBatman&psig=AOvVaw3gASjDZNovoMYEQhdrPdkr&ust=1671181845990000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCPjnjtqj-_sCFQAAAAAdAAAAABAD"
+                    avatar: '',
                 }
             }),
         }),

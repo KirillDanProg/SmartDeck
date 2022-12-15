@@ -23,7 +23,6 @@ export const UserName: FC<UserNameT> = ({changeNameCB}) => {
     }
 
     const saveName = async () => {
-        debugger
         await changeNameCB(userName)
         setIsEditing(!isEditing)
     }

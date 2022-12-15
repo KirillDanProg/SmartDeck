@@ -2,7 +2,6 @@ import {AsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
 import {removeFromLocalStorage, saveToLocalStorage} from "../../app/utils/local-storage";
 import {authApi} from "./authApi";
-import {useAppSelector} from "../../app/hooks";
 
 type StatusType = "idle" | "loading" | "succeeded" | "failed"
 type InitialStateType = {
@@ -12,6 +11,7 @@ type InitialStateType = {
     error: SerializedError | null
     userName: string
     email: string
+    avatar: string
 }
 type SerializedError = {
     name?: string
@@ -27,7 +27,8 @@ const initialState: InitialStateType = {
     status: "loading",
     error: null,
     userName: "new name",
-    email: ""
+    email: "",
+    avatar: ""
 }
 
 export const authSlice = createSlice({
@@ -51,11 +52,15 @@ export const authSlice = createSlice({
                 }
             )
             .addMatcher(authApi.endpoints.authMe.matchFulfilled,
-                (state, {payload}) => {
-                    const {_id, token} = payload
+                (state: InitialStateType, {payload}) => {
+                debugger
+                    const {_id, token, email, name, avatar} = payload
                     if (_id && token) {
                         state.token = token
                         state.userId = _id
+                        state.email = email
+                        state.userName = name
+                        state.avatar = avatar
                         state.status = "succeeded"
                     }
                 }
@@ -68,10 +73,12 @@ export const authSlice = createSlice({
                 }
             )
             .addMatcher(authApi.endpoints.login.matchFulfilled,
-                (state, {payload}) => {
-                    const {_id, token} = payload
+                (state: InitialStateType, {payload}) => {
+                    const {_id, token, email, name } = payload
                     state.token = token
                     state.userId = _id
+                    state.email = email
+                    state.userName = name
                     saveToLocalStorage("id", _id)
                     saveToLocalStorage("token", token)
                 }
@@ -89,9 +96,9 @@ export const authSlice = createSlice({
             .addMatcher(authApi.endpoints.changeName.matchFulfilled,
                 (state, {payload}) => {
                     console.log(payload)
-                    debugger
                     state.userName = payload.updatedUser.name
                     state.email = payload.updatedUser.email
+                    state.avatar = payload.updatedUser.avatar
                 }
             )
     }
