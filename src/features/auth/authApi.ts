@@ -73,24 +73,12 @@ export const authApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: {token}
             }),
-            // transformResponse: (response: ) =IRegisterResponse> response.addedUser
         }),
         setNewPassword: build.mutation({
             query: (resetData: IResetPasswordData) => ({
                 url: "auth/set-new-password",
                 method: "POST",
                 body: resetData
-            })
-        }),
-        resetPassword: build.mutation({
-            query: (email: string) => ({
-                url: "auth/forgot",
-                method: "POST",
-                body: {
-                    email,
-                    from: "test-front-admin <ai73a@yandex.by>",
-                    message: resetPasswordHTMLGeneration()
-                }
             })
         }),
         changeName: build.mutation<any, string>({
