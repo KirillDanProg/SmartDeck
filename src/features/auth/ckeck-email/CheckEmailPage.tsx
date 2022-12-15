@@ -8,30 +8,23 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import checkEmail from '../../../assets/icons/checkEmail.png'
 import Button from '@mui/material/Button';
-import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
 import {PATH} from '../../../layout/AppRoutes/routes';
 import {getFromLocalStorage} from '../../../app/utils/local-storage';
+import {Link} from "react-router-dom";
 
 
 export const CheckEmailPage = () => {
-
-    const [email,setEmail] = useState<string>();
-    const onBactTologinHandler = () => {
-        useRedirectTo(`/${PATH.LOGIN}`, !!email, [])
-    }
-
+    const [email, setEmail] = useState<string>();
 
     useEffect(() => {
-        let receivedEmail =  getFromLocalStorage('email');
-        setEmail(receivedEmail)
+        let receivedEmail = getFromLocalStorage('email');
+        if (receivedEmail) {
+            setEmail(receivedEmail)
+        }
     }, [])
-
 
     return (
         <Grid container component="main" sx={{height: '80vh'}}>
-            {/*{error && <BasicModal modalTitle="Something went wrong"*/}
-            {/*                      modalText="Invalid email or password"*/}
-            {/*/>}*/}
             <CssBaseline/>
             <Grid
                 item
@@ -52,24 +45,28 @@ export const CheckEmailPage = () => {
                             justifyItems: 'center'
                         }}
                     >
-                        <Typography component="h1" variant="h3">
-                            Check email
-                        </Typography>
-                        <img style={{maxWidth: '200px'}} src={checkEmail} alt=""/>
-                        <Typography component="h3" variant="h5">
-                            We`ve sent an Email with instructions to
-                        </Typography>
-                        <Typography component="h3" variant="h5">
-                            {email ? email : <h3>error</h3>}
-                        </Typography>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{mt: 3, mb: 2}}
-                            onClick={onBactTologinHandler}
-                        >Back to login</Button>
-
+                                    <Typography component="h1" variant="h3">
+                                        Check email
+                                    </Typography>
+                                <img style={{maxWidth: '200px'}} src={checkEmail} alt=""/>
+                                <Typography component="h3" variant="h5">
+                                We`ve sent an Email with instructions to
+                                </Typography>
+                                <Typography component="h3" variant="h5">
+                            {
+                                email ? email : <h3>error</h3>
+                            }
+                                </Typography>
+                                <Button
+                                component={Link}
+                                to={PATH.LOGIN}
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{mt: 3, mb: 2}}
+                                >
+                                Back to login
+                                </Button>
                     </Box>
                 </div>
             </Grid>
