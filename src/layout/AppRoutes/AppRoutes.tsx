@@ -8,8 +8,8 @@ import {Main} from "../Main/Main";
 import {Profile} from "../../features/profile/Profile";
 import {CheckEmailPage} from '../../features/auth/ckeck-email/CheckEmailPage';
 import {SignUpPage} from "../../features/auth/sign-up/SignUpPage";
-import {CreatePassword} from "../../features/createPassword/CreatePassword";
-import {ForgotPassword} from "../../features/forgotPassword/ForgotPassword";
+import {CreatePassword} from "../../features/reset-password/createPassword/CreatePassword";
+import {ForgotPassword} from "../../features/reset-password/forgotPassword/ForgotPassword";
 
 
 export const AppRoutes = () => {

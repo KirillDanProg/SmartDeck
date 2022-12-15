@@ -8,11 +8,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {InputAdornment} from "@mui/material";
 import {useFormik} from "formik";
-import {PasswordVisibleIcon} from "../../common/components/PasswordVisible";
+import {PasswordVisibleIcon} from "../../../common/components/PasswordVisible";
 import {useParams} from "react-router-dom";
-import {useSetNewPasswordMutation} from "../auth/authApi";
-import {useRedirectTo} from "../../app/hooks/useRedirectTo";
-import {PATH} from "../../layout/AppRoutes/routes";
+import {useSetNewPasswordMutation} from "../../auth/authApi";
+import {useRedirectTo} from "../../../app/hooks/useRedirectTo";
+import {PATH} from "../../../layout/AppRoutes/routes";
 import * as yup from "yup";
 
 type InitialValuesType = {
