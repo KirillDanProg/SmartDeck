@@ -9,7 +9,7 @@ export const ReturnComponent = () => {
     return (
         <div className={s.topText}>
             <ArrowBackIcon/>
-            <NavLink to={PATH.PACK_LISTS}> Back to Packs List</NavLink>
+            <NavLink to={PATH.PACK_LISTS} className={s.link}> Back to Packs List</NavLink>
         </div>
     );
 };

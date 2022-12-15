@@ -9,7 +9,7 @@ export const PasswordVisibleIcon = (props: {isShown: boolean, setShown: (value: 
     }
 
     return (
-        <span onClick={onClickHandler}>
+        <span onClick={onClickHandler} style={{"cursor": "pointer"}}>
             {
                 props.isShown
                     ? <VisibilityOff/>
