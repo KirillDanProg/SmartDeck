@@ -10,7 +10,7 @@ import {PATH} from "../../layout/AppRoutes/routes";
 import {useAppSelector} from "../../app/hooks";
 import {ReturnComponent} from "../../common/components/returnComponent/ReturnComponent";
 import {useChangeNameMutation, useLogoutMutation} from "../auth/authApi";
-import {CustomGridContainer} from "../../app/utils/CustomGridContainer";
+import {CustomGridContainer} from "../../common/components/CustomGridContainer";
 
 
 export const Profile = () => {

@@ -1,15 +1,13 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import {PATH} from '../../../layout/AppRoutes/routes';
 import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
 import {Form} from '../../../common/components/form/Form';
 import {IRegisterRequest} from "../authModels";
 import {useRegisterMutation} from "../authApi";
-import {CustomGridContainer} from "../../../app/utils/CustomGridContainer";
+import {CustomGridContainer} from "../../../common/components/CustomGridContainer";
 
 
 export const SignUpPage = () => {
