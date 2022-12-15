@@ -2,6 +2,7 @@ import {AsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
 import {removeFromLocalStorage, saveToLocalStorage} from "../../app/utils/local-storage";
 import {authApi} from "./authApi";
+import {useAppSelector} from "../../app/hooks";
 
 type StatusType = "idle" | "loading" | "succeeded" | "failed"
 type InitialStateType = {
@@ -9,6 +10,8 @@ type InitialStateType = {
     userId: string | null
     status: StatusType
     error: SerializedError | null
+    userName: string
+    email: string
 }
 type SerializedError = {
     name?: string
@@ -22,7 +25,9 @@ const initialState: InitialStateType = {
     token: null,
     userId: null,
     status: "loading",
-    error: null
+    error: null,
+    userName: "new name",
+    email: ""
 }
 
 export const authSlice = createSlice({
@@ -78,6 +83,15 @@ export const authSlice = createSlice({
                     state.userId = null
                     removeFromLocalStorage("id")
                     removeFromLocalStorage("token")
+                }
+            )
+            //change Name
+            .addMatcher(authApi.endpoints.changeName.matchFulfilled,
+                (state, {payload}) => {
+                    console.log(payload)
+                    debugger
+                    state.userName = payload.updatedUser.name
+                    state.email = payload.updatedUser.email
                 }
             )
     }

@@ -14,7 +14,7 @@ import {CustomGridContainer} from "../../app/utils/CustomGridContainer";
 
 
 export const Profile = () => {
-    const email = useAppSelector(state => state.profile.email)
+    const email = useAppSelector(state => state.auth.email)
     const [logout, {isSuccess, isLoading}] = useLogoutMutation()
     const [changeName, {}] = useChangeNameMutation()
 

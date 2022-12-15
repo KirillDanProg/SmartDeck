@@ -12,7 +12,7 @@ type UserNameT = {
 
 export const UserName: FC<UserNameT> = ({changeNameCB}) => {
 
-    const profileUserName = useAppSelector(state => state.profile.name)
+    const profileUserName = useAppSelector(state => state.auth.userName)
 
 
     const [userName, setUserName] = useState(profileUserName)
@@ -22,8 +22,9 @@ export const UserName: FC<UserNameT> = ({changeNameCB}) => {
         setUserName(e.currentTarget.value)
     }
 
-    const saveName = () => {
-        changeNameCB(userName)
+    const saveName = async () => {
+        debugger
+        await changeNameCB(userName)
         setIsEditing(!isEditing)
     }
 
