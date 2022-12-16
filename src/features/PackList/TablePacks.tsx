@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
     Paper,
     Table,
@@ -30,32 +30,57 @@ export type CardType = {
 
 export const TablePacks = React.memo(() => {
 
-    const cardPacks = {
-        cards: [] as Array<CardType>,
-        cardsTotalCount: 10,
-        page: 1,
-        pageCount: 10,
-        packUserId: '',
-        cardQuestion: '',
-        sortCards: '',
-        packName: '',
-        packDeckCover: '',
-    }
+    // const cardPacks = {
+    //     packName: '',
+    //     cards: [] as Array<CardType>,
+    //     lastUpdate: "",
+    //     createdBy: "",
+    //     cardsTotalCount: 10,
+    //     page: 1,
+    //     pageCount: 10,
+    //     // packUserId: '',
+    //     // cardQuestion: '',
+    //     // sortCards: '',
+    //     // packDeckCover: '',
+    // }
 
-    const pack = cardPacks.cards.map((pack: any) => {
+    const cardPacks = [
+        {
+            packUserId: '1',
+            packName: 'Learn RTKQuery',
+            cards: [] as Array<CardType>,
+            lastUpdate: "10.11.22",
+            createdBy: "Kirill",
+            cardsTotalCount: 100,
+            page: 1,
+            pageCount: 10,
+        },
+        {
+            packUserId: '2',
+            packName: 'Learn Nest.js',
+            cards: [] as Array<CardType>,
+            lastUpdate: "11.11.22",
+            createdBy: "Dima",
+            cardsTotalCount: 100,
+            page: 1,
+            pageCount: 10,
+        },
+    ]
+
+    const pack = cardPacks.map((pack) => {
         return {
-            userId: pack.user_id,
-            key: pack._id,
-            name: pack.name,
-            cards: pack.cardsCount,
-            lastCreated: pack.created.slice(0, 10).split('-').reverse().join('.'),
-            createdBy: pack.user_name,
-            deckCover: pack.deckCover,
+            userId: pack.packUserId,
+            key: pack.packUserId,
+            name: pack.packName,
+            cards: pack.cardsTotalCount,
+            lastUpdate: pack.lastUpdate,
+            createdBy: pack.createdBy,
             Actions: [
                 {
                     icon: (
                         <SchoolOutlinedIcon
-                            onClick={() => {}}
+                            onClick={() => {
+                            }}
                         />
                     ),
                     status: 'allMy',
@@ -63,7 +88,8 @@ export const TablePacks = React.memo(() => {
                 {
                     icon: (
                         <ModeEditIcon
-                            onClick={() => {}}
+                            onClick={() => {
+                            }}
                         />
                     ),
                     status: 'my',
@@ -71,7 +97,8 @@ export const TablePacks = React.memo(() => {
                 {
                     icon: (
                         <DeleteOutlineIcon
-                            onClick={() => {}}
+                            onClick={() => {
+                            }}
                         />
                     ),
                     status: 'my',
@@ -79,7 +106,6 @@ export const TablePacks = React.memo(() => {
             ],
         }
     })
-
 
 
     return (
@@ -93,7 +119,7 @@ export const TablePacks = React.memo(() => {
                 <TableContainer component={Paper}>
                     <Table size="small" aria-label="a dense table">
                         <TableHead>
-                            <TableRow hover style={{ backgroundColor: '#EFEFEF' }}>
+                            <TableRow hover style={{backgroundColor: '#EFEFEF'}}>
                                 <TableCell align="left">Name</TableCell>
                                 <TableCell align="center">Cards</TableCell>
                                 <TableCell align="center">
@@ -110,24 +136,25 @@ export const TablePacks = React.memo(() => {
                             {pack.map((row) => (
                                 <TableRow
                                     key={row.key}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
                                     <TableCell
                                         align="left"
-                                        style={{ cursor: 'pointer' }}
-                                        onClick={() => {}}
+                                        style={{cursor: 'pointer'}}
+                                        onClick={() => {
+                                        }}
                                     >
                                         {row.name}
                                     </TableCell>
                                     <TableCell align="center">{row.cards}</TableCell>
-                                    <TableCell align="center">{row.lastCreated}</TableCell>
+                                    <TableCell align="center">{row.lastUpdate}</TableCell>
                                     <TableCell align="right">{row.createdBy}</TableCell>
-                                    {/*<TableCell align="right">*/}
-                                    {/*    {row.Actions.map((icon) => <span style={{ padding: '3px' }}>*/}
-                                    {/*                    {icon.icon}*/}
-                                    {/*                </span>*/}
-                                    {/*    )}*/}
-                                    {/*</TableCell>*/}
+                                    <TableCell align="right">
+                                        {row.Actions.map((icon) => <span style={{ padding: '3px' }}>
+                                                        {icon.icon}
+                                                    </span>
+                                        )}
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

@@ -12,7 +12,6 @@ import {useLoginMutation} from "../authApi";
 import {CustomGridContainer} from "../../../common/components/CustomGridContainer";
 
 export const SignInPage = () => {
-
     const [login, {isSuccess}] = useLoginMutation();
 
     const userId = useAppSelector(selectCurrentUser)
