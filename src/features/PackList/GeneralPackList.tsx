@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterAltOffOutlinedIcon from '@mui/icons-material/FilterAltOffOutlined'
+import TuneIcon from '@mui/icons-material/Tune';
 import Box from '@mui/material/Box'
 import {AddNewPack} from "./AddNewPack";
 import {SearchPacksCard} from "./SearchPackCards";
@@ -58,7 +58,7 @@ export const GeneralPackList = () => {
                                     borderRadius: '2px',
                                 }}
                             >
-                                <FilterAltOffOutlinedIcon
+                                <TuneIcon
                                 onClick={()=>{alert("Thank you for dinner")}}
                                 />
                             </Box>

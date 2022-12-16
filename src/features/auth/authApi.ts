@@ -18,6 +18,12 @@ export interface IUser {
     __v: number;
 }
 
+export interface IChangeNameResponse {
+    updatedUser: IUser
+    error?: string
+}
+
+
 export interface IMainLoginResponse {
     _id: string
     email: string
@@ -33,6 +39,20 @@ export interface IMainLoginResponse {
     tokenDeathTime: number
 }
 
+export interface IAuthResponse  {
+    _id: string;
+    email: string;
+    name: string;
+    avatar?: string;
+    publicCardPacksCount: number;
+    created: Date;
+    updated: Date;
+    isAdmin: boolean;
+    verified: boolean;
+    rememberMe: boolean;
+    error?: string;
+}
+
 export interface IRegisterRequest {
     email: string
     password: string
@@ -42,6 +62,11 @@ export interface ILoginRequest {
     email: string
     password: string
     rememberMe: boolean
+}
+
+export interface IGeneralResponse {
+    info: string
+    error: string
 }
 
 export const authApi = apiSlice.injectEndpoints({
@@ -54,7 +79,7 @@ export const authApi = apiSlice.injectEndpoints({
             }),
             transformResponse: (response: IRegisterResponse) => response.addedUser
         }),
-        logout: build.mutation<unknown, void>({
+        logout: build.mutation<IGeneralResponse, void>({
             query: () => ({
                 url: `auth/me`,
                 method: 'DELETE'
@@ -67,21 +92,21 @@ export const authApi = apiSlice.injectEndpoints({
                 body
             }),
         }),
-        authMe: build.mutation({
+        authMe: build.mutation<IAuthResponse, string>({
             query: (token: string) => ({
                 url: "auth/me",
                 method: "POST",
                 body: {token}
             }),
         }),
-        setNewPassword: build.mutation({
-            query: (resetData: IResetPasswordData) => ({
+        setNewPassword: build.mutation<IGeneralResponse,IResetPasswordData>({
+            query: (resetData) => ({
                 url: "auth/set-new-password",
                 method: "POST",
                 body: resetData
             })
         }),
-        changeName: build.mutation<any, string>({
+        changeName: build.mutation<IChangeNameResponse, string>({
             query: (body) => ({
                 url: `/auth/me`,
                 method: 'PUT',
@@ -91,7 +116,7 @@ export const authApi = apiSlice.injectEndpoints({
                 }
             }),
         }),
-        forgotPassword: build.mutation<any, string>({
+        forgotPassword: build.mutation<IGeneralResponse, string>({
             query: (body) => ({
                 url: `/auth/forgot`,
                 method: 'POST',

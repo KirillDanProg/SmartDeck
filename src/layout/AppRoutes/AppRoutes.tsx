@@ -10,6 +10,7 @@ import {SignUpPage} from "../../features/auth/sign-up/SignUpPage";
 import {GeneralPackList} from "../../features/PackList/GeneralPackList";
 import {CreatePassword} from "../../features/reset-password/createPassword/CreatePassword";
 import {ForgotPassword} from "../../features/reset-password/forgotPassword/ForgotPassword";
+import {DevPage} from "../devPage/DevPage";
 
 
 export const AppRoutes = () => {
@@ -27,6 +28,7 @@ export const AppRoutes = () => {
                 <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage/>}/>
                 <Route path={`${PATH.SET_PASSWORD}/:resetPasswordToken`} element={<CreatePassword/>}/>
                 <Route path={PATH.FORGOT_PASSWORD} element={<ForgotPassword/>}/>
+                <Route path={PATH.DEV_PAGE} element={<DevPage/>}/>
             </Routes>
         </>
     )

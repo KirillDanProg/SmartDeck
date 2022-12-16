@@ -5,13 +5,11 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import CardMedia from '@mui/material/CardMedia';
 import {DarkModeSwitch} from "./DarkModeSwitch";
-import {PaletteMode} from "@mui/material";
 import incubatorLogo from '../../assets/logo/incubatorLogo.png'
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import TransgenderIcon from '@mui/icons-material/Transgender';
@@ -19,13 +17,20 @@ import {NavLink} from "react-router-dom";
 import s from "./Header.module.css"
 import {useLogoutMutation} from "../../features/auth/authApi";
 import {PATH} from "../AppRoutes/routes";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {ColorModelContex} from "./ColorModeContext";
+import Link from "@mui/material/Link";
+import List from "@mui/material/List";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import {ChevronLeft} from "@mui/icons-material";
+import {Divider, ListItem} from "@mui/material";
+
 
 export const Header = () => {
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [logout, {}] = useLogoutMutation()
+    const [open, setOpen] = useState(false)
 
     const {mode, toggleColorMode} = useContext(ColorModelContex)
     console.log(mode)
@@ -47,6 +52,11 @@ export const Header = () => {
         await logout().unwrap()
     }
 
+    //==============burger menu=========================
+    const navigationLinks = [
+        {name: "About developers", href: PATH.DEV_PAGE},
+        {name: "About application", href: ""},
+    ]
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -59,10 +69,10 @@ export const Header = () => {
                         aria-label="menu"
                         sx={{mr: 2}}
                     >
-                        <MenuIcon/>
+                        <MenuIcon onClick={() => setOpen(true)}/>
                     </IconButton>
                     <FormGroup sx={{flexGrow: 1}}>
-                        <DarkModeSwitch onClick={toggleColorMode} />
+                        <DarkModeSwitch onClick={toggleColorMode}/>
                     </FormGroup>
                     <NavLink to={PATH.LOGIN}>
                         <CardMedia component="img" sx={{
@@ -115,6 +125,26 @@ export const Header = () => {
                         </div>
                     )}
                 </Toolbar>
+                <SwipeableDrawer open={open}
+                                 onOpen={() => setOpen(true)}
+                                 onClose={() => setOpen(false)}>
+                    <IconButton>
+                        <ChevronLeft onClick={() => setOpen(false)}/>
+                    </IconButton>
+                    <Divider/>
+                    <List>
+                        {navigationLinks.map(l => (
+                                <ListItem>
+                                    <Link color={"textPrimary"}
+                                          variant={"button"}
+                                          className={s.burgerMenuLinks}
+                                          href={l.href}
+                                    >{l.name}</Link>
+                                </ListItem>
+                            )
+                        )}
+                    </List>
+                </SwipeableDrawer>
             </AppBar>
         </Box>
     )
