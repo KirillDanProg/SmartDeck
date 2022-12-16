@@ -60,7 +60,6 @@ export const authSlice = createSlice({
                         state.userId = _id
                         state.email = email
                         state.userName = name
-                        state.avatar = avatar
                         state.status = "succeeded"
                     }
                 }
@@ -98,7 +97,6 @@ export const authSlice = createSlice({
                     console.log(payload)
                     state.userName = payload.updatedUser.name
                     state.email = payload.updatedUser.email
-                    state.avatar = payload.updatedUser.avatar
                 }
             )
     }

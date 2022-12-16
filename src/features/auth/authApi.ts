@@ -51,6 +51,7 @@ export interface IAuthResponse  {
     verified: boolean;
     rememberMe: boolean;
     error?: string;
+    token: string;
 }
 
 export interface IRegisterRequest {

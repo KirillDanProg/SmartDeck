@@ -43,6 +43,7 @@ export const TablePacks = React.memo(() => {
     //     // sortCards: '',
     //     // packDeckCover: '',
     // }
+    const userId = '1'
 
     const cardPacks = [
         {
@@ -150,9 +151,22 @@ export const TablePacks = React.memo(() => {
                                     <TableCell align="center">{row.lastUpdate}</TableCell>
                                     <TableCell align="right">{row.createdBy}</TableCell>
                                     <TableCell align="right">
-                                        {row.Actions.map((icon) => <span style={{ padding: '3px' }}>
-                                                        {icon.icon}
-                                                    </span>
+                                        {row.Actions.map((icon) => {
+                                            //todo: get userId from response
+                                                if ( userId === row.userId) {
+                                                    return (
+                                                        <span style={{padding: '3px'}} >
+                                        {icon.icon}
+                                            </span>
+                                                    )
+                                                } else if (icon.status === 'allMy') {
+                                                    return (
+                                                        <span style={{padding: '3px'}} >
+                                        {icon.icon}
+                                            </span>
+                                                    )
+                                                }
+                                            }
                                         )}
                                     </TableCell>
                                 </TableRow>

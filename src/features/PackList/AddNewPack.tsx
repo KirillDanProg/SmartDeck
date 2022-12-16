@@ -17,7 +17,6 @@ export const AddNewPack = () => {
     }
 
     return (
-        <>
             <Box
                 sx={{
                     width: '100%',
@@ -41,6 +40,5 @@ export const AddNewPack = () => {
                     Add new pack
                 </Button>
             </Box>
-        </>
     )
 }
