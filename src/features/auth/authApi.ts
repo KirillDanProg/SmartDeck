@@ -24,7 +24,7 @@ export interface IChangeNameResponse {
 }
 
 
-export interface IMainLoginResponse {
+export type AuthResponseType = {
     _id: string
     email: string
     rememberMe: boolean
@@ -39,19 +39,6 @@ export interface IMainLoginResponse {
     tokenDeathTime: number
 }
 
-export interface IAuthResponse  {
-    _id: string;
-    email: string;
-    name: string;
-    avatar?: string;
-    publicCardPacksCount: number;
-    created: Date;
-    updated: Date;
-    isAdmin: boolean;
-    verified: boolean;
-    rememberMe: boolean;
-    error?: string;
-}
 
 export interface IRegisterRequest {
     email: string
@@ -85,14 +72,14 @@ export const authApi = apiSlice.injectEndpoints({
                 method: 'DELETE'
             })
         }),
-        login: build.mutation<IMainLoginResponse, ILoginRequest>({
+        login: build.mutation<AuthResponseType, ILoginRequest>({
             query: (body) => ({
                 url: `auth/login`,
                 method: 'POST',
                 body
             }),
         }),
-        authMe: build.mutation<IAuthResponse, string>({
+        authMe: build.mutation<AuthResponseType, string>({
             query: (token: string) => ({
                 url: "auth/me",
                 method: "POST",
