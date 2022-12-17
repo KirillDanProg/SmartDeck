@@ -2,19 +2,20 @@ import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from "@mui/material/Button";
+import {useCreateNewPackMutation} from "../cards/api/packsApi";
 
 
 export const AddNewPack = () => {
-    const [addPackModalOpen, setAddPackModalOpen] = useState(false)
+    // const [addPackModalOpen, setAddPackModalOpen] = useState(false)
+    const [addNewPack, {}] = useCreateNewPackMutation()
 
-
-    const addNewPackHandler = () => {
-        setAddPackModalOpen(true)
+    const addNewPackHandler = async () => {
+        addNewPack( "Kirill, add new pack" )
     }
 
-    const closeModalAddPack = () => {
-        setAddPackModalOpen(false)
-    }
+    // const closeModalAddPack = () => {
+    //     setAddPackModalOpen(false)
+    // }
 
     return (
             <Box

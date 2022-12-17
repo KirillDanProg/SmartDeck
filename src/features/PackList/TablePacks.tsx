@@ -13,69 +13,39 @@ import Box from '@mui/material/Box'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined'
+import {useChangeNamePackMutation, useDeletePackMutation, useGetPacksQuery} from "../cards/api/packsApi";
+import {useAppSelector} from "../../app/hooks";
 
+export const TablePacks = () => {
+    const {} = useGetPacksQuery()
+    const [deletePack, {}] = useDeletePackMutation()
+    const [changeName, {}] = useChangeNamePackMutation()
 
-export type CardType = {
-    answer: string
-    question: string
-    cardsPack_id: string
-    grade: number
-    shots: number
-    user_id: string
-    created: string
-    updated: string
-    _id: string
-    packDeckCover: string
-}
+    const userId = useAppSelector(state => state.auth.userId)
 
-export const TablePacks = React.memo(() => {
+    const cardPacks = useAppSelector(state => state.packs.cardPacks)
 
-    // const cardPacks = {
-    //     packName: '',
-    //     cards: [] as Array<CardType>,
-    //     lastUpdate: "",
-    //     createdBy: "",
-    //     cardsTotalCount: 10,
-    //     page: 1,
-    //     pageCount: 10,
-    //     // packUserId: '',
-    //     // cardQuestion: '',
-    //     // sortCards: '',
-    //     // packDeckCover: '',
-    // }
-    const userId = '1'
+    const deletePackHandler = async (id: string) => {
+        await deletePack(id)
+    }
 
-    const cardPacks = [
-        {
-            packUserId: '1',
-            packName: 'Learn RTKQuery',
-            cards: [] as Array<CardType>,
-            lastUpdate: "10.11.22",
-            createdBy: "Kirill",
-            cardsTotalCount: 100,
-            page: 1,
-            pageCount: 10,
-        },
-        {
-            packUserId: '2',
-            packName: 'Learn Nest.js',
-            cards: [] as Array<CardType>,
-            lastUpdate: "11.11.22",
-            createdBy: "Dima",
-            cardsTotalCount: 100,
-            page: 1,
-            pageCount: 10,
-        },
-    ]
+    const editeNameChangeHandler = async (_id: string) => {
+        await changeName({
+            name: "Pack's name changed",
+            _id
+        })
+    }
 
     const pack = cardPacks.map((pack) => {
+
         return {
-            userId: pack.packUserId,
-            key: pack.packUserId,
-            name: pack.packName,
-            cards: pack.cardsTotalCount,
-            lastUpdate: pack.lastUpdate,
-            createdBy: pack.createdBy,
+            packId: pack._id,
+            userId: pack.user_id,
+            key: pack.user_id,
+            name: pack.name,
+            cards: pack.cardsCount,
+            lastUpdate: pack.created,
+            createdBy: pack.user_name,
             Actions: [
                 {
                     icon: (
@@ -89,8 +59,7 @@ export const TablePacks = React.memo(() => {
                 {
                     icon: (
                         <ModeEditIcon
-                            onClick={() => {
-                            }}
+                            onClick={() => editeNameChangeHandler(pack._id)}
                         />
                     ),
                     status: 'my',
@@ -98,8 +67,7 @@ export const TablePacks = React.memo(() => {
                 {
                     icon: (
                         <DeleteOutlineIcon
-                            onClick={() => {
-                            }}
+                            onClick={() => deletePackHandler(pack._id)}
                         />
                     ),
                     status: 'my',
@@ -177,4 +145,4 @@ export const TablePacks = React.memo(() => {
             </Box>
         </>
     )
-})
+}

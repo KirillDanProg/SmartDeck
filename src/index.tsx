@@ -13,8 +13,7 @@ const root = createRoot(container);
 root.render(
     <BrowserRouter>
       <Provider store={store}>
-        {/*<App />*/}
-          <NamePack/>
+        <App />
       </Provider>
     </BrowserRouter>
 );
