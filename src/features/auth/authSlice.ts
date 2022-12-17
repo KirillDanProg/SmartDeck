@@ -93,7 +93,6 @@ export const authSlice = createSlice({
             //change Name
             .addMatcher(authApi.endpoints.changeName.matchFulfilled,
                 (state, {payload}) => {
-                    console.log(payload)
                     state.userName = payload.updatedUser.name
                     state.email = payload.updatedUser.email
                 }

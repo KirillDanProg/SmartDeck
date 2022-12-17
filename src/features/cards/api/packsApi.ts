@@ -1,14 +1,8 @@
 import {apiSlice} from "../../api/apiSlice";
 import {
-    IChangeNameResponse,
-    IRegisterResponse,
-} from "../../auth/authApi";
-import {
-    CreateNewPackRequestT, IChangeNamePackRequest,
+    IChangeNamePackRequest,
     IChangeNamePackResponse,
-    IDeletePackResponse,
     IGetPacksResponse,
-    INewPackResponse
 } from "./packsSlice";
 
 export const packsApi = apiSlice.injectEndpoints({
@@ -19,7 +13,7 @@ export const packsApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => [{type: "Packs"}]
         }),
-        createNewPack: build.mutation<INewPackResponse, string>({
+        createNewPack: build.mutation<{}, string>({
             query: (body) => ({
                 url: `/cards/pack`,
                 method: 'POST',
@@ -32,7 +26,7 @@ export const packsApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: result =>  [{type: "Packs"}]
         }),
-        deletePack: build.mutation<IDeletePackResponse, string>({
+        deletePack: build.mutation<{}, string>({
             query: (body) => ({
                 url: `/cards/pack?id=${body}`,
                 method: 'DELETE',
