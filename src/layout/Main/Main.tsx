@@ -1,8 +1,8 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
 import {PATH} from "../AppRoutes/routes";
-import {useRedirectTo} from "../../app/hooks/useRedirectTo";
-import {useAppSelector} from "../../app/hooks";
+import {useRedirectTo} from "../../common/hooks/useRedirectTo";
+import {useAppSelector} from "../../common/hooks";
 import {selectCurrentUser} from "../../features/auth/authSlice";
 import Grid from "@mui/material/Grid";
 

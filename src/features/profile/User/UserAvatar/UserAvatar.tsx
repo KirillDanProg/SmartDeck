@@ -1,8 +1,8 @@
-import React, {FC} from "react";
+import React from "react";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
 import {UserPhotoChangeBtn} from "../UserPhotoChangeBtn/UserPhotoCahngeBtn";
-import {useAppSelector} from "../../../../app/hooks";
+import {useAppSelector} from "../../../../common/hooks";
 import defaultImage from "../../../../assets/user/userImg.png"
 
 export const UserAvatar = () => {

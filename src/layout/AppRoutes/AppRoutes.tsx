@@ -7,7 +7,7 @@ import {Main} from "../Main/Main";
 import {Profile} from "../../features/profile/Profile";
 import {CheckEmailPage} from '../../features/reset-password/check-email/CheckEmailPage';
 import {SignUpPage} from "../../features/auth/sign-up/SignUpPage";
-import {GeneralPackList} from "../../features/PackList/GeneralPackList";
+import {CardsPage} from "../../features/cards/CardsPage";
 import {CreatePassword} from "../../features/reset-password/createPassword/CreatePassword";
 import {ForgotPassword} from "../../features/reset-password/forgotPassword/ForgotPassword";
 import {DevPage} from "../devPage/DevPage";
@@ -21,7 +21,7 @@ export const AppRoutes = () => {
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
                     <Route path={PATH.LOGIN} element={<SignInPage/>}/>
                     <Route path={PATH.SIGN_UP} element={<SignUpPage/>}/>
-                    <Route path={PATH.PACK_LISTS} element={<GeneralPackList/>}/>
+                    <Route path={PATH.PACK_LISTS} element={<CardsPage/>}/>
                     <Route path="404" element={<Page404/>}/>
                     <Route path="*" element={<Navigate to="404"/>}/>
                 </Route>

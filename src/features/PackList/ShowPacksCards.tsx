@@ -3,6 +3,10 @@ import Typography from '@mui/material/Typography'
 import { Button, ButtonGroup } from '@mui/material'
 import Box from '@mui/material/Box'
 
+const btnStyle = {
+    width: '196px',
+    height: '39px'
+}
 
 export const ShowPacksCards = () => {
 
@@ -13,20 +17,11 @@ export const ShowPacksCards = () => {
     }
 
     return (
-        <>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '5px',
-                }}
-            >
+            <Box>
                 <Typography variant="h6">Show packs cards</Typography>
+
                 <ButtonGroup
-                    sx={{
-                        width: '196px',
-                        height: '39px',
-                    }}
+                    sx={btnStyle}
                     disableElevation
                     variant="contained"
                     aria-label="Disabled elevation buttons"
@@ -34,10 +29,7 @@ export const ShowPacksCards = () => {
                     <Button
                         disabled={false}
                         onClick={() => onClickShowPacksHandler('My')}
-                        sx={{
-                            width: '196px',
-                            height: '39px',
-                        }}
+                        sx={btnStyle}
                         variant={ownerPack === 'My' ? 'contained' : 'outlined'}
                     >
                         My
@@ -45,16 +37,12 @@ export const ShowPacksCards = () => {
                     <Button
                         disabled={false}
                         onClick={() => onClickShowPacksHandler('All')}
-                        sx={{
-                            width: '196px',
-                            height: '39px',
-                        }}
+                        sx={btnStyle}
                         variant={ownerPack === 'My' ? 'outlined' : 'contained'}
                     >
                         All
                     </Button>
                 </ButtonGroup>
             </Box>
-        </>
     )
 }

@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {baseUrlGeneration} from "../../app/utils/baseUrlGeneration";
+import {baseUrlGeneration} from "../../common/utils/baseUrlGeneration";
 import {RootState} from "../../app/store";
 
 export const apiSlice = createApi({

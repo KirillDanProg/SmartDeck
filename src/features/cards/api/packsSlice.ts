@@ -1,4 +1,4 @@
-import {AsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import {packsApi} from "./packsApi";
 
 
@@ -16,19 +16,19 @@ export type CreatePackCardType = {
 }
 
 export interface INewPackResponse {
-    newCardsPack: INewPackResponseNewCardsPack;
+    newCardsPack: PackResponseType;
     token: string;
     tokenDeathTime: number;
 }
 
 export interface IDeletePackResponse {
-    deletedCardsPack: INewPackResponseNewCardsPack;
+    deletedCardsPack: PackResponseType;
     token: string;
     tokenDeathTime: number;
 }
 
 export interface IChangeNamePackResponse {
-    updatedCardsPack: INewPackResponseNewCardsPack;
+    updatedCardsPack: PackResponseType;
     token: string;
     tokenDeathTime: number;
 }
@@ -38,28 +38,8 @@ export interface IChangeNamePackRequest {
     name: string
 }
 
-
-export interface INewPackResponseNewCardsPack {
-    _id: string;
-    user_id: string;
-    user_name: string;
-    private: boolean;
-    name: string;
-    path: string;
-    grade: number;
-    shots: number;
-    cardsCount: number;
-    type: string;
-    rating: number;
-    created: string;
-    updated: string;
-    more_id: string;
-    __v: number;
-}
-
-
 export interface IGetPacksResponse {
-    cardPacks: IGetPacksResponseCardPacks[];
+    cardPacks: PackResponseType[];
     page: number;
     pageCount: number;
     cardPacksTotalCount: number;
@@ -69,7 +49,7 @@ export interface IGetPacksResponse {
     tokenDeathTime: number;
 }
 
-export interface IGetPacksResponseCardPacks {
+export type PackResponseType = {
     _id: string;
     user_id: string;
     user_name: string;
@@ -88,10 +68,8 @@ export interface IGetPacksResponseCardPacks {
     __v: number;
 }
 
-
-type GenericAsyncThunk = AsyncThunk<unknown, unknown, any>
 const initialState: IGetPacksResponse = {
-    cardPacks: [] as IGetPacksResponseCardPacks[],
+    cardPacks: [] as PackResponseType[],
     page: 1,
     pageCount: 20,
     cardPacksTotalCount: 1,
@@ -113,10 +91,10 @@ export const packsSlice = createSlice({
                     state.cardPacks = cardPacks
                 }
             )
-            // .addMatcher(packsApi.endpoints.createNewPack.matchFulfilled,
-            //     (state, {payload}) => {
-            //             // state.cardPacks.push(payload.newCardsPack)
-            //     })
+        // .addMatcher(packsApi.endpoints.createNewPack.matchFulfilled,
+        //     (state, {payload}) => {
+        //             // state.cardPacks.push(payload.newCardsPack)
+        //     })
     }
 })
 

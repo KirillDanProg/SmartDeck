@@ -1,6 +1,6 @@
 import {AsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
-import {removeFromLocalStorage, saveToLocalStorage} from "../../app/utils/local-storage";
+import {removeFromLocalStorage, saveToLocalStorage} from "../../common/utils/local-storage";
 import {authApi} from "./authApi";
 
 type StatusType = "idle" | "loading" | "succeeded" | "failed"
@@ -93,7 +93,6 @@ export const authSlice = createSlice({
             //change Name
             .addMatcher(authApi.endpoints.changeName.matchFulfilled,
                 (state, {payload}) => {
-                    console.log(payload)
                     state.userName = payload.updatedUser.name
                     state.email = payload.updatedUser.email
                 }

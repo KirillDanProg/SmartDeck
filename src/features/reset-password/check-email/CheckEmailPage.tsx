@@ -4,14 +4,13 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import checkEmail from '../../../assets/icons/checkEmail.png'
-import {getFromLocalStorage} from '../../../app/utils/local-storage';
+import {getFromLocalStorage} from '../../../common/utils/local-storage';
 import {BasicModal} from '../../../common/components/ModalWindow';
-import {useAppSelector} from "../../../app/hooks";
+import {useAppSelector} from "../../../common/hooks";
 import {selectCurrentError} from "../../auth/authSlice";
 import {CustomGridContainer} from "../../../common/components/CustomGridContainer";
-import {getRefFromEmail} from "../../../app/utils/getRefFromEmail";
+import {getRefFromEmail} from "../../../common/utils/getRefFromEmail";
 import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
-import {NavLink} from "react-router-dom";
 import s from "./CheckEmailPage.module.css"
 import {useNavigate} from "react-router-dom";
 

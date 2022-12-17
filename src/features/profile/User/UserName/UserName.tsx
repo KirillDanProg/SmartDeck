@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
 import Box from '@mui/material/Box'
-import {useAppSelector} from "../../../../app/hooks";
+import {useAppSelector} from "../../../../common/hooks";
 
 type UserNameT = {
     changeNameCB: (newName: string) => void

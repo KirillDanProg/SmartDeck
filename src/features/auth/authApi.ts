@@ -1,5 +1,5 @@
 import {apiSlice} from "../api/apiSlice";
-import {resetPasswordHTMLGeneration} from "../../app/utils/resetPasswordHTMLGeneration";
+import {resetPasswordHTMLGeneration} from "../../common/utils/resetPasswordHTMLGeneration";
 import {IResetPasswordData} from "./authModels";
 
 export interface IRegisterResponse {

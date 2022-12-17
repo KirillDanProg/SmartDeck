@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {PATH} from '../../../layout/AppRoutes/routes';
-import {useRedirectTo} from '../../../app/hooks/useRedirectTo';
+import {useRedirectTo} from '../../../common/hooks/useRedirectTo';
 import {Form} from '../../../common/components/form/Form';
 import {IRegisterRequest} from "../authModels";
 import {useRegisterMutation} from "../authApi";

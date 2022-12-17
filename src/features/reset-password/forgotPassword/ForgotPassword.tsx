@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useForgotPasswordMutation} from "../../auth/authApi";
 import {PATH} from "../../../layout/AppRoutes/routes";
-import {saveToLocalStorage} from "../../../app/utils/local-storage";
+import {saveToLocalStorage} from "../../../common/utils/local-storage";
 import * as yup from "yup";
 import {CustomGridContainer} from "../../../common/components/CustomGridContainer";
 

@@ -11,7 +11,7 @@ import {useFormik} from "formik";
 import {PasswordVisibleIcon} from "../../../common/components/PasswordVisible";
 import {useParams} from "react-router-dom";
 import {useSetNewPasswordMutation} from "../../auth/authApi";
-import {useRedirectTo} from "../../../app/hooks/useRedirectTo";
+import {useRedirectTo} from "../../../common/hooks/useRedirectTo";
 import {PATH} from "../../../layout/AppRoutes/routes";
 import * as yup from "yup";
 

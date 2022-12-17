@@ -5,9 +5,7 @@ import s from "./Profile.module.css"
 import {UserAvatar} from "./User/UserAvatar/UserAvatar"
 import {UserName} from "./User/UserName/UserName"
 import {LogoutBtn} from "./Button/LogoutBtn"
-import {useRedirectTo} from "../../app/hooks/useRedirectTo";
-import {PATH} from "../../layout/AppRoutes/routes";
-import {useAppSelector} from "../../app/hooks";
+import {useAppSelector} from "../../common/hooks";
 import {ReturnComponent} from "../../common/components/returnComponent/ReturnComponent";
 import {useChangeNameMutation, useLogoutMutation} from "../auth/authApi";
 import {CustomGridContainer} from "../../common/components/CustomGridContainer";
@@ -15,7 +13,7 @@ import {CustomGridContainer} from "../../common/components/CustomGridContainer";
 
 export const Profile = () => {
     const email = useAppSelector(state => state.auth.email)
-    const [logout, {isSuccess, isLoading}] = useLogoutMutation()
+    const [logout] = useLogoutMutation()
     const [changeName, {}] = useChangeNameMutation()
 
     const logoutHandler = async () => {
