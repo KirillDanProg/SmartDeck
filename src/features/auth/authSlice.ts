@@ -53,7 +53,7 @@ export const authSlice = createSlice({
             )
             .addMatcher(authApi.endpoints.authMe.matchFulfilled,
                 (state: InitialStateType, {payload}) => {
-                    const {_id, token, email, name, avatar} = payload
+                    const {_id, token, email, name} = payload
                     if (_id && token) {
                         state.token = token
                         state.userId = _id
