@@ -3,6 +3,7 @@ import {authSlice} from "../features/auth/authSlice";
 import {apiSlice} from "../features/api/apiSlice";
 import {profileSlice} from "../features/profile/profileSlice";
 import {packsSlice} from "../features/cards/api/packsSlice";
+import {cardsSlice} from '../features/cards/api/cardsSlice';
 
 export const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
         [apiSlice.reducerPath]: apiSlice.reducer,
         profile: profileSlice.reducer,
         packs: packsSlice.reducer,
+        cards:cardsSlice.reducer
     },
     devTools: process.env.NODE_ENV === 'development',
     middleware: (getDefaultMiddleware) =>
