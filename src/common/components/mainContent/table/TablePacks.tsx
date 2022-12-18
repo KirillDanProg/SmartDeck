@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC, memo} from 'react'
 import {
     Paper,
     Table,
@@ -10,12 +10,12 @@ import {
 } from '@mui/material'
 import TableSortLabel from '@mui/material/TableSortLabel'
 import {PackTableCell} from "./PackTableCell";
-import {useGetPacksQuery} from "../../../../features/cards/api/packsApi";
+import {PackResponseType} from "../../../../features/cards/packsSlice";
 
-export const TablePacks = () => {
-    const {data} = useGetPacksQuery()
-
-    const cardPacks = data && data.cardPacks || []
+type PropsType = {
+    cardPacks:  PackResponseType[]
+}
+export const TablePacks:FC<PropsType> = memo(({cardPacks}) => {
 
     return (
         <TableContainer component={Paper}>
@@ -36,11 +36,12 @@ export const TablePacks = () => {
                 <TableBody>
                     {
                         cardPacks.map((data) => (
-                            <PackTableCell packData={data}/>
+                            <PackTableCell key={data._id}
+                                packData={data}/>
                         ))
                     }
                 </TableBody>
             </Table>
         </TableContainer>
     )
-}
+})

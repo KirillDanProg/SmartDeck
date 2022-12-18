@@ -5,8 +5,8 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {useAppSelector} from "../../../hooks";
 import {selectCurrentUser} from "../../../../features/auth/authSlice";
-import {useChangeNamePackMutation, useDeletePackMutation} from "../../../../features/cards/api/packsApi";
-import {PackResponseType} from "../../../../features/cards/api/packsSlice";
+import {useChangeNamePackMutation, useDeletePackMutation} from "../../../../features/cards/packsApi";
+import {PackResponseType} from "../../../../features/cards/packsSlice";
 
 type PropsType = {
     packData: PackResponseType
@@ -40,7 +40,7 @@ export const PackTableCell: FC<PropsType> = ({packData}) => {
             </TableCell>
             <TableCell align="center">{packData.cardsCount}</TableCell>
             <TableCell align="center">{packData.updated}</TableCell>
-            <TableCell align="right">{packData.created}</TableCell>
+            <TableCell align="right">{packData.user_name}</TableCell>
             <TableCell align="right" sx={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>
 
                 {

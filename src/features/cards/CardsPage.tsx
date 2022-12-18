@@ -11,15 +11,18 @@ import {TableFiltersContainer} from "../../common/components/mainContent/filter-
 import {useParams} from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import {useGetPacksQuery} from "./packsApi";
+import {useQueryParamsGenerator} from "../../common/utils/useQueryParamsGenerator";
 
-const style = {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-}
+
+//todo: render optimization
 
 export const CardsPage = () => {
+   const [queryUrl, filters, setFilters] = useQueryParamsGenerator()
+
+    const {data, isLoading} = useGetPacksQuery(queryUrl)
+
+    const cardPacks = data?.cardPacks || []
 
     const {packId} = useParams()
 
@@ -29,8 +32,7 @@ export const CardsPage = () => {
         <PacksPageContainer>
 
             <Box sx={style}>
-                <Typography variant="h5"
-                            sx={{fontWeight: 'bold'}}>
+                <Typography variant="h5" sx={{fontWeight: 'bold'}}>
                     Packs list
                 </Typography>
 
@@ -38,19 +40,20 @@ export const CardsPage = () => {
             </Box>
 
             <TableFiltersContainer>
-                <SearchPacksCard/>
+
+                <SearchPacksCard filters={filters} setFilters={setFilters}/>
 
                 {
                     hideTableFilters && <>
-                        <ShowPacksCards/>
-                        <NumberOfCards/>
+                        <ShowPacksCards filters={filters} setFilters={setFilters}/>
+                        <NumberOfCards data={data} filters={filters} setFilters={setFilters}/>
                         <FiltersReset/>
                     </>
                 }
 
             </TableFiltersContainer>
 
-            <TablePacks/>
+            <TablePacks cardPacks={cardPacks}/>
 
             <PaginationPacksList/>
 
@@ -58,3 +61,9 @@ export const CardsPage = () => {
     );
 };
 
+const style = {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+}

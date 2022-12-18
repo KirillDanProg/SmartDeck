@@ -16,7 +16,7 @@ export const apiSlice = createApi({
             }
         }
     ),
-    tagTypes: ["Packs"]
+    tagTypes: ["Packs", "Cards"]
     ,endpoints: () => ({})
 })
 

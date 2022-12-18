@@ -1,97 +1,71 @@
-import React, { useEffect, useState } from 'react'
+import React, {FC} from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import { Slider } from '@mui/material'
+import {Slider} from '@mui/material'
+import {QueryParamsType} from "../../common/utils/useQueryParamsGenerator";
+import {IGetPacksResponse} from "../cards/packsSlice";
 
+type PropsType = {
+    filters: QueryParamsType
+    setFilters: (values: QueryParamsType) => void
+    data: IGetPacksResponse | undefined
+}
+export const NumberOfCards: FC<PropsType> = ({filters, setFilters, data}) => {
+    //todo: fix slider types and state update
 
-export const NumberOfCards = () => {
-    const minCountCards = 1
-    const maxCountCards = 10
-    const max = 15
-    const min = 0
-    // const isInitializedSlider = useAppSelector(
-    //     (state) => state.packsCard.slider.isInitializedSlider
-    // )
+    const maxValueStrict = data?.maxCardsCount
 
-
-    const [value, setValue] = useState<Array<number>>([min, max])
-
-
-
-
-    useEffect(() => {
-        setValue([min, max])
-    }, [max, min])
-
-
+    const min = filters.min || data?.minCardsCount || 0
+    const max = filters.max || data?.maxCardsCount || 10
 
     const handleChange = (event: Event, value: number | number[]) => {
-        let newValue = value as [number, number]
-        setValue(newValue as number[])
+        let newValues = value as number[]
+        setFilters({
+            ...filters,
+            min: `${newValues[0]}`,
+            max: `${newValues[1]}`
+        })
     }
 
     return (
-        <>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '5px',
-                }}
-            >
+            <Box>
                 <Typography variant="h6">Number of cards</Typography>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        gap: '10px',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            width: '36px',
-                            height: '36px',
-                            background: '#FFFFFF',
-                            border: '1px solid #D9D9D9',
-                            borderRadius: '2px',
-                            margin: '0 15px 0 0',
-                        }}
-                    >
-                        <Typography>{value[0]}</Typography>
+                <Box sx={containerStyle}>
+                    <Box sx={style}>
+                        <Typography>{min}</Typography>
                     </Box>
+
                     <Slider
                         disabled={false}
-                        sx={{
-                            width: '155px',
-                        }}
+                        sx={{width: '155px',}}
                         getAriaLabel={() => 'range'}
-                        value={[value[0], value[1]]}
+                        value={[+min, +max]}
                         onChange={handleChange}
                         valueLabelDisplay="off"
-                        min={minCountCards}
-                        max={maxCountCards}
+                        max={maxValueStrict}
                     />
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            width: '36px',
-                            height: '36px',
-                            background: '#FFFFFF',
-                            border: '1px solid #D9D9D9',
-                            borderRadius: '2px',
-                            margin: '0 0 0 15px',
-                        }}
-                    >
-                        <Typography>{value[1]}</Typography>
+                    <Box sx={style}>
+                        <Typography>{max}</Typography>
                     </Box>
                 </Box>
             </Box>
-        </>
     )
+}
+
+const style = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '36px',
+    height: '36px',
+    background: '#FFFFFF',
+    border: '1px solid #D9D9D9',
+    borderRadius: '2px',
+    margin: '0 15px 0 0',
+}
+const containerStyle = {
+    display: 'flex',
+    gap: '10px',
+    flexDirection: 'row',
+    alignItems: 'center',
 }

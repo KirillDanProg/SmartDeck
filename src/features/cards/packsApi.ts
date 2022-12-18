@@ -1,15 +1,25 @@
-import {apiSlice} from "../../api/apiSlice";
+import {apiSlice} from "../api/apiSlice";
 import {
     IChangeNamePackRequest,
     IChangeNamePackResponse,
     IGetPacksResponse,
 } from "./packsSlice";
 
+export type QueryParams = {
+    packName?: string
+    min?: string
+    max?: string
+    sortPacks?: string
+    page?: string
+    pageCount?: string
+    user_id?: string
+}
 export const packsApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        getPacks: build.query<IGetPacksResponse, void>({
-            query: () => ({
+        getPacks: build.query<IGetPacksResponse, any>({
+            query: (params) => ({
                 url: `/cards/pack`,
+                params
             }),
             providesTags: result => [{type: "Packs"}]
         }),

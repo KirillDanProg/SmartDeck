@@ -1,10 +1,10 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import Box from "@mui/material/Box";
 
 type PropsType = {
     children: React.ReactNode
 }
-export const TableFiltersContainer: FC<PropsType> = ({children}) => {
+export const TableFiltersContainer: FC<PropsType> = memo(({children}) => {
     return (
         <Box sx={{
             marginTop: '30px',
@@ -17,5 +17,5 @@ export const TableFiltersContainer: FC<PropsType> = ({children}) => {
             {children}
         </Box>
     );
-};
+})
 

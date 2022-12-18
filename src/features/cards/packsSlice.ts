@@ -1,32 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {packsApi} from "./packsApi";
 
-
-export type CreateNewPackRequestT = {
-    cardsPack: {
-        name?: string,
-        private?: boolean
-    }
-}
-
-export type CreatePackCardType = {
-    name?: string
-    deckCover?: string
-    private?: boolean | string
-}
-
-export interface INewPackResponse {
-    newCardsPack: PackResponseType;
-    token: string;
-    tokenDeathTime: number;
-}
-
-export interface IDeletePackResponse {
-    deletedCardsPack: PackResponseType;
-    token: string;
-    tokenDeathTime: number;
-}
-
 export interface IChangeNamePackResponse {
     updatedCardsPack: PackResponseType;
     token: string;
