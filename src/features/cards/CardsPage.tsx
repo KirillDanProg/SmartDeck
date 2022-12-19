@@ -61,7 +61,8 @@ export const CardsPage = () => {
 
             <TablePacks cardPacks={cardPacks} />
 
-            <PaginationPacksList /></>
+            <PaginationPacksList data={data} />
+            </>
       }
 
     </PacksPageContainer>

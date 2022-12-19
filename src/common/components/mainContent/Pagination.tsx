@@ -1,64 +1,73 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 import TablePagination from "@mui/material/TablePagination";
 import Pagination from "@mui/material/Pagination";
 import Box from "@mui/material/Box";
-import {QueryParamsType} from "../../utils/useQueryParamsGenerator";
 import {IGetPacksResponse} from "../../../features/cards/packsSlice";
+import {useSearchParams} from "react-router-dom";
 
 type PropsType = {
-    filters: QueryParamsType
-    setFilters: (values: QueryParamsType) => void
-    data: IGetPacksResponse | undefined
+    data: IGetPacksResponse
 }
 
-export const PaginationPacksList: FC<PropsType> = ({filters, setFilters, data}) => {
+export const PaginationPacksList: FC<PropsType> = ({ data}) => {
 
-    console.log("filters ", filters)
-    console.log("setFilters ", setFilters)
-    console.log("data ", data);
+    const [params, setParams] = useSearchParams();
 
-    const page = data?.page || 1
-    const pageCount = data?.pageCount || 1;
-    const cardPacksTotalCount = data?.cardPacksTotalCount || 1;
+    const [changePage, setChangePage] = useState('')
+    // const [changePageCount, setChangePageCount] = useState('')
 
-    const TotalCountPages = Math.round(cardPacksTotalCount / pageCount);
+    useEffect(() => {
+        setParams(params);
+    }, [changePage,
+        // changePageCount
+    ]);
+
+    const page = params.get('page') || 1
+    const pageCount = params.get('pageCount') || 1;
+    const cardPacksTotalCount = data.cardPacksTotalCount || 1;
+
+    const totalCountPages = Math.round(cardPacksTotalCount / +pageCount);
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number
     ) => {
-        setFilters({...filters, page: (newPage + "") })
+        params.set('page', String(newPage))
+        setChangePage(String(newPage))
     }
 
     const handleChangeRowsPerPage = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
-        setFilters({...filters, pageCount: (parseInt(event.target.value, 10) + "") })
+        params.set('pageCount', String(event.target.value))
+        // setChangePageCount(String(event.target.value))
+        setChangePage(String(event.target.value))
     }
 
     const currentPageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
-        setFilters({...filters, page: (page + "")})
+        params.set('page', String(page))
+        setChangePage(String(page))
     };
 
     return (
         <Box style={style}>
-            {/*<Pagination*/}
-            {/*    disabled={false}*/}
-            {/*    color={"primary"}*/}
-            {/*    count={TotalCountPages}*/}
-            {/*    variant="outlined"*/}
-            {/*    shape="rounded"*/}
-            {/*    page={page}*/}
-            {/*    defaultPage={1}*/}
-            {/*    onChange={currentPageHandler}*/}
-            {/*/>*/}
+            <Pagination
+                disabled={false}
+                color={"primary"}
+                count={totalCountPages}
+                variant="outlined"
+                shape="rounded"
+                page={+page}
+                defaultPage={1}
+                onChange={currentPageHandler}
+            />
             <TablePagination
                 sx={{mt: -1}}
                 component="div"
                 count={cardPacksTotalCount}
-                page={page}
+                page={+page}
                 onPageChange={handleChangePage}
-                rowsPerPage={pageCount}
+                rowsPerPage={+pageCount}
                 onRowsPerPageChange={handleChangeRowsPerPage}
                 rowsPerPageOptions={[1, 5, 10, 25]}
             />
