@@ -1,29 +1,28 @@
-import {useAppSelector} from '../../common/hooks';
-import {selectCurrentUser} from '../auth/authSlice';
-import {QueryParamsType} from '../../common/utils/useQueryParamsGenerator';
-import React, {FC, useState} from 'react'
-import Typography from '@mui/material/Typography'
-import {Button, ButtonGroup} from '@mui/material'
-import Box from '@mui/material/Box'
+import React, { FC, useState } from "react";
+import Typography from "@mui/material/Typography";
+import { Button, ButtonGroup } from "@mui/material";
+import Box from "@mui/material/Box";
+import { useAppSelector } from "../../common/hooks";
+import { selectCurrentUser } from "../auth/authSlice";
+import { useSearchParams } from "react-router-dom";
 
-type PropsType = {
-    filters: QueryParamsType
-    setFilters: (values: QueryParamsType) => void
-}
-export const ShowPacksCards: FC<PropsType> = ({setFilters, filters}) => {
+export const ShowPacksCards = () => {
 
-  const user_id = useAppSelector(selectCurrentUser)
-  const [ownerPack, setOwnerPack] = useState('All')
+  const [params, setParams] = useSearchParams();
 
-  const onClickShowPacksHandler = (value: 'All' | 'My') => {
-    setOwnerPack(value)
+  const user_id = useAppSelector(selectCurrentUser);
 
+  const ownerFilter = params.get("user_id");
+
+  const onClickShowPacksHandler = (value: "All" | "My") => {
     if (user_id) {
-      value === 'My'
-        ? setFilters({...filters, user_id})
-        : setFilters({...filters, user_id: ''})
+      value === "My"
+        ? params.set("user_id", user_id)
+        : params.delete("user_id");
+
+      setParams(params)
     }
-  }
+  };
 
   return (
     <Box>
@@ -37,26 +36,26 @@ export const ShowPacksCards: FC<PropsType> = ({setFilters, filters}) => {
       >
         <Button
           disabled={false}
-          onClick={() => onClickShowPacksHandler('My')}
+          onClick={() => onClickShowPacksHandler("My")}
           sx={btnStyle}
-          variant={ownerPack === 'My' ? 'contained' : 'outlined'}
+          variant={ownerFilter ? "contained" : "outlined"}
         >
-                    My
+          My
         </Button>
         <Button
           disabled={false}
-          onClick={() => onClickShowPacksHandler('All')}
+          onClick={() => onClickShowPacksHandler("All")}
           sx={btnStyle}
-          variant={ownerPack === 'My' ? 'outlined' : 'contained'}
+          variant={ownerFilter ? "outlined" : "contained"}
         >
-                    All
+          All
         </Button>
       </ButtonGroup>
     </Box>
-  )
-}
+  );
+};
 
 const btnStyle = {
-  width: '196px',
-  height: '39px'
-}
+  width: "196px",
+  height: "39px"
+};

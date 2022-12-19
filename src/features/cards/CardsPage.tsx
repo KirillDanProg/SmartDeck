@@ -1,69 +1,76 @@
-import {useGetPacksQuery} from './packsApi';
-import {AddNewPack} from '../../common/components/mainContent/AddNewPack';
-import {SearchPacksCard} from '../../common/components/mainContent/SearchPacks';
-import {ShowPacksCards} from '../PackList/ShowPacksCards';
-import {NumberOfCards} from '../PackList/NumberOfCards';
-import {TablePacks} from '../../common/components/mainContent/table/TablePacks';
-import {PaginationPacksList} from '../../common/components/mainContent/Pagination';
-import {FiltersReset} from '../../common/components/mainContent/filter-controlers/FiltersReset';
-import {PacksPageContainer} from '../../common/components/mainContent/table/PacksPageContainer';
-import {TableFiltersContainer} from '../../common/components/mainContent/filter-controlers/TableFiltersContainer';
-import {useQueryParamsGenerator} from '../../common/utils/useQueryParamsGenerator';
-import {useParams} from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import React from 'react';
+import React from "react";
+import { AddNewPack } from "../../common/components/mainContent/AddNewPack";
+import { SearchPacksCard } from "../../common/components/mainContent/SearchPackCards";
+import { ShowPacksCards } from "../PackList/ShowPacksCards";
+import { NumberOfCards } from "../PackList/NumberOfCards";
+import { TablePacks } from "../../common/components/mainContent/table/TablePacks";
+import { FiltersReset } from "../../common/components/mainContent/filter-controlers/FiltersReset";
+import { PacksPageContainer } from "../../common/components/mainContent/table/PacksPageContainer";
+import { TableFiltersContainer } from "../../common/components/mainContent/filter-controlers/TableFiltersContainer";
+import { useParams, useSearchParams } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { useGetPacksQuery } from "./packsApi";
+import { IGetPacksResponse } from "./packsSlice";
+import { Preloader } from "../../common/components/Preloader";
+import { getUrlParams } from "../../common/utils/getUrlParams";
+import { PaginationPacksList } from "../../common/components/mainContent/Pagination";
 
 
 //todo: render optimization
 
 export const CardsPage = () => {
-  const [queryUrl, filters, setFilters] = useQueryParamsGenerator()
+  const [params, setParams] = useSearchParams();
 
-  const {data, isLoading} = useGetPacksQuery(filters)
+  const paramsObject = getUrlParams(params);
 
-  const cardPacks = data?.cardPacks || []
+  const { data = {} as IGetPacksResponse, isLoading} = useGetPacksQuery(paramsObject);
 
-  const {packId} = useParams()
+  const cardPacks = data?.cardPacks || [];
 
-  const hideTableFilters = !packId
+  const { packId } = useParams();
+
+  const hideTableFilters = !packId;
 
   return (
     <PacksPageContainer>
 
       <Box sx={style}>
-        <Typography variant="h5" sx={{fontWeight: 'bold'}}>
-                    Packs list
+        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+          Packs list
         </Typography>
 
-        <AddNewPack/>
+        <AddNewPack />
       </Box>
+      {
+        isLoading
+          ? <Preloader />
+          : <><TableFiltersContainer>
 
-      <TableFiltersContainer>
+            <SearchPacksCard />
 
-        <SearchPacksCard filters={filters} setFilters={setFilters}/>
+            {
+              hideTableFilters && <>
+                <ShowPacksCards />
+                <NumberOfCards data={data} isLoading={isLoading} />
+                <FiltersReset setParams={setParams} params={params} />
+              </>
+            }
 
-        {
-          hideTableFilters && <>
-            <ShowPacksCards filters={filters} setFilters={setFilters}/>
-            <NumberOfCards data={data} filters={filters} setFilters={setFilters}/>
-            <FiltersReset/>
-          </>
-        }
+          </TableFiltersContainer>
 
-      </TableFiltersContainer>
+            <TablePacks cardPacks={cardPacks} />
 
-      <TablePacks cardPacks={cardPacks}/>
-
-      <PaginationPacksList/>
+            <PaginationPacksList /></>
+      }
 
     </PacksPageContainer>
   );
 };
 
 const style = {
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-}
+  width: "100%",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between"
+};
