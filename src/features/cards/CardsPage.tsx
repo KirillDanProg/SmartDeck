@@ -1,69 +1,76 @@
-import React from 'react';
-import {AddNewPack} from "../../common/components/mainContent/AddNewPack";
-import {SearchPacksCard} from "../../common/components/mainContent/SearchPackCards";
-import {ShowPacksCards} from "../PackList/ShowPacksCards";
-import {NumberOfCards} from "../PackList/NumberOfCards";
-import {TablePacks} from "../../common/components/mainContent/table/TablePacks";
-import {PaginationPacksList} from "../../common/components/mainContent/PaginationOfPackList";
-import {FiltersReset} from "../../common/components/mainContent/filter-controlers/FiltersReset";
-import {PacksPageContainer} from "../../common/components/mainContent/table/PacksPageContainer";
-import {TableFiltersContainer} from "../../common/components/mainContent/filter-controlers/TableFiltersContainer";
-import {useParams} from "react-router-dom";
+import React from "react";
+import { AddNewPack } from "../../common/components/mainContent/AddNewPack";
+import { SearchPacksCard } from "../../common/components/mainContent/SearchPackCards";
+import { ShowPacksCards } from "../PackList/ShowPacksCards";
+import { NumberOfCards } from "../PackList/NumberOfCards";
+import { TablePacks } from "../../common/components/mainContent/table/TablePacks";
+import { PaginationPacksList } from "../../common/components/mainContent/PaginationOfPackList";
+import { FiltersReset } from "../../common/components/mainContent/filter-controlers/FiltersReset";
+import { PacksPageContainer } from "../../common/components/mainContent/table/PacksPageContainer";
+import { TableFiltersContainer } from "../../common/components/mainContent/filter-controlers/TableFiltersContainer";
+import { useParams, useSearchParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {useGetPacksQuery} from "./packsApi";
-import {useQueryParamsGenerator} from "../../common/utils/useQueryParamsGenerator";
+import { useGetPacksQuery } from "./packsApi";
+import { IGetPacksResponse } from "./packsSlice";
+import { Preloader } from "../../common/components/Preloader";
+import { getUrlParams } from "../../common/utils/getUrlParams";
 
 
 //todo: render optimization
 
 export const CardsPage = () => {
-   const [queryUrl, filters, setFilters] = useQueryParamsGenerator()
+  const [params, setParams] = useSearchParams();
 
-    const {data, isLoading} = useGetPacksQuery(queryUrl)
+  const paramsObject = getUrlParams(params);
 
-    const cardPacks = data?.cardPacks || []
+  const { data = {} as IGetPacksResponse, isLoading} = useGetPacksQuery(paramsObject);
 
-    const {packId} = useParams()
+  const cardPacks = data?.cardPacks || [];
 
-    const hideTableFilters = !packId
+  const { packId } = useParams();
 
-    return (
-        <PacksPageContainer>
+  const hideTableFilters = !packId;
 
-            <Box sx={style}>
-                <Typography variant="h5" sx={{fontWeight: 'bold'}}>
-                    Packs list
-                </Typography>
+  return (
+    <PacksPageContainer>
 
-                <AddNewPack/>
-            </Box>
+      <Box sx={style}>
+        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+          Packs list
+        </Typography>
 
-            <TableFiltersContainer>
+        <AddNewPack />
+      </Box>
+      {
+        isLoading
+          ? <Preloader />
+          : <><TableFiltersContainer>
 
-                <SearchPacksCard filters={filters} setFilters={setFilters}/>
+            <SearchPacksCard />
 
-                {
-                    hideTableFilters && <>
-                        <ShowPacksCards filters={filters} setFilters={setFilters}/>
-                        <NumberOfCards data={data} filters={filters} setFilters={setFilters}/>
-                        <FiltersReset/>
-                    </>
-                }
+            {
+              hideTableFilters && <>
+                <ShowPacksCards />
+                <NumberOfCards data={data} isLoading={isLoading} />
+                <FiltersReset setParams={setParams} params={params} />
+              </>
+            }
 
-            </TableFiltersContainer>
+          </TableFiltersContainer>
 
-            <TablePacks cardPacks={cardPacks}/>
+            <TablePacks cardPacks={cardPacks} />
 
-            <PaginationPacksList/>
+            <PaginationPacksList /></>
+      }
 
-        </PacksPageContainer>
-    );
+    </PacksPageContainer>
+  );
 };
 
 const style = {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-}
+  width: "100%",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between"
+};

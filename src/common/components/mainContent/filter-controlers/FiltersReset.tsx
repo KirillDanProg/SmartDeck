@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { FC } from "react";
 import TuneIcon from "@mui/icons-material/Tune";
 import Box from "@mui/material/Box";
 
-export const FiltersReset = () => {
+
+type PropsType = {
+  params:  URLSearchParams
+  setParams: (value: URLSearchParams) => void
+}
+export const FiltersReset: FC<PropsType>= ({setParams, params}) => {
+
+  const resetFilters = () => {
+    params.forEach((value, key) => {
+      console.log(key)
+    })
+    setParams(params)
+  }
+
     return (
         <Box sx={{alignSelf: 'flex-end', marginBottom: '2px'}}>
             <Box
@@ -19,7 +32,7 @@ export const FiltersReset = () => {
                 }}
             >
 
-                <TuneIcon/>
+                <TuneIcon onClick={resetFilters}/>
 
             </Box>
         </Box>
