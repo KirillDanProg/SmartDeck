@@ -1,59 +1,16 @@
 import React from 'react'
-import {
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-} from '@mui/material'
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,} from '@mui/material'
 import {CardTableCell} from './CardTableCell';
 import {useGetCardsQuery} from '../../../../features/cards/api/cardsApi';
 import TableSortLabel from '@mui/material/TableSortLabel'
 import {CardResponseType} from '../../../../features/cards/api/cardsSlice';
-
-const cards = [
-    {
-        answer: '1',
-        question: 'ANSWER',
-        cardsPack_id: '1',
-        grade: 2,
-        shots: 1,
-        user_id: '1',
-        created: '1111111111111111111',
-        updated: '11111111111111111111111111111',
-        _id: '11111'
-    },
-    {
-        answer: '2',
-        question: 'ANSWER',
-        cardsPack_id: '1',
-        grade: 2,
-        shots: 1,
-        user_id: '1',
-        created: '1111111111111111111',
-        updated: '11111111111111111111111111111',
-        _id: '11111'
-    },
-    {
-        answer: '3',
-        question: 'ANSWER',
-        cardsPack_id: '1',
-        grade: 2,
-        shots: 1,
-        user_id: '1',
-        created: '1111111111111111111',
-        updated: '11111111111111111111111111111',
-        _id: '11111'
-    },
-]
+import {useParams} from 'react-router-dom';
 
 
 export const TableCards = () => {
-    const {data} = useGetCardsQuery();
-    // const cardPacks = data && data.cards;
-    const cardPacks = cards;
+     const {id=''} = useParams();
+    const {data} = useGetCardsQuery(id);
+    const cardPacks = data && data.cards;
     return (
         <TableContainer component={Paper}>
             <Table size="small" aria-label="a dense table">
@@ -66,7 +23,7 @@ export const TableCards = () => {
                                 Last Updated
                             </TableSortLabel>
                         </TableCell>
-                        <TableCell align="right">Grade</TableCell>
+                        <TableCell align="center">Grade</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

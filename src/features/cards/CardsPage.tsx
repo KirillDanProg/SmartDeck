@@ -3,15 +3,16 @@ import {AddNewPack} from '../../common/components/mainContent/AddNewPack';
 import {SearchPacksCard} from '../../common/components/mainContent/SearchPackCards';
 import {ShowPacksCards} from '../PackList/ShowPacksCards';
 import {NumberOfCards} from '../PackList/NumberOfCards';
-import {TablePacks} from '../../common/components/mainContent/table/TablePacks';
 import {PaginationPacksList} from '../../common/components/mainContent/PaginationOfPackList';
 import {FiltersReset} from '../../common/components/mainContent/filter-controlers/FiltersReset';
 import {PacksPageContainer} from '../../common/components/mainContent/table/PacksPageContainer';
 import {TableFiltersContainer} from '../../common/components/mainContent/filter-controlers/TableFiltersContainer';
-import {useParams} from 'react-router-dom';
+import {Outlet, useParams} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {TableCards} from '../../common/components/mainContent/pack-cards/CardsPack';
+import {TablePacks} from '../../common/components/mainContent/table/TablePacks';
+import {AddNewCard} from '../../common/components/mainContent/pack-cards/AddNewCard';
 
 const style = {
     width: '100%',
@@ -22,9 +23,9 @@ const style = {
 
 export const CardsPage = () => {
 
-    const {packId} = useParams()
+    const {id} = useParams();
 
-    const hideTableFilters = !packId
+    const hideTableFilters = !id
 
     return (
         <PacksPageContainer>
@@ -35,7 +36,7 @@ export const CardsPage = () => {
                     Packs list
                 </Typography>
 
-                <AddNewPack/>
+                { hideTableFilters ? <AddNewPack/> : <AddNewCard cardsPack_id= {id}/>}
             </Box>
 
             <TableFiltersContainer>
@@ -50,9 +51,11 @@ export const CardsPage = () => {
                 }
 
             </TableFiltersContainer>
-
-            {/*<TablePacks/>*/}
-            <TableCards/>
+            {
+                hideTableFilters
+                    ? <TablePacks/>
+                    : <Outlet/>
+            }
 
             <PaginationPacksList/>
 

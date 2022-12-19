@@ -11,6 +11,7 @@ import {CardsPage} from "../../features/cards/CardsPage";
 import {CreatePassword} from "../../features/reset-password/createPassword/CreatePassword";
 import {ForgotPassword} from "../../features/reset-password/forgotPassword/ForgotPassword";
 import {DevPage} from "../devPage/DevPage";
+import {TableCards} from '../../common/components/mainContent/pack-cards/CardsPack';
 
 
 export const AppRoutes = () => {
@@ -21,7 +22,9 @@ export const AppRoutes = () => {
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
                     <Route path={PATH.LOGIN} element={<SignInPage/>}/>
                     <Route path={PATH.SIGN_UP} element={<SignUpPage/>}/>
-                    <Route path={PATH.PACK_LISTS} element={<CardsPage/>}/>
+                    <Route path={PATH.PACK_LISTS} element={<CardsPage/>}>
+                        <Route path={':id'} element={<TableCards/>}/>
+                    </Route>
                     <Route path="404" element={<Page404/>}/>
                     <Route path="*" element={<Navigate to="404"/>}/>
                 </Route>

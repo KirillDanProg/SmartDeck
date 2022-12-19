@@ -7,6 +7,8 @@ import {useAppSelector} from "../../../../app/hooks";
 import {selectCurrentUser} from "../../../../features/auth/authSlice";
 import {useChangeNamePackMutation, useDeletePackMutation} from "../../../../features/cards/api/packsApi";
 import {PackResponseType} from "../../../../features/cards/api/packsSlice";
+import {NavLink} from 'react-router-dom';
+import {PATH} from '../../../../layout/AppRoutes/routes';
 
 type PropsType = {
     packData: PackResponseType
@@ -35,9 +37,9 @@ export const PackTableCell: FC<PropsType> = ({packData}) => {
             key={packData._id}
             sx={{'&:last-child td, &:last-child th': {border: 0}}}
         >
-            <TableCell align="left" style={{cursor: 'pointer'}}>
+            <NavLink to={`${PATH.PACK_LISTS}/${packData._id}`}><TableCell align="left" style={{cursor: 'pointer'}}>
                 {packData.name}
-            </TableCell>
+            </TableCell></NavLink>
             <TableCell align="center">{packData.cardsCount}</TableCell>
             <TableCell align="center">{packData.updated}</TableCell>
             <TableCell align="right">{packData.created}</TableCell>

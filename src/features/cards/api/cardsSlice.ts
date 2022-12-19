@@ -1,43 +1,49 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {packsApi} from "./packsApi";
+import {createSlice} from '@reduxjs/toolkit';
+import {packsApi} from './packsApi';
 import {cardsApi} from './cardsApi';
+import {RootState} from '../../../app/store';
 
 
-// export type CreateNewPackRequestT = {
-//     cardsPack: {
-//         name?: string,
-//         private?: boolean
-//     }
-// }
+export type CreateNewCardRequestT = {
+    cardsPack_id: string
+    question?: string
+    answer?: string
+}
 
-// export type CreatePackCardType = {
-//     name?: string
-//     deckCover?: string
-//     private?: boolean | string
-// }
-//
-// export interface INewPackResponse {
-//     newCardsPack: PackResponseType;
-//     token: string;
-//     tokenDeathTime: number;
-// }
-//
-// export interface IDeletePackResponse {
-//     deletedCardsPack: PackResponseType;
-//     token: string;
-//     tokenDeathTime: number;
-// }
-//
-// export interface IChangeNamePackResponse {
-//     updatedCardsPack: PackResponseType;
-//     token: string;
-//     tokenDeathTime: number;
-// }
-//
-// export interface IChangeNamePackRequest {
-//     _id: string,
-//     name: string
-// }
+export type CreatedCardType = {
+    cardsPack_id: string
+    question?: string
+    answer?: string
+    grade?: number
+    shots?: number
+    answerImg?: string
+    questionImg?: string
+    questionVideo?: string
+    answerVideo?: string
+}
+
+export interface INewCardResponse {
+    newCardsPack: CardResponseType;
+    token: string;
+    tokenDeathTime: number;
+}
+
+export interface IDeleteCardResponse {
+    deletedCard: CardResponseType;
+    token: string;
+    tokenDeathTime: number;
+}
+
+export interface IChangeNameCardResponse {
+    updatedCard: CardResponseType;
+    token: string;
+    tokenDeathTime: number;
+}
+
+export interface IChangeNameCardRequest {
+    _id: string
+    question: string
+}
 
 export interface IGetCardsResponse {
     cards: CardResponseType[];
@@ -69,11 +75,11 @@ const initialState: IGetCardsResponse = {
     minGrade: 1,
     page: 1,
     pageCount: 4,
-    packUserId: 'initialID'
+    packUserId: '5eb6a2f72f849402d46c6ac7'
 }
 
 export const cardsSlice = createSlice({
-    name: "cards",
+    name: 'cards',
     initialState,
     reducers: {},
     extraReducers: builder => {
@@ -82,12 +88,22 @@ export const cardsSlice = createSlice({
                 (state, {payload}) => {
                     const {cards} = payload
                     state.cards = cards
+                    state.packUserId = payload.packUserId
                 }
             )
-        // .addMatcher(packsApi.endpoints.createNewPack.matchFulfilled,
-        //     (state, {payload}) => {
-        //             // state.cardPacks.push(payload.newCardsPack)
-        //     })
+            .addMatcher(cardsApi.endpoints.createNewCard.matchFulfilled,
+                (state, {payload}) => {
+
+                })
+            .addMatcher(cardsApi.endpoints.deleteCard.matchFulfilled,
+                (state, {payload}) => {
+
+                })
+            .addMatcher(cardsApi.endpoints.changeCardName.matchFulfilled,
+                (state, {payload}) => {
+
+                })
     }
 })
 
+export const selectCardsPackID = (state: RootState) => state.cards.packUserId;
