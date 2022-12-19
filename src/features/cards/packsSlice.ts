@@ -1,5 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {packsApi} from "./packsApi";
+import {packsApi} from './packsApi';
+import {createSlice} from '@reduxjs/toolkit';
 
 export interface IChangeNamePackResponse {
     updatedCardsPack: PackResponseType;
@@ -43,32 +43,32 @@ export type PackResponseType = {
 }
 
 const initialState: IGetPacksResponse = {
-    cardPacks: [] as PackResponseType[],
-    page: 1,
-    pageCount: 20,
-    cardPacksTotalCount: 1,
-    minCardsCount: 1,
-    maxCardsCount: 15,
-    token: "",
-    tokenDeathTime: 1,
+  cardPacks: [] as PackResponseType[],
+  page: 1,
+  pageCount: 20,
+  cardPacksTotalCount: 1,
+  minCardsCount: 1,
+  maxCardsCount: 15,
+  token: '',
+  tokenDeathTime: 1,
 }
 
 export const packsSlice = createSlice({
-    name: "packs",
-    initialState,
-    reducers: {},
-    extraReducers: builder => {
-        builder
-            .addMatcher(packsApi.endpoints.getPacks.matchFulfilled,
-                (state, {payload}) => {
-                    const {cardPacks} = payload
-                    state.cardPacks = cardPacks
-                }
-            )
-        // .addMatcher(packsApi.endpoints.createNewPack.matchFulfilled,
-        //     (state, {payload}) => {
-        //             // state.cardPacks.push(payload.newCardsPack)
-        //     })
-    }
+  name: 'packs',
+  initialState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addMatcher(packsApi.endpoints.getPacks.matchFulfilled,
+        (state, {payload}) => {
+          const {cardPacks} = payload
+          state.cardPacks = cardPacks
+        }
+      )
+    // .addMatcher(packsApi.endpoints.createNewPack.matchFulfilled,
+    //     (state, {payload}) => {
+    //             // state.cardPacks.push(payload.newCardsPack)
+    //     })
+  }
 })
 

@@ -9,32 +9,32 @@ type GridContainerT = {
 }
 
 export const CustomGridContainer:FC<GridContainerT> = ({children}) => {
-    return (
-        <Container
-            maxWidth="sm"
-            sx={{
-                display: 'flex',
-                height: '100vh',
-                justifyContent: 'center',
-            }}
-        >
-            <Paper
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    mt: 7,
-                    p: 3,
-                    width: 450,
-                    height: 500,
-                }}
-            >
-                <Stack sx={{alignItems: 'center',justifyContent: 'space-around', }}>
-                    {children}
-                </Stack>
-            </Paper>
-        </Container>
+  return (
+    <Container
+      maxWidth="sm"
+      sx={{
+        display: 'flex',
+        height: '100vh',
+        justifyContent: 'center',
+      }}
+    >
+      <Paper
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          mt: 7,
+          p: 3,
+          width: 450,
+          height: 500,
+        }}
+      >
+        <Stack sx={{alignItems: 'center',justifyContent: 'space-around', }}>
+          {children}
+        </Stack>
+      </Paper>
+    </Container>
             
 
-    );
+  );
 };
 

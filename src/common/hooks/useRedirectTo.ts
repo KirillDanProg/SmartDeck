@@ -1,13 +1,13 @@
-import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {useNavigate} from 'react-router-dom';
+import {useEffect} from 'react';
 
 export const useRedirectTo = (to: string, condition: boolean, dependency: any[]) => {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    useEffect(() => {
-        if (condition) {
-            navigate(to)
-        }
-    }, dependency)
+  useEffect(() => {
+    if (condition) {
+      navigate(to)
+    }
+  }, dependency)
 
 }
