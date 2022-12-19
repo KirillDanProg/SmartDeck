@@ -1,47 +1,69 @@
-import React from "react";
+import React, {FC} from "react";
 import TablePagination from "@mui/material/TablePagination";
 import Pagination from "@mui/material/Pagination";
+import Box from "@mui/material/Box";
+import {QueryParamsType} from "../../utils/useQueryParamsGenerator";
+import {IGetPacksResponse} from "../../../features/cards/packsSlice";
 
-export const PaginationPacksList = () => {
+type PropsType = {
+    filters: QueryParamsType
+    setFilters: (values: QueryParamsType) => void
+    data: IGetPacksResponse | undefined
+}
 
-  const pageCount = 10;
-  const cardPacksTotalCount = 5;
+export const PaginationPacksList: FC<PropsType> = ({filters, setFilters, data}) => {
 
-  const TotalCountPages = Math.round(cardPacksTotalCount / pageCount);
+    console.log("filters ", filters)
+    console.log("setFilters ", setFilters)
+    console.log("data ", data);
 
-  const handleChangePage = () => {
+    const page = data?.page || 1
+    const pageCount = data?.pageCount || 1;
+    const cardPacksTotalCount = data?.cardPacksTotalCount || 1;
 
-  };
+    const TotalCountPages = Math.round(cardPacksTotalCount / pageCount);
 
-  const handleChangeRowsPerPage = () => {
-  };
+    const handleChangePage = (
+        event: React.MouseEvent<HTMLButtonElement> | null,
+        newPage: number
+    ) => {
+        setFilters({...filters, page: (newPage + "") })
+    }
 
-  const currentPageHandler = () => {
+    const handleChangeRowsPerPage = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        setFilters({...filters, pageCount: (parseInt(event.target.value, 10) + "") })
+    }
 
-  };
+    const currentPageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
+        setFilters({...filters, page: (page + "")})
+    };
 
-  return (
-    <div style={{ display: "flex", width: "100%", margin: "10px auto" }}>
-      <Pagination
-        disabled={false}
-        color={"primary"}
-        count={TotalCountPages}
-        variant="outlined"
-        shape="rounded"
-        page={pageCount}
-        defaultPage={1}
-        onChange={currentPageHandler}
-      />
-      <TablePagination
-        sx={{ mt: -1 }}
-        component="div"
-        count={cardPacksTotalCount}
-        page={1}
-        onPageChange={handleChangePage}
-        rowsPerPage={1}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        rowsPerPageOptions={[1, 5, 10, 25]}
-      />
-    </div>
-  );
+    return (
+        <Box style={style}>
+            {/*<Pagination*/}
+            {/*    disabled={false}*/}
+            {/*    color={"primary"}*/}
+            {/*    count={TotalCountPages}*/}
+            {/*    variant="outlined"*/}
+            {/*    shape="rounded"*/}
+            {/*    page={page}*/}
+            {/*    defaultPage={1}*/}
+            {/*    onChange={currentPageHandler}*/}
+            {/*/>*/}
+            <TablePagination
+                sx={{mt: -1}}
+                component="div"
+                count={cardPacksTotalCount}
+                page={page}
+                onPageChange={handleChangePage}
+                rowsPerPage={pageCount}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                rowsPerPageOptions={[1, 5, 10, 25]}
+            />
+        </Box>
+    );
 };
+
+const style = {display: "flex", width: "100%", margin: "10px auto"}

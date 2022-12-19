@@ -55,7 +55,7 @@ export const CardsPage = () => {
 
       <TablePacks cardPacks={cardPacks}/>
 
-      <PaginationPacksList/>
+      <PaginationPacksList data={data} filters={filters} setFilters={setFilters}/>
 
     </PacksPageContainer>
   );

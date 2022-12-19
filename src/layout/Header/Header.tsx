@@ -17,7 +17,7 @@ import Menu from "@mui/material/Menu";
 import CardMedia from "@mui/material/CardMedia";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import TransgenderIcon from "@mui/icons-material/Transgender";
-import { NavLink } from "react-router-dom";
+import { NavLink, unstable_HistoryRouter } from "react-router-dom";
 import { useContext, useState } from "react";
 import Link from "@mui/material/Link";
 import List from "@mui/material/List";
@@ -32,6 +32,7 @@ export const Header = () => {
   const [logout, {}] = useLogoutMutation();
   const [open, setOpen] = useState(false);
 
+
   const { mode, toggleColorMode } = useContext(ColorModelContex);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -45,7 +46,6 @@ export const Header = () => {
   const logOutHandler = async () => {
     await logout().unwrap();
   };
-
   //==============burger menu=========================
   const navigationLinks = [
     { name: "About developers", href: PATH.DEV_PAGE },
@@ -92,8 +92,11 @@ export const Header = () => {
                 anchorEl={anchorEl}
                 anchorOrigin={{
                   vertical: "top",
-                  horizontal: "right"
+                  horizontal: "right",
                 }}
+                // sx={{
+                //     top: '55px',
+                // }}
                 keepMounted
                 transformOrigin={{
                   vertical: "top",
@@ -103,7 +106,7 @@ export const Header = () => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>
-                  <NavLink to={"/profile"} className={s.link}>
+                  <NavLink to={"/profile"} color={'inherite'} >
                     <TransgenderIcon fontSize={"small"} sx={{
                       paddingRight: 1
                     }} />
@@ -113,7 +116,6 @@ export const Header = () => {
                 <MenuItem onClick={logOutHandler}>
                   <DirectionsRunIcon fontSize={"small"} sx={{
                     paddingRight: 1
-
                   }} />
                   Log out</MenuItem>
               </Menu>

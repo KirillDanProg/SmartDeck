@@ -44,7 +44,7 @@ export type PackResponseType = {
 
 const initialState: IGetPacksResponse = {
   cardPacks: [] as PackResponseType[],
-  page: 1,
+  page: 2,
   pageCount: 20,
   cardPacksTotalCount: 1,
   minCardsCount: 1,
@@ -65,10 +65,6 @@ export const packsSlice = createSlice({
           state.cardPacks = cardPacks
         }
       )
-    // .addMatcher(packsApi.endpoints.createNewPack.matchFulfilled,
-    //     (state, {payload}) => {
-    //             // state.cardPacks.push(payload.newCardsPack)
-    //     })
   }
 })
 

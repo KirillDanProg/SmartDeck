@@ -3,19 +3,6 @@ import {blueGrey, grey} from '@mui/material/colors';
 import {PaletteMode, ThemeProvider} from '@mui/material';
 import * as React from 'react';
 
-// export class ThemeModeToggle {
-//     private _mode: PaletteMode = "light";
-//
-//     get mode(): PaletteMode {
-//         return this._mode;
-//     }
-//
-//     set mode(value: PaletteMode) {
-//         this._mode = value;
-//     }
-//
-// }
-
 interface IColorModeContext {
     toggleColorMode: () => void
     mode: 'dark' | 'light'

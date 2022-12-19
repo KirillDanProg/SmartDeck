@@ -4,7 +4,7 @@ type paramEntryType = string[]
 
 export const urlParamsGenerator = (params: paramEntryType[]): QueryParams | any=> {
   let paramsUrl = ''
-
+  debugger
   for(let i = 0; i < params.length; i++) {
     let key = params[i][0]
     let value = params[i][1]

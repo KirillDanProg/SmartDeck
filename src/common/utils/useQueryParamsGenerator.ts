@@ -32,7 +32,7 @@ export const useQueryParamsGenerator = (): ReturnType => {
   const debouncedMinMax = useDebounce(memoizedMinMax)
 
   const [searchParams, setSearchParams] = useSearchParams()
-
+debugger
   // params
   const paramsArray = Array.from(searchParams.entries())
 
