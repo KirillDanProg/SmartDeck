@@ -17,7 +17,7 @@ import Menu from "@mui/material/Menu";
 import CardMedia from "@mui/material/CardMedia";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import TransgenderIcon from "@mui/icons-material/Transgender";
-import { NavLink, unstable_HistoryRouter } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import Link from "@mui/material/Link";
 import List from "@mui/material/List";
@@ -25,11 +25,9 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { ChevronLeft } from "@mui/icons-material";
 import { Divider, ListItem } from "@mui/material";
 
-//todo: refactoring
 export const Header = () => {
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [logout, {}] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const [open, setOpen] = useState(false);
 
 
@@ -69,13 +67,13 @@ export const Header = () => {
           <FormGroup sx={{ flexGrow: 1 }}>
             <DarkModeSwitch onClick={toggleColorMode} />
           </FormGroup>
-          <NavLink to={PATH.LOGIN}>
+          <NavLink to={PATH.MAIN}>
             <CardMedia component="img" sx={{
               width: 209,
               height: 48
             }} src={incubatorLogo} />
           </NavLink>
-          {auth && (
+
             <div>
               <IconButton
                 size="large"
@@ -94,9 +92,6 @@ export const Header = () => {
                   vertical: "top",
                   horizontal: "right",
                 }}
-                // sx={{
-                //     top: '55px',
-                // }}
                 keepMounted
                 transformOrigin={{
                   vertical: "top",
@@ -120,7 +115,6 @@ export const Header = () => {
                   Log out</MenuItem>
               </Menu>
             </div>
-          )}
         </Toolbar>
         <SwipeableDrawer open={open}
                          onOpen={() => setOpen(true)}

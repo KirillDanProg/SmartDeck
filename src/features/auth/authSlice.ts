@@ -38,6 +38,13 @@ export const authSlice = createSlice({
   extraReducers: builder => {
     builder
       .addMatcher(
+        (action): action is GenericAsyncThunk => action.type.endsWith('/pending'),
+        (state) => {
+          state.status = 'loading'
+          state.error = null
+        }
+      )
+      .addMatcher(
         (action): action is GenericAsyncThunk => action.type.endsWith('/rejected'),
         (state, action) => {
           state.status = 'failed'
@@ -64,12 +71,6 @@ export const authSlice = createSlice({
         }
       )
     //login
-      .addMatcher(authApi.endpoints.login.matchPending,
-        (state) => {
-          state.status = 'loading'
-          state.error = null
-        }
-      )
       .addMatcher(authApi.endpoints.login.matchFulfilled,
         (state: InitialStateType, {payload}) => {
           const {_id, token, email, name } = payload
