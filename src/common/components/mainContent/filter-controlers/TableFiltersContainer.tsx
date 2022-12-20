@@ -10,6 +10,7 @@ export const TableFiltersContainer: FC<PropsType> = memo(({children}) => {
       marginTop: '30px',
       display: 'flex',
       flexDirection: 'row',
+      alignItems: "center",
       justifyContent: 'space-between',
       width: '100%',
       marginBottom: '30px'

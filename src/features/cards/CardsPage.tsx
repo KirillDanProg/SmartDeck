@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {TablePacks} from '../../common/components/mainContent/table/TablePacks';
 import {AddNewCard} from '../../common/components/mainContent/pack-cards/AddNewCard';
-import {TableCards} from '../../common/components/mainContent/pack-cards/CardsPack';
 import {getUrlParams} from '../../common/utils/getUrlParams';
 import {useGetPacksQuery} from './packsApi';
 import {IGetPacksResponse} from './packsSlice';

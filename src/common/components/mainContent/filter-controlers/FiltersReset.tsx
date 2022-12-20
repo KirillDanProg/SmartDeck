@@ -1,41 +1,40 @@
 import React, { FC } from "react";
-import TuneIcon from "@mui/icons-material/Tune";
+import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
 import Box from "@mui/material/Box";
 
 
 type PropsType = {
-  params:  URLSearchParams
+  params: URLSearchParams
   setParams: (value: URLSearchParams) => void
 }
-export const FiltersReset: FC<PropsType>= ({setParams, params}) => {
+export const FiltersReset: FC<PropsType> = ({ setParams, params }) => {
 
   const resetFilters = () => {
-    params.forEach((value, key) => {
-      console.log(key)
-    })
-    setParams(params)
-  }
+    const keys = Array.from(params.keys());
+    keys.forEach(key => params.delete(key));
+    setParams(params);
+  };
 
-    return (
-        <Box sx={{alignSelf: 'flex-end', marginBottom: '2px'}}>
-            <Box
-                sx={{
-                    marginTop: '30px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '36px',
-                    height: '36px',
-                    background: '#FFFFFF',
-                    border: '1px solid #D9D9D9',
-                    borderRadius: '2px',
-                }}
-            >
-
-                <TuneIcon onClick={resetFilters}/>
-
-            </Box>
-        </Box>
-    );
+  return (
+    <Box sx={{ alignSelf: "flex-end", marginBottom: "2px" }}>
+      <Box
+        sx={{
+          marginTop: "30px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "36px",
+          height: "36px",
+          cursor: "pointer",
+          "&:hover": {
+            transform: "scale(1.2)",
+            transition: "0.4s"
+          }
+        }}
+      >
+        <FilterAltOffIcon onClick={resetFilters} />
+      </Box>
+    </Box>
+  );
 };
 

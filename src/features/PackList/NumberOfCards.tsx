@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { FC, memo, useEffect, useMemo, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Slider } from "@mui/material";
@@ -10,22 +10,19 @@ type PropsType = {
   data: IGetPacksResponse
   isLoading: boolean
 }
-export const NumberOfCards: FC<PropsType> = ({ data }) => {
-
+export const NumberOfCards: FC<PropsType> = memo(({ data }) => {
   const [params, setParams] = useSearchParams();
 
   const minCardsCount = data.minCardsCount;
 
   const maxCardsCount = data.maxCardsCount;
 
-  let min = params.get("min");
-  let max = params.get("max");
+  let min = params.get("min") || minCardsCount;
+  let max = params.get("max") || maxCardsCount;
 
-  const initRange = (!min && !max) ? [minCardsCount, maxCardsCount] : [min, max]
+  const [range, setRange] = useState([min, max]);
 
-  const [range, setRange] = useState<any>(initRange);
-
-  const handleChange = (event: Event, value: any) => {
+  const handleChange = (event: Event, value: number | number[]) => {
     const newRange = value as number[];
     setRange(newRange);
     min = String(newRange[0]);
@@ -34,8 +31,11 @@ export const NumberOfCards: FC<PropsType> = ({ data }) => {
     params.set("max", String(max));
   };
 
-  const debouncedRange = useDebounce(range);
+  const memoizedRange = useMemo(() => {
+    return [min, max]
+  }, [min, max])
 
+  const debouncedRange = useDebounce(memoizedRange);
 
   useEffect(() => {
     setParams(params);
@@ -46,25 +46,25 @@ export const NumberOfCards: FC<PropsType> = ({ data }) => {
       <Typography variant="h6">Number of cards</Typography>
       <Box sx={containerStyle}>
         <Box sx={style}>
-          <Typography>{range[0]}</Typography>
+          <Typography>{min}</Typography>
         </Box>
 
         <Slider
           disabled={false}
           sx={{ width: "155px" }}
           getAriaLabel={() => "range"}
-          value={range}
+          value={[+min, +max]}
           onChange={handleChange}
           valueLabelDisplay="off"
           max={maxCardsCount}
         />
         <Box sx={style}>
-          <Typography>{range[1]}</Typography>
+          <Typography>{max}</Typography>
         </Box>
       </Box>
     </Box>
   );
-};
+});
 
 const style = {
   display: "flex",
