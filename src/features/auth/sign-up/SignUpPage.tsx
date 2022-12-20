@@ -8,36 +8,45 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import * as React from 'react';
+import {SignupSkeleton} from "../../../common/components/Skeletons/SignUpSkeleton";
 
 
 export const SignUpPage = () => {
 
-  const [register, {isSuccess}] = useRegisterMutation()
+    const [register, {isSuccess, isLoading}] = useRegisterMutation()
 
-  //todo: types
-  async function signUpHandler(data: IRegisterRequest) {
-    await register(data).unwrap()
-  }
+    //todo: types
+    async function signUpHandler(data: IRegisterRequest) {
+        await register(data).unwrap()
+    }
 
-  useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isSuccess])
+    useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isSuccess])
 
-  return (
-    <CustomGridContainer>
-      <Box
-        sx={{
-          my: 8,
-          mx: 4,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}/>
-        <Typography component="h1" variant="h5">
-                        Sign up
-        </Typography>
-        <Form formType="sign-up" callback={signUpHandler}/>
-      </Box>
-    </CustomGridContainer>
-  );
+    return (
+        <>
+            {
+                isLoading
+                    ?
+                    <SignupSkeleton/>
+                    :
+                    <CustomGridContainer>
+                        <Box
+                            sx={{
+                                my: 8,
+                                mx: 4,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}/>
+                            <Typography component="h1" variant="h5">
+                                Sign up
+                            </Typography>
+                            <Form formType="sign-up" callback={signUpHandler}/>
+                        </Box>
+                    </CustomGridContainer>
+            }
+        </>
+    );
 }

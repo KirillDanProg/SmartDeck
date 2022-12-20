@@ -4,9 +4,10 @@ import Button from "@mui/material/Button";
 
 export type closeModalT = {
     closeModal: (e: boolean) => void
+    cb: () => void
 }
 
-export const BtnForModal: FC<closeModalT> = ({closeModal}) => {
+export const BtnForModal: FC<closeModalT> = ({closeModal, cb}) => {
     const closeModalHandler = () => closeModal(false)
     return (
         <Box sx={styleBtnContainer}>
@@ -18,10 +19,10 @@ export const BtnForModal: FC<closeModalT> = ({closeModal}) => {
                 Cancel
             </Button>
             <Button
-                onClick={() => {}}
+                onClick={cb}
                 sx={styleRightBtn}
                 variant="contained"
-                disabled={true}
+                disabled={false}
             >
                 Save
             </Button>
@@ -29,7 +30,7 @@ export const BtnForModal: FC<closeModalT> = ({closeModal}) => {
     );
 };
 
-const styleBtnContainer = { display: 'flex', gap: '40px' }
+const styleBtnContainer = {display: 'flex', gap: '40px'}
 
 const styleLeftBtn = {
     borderRadius: '30px',

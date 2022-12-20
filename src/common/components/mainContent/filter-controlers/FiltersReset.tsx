@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
 import Box from "@mui/material/Box";
+import s from "../../../../features/cards/CardsPage.module.css"
 
 
 type PropsType = {
@@ -17,21 +18,7 @@ export const FiltersReset: FC<PropsType> = ({ setParams, params }) => {
 
   return (
     <Box sx={{ alignSelf: "flex-end", marginBottom: "2px" }}>
-      <Box
-        sx={{
-          marginTop: "30px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "36px",
-          height: "36px",
-          cursor: "pointer",
-          "&:hover": {
-            transform: "scale(1.2)",
-            transition: "0.4s"
-          }
-        }}
-      >
+      <Box className={s.forIcons}>
         <FilterAltOffIcon onClick={resetFilters} />
       </Box>
     </Box>

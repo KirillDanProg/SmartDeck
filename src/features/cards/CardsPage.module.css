@@ -1,0 +1,25 @@
+.forIcons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+}
+
+.forIcons:hover {
+    transform: scale(1.2);
+    transition: 0.4s;
+    opacity: 0.8;
+}
+
+.forIconsDisabled {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    opacity: 0.4;
+}

@@ -106,7 +106,6 @@ export const Form: FC<FormPropsType> = ({callback, formType}) => {
             ? '/signup'
             : '/login'}
           component={Link}
-
           >
             {formType === 'sign-in'
               ? 'Don\'t have an account? Sign Up'

@@ -25,13 +25,15 @@ export const CardsPage = () => {
 
     const paramsObject = getUrlParams(params)
 
-    const {data = {} as IGetPacksResponse, isLoading} = useGetPacksQuery(paramsObject);
+    const {data = {} as IGetPacksResponse, isLoading, isFetching} = useGetPacksQuery(paramsObject);
 
     const cardPacks = data.cardPacks;
 
     const {packId} = useParams();
 
     const hideTableFilters = !packId;
+
+    const disabled = isLoading || isFetching
 
     return (
         <PacksPageContainer>
@@ -40,14 +42,12 @@ export const CardsPage = () => {
                 <Typography variant="h5" sx={{fontWeight: 'bold'}}>
                     Packs list
                 </Typography>
+                {hideTableFilters ? <AddNewPack/> : <AddNewCard cardsPack_id={packId}/>}
             </Box>
             {
                 isLoading
                     ? <Preloader/>
                     : <><TableFiltersContainer>
-
-                        {hideTableFilters ? <AddNewPack/> : <AddNewCard cardsPack_id={packId}/>}
-
                         <SearchPacksCard/>
 
                         {
@@ -62,7 +62,7 @@ export const CardsPage = () => {
 
                         {
                             hideTableFilters
-                                ? <TablePacks cardPacks={cardPacks}/>
+                                ? <TablePacks disabled={disabled} cardPacks={cardPacks}/>
                                 : <Outlet/>
                         }
                         <PaginationPacksList data={data}/>

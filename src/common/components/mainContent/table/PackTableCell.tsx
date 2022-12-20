@@ -10,12 +10,14 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {NavLink} from 'react-router-dom';
 import {PATH} from '../../../../layout/AppRoutes/routes';
 import {convertedDate} from "../../../utils/convertedDate";
+import s from "../../../../features/cards/CardsPage.module.css"
 
 type PropsType = {
     packData: PackResponseType
+    disabled: boolean
 }
 
-export const PackTableCell: FC<PropsType> = ({packData}) => {
+export const PackTableCell: FC<PropsType> = ({packData, disabled}) => {
     const [deletePack] = useDeletePackMutation()
     const [changeName] = useChangeNamePackMutation()
 
@@ -43,18 +45,29 @@ export const PackTableCell: FC<PropsType> = ({packData}) => {
             </TableCell></NavLink>
             <TableCell align="center">{packData.cardsCount}</TableCell>
             <TableCell align="center">{convertedDate(packData.updated)}</TableCell>
-            <TableCell align="right">{packData.created}</TableCell>
+            <TableCell align="right">{packData.user_name}</TableCell>
             <TableCell align="right" sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
 
                 {
                     packOwner
-                        ? <>
-                            <SchoolOutlinedIcon/>
-                            <ModeEditIcon onClick={editeNameChangeHandler}/>
-                            <DeleteOutlineIcon onClick={deletePackHandler}/>
+                        ? <>{
+                        disabled ? <>
+                                <SchoolOutlinedIcon className={s.forIconsDisabled} />
+                                <ModeEditIcon className={s.forIconsDisabled}/>
+                                <DeleteOutlineIcon className={s.forIconsDisabled}/>
+                            </> :
+                        <>
+                            <SchoolOutlinedIcon className={s.forIcons}/>
+                            <ModeEditIcon className={s.forIcons} onClick={editeNameChangeHandler}/>
+                            <DeleteOutlineIcon className={s.forIcons} onClick={deletePackHandler}/>
+                        </>
+                    }
                         </>
 
-                        : <SchoolOutlinedIcon/>
+                        : <>
+                            { disabled ? <SchoolOutlinedIcon className={s.forIconsDisabled}/> :
+                                <SchoolOutlinedIcon className={s.forIcons}/>}
+                        </>
                 }
             </TableCell>
         </TableRow>

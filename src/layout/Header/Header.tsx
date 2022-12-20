@@ -17,7 +17,7 @@ import Menu from "@mui/material/Menu";
 import CardMedia from "@mui/material/CardMedia";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import TransgenderIcon from "@mui/icons-material/Transgender";
-import { NavLink, unstable_HistoryRouter } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import { useContext, useState } from "react";
 import Link from "@mui/material/Link";
 import List from "@mui/material/List";
@@ -31,7 +31,6 @@ export const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [logout, {}] = useLogoutMutation();
   const [open, setOpen] = useState(false);
-
 
   const { mode, toggleColorMode } = useContext(ColorModelContex);
 
@@ -94,9 +93,6 @@ export const Header = () => {
                   vertical: "top",
                   horizontal: "right",
                 }}
-                // sx={{
-                //     top: '55px',
-                // }}
                 keepMounted
                 transformOrigin={{
                   vertical: "top",
@@ -107,7 +103,7 @@ export const Header = () => {
               >
                 <MenuItem onClick={handleClose}>
                   <NavLink to={"/profile"} color={'inherite'} >
-                    <TransgenderIcon fontSize={"small"} sx={{
+                    <TransgenderIcon  fontSize={"small"} sx={{
                       paddingRight: 1
                     }} />
                     Profile
