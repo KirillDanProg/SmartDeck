@@ -11,12 +11,12 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {TablePacks} from '../../common/components/mainContent/table/TablePacks';
 import {AddNewCard} from '../../common/components/mainContent/pack-cards/AddNewCard';
-import {TableCards} from '../../common/components/mainContent/pack-cards/CardsPack';
 import {getUrlParams} from '../../common/utils/getUrlParams';
 import {useGetPacksQuery} from './packsApi';
 import {IGetPacksResponse} from './packsSlice';
 import {Preloader} from '../../common/components/Preloader';
 import {PaginationPacksList} from '../../common/components/mainContent/Pagination';
+import {ReturnComponent} from '../../common/components/returnComponent/ReturnComponent';
 
 
 //todo: render optimization
@@ -24,7 +24,7 @@ import {PaginationPacksList} from '../../common/components/mainContent/Paginatio
 export const CardsPage = () => {
     const [params, setParams] = useSearchParams();
 
-    const paramsObject = getUrlParams(params)
+    const paramsObject = getUrlParams(params);
 
     const {data = {} as IGetPacksResponse, isLoading} = useGetPacksQuery(paramsObject);
 
@@ -34,43 +34,44 @@ export const CardsPage = () => {
 
     const hideTableFilters = !packId;
 
-    return (
-        <PacksPageContainer>
+    return (<>
+           {!hideTableFilters && <ReturnComponent/>}
+           <PacksPageContainer>
+               <Box sx={style}>
+                   <Typography variant="h5" sx={{fontWeight: 'bold'}}>
+                       {hideTableFilters ?  'Packs list' : 'My pack'}
+                   </Typography>
+               </Box>
+               {
+                   isLoading
+                       ? <Preloader/>
+                       : <><TableFiltersContainer>
 
-            <Box sx={style}>
-                <Typography variant="h5" sx={{fontWeight: 'bold'}}>
-                    Packs list
-                </Typography>
-            </Box>
-            {
-                isLoading
-                    ? <Preloader/>
-                    : <><TableFiltersContainer>
+                           {hideTableFilters ? <AddNewPack/> : <AddNewCard cardsPack_id={packId}/>}
 
-                        {hideTableFilters ? <AddNewPack/> : <AddNewCard cardsPack_id={packId}/>}
+                           <SearchPacksCard/>
 
-                        <SearchPacksCard/>
+                           {
+                               hideTableFilters && <>
+                                   <ShowPacksCards/>
+                                   <NumberOfCards data={data} isLoading={isLoading}/>
+                                   <FiltersReset setParams={setParams} params={params}/>
+                               </>
+                           }
 
-                        {
-                            hideTableFilters && <>
-                                <ShowPacksCards/>
-                                <NumberOfCards data={data} isLoading={isLoading}/>
-                                <FiltersReset setParams={setParams} params={params}/>
-                            </>
-                        }
+                       </TableFiltersContainer>
 
-                    </TableFiltersContainer>
+                           {
+                               hideTableFilters
+                                   ? <TablePacks cardPacks={cardPacks}/>
+                                   : <Outlet/>
+                           }
+                           <PaginationPacksList data={data}/>
+                       </>
+               }
 
-                        {
-                            hideTableFilters
-                                ? <TablePacks cardPacks={cardPacks}/>
-                                : <Outlet/>
-                        }
-                        <PaginationPacksList data={data}/>
-                    </>
-            }
-
-        </PacksPageContainer>
+           </PacksPageContainer>
+       </>
     );
 };
 

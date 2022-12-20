@@ -25,7 +25,7 @@ export const TablePacks:FC<PropsType> = memo(({cardPacks}) => {
             <TableCell align="left">Name</TableCell>
             <TableCell align="center">Cards</TableCell>
             <TableCell align="center">
-              <TableSortLabel>
+              <TableSortLabel >
                                 Last Update
               </TableSortLabel>
             </TableCell>

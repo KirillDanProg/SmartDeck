@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {cardsApi} from './cardsApi';
 import {RootState} from '../../../app/store';
+import {jsx} from '@emotion/react';
 
 
 export type CreateNewCardRequestT = {
@@ -31,6 +32,17 @@ export interface IDeleteCardResponse {
     deletedCard: CardResponseType;
     token: string;
     tokenDeathTime: number;
+}
+
+export interface IGetCardRequest {
+    cardAnswer?:string
+    cardQuestion?:string
+    cardsPack_id:string
+    min?:string
+    max?:string
+    sortCards?:string
+    page?:string
+    pageCount?:string
 }
 
 export interface IChangeNameCardResponse {

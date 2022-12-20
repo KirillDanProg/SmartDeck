@@ -1,37 +1,59 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Button from '@mui/material/Button';
 import {useCreateNewCardMutation} from '../../../../features/cards/api/cardsApi';
 import {CreateNewCardRequestT} from '../../../../features/cards/api/cardsSlice';
+import {useFormik} from 'formik';
+import TextField from '@mui/material/TextField';
 
 type AddCardType = {
-    cardsPack_id:string
+    cardsPack_id: string
 }
 
-export const AddNewCard:React.FC<AddCardType> = ({cardsPack_id, ...props}) => {
-
+export const AddNewCard: React.FC<AddCardType> = ({cardsPack_id, ...props}) => {
+    const [addCardModalOpen, setAddCardModalOpen] = useState(false)
     const [addNewCard, {}] = useCreateNewCardMutation();
-    const card:CreateNewCardRequestT = {
+    const card: CreateNewCardRequestT = {
         cardsPack_id,
         question: 'How are you?',
         answer: 'GOOD!'
-
     }
 
-    const addNewCardHandler = async () => {
-        addNewCard(card)
+    const openModalAddCard = () => {
+        setAddCardModalOpen(true)
+    }
+    const closeModalAddPack = (e: boolean) => {
+        setAddCardModalOpen(e)
     }
 
-    // const [addPackModalOpen, setAddPackModalOpen] = useState(false)
-    // const closeModalAddPack = () => {
-    //     setAddPackModalOpen(false)
-    // }
+
+    const formik = useFormik({
+        initialValues: {
+            question: ''
+        },
+        onSubmit: values => {
+            addNewCard({
+                cardsPack_id,
+                question: values.question,
+                answer: 'GOOD!'
+            });
+            formik.resetForm();
+        },
+    });
 
     return (
-        <Button
-            disabled={false}
-            onClick={addNewCardHandler}
-        >
-            Add new card
-        </Button>
+        <>
+            <form onSubmit={formik.handleSubmit}>
+                <Button
+                    type="submit"
+                    disabled={false}
+                >
+                    Add new card
+                </Button>
+                <TextField
+                    {...formik.getFieldProps('question')}
+                />
+            </form>
+        </>
     )
 }
+
