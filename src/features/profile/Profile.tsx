@@ -24,7 +24,6 @@ export const Profile = () => {
     await changeName(newName)
   }
 
-  // useRedirectTo(`/${PATH.LOGIN}`, isSuccess, [isLoading])
   return (
     <>
       <ReturnComponent/>

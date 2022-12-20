@@ -9,6 +9,7 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {NavLink} from 'react-router-dom';
 import {PATH} from '../../../../layout/AppRoutes/routes';
+import {convertedDate} from "../../../utils/convertedDate";
 
 type PropsType = {
     packData: PackResponseType
@@ -41,7 +42,7 @@ export const PackTableCell: FC<PropsType> = ({packData}) => {
                 {packData.name}
             </TableCell></NavLink>
             <TableCell align="center">{packData.cardsCount}</TableCell>
-            <TableCell align="center">{packData.updated}</TableCell>
+            <TableCell align="center">{convertedDate(packData.updated)}</TableCell>
             <TableCell align="right">{packData.created}</TableCell>
             <TableCell align="right" sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
 
