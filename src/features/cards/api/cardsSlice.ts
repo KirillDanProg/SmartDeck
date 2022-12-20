@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {packsApi} from './packsApi';
 import {cardsApi} from './cardsApi';
 import {RootState} from '../../../app/store';
 
@@ -75,7 +74,7 @@ const initialState: IGetCardsResponse = {
     minGrade: 1,
     page: 1,
     pageCount: 4,
-    packUserId: '5eb6a2f72f849402d46c6ac7'
+    packUserId: ''
 }
 
 export const cardsSlice = createSlice({

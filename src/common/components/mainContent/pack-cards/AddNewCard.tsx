@@ -1,7 +1,6 @@
 import React from 'react'
 import Button from '@mui/material/Button';
 import {useCreateNewCardMutation} from '../../../../features/cards/api/cardsApi';
-import {useParams} from 'react-router-dom';
 import {CreateNewCardRequestT} from '../../../../features/cards/api/cardsSlice';
 
 type AddCardType = {

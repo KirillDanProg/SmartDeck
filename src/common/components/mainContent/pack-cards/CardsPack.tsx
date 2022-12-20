@@ -8,8 +8,8 @@ import {useParams} from 'react-router-dom';
 
 
 export const TableCards = () => {
-     const {id=''} = useParams();
-    const {data} = useGetCardsQuery(id);
+    const {packId = ''} = useParams();
+    const {data} = useGetCardsQuery(packId);
     const cardPacks = data && data.cards;
     return (
         <TableContainer component={Paper}>

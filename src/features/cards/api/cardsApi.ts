@@ -3,11 +3,11 @@ import {CreateNewCardRequestT, IChangeNameCardRequest, IChangeNameCardResponse, 
 
 export const cardsApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        getCards: build.query<IGetCardsResponse, any>({
-            query: (cardsPack_id ) => ({
+        getCards: build.query<IGetCardsResponse, string>({
+            query: (cardsPack_id) => ({
                 url: `/cards/card?cardsPack_id=${cardsPack_id}`
             }),
-            providesTags: result => [{type: "Cards"}]
+            providesTags: result => [{type: 'Cards'}]
         }),
         createNewCard: build.mutation<{}, CreateNewCardRequestT>({
             query: (body) => ({
@@ -21,18 +21,18 @@ export const cardsApi = apiSlice.injectEndpoints({
                     }
                 }
             }),
-            invalidatesTags: result =>  [{type: "Cards"}]
+            invalidatesTags: result => [{type: 'Cards'}]
         }),
         deleteCard: build.mutation<{}, string>({
             query: (body) => ({
                 url: `/cards/card?id=${body}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: result =>  [{type: "Cards"}]
+            invalidatesTags: result => [{type: 'Cards'}]
         }),
         changeCardName: build.mutation<IChangeNameCardResponse, IChangeNameCardRequest>({
             query: (body) => ({
-                url: `/cards/pack`,
+                url: `/cards/card`,
                 method: 'PUT',
                 body: {
                     card: {
@@ -41,13 +41,14 @@ export const cardsApi = apiSlice.injectEndpoints({
                     }
                 }
             }),
-            invalidatesTags: result =>  [{type: "Packs"}]
+            invalidatesTags: result => [{type: 'Cards'}]
         }),
     }),
 });
 
 
-export const {useGetCardsQuery,
+export const {
+    useGetCardsQuery,
     useCreateNewCardMutation,
     useDeleteCardMutation,
     useChangeCardNameMutation
