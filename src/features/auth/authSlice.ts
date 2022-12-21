@@ -19,7 +19,7 @@ type SerializedError = {
     code?: string
     stack?: string
 }
-type GenericAsyncThunk = AsyncThunk<unknown, unknown, any>
+export type GenericAsyncThunk = AsyncThunk<unknown, unknown, any>
 
 const initialState: InitialStateType = {
   token: null,

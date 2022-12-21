@@ -44,5 +44,3 @@ function App() {
 }
 
 export default App;
-// <BasicModal modalTitle="Something went wrong"
-//             modalText={serverErrorHandler(error)}/>

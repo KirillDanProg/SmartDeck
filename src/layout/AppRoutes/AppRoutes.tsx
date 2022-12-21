@@ -1,17 +1,16 @@
-import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { PATH } from "./routes";
-import { Page404 } from "../404-page/Page404";
-import { SignInPage } from "../../features/auth/sign-in/SignInPage";
-import { Main } from "../Main/Main";
-import { Profile } from "../../features/profile/Profile";
-import { CheckEmailPage } from "../../features/reset-password/check-email/CheckEmailPage";
-import { SignUpPage } from "../../features/auth/sign-up/SignUpPage";
-import { CardsPage } from "../../features/cards/CardsPage";
-import { CreatePassword } from "../../features/reset-password/createPassword/CreatePassword";
-import { ForgotPassword } from "../../features/reset-password/forgotPassword/ForgotPassword";
-import { DevPage } from "../devPage/DevPage";
-import { TableCards } from "../../common/components/mainContent/pack-cards/CardsPack";
+import React from 'react';
+import {Navigate, Route, Routes} from 'react-router-dom';
+import {PATH} from './routes';
+import {Page404} from '../404-page/Page404';
+import {SignInPage} from '../../features/auth/sign-in/SignInPage';
+import {Main} from '../Main/Main';
+import {Profile} from '../../features/profile/Profile';
+import {CheckEmailPage} from '../../features/reset-password/check-email/CheckEmailPage';
+import {SignUpPage} from '../../features/auth/sign-up/SignUpPage';
+import {CardsPage} from '../../features/cards/CardsPage';
+import {CreatePassword} from '../../features/reset-password/createPassword/CreatePassword';
+import {ForgotPassword} from '../../features/reset-password/forgotPassword/ForgotPassword';
+import {DevPage} from '../devPage/DevPage';
 
 
 export const AppRoutes = () => {
