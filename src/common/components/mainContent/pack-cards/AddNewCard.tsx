@@ -6,14 +6,14 @@ import {useFormik} from 'formik';
 import TextField from '@mui/material/TextField';
 
 type AddCardType = {
-    cardsPack_id: string
+    packId: string
 }
 
-export const AddNewCard: React.FC<AddCardType> = ({cardsPack_id, ...props}) => {
+export const AddNewCard: React.FC<AddCardType> = ({packId, ...props}) => {
     const [addCardModalOpen, setAddCardModalOpen] = useState(false)
     const [addNewCard, {}] = useCreateNewCardMutation();
     const card: CreateNewCardRequestT = {
-        cardsPack_id,
+        cardsPack_id:packId,
         question: 'How are you?',
         answer: 'GOOD!'
     }
@@ -31,11 +31,9 @@ export const AddNewCard: React.FC<AddCardType> = ({cardsPack_id, ...props}) => {
             question: ''
         },
         onSubmit: values => {
-            addNewCard({
-                cardsPack_id,
-                question: values.question,
-                answer: 'GOOD!'
-            });
+            addNewCard(
+                card
+            );
             formik.resetForm();
         },
     });

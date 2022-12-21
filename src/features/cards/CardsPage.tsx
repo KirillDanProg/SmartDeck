@@ -6,7 +6,7 @@ import {NumberOfCards} from '../PackList/NumberOfCards';
 import {FiltersReset} from '../../common/components/mainContent/filter-controlers/FiltersReset';
 import {PacksPageContainer} from '../../common/components/mainContent/table/PacksPageContainer';
 import {TableFiltersContainer} from '../../common/components/mainContent/filter-controlers/TableFiltersContainer';
-import {Outlet, useParams, useSearchParams} from 'react-router-dom';
+import {Outlet, useLocation, useParams, useSearchParams} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {TablePacks} from '../../common/components/mainContent/table/TablePacks';
@@ -17,6 +17,7 @@ import {IGetPacksResponse} from './packsSlice';
 import {Preloader} from '../../common/components/Preloader';
 import {PaginationPacksList} from '../../common/components/mainContent/Pagination';
 import {ReturnComponent} from '../../common/components/returnComponent/ReturnComponent';
+import {TableCards} from '../../common/components/mainContent/pack-cards/CardsPack';
 
 
 //todo: render optimization
@@ -30,48 +31,50 @@ export const CardsPage = () => {
 
     const cardPacks = data.cardPacks;
 
-    const {packId} = useParams();
+    const packId = params.get('cardsPack_id') || '';
 
-    const hideTableFilters = !packId;
+    const {pathname} = useLocation();
+
+    const hideTableFilters = pathname !== '/cards';
 
     return (<>
-           {!hideTableFilters && <ReturnComponent/>}
-           <PacksPageContainer>
-               <Box sx={style}>
-                   <Typography variant="h5" sx={{fontWeight: 'bold'}}>
-                       {hideTableFilters ?  'Packs list' : 'My pack'}
-                   </Typography>
-               </Box>
-               {
-                   isLoading
-                       ? <Preloader/>
-                       : <><TableFiltersContainer>
+            {!hideTableFilters && <ReturnComponent/>}
+            <PacksPageContainer>
+                <Box sx={style}>
+                    <Typography variant="h5" sx={{fontWeight: 'bold'}}>
+                        {hideTableFilters ? 'Packs list' : 'My pack'}
+                    </Typography>
+                </Box>
+                {
+                    isLoading
+                        ? <Preloader/>
+                        : <><TableFiltersContainer>
 
-                           {hideTableFilters ? <AddNewPack/> : <AddNewCard cardsPack_id={packId}/>}
+                            {hideTableFilters ? <AddNewPack/> : <AddNewCard packId={packId}/>}
 
-                           <SearchPacksCard/>
+                            <SearchPacksCard/>
 
-                           {
-                               hideTableFilters && <>
-                                   <ShowPacksCards/>
-                                   <NumberOfCards data={data} isLoading={isLoading}/>
-                                   <FiltersReset setParams={setParams} params={params}/>
-                               </>
-                           }
+                            {
+                                hideTableFilters && <>
+                                    <ShowPacksCards/>
+                                    <NumberOfCards data={data} isLoading={isLoading}/>
+                                    <FiltersReset setParams={setParams} params={params}/>
+                                </>
+                            }
 
-                       </TableFiltersContainer>
+                        </TableFiltersContainer>
 
-                           {
-                               hideTableFilters
-                                   ? <TablePacks cardPacks={cardPacks}/>
-                                   : <Outlet/>
-                           }
-                           <PaginationPacksList data={data}/>
-                       </>
-               }
+                            {
+                                hideTableFilters
+                                    ? <TablePacks cardPacks={cardPacks}/>
+                                    : <TableCards/>
+                            }
+                            <PaginationPacksList data={data}/>
+                        </>
+                }
 
-           </PacksPageContainer>
-       </>
+            </PacksPageContainer>
+        </>
     );
 };
 

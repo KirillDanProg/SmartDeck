@@ -22,9 +22,8 @@ export const AppRoutes = () => {
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
                     <Route path={PATH.LOGIN} element={<SignInPage/>}/>
                     <Route path={PATH.SIGN_UP} element={<SignUpPage/>}/>
-                    <Route path={PATH.PACK_LISTS} element={<CardsPage/>}>
-                        <Route path={':packId'} element={<TableCards/>}/>
-                    </Route>
+                    <Route path={PATH.PACK_LISTS} element={<CardsPage/>}/>
+                    <Route path={PATH.CARDS} element={<CardsPage/>}/>
                     <Route path="404" element={<Page404/>}/>
                     <Route path="*" element={<Navigate to="404"/>}/>
                 </Route>

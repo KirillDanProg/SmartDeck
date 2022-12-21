@@ -7,5 +7,6 @@ export const PATH = {
   FORGOT_PASSWORD: '/forgot-password',
   SET_PASSWORD: 'set-new-password',
   PACK_LISTS: '/pack-lists',
+  CARDS: '/cards',
   DEV_PAGE: '/dev'
 }

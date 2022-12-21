@@ -11,11 +11,18 @@ import {getUrlParams} from '../../../utils/getUrlParams';
 
 export const TableCards = () => {
     //с хардкодом работает
-    const [params, setParams] = useSearchParams({cardsPack_id:'639e269ac7270c4efc6205a4',sortCards:'1updated'});
+    //{cardsPack_id:'639e269ac7270c4efc6205a4',sortCards:'1updated'}
+    const [params, setParams] = useSearchParams();
     const paramsObject = getUrlParams(params);
 
     const {packId = ''} = useParams();
     const {data = {} as IGetCardsResponse, isLoading, isSuccess} = useGetCardsQuery(paramsObject);
+
+    // const sortToggle = (arg:string) =>{
+    //    const sortCards = paramsObject.sortCards;
+    //     sortCards  ===`0updated` ? arg = '1' : '0';
+    //         setParams({sortCards:`${arg}updated`});
+    // }
 
     console.log(paramsObject)
     const cardPacks = data && data.cards;
@@ -28,9 +35,10 @@ export const TableCards = () => {
                         <TableCell align="left">Question</TableCell>
                         <TableCell align="center">Answer</TableCell>
                         <TableCell align="center">
-                            <TableSortLabel>
+                            <TableSortLabel >
                                 Last Updated
                             </TableSortLabel>
+                            {/*defaultValue={paramsObject.sortCards}  onClick={sortToggle}*/}
                         </TableCell>
                         <TableCell align="center">Grade</TableCell>
                     </TableRow>
