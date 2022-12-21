@@ -10,6 +10,8 @@ import {ChildEditPack} from "./features/modal/ChildEditPack";
 import {LoginSkeleton} from "./common/components/Skeletons/LoginSkeleton";
 import {Page404} from "./layout/404-page/Page404";
 import {SignupSkeleton} from "./common/components/Skeletons/SignUpSkeleton";
+import {ProfileSkeleton} from "./common/components/Skeletons/ProfileSkeleton";
+import {TableSkeleton} from "./common/components/Skeletons/TableSkeleton";
 
 
 const container = document.getElementById('root')!;
@@ -18,8 +20,8 @@ const root = createRoot(container);
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      {/*<SignupSkeleton />*/}
-      <App />
+      <TableSkeleton />
+      {/*<App />*/}
     </Provider>
   </BrowserRouter>
 );
