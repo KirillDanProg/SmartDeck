@@ -1,15 +1,16 @@
 import {apiSlice} from '../../api/apiSlice';
-import {CreateNewCardRequestT, IChangeNameCardRequest, IChangeNameCardResponse, IGetCardsResponse} from './cardsSlice';
+import {IChangeNameCardRequest, IChangeNameCardResponse, IGetCardRequest, IGetCardsResponse} from './cardsSlice';
 
 export const cardsApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        getCards: build.query<IGetCardsResponse, string>({
-            query: (cardsPack_id) => ({
-                url: `/cards/card?cardsPack_id=${cardsPack_id}`
+        getCards: build.query<IGetCardsResponse, any>({
+            query: (params:IGetCardRequest) => ({
+                url: `/cards/card`,
+                params
             }),
             providesTags: result => [{type: 'Cards'}]
         }),
-        createNewCard: build.mutation<{}, CreateNewCardRequestT>({
+        createNewCard: build.mutation<{}, any>({
             query: (body) => ({
                 url: `/cards/card`,
                 method: 'POST',

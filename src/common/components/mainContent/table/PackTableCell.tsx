@@ -37,7 +37,7 @@ export const PackTableCell: FC<PropsType> = ({packData}) => {
             key={packData._id}
             sx={{'&:last-child td, &:last-child th': {border: 0}}}
         >
-            <NavLink to={`${PATH.PACK_LISTS}/${packData._id}`}><TableCell align="left" style={{cursor: 'pointer'}}>
+            <NavLink to={`${PATH.CARDS}?cardsPack_id=${packData._id}`}><TableCell align="left" style={{cursor: 'pointer'}}>
                 {packData.name}
             </TableCell></NavLink>
             <TableCell align="center">{packData.cardsCount}</TableCell>

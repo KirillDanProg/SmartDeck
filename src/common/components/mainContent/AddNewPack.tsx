@@ -2,8 +2,8 @@ import {useCreateNewPackMutation} from '../../../features/cards/packsApi';
 import React, {useState} from 'react'
 import Button from '@mui/material/Button';
 import {BasicModalPacksList} from "../../../features/modal/BasicModal";
-import {ChildEditPack} from "../../../features/modal/ChildEditPack";
 import {BtnForModal} from "../../../features/modal/BtnForModal";
+import {ChildEditPack} from '../../../features/modal/ChildEditPack';
 
 
 export const AddNewPack = () => {
