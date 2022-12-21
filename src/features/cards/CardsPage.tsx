@@ -27,7 +27,7 @@ export const CardsPage = () => {
 
     const paramsObject = getUrlParams(params);
 
-    const {data = {} as IGetPacksResponse, isLoading} = useGetPacksQuery(paramsObject);
+    const {data = {} as IGetPacksResponse, isLoading, isFetching} = useGetPacksQuery(paramsObject);
 
     const cardPacks = data.cardPacks;
 
@@ -36,6 +36,7 @@ export const CardsPage = () => {
     const {pathname} = useLocation();
 
     const hideTableFilters = pathname !== '/cards';
+    const disabled = isLoading || isFetching
 
     return (<>
             {!hideTableFilters && <ReturnComponent/>}
@@ -64,14 +65,14 @@ export const CardsPage = () => {
 
                         </TableFiltersContainer>
 
-                            {
-                                hideTableFilters
-                                    ? <TablePacks cardPacks={cardPacks}/>
-                                    : <TableCards/>
-                            }
-                            <PaginationPacksList data={data}/>
-                        </>
-                }
+                        {
+                            hideTableFilters
+                                ? <TablePacks disabled={disabled} cardPacks={cardPacks}/>
+                                : <Outlet/>
+                        }
+                        <PaginationPacksList data={data}/>
+                    </>
+            }
 
             </PacksPageContainer>
         </>

@@ -3,46 +3,45 @@ import {AppRoutes} from '../layout/AppRoutes/AppRoutes';
 import {Header} from '../layout/Header/Header';
 import {useAppSelector} from '../common/hooks';
 import {selectCurrentError, selectCurrentStatus} from '../features/auth/authSlice';
+import {BasicModal} from '../common/components/ModalWindow';
 import {serverErrorHandler} from '../common/utils/serverErrorTransformed';
-import {Preloader} from '../common/components/Preloader';
 import {useAuthMeMutation} from '../features/auth/authApi';
-import { ColorModelContextProvider} from '../layout/Header/ColorModeContext';
+import {ColorModelContextProvider} from '../layout/Header/ColorModeContext';
 import CssBaseline from '@mui/material/CssBaseline';
-import React, { useEffect} from 'react';
-import { ErrorSnackbar } from "../common/components/ErrorSnackbar";
+import React, {useEffect} from 'react';
+import {ErrorSnackbar} from "../common/components/ErrorSnackbar";
+import {LoginSkeleton} from "../common/components/Skeletons/LoginSkeleton";
 
 function App() {
 
-  const error = useAppSelector(selectCurrentError)
+    const error = useAppSelector(selectCurrentError)
 
-  const status = useAppSelector(selectCurrentStatus)
+    const status = useAppSelector(selectCurrentStatus)
 
-  const [authMe, {}] = useAuthMeMutation()
+    const [authMe, {}] = useAuthMeMutation()
 
-  useEffect(() => {
-    authMe('').unwrap()
-  }, [])
+    useEffect(() => {
+        authMe('').unwrap()
+    }, [])
 
-  return (
-    <ColorModelContextProvider>
+    return (
+        <ColorModelContextProvider>
+            <CssBaseline/>
+            {
+                error && <ErrorSnackbar errorMessage={serverErrorHandler(error)}/>
+            }
 
-      <CssBaseline/>
-      {
-        error && <ErrorSnackbar errorMessage={serverErrorHandler(error)}/>
-      }
-
-      {status === 'loading'
-        ? <Preloader/>
-        : <>
-          <Header/>
-
-          <AppRoutes/>
-        </>
-      }
-    </ColorModelContextProvider>
-  )
+            {status === 'loading'
+                ? <LoginSkeleton/>
+                : <>
+                    <Header/>
+                    {error && <BasicModal modalTitle="Something went wrong"
+                                          modalText={serverErrorHandler(error)}/>}
+                    <AppRoutes/>
+                </>
+            }
+        </ColorModelContextProvider>
+    )
 }
 
 export default App;
-// <BasicModal modalTitle="Something went wrong"
-//             modalText={serverErrorHandler(error)}/>

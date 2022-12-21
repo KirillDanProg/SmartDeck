@@ -26,8 +26,9 @@ import { ChevronLeft } from "@mui/icons-material";
 import { Divider, ListItem } from "@mui/material";
 
 export const Header = () => {
+  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [logout] = useLogoutMutation();
+  const [logout, {}] = useLogoutMutation();
   const [open, setOpen] = useState(false);
 
 
@@ -73,7 +74,7 @@ export const Header = () => {
               height: 48
             }} src={incubatorLogo} />
           </NavLink>
-
+          {auth && (
             <div>
               <IconButton
                 size="large"
@@ -115,6 +116,7 @@ export const Header = () => {
                   Log out</MenuItem>
               </Menu>
             </div>
+          )}
         </Toolbar>
         <SwipeableDrawer open={open}
                          onOpen={() => setOpen(true)}

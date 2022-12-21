@@ -12,6 +12,7 @@ export const AddNewPack = () => {
 
     const addNewPackHandler = async () => {
         addNewPack('Kirill, add new pack')
+        setAddPackModalOpen(false)
     }
 
     const openModalAddPack = () => {
@@ -25,11 +26,12 @@ export const AddNewPack = () => {
         <>
             <BasicModalPacksList title={"Edit pack"} open={addPackModalOpen} closeModal={closeModalAddPack}>
                 <ChildEditPack/>
-                <BtnForModal closeModal={closeModalAddPack}/>
+                <BtnForModal closeModal={closeModalAddPack} cb={addNewPackHandler}/>
             </BasicModalPacksList>
             <Button
                 disabled={false}
                 onClick={openModalAddPack}
+                variant={'contained'}
             >
                 Add new pack
             </Button>

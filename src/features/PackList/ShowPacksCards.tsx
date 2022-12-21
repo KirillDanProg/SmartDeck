@@ -27,7 +27,6 @@ export const ShowPacksCards = () => {
   return (
     <Box>
       <Typography variant="h6">Show packs cards</Typography>
-
       <ButtonGroup
         sx={btnStyle}
         disableElevation

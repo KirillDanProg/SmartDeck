@@ -14,8 +14,9 @@ import TableSortLabel from '@mui/material/TableSortLabel'
 
 type PropsType = {
     cardPacks:  PackResponseType[]
+    disabled: boolean
 }
-export const TablePacks:FC<PropsType> = memo(({cardPacks}) => {
+export const TablePacks:FC<PropsType> = memo(({cardPacks, disabled}) => {
 
   return (
     <TableContainer component={Paper}>
@@ -36,7 +37,7 @@ export const TablePacks:FC<PropsType> = memo(({cardPacks}) => {
         <TableBody>
           {
             cardPacks.map((data) => (
-              <PackTableCell key={data._id}
+              <PackTableCell disabled={disabled} key={data._id}
                 packData={data}/>
             ))
           }
