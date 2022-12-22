@@ -1,37 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {cardsApi} from './cardsApi';
 import {RootState} from '../../../app/store';
-import {jsx} from '@emotion/react';
+import {GenericAsyncThunk} from '../../auth/authSlice';
 
 
 export type CreateNewCardRequestT = {
     cardsPack_id: string
     question?: string
     answer?: string
-}
-
-export type CreatedCardType = {
-    cardsPack_id: string
-    question?: string
-    answer?: string
-    grade?: number
-    shots?: number
-    answerImg?: string
-    questionImg?: string
-    questionVideo?: string
-    answerVideo?: string
-}
-
-export interface INewCardResponse {
-    newCardsPack: CardResponseType;
-    token: string;
-    tokenDeathTime: number;
-}
-
-export interface IDeleteCardResponse {
-    deletedCard: CardResponseType;
-    token: string;
-    tokenDeathTime: number;
 }
 
 export interface IGetCardRequest {
@@ -64,6 +40,8 @@ export interface IGetCardsResponse {
     page: number
     pageCount: number
     packUserId: string
+    status:null | 'loading' | 'failed' | 'succeeded'
+    error:null | string
 }
 
 export type CardResponseType = {
@@ -78,7 +56,6 @@ export type CardResponseType = {
     _id: string
 }
 
-
 const initialState: IGetCardsResponse = {
     cards: [] as CardResponseType[],
     cardsTotalCount: 3,
@@ -86,7 +63,9 @@ const initialState: IGetCardsResponse = {
     minGrade: 1,
     page: 1,
     pageCount: 4,
-    packUserId: ''
+    packUserId: '',
+    status:null,
+    error:null
 }
 
 export const cardsSlice = createSlice({
@@ -95,6 +74,27 @@ export const cardsSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
+            .addMatcher(
+                (action): action is GenericAsyncThunk => action.type.endsWith('/pending'),
+                (state) => {
+                    state.status = 'loading'
+                    state.error = null
+                }
+            )
+            .addMatcher(
+                (action): action is GenericAsyncThunk => action.type.endsWith('/rejected'),
+                (state, action) => {
+                    state.status = 'failed'
+                    state.error = action.payload.data.error
+                }
+            )
+            .addMatcher(
+                (action): action is GenericAsyncThunk => action.type.endsWith('/fulfilled'),
+                (state) => {
+                    state.status = 'succeeded'
+                    state.error = null
+                }
+            )
             .addMatcher(cardsApi.endpoints.getCards.matchFulfilled,
                 (state, {payload}) => {
                     const {cards} = payload

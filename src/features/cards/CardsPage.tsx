@@ -35,7 +35,7 @@ export const CardsPage = () => {
 
     const hideTableFilters = pathname !== '/cards';
     const disabled = isLoading || isFetching
-
+    console.log('RENDER_CARDS');
     return (<>
             {!hideTableFilters && <ReturnComponent/>}
             <PacksPageContainer>
@@ -69,7 +69,7 @@ export const CardsPage = () => {
                             {
                                 hideTableFilters
                                     ? <TablePacks disabled={disabled} cardPacks={cardPacks}/>
-                                    : <Outlet/>
+                                    : <TableCards/>
                             }
                             <PaginationPacksList data={data}/>
                         </>
@@ -80,9 +80,9 @@ export const CardsPage = () => {
     );
 };
 
-// const style = {
-//     width: '100%',
-//     display: 'flex',
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-// };
+const style = {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+};
