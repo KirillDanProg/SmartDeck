@@ -18,9 +18,7 @@ import {Preloader} from '../../common/components/Preloader';
 import {PaginationPacksList} from '../../common/components/mainContent/Pagination';
 import {ReturnComponent} from '../../common/components/returnComponent/ReturnComponent';
 import {TableCards} from '../../common/components/mainContent/pack-cards/CardsPack';
-
-
-//todo: render optimization
+import {TableSkeleton} from "../../common/components/Skeletons/TableSkeleton";
 
 export const CardsPage = () => {
     const [params, setParams] = useSearchParams();
@@ -41,20 +39,23 @@ export const CardsPage = () => {
     return (<>
             {!hideTableFilters && <ReturnComponent/>}
             <PacksPageContainer>
-                <Box sx={style}>
+                <Box sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                }}>
                     <Typography variant="h5" sx={{fontWeight: 'bold'}}>
                         {hideTableFilters ? 'Packs list' : 'My pack'}
                     </Typography>
+
+                    {hideTableFilters ? <AddNewPack/> : <AddNewCard packId={packId}/>}
                 </Box>
                 {
                     isLoading
-                        ? <Preloader/>
+                        ? <TableSkeleton/>
                         : <><TableFiltersContainer>
-
-                            {hideTableFilters ? <AddNewPack/> : <AddNewCard packId={packId}/>}
-
                             <SearchPacksCard/>
-
                             {
                                 hideTableFilters && <>
                                     <ShowPacksCards/>
@@ -65,23 +66,23 @@ export const CardsPage = () => {
 
                         </TableFiltersContainer>
 
-                        {
-                            hideTableFilters
-                                ? <TablePacks disabled={disabled} cardPacks={cardPacks}/>
-                                : <Outlet/>
-                        }
-                        <PaginationPacksList data={data}/>
-                    </>
-            }
+                            {
+                                hideTableFilters
+                                    ? <TablePacks disabled={disabled} cardPacks={cardPacks}/>
+                                    : <Outlet/>
+                            }
+                            <PaginationPacksList data={data}/>
+                        </>
+                }
 
             </PacksPageContainer>
         </>
     );
 };
 
-const style = {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-};
+// const style = {
+//     width: '100%',
+//     display: 'flex',
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+// };

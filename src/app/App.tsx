@@ -30,13 +30,10 @@ function App() {
             {
                 error && <ErrorSnackbar errorMessage={serverErrorHandler(error)}/>
             }
-
             {status === 'loading'
                 ? <LoginSkeleton/>
                 : <>
                     <Header/>
-                    {error && <BasicModal modalTitle="Something went wrong"
-                                          modalText={serverErrorHandler(error)}/>}
                     <AppRoutes/>
                 </>
             }
