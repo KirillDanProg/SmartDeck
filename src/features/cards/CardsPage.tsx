@@ -51,7 +51,7 @@ export const CardsPage = () => {
 
                     {hideTableFilters ? <AddNewPack/> : <AddNewCard packId={packId}/>}
                 </Box>
-                {
+                {   
                     isLoading
                         ? <TableSkeleton/>
                         : <><TableFiltersContainer>

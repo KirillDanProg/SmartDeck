@@ -35,12 +35,14 @@ export const PackTableCell: FC<PropsType> = ({packData, disabled}) => {
         })
     }
 
+    console.log('packData ', packData)
     return (
         <TableRow
             key={packData._id}
             sx={{'&:last-child td, &:last-child th': {border: 0}}}
         >
-            <NavLink to={`${PATH.CARDS}?cardsPack_id=${packData._id}`}><TableCell align="left" style={{cursor: 'pointer'}}>
+            <NavLink to={`${PATH.CARDS}?cardsPack_id=${packData._id}`}><TableCell align="left"
+                                                                                  style={{cursor: 'pointer'}}>
                 {packData.name}
             </TableCell></NavLink>
             <TableCell align="center">{packData.cardsCount}</TableCell>
@@ -51,22 +53,27 @@ export const PackTableCell: FC<PropsType> = ({packData, disabled}) => {
                 {
                     packOwner
                         ? <>{
-                        disabled ? <>
-                                <SchoolOutlinedIcon className={s.forIconsDisabled} />
-                                <ModeEditIcon className={s.forIconsDisabled}/>
-                                <DeleteOutlineIcon className={s.forIconsDisabled}/>
-                            </> :
-                        <>
-                            <SchoolOutlinedIcon className={s.forIcons}/>
-                            <ModeEditIcon className={s.forIcons} onClick={editeNameChangeHandler}/>
-                            <DeleteOutlineIcon className={s.forIcons} onClick={deletePackHandler}/>
-                        </>
-                    }
+                            disabled ? <>
+                                    <SchoolOutlinedIcon className={s.forIconsDisabled}/>
+                                    <ModeEditIcon className={s.forIconsDisabled}/>
+                                    <DeleteOutlineIcon className={s.forIconsDisabled}/>
+                                </> :
+                                <>
+                                    {packData.cardsCount ? <SchoolOutlinedIcon className={s.forIcons}/> :
+                                        <SchoolOutlinedIcon className={s.forIconsDisabled}/>}
+                                        <ModeEditIcon className={s.forIcons} onClick={editeNameChangeHandler}/>
+                                        <DeleteOutlineIcon className={s.forIcons} onClick={deletePackHandler}/>
+                                </>
+                        }
                         </>
 
                         : <>
-                            { disabled ? <SchoolOutlinedIcon className={s.forIconsDisabled}/> :
-                                <SchoolOutlinedIcon className={s.forIcons}/>}
+                            {disabled ? <SchoolOutlinedIcon className={s.forIconsDisabled}/>
+                                : <> {packData.cardsCount ? <SchoolOutlinedIcon className={s.forIcons}/>
+                                    : <SchoolOutlinedIcon className={s.forIconsDisabled}/>
+                                }
+                                </>
+                            }
                         </>
                 }
             </TableCell>
