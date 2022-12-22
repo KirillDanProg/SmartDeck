@@ -1,5 +1,5 @@
 
-export const sortToggle = (sortBy:any, setParams:(params:any)=>void, params:any,  ) => {
+export const sortToggle = (sortBy:any, setParams:(params:any)=>void, params:any  ) => {
     if (sortBy === '0updated') {
         sortBy = '1updated';
     } else {

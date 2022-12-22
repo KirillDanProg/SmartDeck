@@ -12,10 +12,19 @@ export const TableCards = () => {
     const [params, setParams] = useSearchParams();
     const paramsObject = getUrlParams(params);
     const {data = {} as IGetCardsResponse, isLoading, isSuccess} = useGetCardsQuery(paramsObject);
-
     let sortCards = params.get('sortCards') || '';
-    const sortToggleUpdateHandler = () => sortToggle(sortCards, setParams, params);
+   //todo: super function
+    const sortToggleUpdateHandler = () => {
+        if (sortCards === '0updated') {
+            sortCards = '1updated';
+        } else {
+            sortCards = '0updated';
+        }
+        params.set('sortCards', sortCards);
+        setParams(params);
+    };
     const cardPacks = data && data.cards;
+
     return (
         <TableContainer component={Paper}>
 
