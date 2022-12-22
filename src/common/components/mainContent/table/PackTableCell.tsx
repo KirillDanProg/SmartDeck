@@ -35,7 +35,6 @@ export const PackTableCell: FC<PropsType> = ({packData, disabled}) => {
         })
     }
 
-    console.log('packData ', packData)
     return (
         <TableRow
             key={packData._id}

@@ -6,7 +6,7 @@ import {NumberOfCards} from '../PackList/NumberOfCards';
 import {FiltersReset} from '../../common/components/mainContent/filter-controlers/FiltersReset';
 import {PacksPageContainer} from '../../common/components/mainContent/table/PacksPageContainer';
 import {TableFiltersContainer} from '../../common/components/mainContent/filter-controlers/TableFiltersContainer';
-import {Outlet, useLocation, useParams, useSearchParams} from 'react-router-dom';
+import { useLocation, useSearchParams} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {TablePacks} from '../../common/components/mainContent/table/TablePacks';
@@ -14,7 +14,6 @@ import {AddNewCard} from '../../common/components/mainContent/pack-cards/AddNewC
 import {getUrlParams} from '../../common/utils/getUrlParams';
 import {useGetPacksQuery} from './packsApi';
 import {IGetPacksResponse} from './packsSlice';
-import {Preloader} from '../../common/components/Preloader';
 import {PaginationPacksList} from '../../common/components/mainContent/Pagination';
 import {ReturnComponent} from '../../common/components/returnComponent/ReturnComponent';
 import {TableCards} from '../../common/components/mainContent/pack-cards/CardsPack';
@@ -34,17 +33,13 @@ export const CardsPage = () => {
     const {pathname} = useLocation();
 
     const hideTableFilters = pathname !== '/cards';
-    const disabled = isLoading || isFetching
+
     console.log('RENDER_CARDS');
+
     return (<>
             {!hideTableFilters && <ReturnComponent/>}
             <PacksPageContainer>
-                <Box sx={{
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                }}>
+                <Box sx={style}>
                     <Typography variant="h5" sx={{fontWeight: 'bold'}}>
                         {hideTableFilters ? 'Packs list' : 'My pack'}
                     </Typography>
@@ -68,9 +63,10 @@ export const CardsPage = () => {
 
                             {
                                 hideTableFilters
-                                    ? <TablePacks disabled={disabled} cardPacks={cardPacks}/>
+                                    ? <TablePacks disabled={isFetching} cardPacks={cardPacks}/>
                                     : <TableCards/>
                             }
+
                             <PaginationPacksList data={data}/>
                         </>
                 }

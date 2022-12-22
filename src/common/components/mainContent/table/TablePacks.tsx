@@ -1,6 +1,6 @@
-import {PackTableCell} from './PackTableCell';
-import {PackResponseType} from '../../../../features/cards/packsSlice';
-import React, {FC, memo} from 'react'
+import { PackTableCell } from "./PackTableCell";
+import { PackResponseType } from "../../../../features/cards/packsSlice";
+import React, { FC, memo } from "react";
 import {
   Paper,
   Table,
@@ -8,26 +8,27 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow,
-} from '@mui/material'
-import TableSortLabel from '@mui/material/TableSortLabel'
+  TableRow
+} from "@mui/material";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import { EmptyList } from "../../emptyList/EmptyList";
 
 type PropsType = {
-    cardPacks:  PackResponseType[]
-    disabled: boolean
+  cardPacks: PackResponseType[]
+  disabled: boolean
 }
-export const TablePacks:FC<PropsType> = memo(({cardPacks, disabled}) => {
+export const TablePacks: FC<PropsType> = memo(({ cardPacks, disabled }) => {
 
   return (
     <TableContainer component={Paper}>
       <Table size="small" aria-label="a dense table">
         <TableHead>
-          <TableRow hover style={{backgroundColor: '#EFEFEF'}}>
+          <TableRow hover style={{ backgroundColor: "#EFEFEF" }}>
             <TableCell align="left">Name</TableCell>
             <TableCell align="center">Cards</TableCell>
             <TableCell align="center">
-              <TableSortLabel >
-                                Last Update
+              <TableSortLabel>
+                Last Update
               </TableSortLabel>
             </TableCell>
             <TableCell align="right">Created by</TableCell>
@@ -36,13 +37,16 @@ export const TablePacks:FC<PropsType> = memo(({cardPacks, disabled}) => {
         </TableHead>
         <TableBody>
           {
-            cardPacks.map((data) => (
-              <PackTableCell disabled={disabled} key={data._id}
-                packData={data}/>
-            ))
+            cardPacks.length > 0
+              ? cardPacks.map((data) => (
+                <PackTableCell disabled={disabled}
+                               key={data._id}
+                               packData={data} />
+              ))
+              : <EmptyList />
           }
         </TableBody>
       </Table>
     </TableContainer>
-  )
-})
+  );
+});
