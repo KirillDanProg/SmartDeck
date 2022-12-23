@@ -1,10 +1,11 @@
 
-export const sortToggle = (sortBy:any, setParams:(params:any)=>void, params:any  ) => {
-    if (sortBy === '0updated') {
-        sortBy = '1updated';
+export const sortToggle = (sortBy:any, sortParam:any, setParams:any, params:any  ) => {
+    if (sortBy === `0${sortParam}`) {
+        sortBy = `1${sortParam}`;
+        return sortBy
     } else {
-        sortBy = '0updated';
+        sortBy = `0${sortParam}`;
+        return sortBy
     }
-    params.set('sortCards', sortBy);
-    setParams(params);
+
 }
