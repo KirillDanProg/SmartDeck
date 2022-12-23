@@ -8,9 +8,10 @@ import { useSearchParams } from "react-router-dom";
 import { getUrlParams } from "../../../utils/getUrlParams";
 import { EmptyList } from "../../emptyList/EmptyList";
 import { Preloader } from "../../Preloader";
+import {sortToggle} from '../../../utils/sortToggle';
 
 export const TableCards = () => {
-  const [params, setParams] = useSearchParams();
+  const [params, setParams] = useSearchParams();//заменить useQueryParams
   const paramsObject = getUrlParams(params);
   const { data = {} as IGetCardsResponse, isLoading } = useGetCardsQuery(paramsObject);
   let sortCards = params.get("sortCards") || "";
@@ -23,6 +24,11 @@ export const TableCards = () => {
     }
     params.set("sortCards", sortCards);
     setParams(params);
+
+    sortToggle(sortCards, sortCards, setParams, params);
+    params.set("sortCards",sortCards);
+    setParams(params);
+    console.log(paramsObject)
   };
 
   const cards = data.cards;
