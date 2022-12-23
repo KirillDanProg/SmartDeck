@@ -1,65 +1,60 @@
-import React, { FC, memo, useEffect, useMemo, useState } from "react";
+import React, { FC, memo, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Slider } from "@mui/material";
 import { IGetPacksResponse } from "../cards/packsSlice";
-import { useSearchParams } from "react-router-dom";
-import { useDebounce } from "../../common/utils/useDebounce";
+import { useQueryParams } from "../../common/hooks/useQueryParams";
 
 type PropsType = {
   data: IGetPacksResponse
-  isLoading: boolean
 }
+
 export const NumberOfCards: FC<PropsType> = memo(({ data }) => {
-  const [params, setParams] = useSearchParams();
+
+  const [searchParams, setParam] = useQueryParams();
 
   const minCardsCount = data.minCardsCount;
 
   const maxCardsCount = data.maxCardsCount;
 
-  let min = params.get("min") || minCardsCount;
-  let max = params.get("max") || maxCardsCount;
+  let min = searchParams.get("min") || minCardsCount;
+  let max = searchParams.get("max") || maxCardsCount;
 
-  const [range, setRange] = useState([min, max]);
+  const [range, setRange] = useState([+min, +max]);
 
   const handleChange = (event: Event, value: number | number[]) => {
     const newRange = value as number[];
+    //update UI
     setRange(newRange);
-    min = String(newRange[0]);
-    max = String(newRange[1]);
-    params.set("min", String(min));
-    params.set("max", String(max));
+
+    if (+min !== newRange[0]) {
+      min = String(newRange[0]);
+      setParam("min", String(min));
+    } else {
+      max = String(newRange[1]);
+      setParam("max", String(max));
+    }
   };
-
-  const memoizedRange = useMemo(() => {
-    return [min, max]
-  }, [min, max])
-
-  const debouncedRange = useDebounce(memoizedRange);
-
-  useEffect(() => {
-    setParams(params);
-  }, [debouncedRange]);
-
+  debugger
   return (
     <Box>
       <Typography variant="h6">Number of cards</Typography>
       <Box sx={containerStyle}>
         <Box sx={style}>
-          <Typography>{min}</Typography>
+          <Typography>{range[0]}</Typography>
         </Box>
 
         <Slider
           disabled={false}
           sx={{ width: "155px" }}
           getAriaLabel={() => "range"}
-          value={[+min, +max]}
+          value={range}
           onChange={handleChange}
           valueLabelDisplay="off"
           max={maxCardsCount}
         />
         <Box sx={style}>
-          <Typography>{max}</Typography>
+          <Typography>{range[1]}</Typography>
         </Box>
       </Box>
     </Box>

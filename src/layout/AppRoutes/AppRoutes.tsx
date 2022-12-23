@@ -19,17 +19,18 @@ export const AppRoutes = () => {
             <Routes>
                 <Route path={PATH.MAIN} element={<Main/>}>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
-                    <Route path={PATH.LOGIN} element={<SignInPage/>}/>
-                    <Route path={PATH.SIGN_UP} element={<SignUpPage/>}/>
                     <Route path={PATH.PACK_LISTS} element={<CardsPage/>}/>
                     <Route path={PATH.CARDS} element={<CardsPage/>}/>
-                    <Route path="404" element={<Page404/>}/>
-                    <Route path="*" element={<Navigate to="404"/>}/>
                 </Route>
+
+                <Route path={PATH.SIGN_UP} element={<SignUpPage/>}/>
+                <Route path={PATH.LOGIN} element={<SignInPage/>}/>
                 <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage/>}/>
                 <Route path={`${PATH.SET_PASSWORD}/:resetPasswordToken`} element={<CreatePassword/>}/>
                 <Route path={PATH.FORGOT_PASSWORD} element={<ForgotPassword/>}/>
                 <Route path={PATH.DEV_PAGE} element={<DevPage/>}/>
+                <Route path="404" element={<Page404/>}/>
+                <Route path="*" element={<Navigate to="404"/>}/>
             </Routes>
         </>
     )

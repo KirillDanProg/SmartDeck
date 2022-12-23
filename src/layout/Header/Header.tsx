@@ -38,12 +38,8 @@ export const Header = () => {
         setAnchorEl(event.currentTarget);
     };
 
-    const redirectToProfile = () => {
-        navigate(PATH.PROFILE)
-    }
-
     const handleClose = () => {
-        redirectToProfile()
+        navigate(PATH.PROFILE)
         setAnchorEl(null);
     };
 
@@ -74,7 +70,7 @@ export const Header = () => {
                     <FormGroup sx={{flexGrow: 1}}>
                         <DarkModeSwitch onClick={toggleColorMode}/>
                     </FormGroup>
-                    <NavLink to={PATH.MAIN}>
+                    <NavLink to={PATH.PACK_LISTS}>
                         <CardMedia component="img" sx={{
                             width: 209,
                             height: 48

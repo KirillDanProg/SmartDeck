@@ -5,14 +5,13 @@ import s from "../../../../features/cards/CardsPage.module.css"
 
 type PropsType = {
   params: URLSearchParams
-  setParams: (value: URLSearchParams) => void
+  deleteParam: (key: string) => void
 }
-export const FiltersReset: FC<PropsType> = ({ setParams, params }) => {
+export const FiltersReset: FC<PropsType> = ({ deleteParam, params }) => {
 
   const resetFilters = () => {
     const keys = Array.from(params.keys());
-    keys.forEach(key => params.delete(key));
-    setParams(params);
+    keys.forEach(key => deleteParam(key));
   };
 
   return (

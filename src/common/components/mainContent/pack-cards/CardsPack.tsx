@@ -10,10 +10,15 @@ import { EmptyList } from "../../emptyList/EmptyList";
 import { Preloader } from "../../Preloader";
 
 export const TableCards = () => {
+
   const [params, setParams] = useSearchParams();
+
   const paramsObject = getUrlParams(params);
+
   const { data = {} as IGetCardsResponse, isLoading } = useGetCardsQuery(paramsObject);
+
   let sortCards = params.get("sortCards") || "";
+
   //todo: super function
   const sortToggleUpdateHandler = () => {
     if (sortCards === "0updated") {
