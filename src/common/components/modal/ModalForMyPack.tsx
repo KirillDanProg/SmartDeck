@@ -1,12 +1,9 @@
 import React from 'react';
 import MenuItem from "@mui/material/MenuItem";
-import TransgenderIcon from "@mui/icons-material/Transgender";
-import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import Menu from "@mui/material/Menu";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
-import s from "../cards/CardsPage.module.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 

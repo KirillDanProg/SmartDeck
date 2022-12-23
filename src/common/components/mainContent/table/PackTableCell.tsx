@@ -1,16 +1,17 @@
-import {useAppSelector} from '../../../hooks';
-import {selectCurrentUser} from '../../../../features/auth/authSlice';
-import {useChangeNamePackMutation, useDeletePackMutation} from '../../../../features/cards/packsApi';
-import {PackResponseType} from '../../../../features/cards/packsSlice';
+import {selectCurrentUser} from 'features/auth/authSlice';
+import {useChangeNamePackMutation, useDeletePackMutation} from 'features/cards/packsApi';
+import {PackResponseType} from 'features/cards/packsSlice';
+import s from "features/cards/CardsPage.module.css"
+
 import React, {FC} from 'react';
 import {TableCell, TableRow} from '@mui/material';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {NavLink} from 'react-router-dom';
-import {PATH} from '../../../../layout/AppRoutes/routes';
-import {convertedDate} from "../../../utils/convertedDate";
-import s from "../../../../features/cards/CardsPage.module.css"
+import {PATH} from 'layout/AppRoutes/routes';
+import {convertedDate} from "../../../utils";
+import { useAppSelector } from "../../../hooks";
 
 type PropsType = {
     packData: PackResponseType

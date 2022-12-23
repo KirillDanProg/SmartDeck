@@ -1,4 +1,4 @@
-import {apiSlice} from '../../api/apiSlice';
+import {apiSlice} from '../../../app/api/apiSlice';
 import {IChangeNameCardRequest, IChangeNameCardResponse, IGetCardRequest, IGetCardsResponse} from './cardsSlice';
 
 export const cardsApi = apiSlice.injectEndpoints({

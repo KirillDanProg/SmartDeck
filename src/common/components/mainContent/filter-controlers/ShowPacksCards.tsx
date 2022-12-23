@@ -2,25 +2,22 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import { Button, ButtonGroup } from "@mui/material";
 import Box from "@mui/material/Box";
-import { useAppSelector } from "../../common/hooks";
-import { selectCurrentUser } from "../auth/authSlice";
-import { useSearchParams } from "react-router-dom";
+import { selectCurrentUser } from "features/auth/authSlice";
+import { useQueryParams, useAppSelector} from "common/hooks";
 
 export const ShowPacksCards = () => {
 
-  const [params, setParams] = useSearchParams();
+  const [searchParams, setParam, deleteParam] = useQueryParams()
 
   const user_id = useAppSelector(selectCurrentUser);
 
-  const ownerFilter = params.get("user_id");
+  const ownerFilter = searchParams.get("user_id");
 
   const onClickShowPacksHandler = (value: "All" | "My") => {
     if (user_id) {
       value === "My"
-        ? params.set("user_id", user_id)
-        : params.delete("user_id");
-
-      setParams(params)
+        ? setParam("user_id", user_id)
+        : deleteParam("user_id")
     }
   };
 

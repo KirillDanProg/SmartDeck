@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import {Rating, TableCell, TableRow} from '@mui/material';
-import {CardResponseType} from '../../../../features/cards/api/cardsSlice';
+import {CardResponseType} from 'features/cards/cardsApi/cardsSlice';
 import {NavLink} from 'react-router-dom';
-import {useChangeCardNameMutation, useDeleteCardMutation} from '../../../../features/cards/api/cardsApi';
+import {useChangeCardNameMutation, useDeleteCardMutation} from 'features/cards/cardsApi/cardsApi';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {useAppSelector} from '../../../hooks';
-import {selectCurrentUser} from '../../../../features/auth/authSlice';
+import {selectCurrentUser} from 'features/auth/authSlice';
 
 type PropsType = {
     cardData: CardResponseType

@@ -1,15 +1,15 @@
+import * as React from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import s from "./CheckEmailPage.module.css";
-import checkEmail from "../../../assets/icons/checkEmail.png";
-import { getFromLocalStorage } from "../../../common/utils/local-storage";
-import { CustomGridContainer } from "../../../common/components/CustomGridContainer";
-import { getRefFromEmail } from "../../../common/utils/getRefFromEmail";
+import checkEmail from "assets/icons/checkEmail.png";
+import { getFromLocalStorage, getRefFromEmail } from "../../../utils";
+import { CustomGridContainer } from "../../CustomGridContainer";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import CssBaseline from "@mui/material/CssBaseline";
-import { useEffect, useState } from "react";
-import * as React from "react";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import { useNavigate } from "react-router-dom";
+
 
 export const CheckEmailPage = () => {
   const navigate = useNavigate();

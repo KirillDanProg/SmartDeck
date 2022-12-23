@@ -3,7 +3,8 @@ import {
   IChangeNamePackResponse,
   IGetPacksResponse,
 } from './packsSlice';
-import {apiSlice} from '../api/apiSlice';
+import {apiSlice} from '../../app/api/apiSlice';
+import { ParamsType } from "../../common/utils/getUrlParams";
 
 export type QueryParams = {
     packName?: string
@@ -16,7 +17,7 @@ export type QueryParams = {
 }
 export const packsApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    getPacks: build.query<IGetPacksResponse, any>({
+    getPacks: build.query<IGetPacksResponse, ParamsType>({
       query: (params) => ({
         url: '/cards/pack',
         params
@@ -34,7 +35,7 @@ export const packsApi = apiSlice.injectEndpoints({
           }
         }
       }),
-      invalidatesTags: result =>  [{type: 'Packs'}]
+      invalidatesTags: () =>  [{type: 'Packs'}]
     }),
     deletePack: build.mutation<{}, string>({
       query: (body) => ({
@@ -54,10 +55,13 @@ export const packsApi = apiSlice.injectEndpoints({
           }
         }
       }),
-      invalidatesTags: result =>  [{type: 'Packs'}]
+      invalidatesTags: () =>  [{type: 'Packs'}]
     }),
   }),
 });
 
 
-export const {useGetPacksQuery, useCreateNewPackMutation, useDeletePackMutation, useChangeNamePackMutation} = packsApi
+export const {useGetPacksQuery,
+  useCreateNewPackMutation,
+  useDeletePackMutation,
+  useChangeNamePackMutation} = packsApi

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Button from '@mui/material/Button';
-import {useCreateNewCardMutation} from '../../../../features/cards/api/cardsApi';
-import {CreateNewCardRequestT} from '../../../../features/cards/api/cardsSlice';
+import {useCreateNewCardMutation} from '../../../../features/cards/cardsApi/cardsApi';
+import {CreateNewCardRequestT} from '../../../../features/cards/cardsApi/cardsSlice';
 import {useFormik} from 'formik';
 import TextField from '@mui/material/TextField';
 

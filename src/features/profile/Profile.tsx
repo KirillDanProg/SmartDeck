@@ -1,15 +1,15 @@
+import React from 'react'
 import s from './Profile.module.css'
 import {UserAvatar} from './User/UserAvatar/UserAvatar'
 import {UserName} from './User/UserName/UserName'
 import {LogoutBtn} from './Button/LogoutBtn'
-import {useAppSelector} from '../../common/hooks';
-import {ReturnComponent} from '../../common/components/returnComponent/ReturnComponent';
 import {useChangeNameMutation, useLogoutMutation} from '../auth/authApi';
-import {CustomGridContainer} from '../../common/components/CustomGridContainer';
-import Box from '@mui/material/Box'
+import {CustomGridContainer} from "common/components";
 import Typography from '@mui/material/Typography'
-import React from 'react'
-import {ProfileSkeleton} from "../../common/components/Skeletons/ProfileSkeleton";
+import {ProfileSkeleton} from "common/components/skeletons/ProfileSkeleton";
+import {ReturnComponent} from 'common/components/returnComponent/ReturnComponent';
+import Box from '@mui/material/Box'
+import { useAppSelector } from "../../common/hooks";
 
 
 export const Profile = () => {
@@ -18,6 +18,7 @@ export const Profile = () => {
     const [changeName, {isLoading: isLoadingChangeName}] = useChangeNameMutation()
 
     const isLoading = isLoadingLogout || isLoadingChangeName
+
     const logoutHandler = async () => {
         await logout().unwrap()
     }

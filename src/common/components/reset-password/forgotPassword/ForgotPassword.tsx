@@ -1,15 +1,16 @@
-import s from './ForgotPassword.module.css';
-import {useForgotPasswordMutation} from '../../auth/authApi';
-import {PATH} from '../../../layout/AppRoutes/routes';
-import {saveToLocalStorage} from '../../../common/utils/local-storage';
-import {CustomGridContainer} from '../../../common/components/CustomGridContainer';
 import React from 'react';
+import s from './ForgotPassword.module.css';
+import {useForgotPasswordMutation} from 'features/auth/authApi';
+import {PATH} from 'layout/AppRoutes/routes';
+import {saveToLocalStorage} from "common/utils";
+import {CustomGridContainer} from 'common/components/CustomGridContainer';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {useFormik} from 'formik';
 import Typography from '@mui/material/Typography';
 import {NavLink, useNavigate} from 'react-router-dom';
 import * as yup from 'yup';
+import {useFormik} from 'formik';
+
 
 export const validationSchema = yup.object({
   email: yup

@@ -1,4 +1,4 @@
-import {ReturnComponent} from '../../../common/components/returnComponent/ReturnComponent';
+import {ReturnComponent} from '../returnComponent/ReturnComponent';
 import React from 'react'
 import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack'

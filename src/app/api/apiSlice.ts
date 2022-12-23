@@ -1,11 +1,11 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {RootState} from "../../app/store";
-import {baseUrlGeneration} from '../../common/utils/baseUrlGeneration';
+import {RootState} from "../store";
+import {baseUrlGenerator} from "common/utils";
 
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-            baseUrl: baseUrlGeneration(),
+            baseUrl: baseUrlGenerator(),
             credentials: "include",
             prepareHeaders: (headers, {getState}) => {
                 const token = (getState() as RootState).auth.token;

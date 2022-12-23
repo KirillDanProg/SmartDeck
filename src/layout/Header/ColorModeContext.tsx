@@ -8,16 +8,12 @@ interface IColorModeContext {
     mode: 'dark' | 'light'
 }
 
-export const ColorModelContex = React.createContext<IColorModeContext>({
+export const ColorModelContext = React.createContext<IColorModeContext>({
   toggleColorMode: () => {
 
   },
   mode: 'light'
 })
-
-
-
-
 
 
 // @ts-ignore
@@ -50,12 +46,12 @@ export const ColorModelContextProvider= ({ children }) => {
     }), [mode])
 
   return (
-    <ColorModelContex.Provider value={colorMode}>
+    <ColorModelContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
-    </ColorModelContex.Provider>
+    </ColorModelContext.Provider>
   )
 }
 
-export const useColorMode = () => React.useContext(ColorModelContex)
+export const useColorMode = () => React.useContext(ColorModelContext)
 
 

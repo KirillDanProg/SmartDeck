@@ -1,19 +1,25 @@
 import React  from "react";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { CardTableCell } from "./CardTableCell";
-import { useGetCardsQuery } from "../../../../features/cards/api/cardsApi";
+import { useGetCardsQuery } from "features/cards/cardsApi/cardsApi";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import { CardResponseType, IGetCardsResponse } from "../../../../features/cards/api/cardsSlice";
-import { useSearchParams } from "react-router-dom";
-import { getUrlParams } from "../../../utils/getUrlParams";
-import { EmptyList } from "../../emptyList/EmptyList";
+import { CardResponseType, IGetCardsResponse } from "features/cards/cardsApi/cardsSlice";
+import { EmptyList } from "common/components";
+import { getUrlParams } from "../../../utils";
 import { Preloader } from "../../Preloader";
+import { useQueryParams } from "common/hooks";
+
 
 export const TableCards = () => {
-  const [params, setParams] = useSearchParams();
-  const paramsObject = getUrlParams(params);
+
+  const [searchParams, setParam] = useQueryParams()
+
+  const paramsObject = getUrlParams(searchParams);
+
   const { data = {} as IGetCardsResponse, isLoading } = useGetCardsQuery(paramsObject);
-  let sortCards = params.get("sortCards") || "";
+
+  let sortCards = searchParams.get("sortCards") || "";
+
   //todo: super function
   const sortToggleUpdateHandler = () => {
     if (sortCards === "0updated") {
@@ -21,8 +27,7 @@ export const TableCards = () => {
     } else {
       sortCards = "0updated";
     }
-    params.set("sortCards", sortCards);
-    setParams(params);
+    setParam("sortCards", sortCards);
   };
 
   const cards = data.cards;
@@ -47,6 +52,7 @@ export const TableCards = () => {
                 <TableCell align="center">Grade</TableCell>
               </TableRow>
             </TableHead>
+
             <TableBody>
               {
                 cards.length > 0
@@ -57,6 +63,7 @@ export const TableCards = () => {
                   : <EmptyList />
               }
             </TableBody>
+
           </Table>
       }
 

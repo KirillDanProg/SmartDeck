@@ -1,8 +1,8 @@
 import styles from '../forgotPassword/ForgotPassword.module.css';
-import {PasswordVisibleIcon} from '../../../common/components/PasswordVisible';
-import {useSetNewPasswordMutation} from '../../auth/authApi';
-import {useRedirectTo} from '../../../common/hooks/useRedirectTo';
-import {PATH} from '../../../layout/AppRoutes/routes';
+import {PasswordVisibleIcon} from 'common/components/PasswordVisible';
+import {useSetNewPasswordMutation} from 'features/auth/authApi';
+import {useRedirectTo} from "common/hooks";
+import {PATH} from 'layout/AppRoutes/routes';
 import React, {useState} from 'react';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';

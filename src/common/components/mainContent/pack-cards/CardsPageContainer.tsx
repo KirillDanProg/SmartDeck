@@ -7,22 +7,20 @@ type PropsType = {
 
 export const CardsPageContainer: FC<PropsType> = ({children}) => {
     return (
-        <Box sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '50px',
-                width: '100%',
-                height: '100vh',
-            }}
-        >
-
+        <Box sx={style}>
             <Box sx={{width: '80%', height: '600px'}}>
 
                 {children}
 
             </Box>
-
         </Box>
     );
 };
 
+const style = {
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '50px',
+  width: '100%',
+  height: '100vh',
+}

@@ -1,6 +1,6 @@
 import {DarkModeSwitch} from "./DarkModeSwitch";
 import s from "./Header.module.css";
-import {ColorModelContex} from "./ColorModeContext";
+import {ColorModelContext} from "./ColorModeContext";
 import incubatorLogo from "../../assets/logo/incubatorLogo.png";
 import {useLogoutMutation} from "../../features/auth/authApi";
 import {PATH} from "../AppRoutes/routes";
@@ -32,18 +32,14 @@ export const Header = () => {
     const [open, setOpen] = useState(false);
 
     const navigate = useNavigate()
-    const {mode, toggleColorMode} = useContext(ColorModelContex);
+    const {mode, toggleColorMode} = useContext(ColorModelContext);
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const redirectToProfile = () => {
-        navigate(PATH.PROFILE)
-    }
-
     const handleClose = () => {
-        redirectToProfile()
+        navigate(PATH.PROFILE)
         setAnchorEl(null);
     };
 
@@ -74,7 +70,7 @@ export const Header = () => {
                     <FormGroup sx={{flexGrow: 1}}>
                         <DarkModeSwitch onClick={toggleColorMode}/>
                     </FormGroup>
-                    <NavLink to={PATH.MAIN}>
+                    <NavLink to={PATH.PACK_LISTS}>
                         <CardMedia component="img" sx={{
                             width: 209,
                             height: 48

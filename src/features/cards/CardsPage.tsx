@@ -1,84 +1,84 @@
-import React from 'react';
-import {AddNewPack} from '../../common/components/mainContent/AddNewPack';
-import {SearchPacksCard} from '../../common/components/mainContent/SearchPackCards';
-import {ShowPacksCards} from '../PackList/ShowPacksCards';
-import {NumberOfCards} from '../PackList/NumberOfCards';
-import {FiltersReset} from '../../common/components/mainContent/filter-controlers/FiltersReset';
-import {PacksPageContainer} from '../../common/components/mainContent/table/PacksPageContainer';
-import {TableFiltersContainer} from '../../common/components/mainContent/filter-controlers/TableFiltersContainer';
-import { useLocation, useSearchParams} from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import {TablePacks} from '../../common/components/mainContent/table/TablePacks';
-import {AddNewCard} from '../../common/components/mainContent/pack-cards/AddNewCard';
-import {getUrlParams} from '../../common/utils/getUrlParams';
-import {useGetPacksQuery} from './packsApi';
-import {IGetPacksResponse} from './packsSlice';
-import {PaginationPacksList} from '../../common/components/mainContent/Pagination';
-import {ReturnComponent} from '../../common/components/returnComponent/ReturnComponent';
-import {TableCards} from '../../common/components/mainContent/pack-cards/CardsPack';
-import {TableSkeleton} from "../../common/components/Skeletons/TableSkeleton";
+import React from "react";
+import { useLocation } from "react-router-dom";
+import { getUrlParams } from "common/utils";
+import { useGetPacksQuery } from "./packsApi";
+import { IGetPacksResponse } from "./packsSlice";
+import { useQueryParams } from "common/hooks/useQueryParams";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import {
+  SearchPacksCard,
+  TableFiltersContainer,
+  NumberOfCards,
+  TablePacks,
+  AddNewPack,
+  FiltersReset,
+  AddNewCard,
+  PacksPagination,
+  PacksPageContainer,
+  TableCards,
+  ShowPacksCards
+} from "common/components";
+
 
 export const CardsPage = () => {
-    const [params, setParams] = useSearchParams();
 
-    const paramsObject = getUrlParams(params);
+  const [searchParams, setParam, deleteParam] = useQueryParams();
 
-    const {data = {} as IGetPacksResponse, isLoading, isFetching} = useGetPacksQuery(paramsObject);
+  const paramsObject = getUrlParams(searchParams);
 
-    const cardPacks = data.cardPacks;
+  const { data = {} as IGetPacksResponse, isLoading, isFetching } = useGetPacksQuery(paramsObject);
 
-    const packId = params.get('cardsPack_id') || '';
+  const cardPacks = data.cardPacks;
 
-    const {pathname} = useLocation();
+  const packId = searchParams.get("cardsPack_id") || "";
 
-    const hideTableFilters = pathname !== '/cards';
+  const { pathname } = useLocation();
 
-    console.log('RENDER_CARDS');
+  const hideTableFilters = pathname !== "/cards";
 
-    return (<>
-            {!hideTableFilters && <ReturnComponent/>}
-            <PacksPageContainer>
-                <Box sx={style}>
-                    <Typography variant="h5" sx={{fontWeight: 'bold'}}>
-                        {hideTableFilters ? 'Packs list' : 'My pack'}
-                    </Typography>
+  return (
+    <PacksPageContainer>
+      <Box sx={style}>
+        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+          {hideTableFilters ? "Packs list" : "My pack"}
+        </Typography>
 
-                    {hideTableFilters ? <AddNewPack/> : <AddNewCard packId={packId}/>}
-                </Box>
-                {   
-                    isLoading
-                        ? <TableSkeleton/>
-                        : <><TableFiltersContainer>
-                            <SearchPacksCard/>
-                            {
-                                hideTableFilters && <>
-                                    <ShowPacksCards/>
-                                    <NumberOfCards data={data} isLoading={isLoading}/>
-                                    <FiltersReset setParams={setParams} params={params}/>
-                                </>
-                            }
+        {hideTableFilters ? <AddNewPack /> : <AddNewCard packId={packId} />}
+      </Box>
 
-                        </TableFiltersContainer>
+      <>
 
-                            {
-                                hideTableFilters
-                                    ? <TablePacks disabled={isFetching} cardPacks={cardPacks}/>
-                                    : <TableCards/>
-                            }
+        <TableFiltersContainer>
+          <SearchPacksCard />
+          {
+            hideTableFilters && <>
+              <ShowPacksCards />
+              {
+                !isLoading && <NumberOfCards data={data} />
+              }
+              <FiltersReset deleteParam={deleteParam} params={searchParams} />
+            </>
+          }
 
-                            <PaginationPacksList data={data}/>
-                        </>
-                }
+        </TableFiltersContainer>
 
-            </PacksPageContainer>
-        </>
-    );
+        {
+          hideTableFilters
+            ? <TablePacks isFetching={isFetching} cardPacks={cardPacks} />
+            : <TableCards />
+        }
+
+        <PacksPagination data={data} />
+      </>
+
+    </PacksPageContainer>
+  );
 };
 
 const style = {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  width: "100%",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between"
 };
