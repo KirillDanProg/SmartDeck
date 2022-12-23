@@ -37,7 +37,6 @@ export const UserName: FC<UserNameT> = ({changeNameCB}) => {
   }
 
   const error = userName.trim().length < 1
-
   return (
     <Box sx={{mb: 1, display: 'flex', alignItems: 'center', }}>
       {!isEditing ? (

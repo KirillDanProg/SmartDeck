@@ -22,6 +22,9 @@ export type AuthResponseType = {
   tokenDeathTime: number
 }
 
+export type UpdatedUserType = {
+  updatedUser: UserType & { avatar: string | null }
+}
 export type UserType = Omit<AuthResponseType,
   "token" |
   "tokenDeathTime">
@@ -79,7 +82,7 @@ export const authApi = apiSlice.injectEndpoints({
         body: resetData
       })
     }),
-    changeName: build.mutation<void, string>({
+    changeName: build.mutation<UserType, string>({
       query: (body) => ({
         url: "/auth/me",
         method: "PUT",
@@ -87,7 +90,8 @@ export const authApi = apiSlice.injectEndpoints({
           name: body,
           avatar: ""
         }
-      })
+      }),
+      transformResponse: (response: UpdatedUserType) => response.updatedUser
     }),
     forgotPassword: build.mutation<IGeneralResponse, string>({
       query: (body) => ({

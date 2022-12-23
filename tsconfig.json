@@ -2,11 +2,6 @@
   "compilerOptions": {
     "baseUrl": "src",
     "target": "es6",
-    "extensions": ["tsx","ts","js"],
-    "preferAbsolute": true,
-    "modules": ["paths.src", "node_modules"],
-    "alias": {},
-    "mainFiles": ["index.ts"],
     "lib": ["dom", "dom.iterable", "esnext", "es6"],
     "allowJs": true,
     "skipLibCheck": true,
