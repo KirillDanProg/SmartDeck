@@ -4,7 +4,6 @@ import React from 'react';
 import {createRoot} from 'react-dom/client';
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
-import {ModalForMyPack} from "./features/modal/ModalForMyPack";
 
 
 const container = document.getElementById('root')!;

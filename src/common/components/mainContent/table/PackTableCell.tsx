@@ -45,12 +45,10 @@ export const PackTableCell: FC<PropsType> = ({packData, disabled}) => {
             key={packData._id}
             sx={{'&:last-child td, &:last-child th': {border: 0}}}
         >
-            {/*<NavLink to={`${PATH.CARDS}?cardsPack_id=${packData._id}`}>*/}
                 <TableCell onClick={redirectToPackCardHandle} align="left"
                            style={{cursor: 'pointer'}}>
                     {packData.name}
                 </TableCell>
-            {/*</NavLink>*/}
             <TableCell align="center">{packData.cardsCount}</TableCell>
             <TableCell align="center">{convertedDate(packData.updated)}</TableCell>
             <TableCell align="right">{packData.user_name}</TableCell>
