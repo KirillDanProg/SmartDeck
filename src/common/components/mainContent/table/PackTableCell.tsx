@@ -67,8 +67,8 @@ export const PackTableCell: FC<PropsType> = ({packData, disabled}) => {
                                 <>
                                     {packData.cardsCount ? <SchoolOutlinedIcon className={s.forIcons}/> :
                                         <SchoolOutlinedIcon className={s.forIconsDisabled}/>}
-                                    <ModeEditIcon className={s.forIcons} onClick={editeNameChangeHandler}/>
-                                    <DeleteOutlineIcon className={s.forIcons} onClick={deletePackHandler}/>
+                                        <ModeEditIcon className={s.forIcons} onClick={editeNameChangeHandler}/>
+                                        <DeleteOutlineIcon className={s.forIcons} onClick={deletePackHandler}/>
                                 </>
                         }
                         </>
