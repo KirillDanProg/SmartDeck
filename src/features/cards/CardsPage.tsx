@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { getUrlParams } from "common/utils";
+import {getUrlParams, sortToggle} from 'common/utils';
 import { useGetPacksQuery } from "./packsApi";
 import { IGetPacksResponse } from "./packsSlice";
 import { useQueryParams } from "common/hooks/useQueryParams";
@@ -37,6 +37,11 @@ export const CardsPage = () => {
 
   const hideTableFilters = pathname !== "/cards";
 
+  let sortPacks = searchParams.get('sortPacks') || '';
+
+  const sortToggleUpdateHandler = () => {
+    sortToggle(sortPacks, 'updated', setParam, 'sortPacks');
+  };
   return (
     <PacksPageContainer>
       <Box sx={style}>
@@ -65,7 +70,12 @@ export const CardsPage = () => {
 
         {
           hideTableFilters
-            ? <TablePacks isFetching={isFetching} cardPacks={cardPacks} />
+            ? <TablePacks isFetching={isFetching}
+                          cardPacks={cardPacks}
+                          sortToggle={sortToggleUpdateHandler}
+                          sortPacks={sortPacks}
+                          setParam={setParam}
+              />
             : <TableCards />
         }
 
