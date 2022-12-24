@@ -16,17 +16,9 @@
     opacity: 0.5;
 }
 
-.topText {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    padding: 15px;
-}
-
 .link {
     color: black;
     text-decoration: none;
+    cursor: pointer
+
 }

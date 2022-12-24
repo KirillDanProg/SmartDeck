@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import { InputAdornment } from "@mui/material";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import Box from "@mui/material/Box";
-import { useQueryParams } from "../../hooks/useQueryParams";
+import { useQueryParams } from "common/hooks";
 
 
 export const SearchPacksCard = memo(() => {

@@ -5,8 +5,9 @@ import Box from "@mui/material/Box";
 import { IGetPacksResponse } from "features/cards/packsSlice";
 import { useQueryParams } from "common/hooks";
 
+//todo fix data for pagination
 type PropsType = {
-  data: IGetPacksResponse
+  data: any
 }
 
 export const PacksPagination: FC<PropsType> = ({ data }) => {

@@ -5,9 +5,9 @@ import { useGetCardsQuery } from "features/cards/cardsApi/cardsApi";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import { CardResponseType, IGetCardsResponse } from "features/cards/cardsApi/cardsSlice";
 import { EmptyList } from "common/components";
-import { getUrlParams } from "../../../utils";
-import { Preloader } from "../../Preloader";
+import { getUrlParams } from "common/utils";
 import { useQueryParams } from "common/hooks";
+import { TableSkeleton } from "common/components/skeletons/TableSkeleton";
 
 
 export const TableCards = () => {
@@ -37,7 +37,7 @@ export const TableCards = () => {
 
       {
         isLoading
-          ? <Preloader />
+          ? <TableSkeleton />
           : <Table size="small" aria-label="a dense table">
             <TableHead>
               <TableRow hover style={{ backgroundColor: "#EFEFEF" }}>

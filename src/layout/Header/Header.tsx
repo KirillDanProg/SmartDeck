@@ -57,25 +57,27 @@ export const Header = () => {
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{mr: 2}}
-                        onClick={() => setOpen(true)}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    <FormGroup sx={{flexGrow: 1}}>
-                        <DarkModeSwitch onClick={toggleColorMode}/>
-                    </FormGroup>
+                    {/*<IconButton*/}
+                    {/*    size="large"*/}
+                    {/*    edge="start"*/}
+                    {/*    color="inherit"*/}
+                    {/*    aria-label="menu"*/}
+                    {/*    sx={{mr: 2}}*/}
+                    {/*    onClick={() => setOpen(true)}*/}
+                    {/*>*/}
+                    {/*    <MenuIcon/>*/}
+                    {/*</IconButton>*/}
                     <NavLink to={PATH.PACK_LISTS}>
                         <CardMedia component="img" sx={{
                             width: 209,
                             height: 48
                         }} src={incubatorLogo}/>
                     </NavLink>
+
+                    <FormGroup sx={{flexGrow: 1}}>
+                        <DarkModeSwitch onClick={toggleColorMode}/>
+                    </FormGroup>
+
                     {auth && (
                         <div>
                             <IconButton
