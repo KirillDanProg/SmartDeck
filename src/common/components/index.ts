@@ -1,6 +1,5 @@
 export {EmptyList} from "./emptyList/EmptyList"
 export {PacksPagination} from "./mainContent/PacksPagination"
-export {SearchPacksCard} from "./mainContent/SearchPackCards"
 export {AddNewPack} from "./mainContent/AddNewPack"
 
 export {TablePacks} from "./mainContent/table/TablePacks"
@@ -11,6 +10,7 @@ export {FiltersReset} from "./mainContent/filter-controlers/FiltersReset"
 export {TableFiltersContainer} from "./mainContent/filter-controlers/TableFiltersContainer"
 export {NumberOfCards} from "./mainContent/filter-controlers/NumberOfCards"
 export {ShowPacksCards} from "./mainContent/filter-controlers/ShowPacksCards"
+export {SearchPacksCard} from "./mainContent/filter-controlers/SearchPackCards"
 
 export {TableCards} from "./mainContent/pack-cards/TableCards"
 export {AddNewCard} from "./mainContent/pack-cards/AddNewCard"

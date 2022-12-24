@@ -1,76 +1,55 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import { getUrlParams } from "common/utils";
-import { useGetPacksQuery } from "./packsApi";
-import { IGetPacksResponse } from "./packsSlice";
-import { useQueryParams } from "common/hooks/useQueryParams";
+import { useQueryParams } from "common/hooks";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {
   SearchPacksCard,
   TableFiltersContainer,
-  NumberOfCards,
-  TablePacks,
-  AddNewPack,
-  FiltersReset,
   AddNewCard,
   PacksPagination,
   PacksPageContainer,
   TableCards,
-  ShowPacksCards
 } from "common/components";
+import { IGetCardsResponse } from "./cardsApi/cardsSlice";
+import { useGetCardsQuery } from "./cardsApi/cardsApi";
+import { ReturnComponent } from "../../common/components/returnComponent/ReturnComponent";
 
 
 export const CardsPage = () => {
 
-  const [searchParams, setParam, deleteParam] = useQueryParams();
+  const [searchParams] = useQueryParams();
 
   const paramsObject = getUrlParams(searchParams);
 
-  const { data = {} as IGetPacksResponse, isLoading, isFetching } = useGetPacksQuery(paramsObject);
-
-  const cardPacks = data.cardPacks;
+  const { data = {} as IGetCardsResponse } = useGetCardsQuery(paramsObject);
 
   const packId = searchParams.get("cardsPack_id") || "";
 
-  const { pathname } = useLocation();
-
-  const hideTableFilters = pathname !== "/cards";
-
   return (
     <PacksPageContainer>
+
+      <ReturnComponent/>
+
       <Box sx={style}>
+
         <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-          {hideTableFilters ? "Packs list" : "My pack"}
+          My pack
         </Typography>
 
-        {hideTableFilters ? <AddNewPack /> : <AddNewCard packId={packId} />}
+        <AddNewCard packId={packId} />
+
       </Box>
 
-      <>
-
         <TableFiltersContainer>
+
           <SearchPacksCard />
-          {
-            hideTableFilters && <>
-              <ShowPacksCards />
-              {
-                !isLoading && <NumberOfCards data={data} />
-              }
-              <FiltersReset deleteParam={deleteParam} params={searchParams} />
-            </>
-          }
 
         </TableFiltersContainer>
 
-        {
-          hideTableFilters
-            ? <TablePacks isFetching={isFetching} cardPacks={cardPacks} />
-            : <TableCards />
-        }
+        <TableCards />
 
         <PacksPagination data={data} />
-      </>
 
     </PacksPageContainer>
   );

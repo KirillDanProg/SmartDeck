@@ -7,10 +7,13 @@ import {Main} from '../Main/Main';
 import {Profile} from '../../features/profile/Profile';
 import {CheckEmailPage} from '../../common/components/reset-password/check-email/CheckEmailPage';
 import {SignUpPage} from '../../features/auth/sign-up/SignUpPage';
-import {CardsPage} from '../../features/cards/CardsPage';
+import {PacksPage} from '../../features/cards/PacksPage';
 import {CreatePassword} from '../../common/components/reset-password/createPassword/CreatePassword';
 import {ForgotPassword} from '../../common/components/reset-password/forgotPassword/ForgotPassword';
 import {DevPage} from '../devPage/DevPage';
+import { LearnPack } from "../../common/components/learn-page/LearnPack";
+import { TableCards } from "../../common/components";
+import { CardsPage } from "../../features/cards/CardsPage";
 
 
 export const AppRoutes = () => {
@@ -19,8 +22,9 @@ export const AppRoutes = () => {
             <Routes>
                 <Route path={PATH.MAIN} element={<Main/>}>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
-                    <Route path={PATH.PACK_LISTS} element={<CardsPage/>}/>
+                    <Route path={PATH.PACK_LISTS} element={<PacksPage/>}/>
                     <Route path={PATH.CARDS} element={<CardsPage/>}/>
+                    <Route path={PATH.LEARN_PACK} element={<LearnPack/>}/>
                 </Route>
 
                 <Route path={PATH.SIGN_UP} element={<SignUpPage/>}/>

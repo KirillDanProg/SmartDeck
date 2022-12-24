@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 
 export const NamePack = () => {
 
-
   return (
     <Container
       maxWidth="xl"
