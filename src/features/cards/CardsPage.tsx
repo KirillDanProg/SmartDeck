@@ -6,10 +6,15 @@ import Typography from "@mui/material/Typography";
 import {
   SearchPacksCard,
   TableFiltersContainer,
+  NumberOfCards,
+  TablePacks,
+  AddNewPack,
+  FiltersReset,
   AddNewCard,
   PacksPagination,
   PacksPageContainer,
   TableCards,
+  ShowPacksCards
 } from "common/components";
 import { IGetCardsResponse } from "./cardsApi/cardsSlice";
 import { useGetCardsQuery } from "./cardsApi/cardsApi";
@@ -18,8 +23,8 @@ import { ReturnComponent } from "../../common/components/returnComponent/ReturnC
 
 export const CardsPage = () => {
 
+  const [searchParams, setParam, deleteParam] = useQueryParams();
   const [searchParams] = useQueryParams();
-
   const paramsObject = getUrlParams(searchParams);
 
   const { data = {} as IGetCardsResponse } = useGetCardsQuery(paramsObject);
