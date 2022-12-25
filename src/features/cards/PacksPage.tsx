@@ -1,5 +1,4 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import { getUrlParams } from "common/utils";
 import { useGetPacksQuery } from "./packsApi";
 import { IGetPacksResponse } from "./packsSlice";
@@ -13,10 +12,8 @@ import {
   TablePacks,
   AddNewPack,
   FiltersReset,
-  AddNewCard,
   PacksPagination,
   PacksPageContainer,
-  TableCards,
   ShowPacksCards
 } from "common/components";
 

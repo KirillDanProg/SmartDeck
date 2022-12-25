@@ -1,6 +1,6 @@
 export {EmptyList} from "./emptyList/EmptyList"
-export {PacksPagination} from "./mainContent/PacksPagination"
 export {AddNewPack} from "./mainContent/AddNewPack"
+export {PacksPagination} from "./pagination/PacksPagination"
 
 export {TablePacks} from "./mainContent/table/TablePacks"
 export {PackTableCell} from "./mainContent/table/PackTableCell"
