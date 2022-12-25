@@ -6,15 +6,7 @@ import {
 import {apiSlice} from '../../app/api/apiSlice';
 import { ParamsType } from "../../common/utils/getUrlParams";
 
-export type QueryParams = {
-    packName?: string
-    min?: string
-    max?: string
-    sortPacks?: string
-    page?: string
-    pageCount?: string
-    user_id?: string
-}
+
 export const packsApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     getPacks: build.query<IGetPacksResponse, ParamsType>({

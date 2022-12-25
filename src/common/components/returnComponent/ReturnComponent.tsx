@@ -1,7 +1,6 @@
 import s from "../../../features/profile/Profile.module.css";
 import { PATH } from "../../../layout/AppRoutes/routes";
 import React from "react";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';

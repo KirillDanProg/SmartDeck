@@ -1,4 +1,3 @@
-import {packsApi} from './packsApi';
 import {createSlice} from '@reduxjs/toolkit';
 
 export interface IChangeNamePackResponse {
@@ -57,14 +56,5 @@ export const packsSlice = createSlice({
   name: 'packs',
   initialState,
   reducers: {},
-  extraReducers: builder => {
-    builder
-      .addMatcher(packsApi.endpoints.getPacks.matchFulfilled,
-        (state, {payload}) => {
-          const {cardPacks} = payload
-          state.cardPacks = cardPacks
-        }
-      )
-  }
 })
 
