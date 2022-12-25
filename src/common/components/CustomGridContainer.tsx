@@ -14,7 +14,7 @@ export const CustomGridContainer:FC<GridContainerT> = ({children}) => {
       maxWidth="sm"
       sx={{
         display: 'flex',
-        height: '100vh',
+        minHeight: '90vh',
         justifyContent: 'center',
       }}
     >

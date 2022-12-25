@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Slider } from "@mui/material";
 import { IGetPacksResponse } from "features/cards/packsSlice";
-import { useQueryParams } from "../../../hooks";
+import { useQueryParams } from "../../hooks";
 
 type PropsType = {
   data: IGetPacksResponse

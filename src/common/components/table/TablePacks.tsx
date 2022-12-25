@@ -1,19 +1,18 @@
-import {PackTableCell} from './PackTableCell';
-import {PackResponseType} from '../../../../features/cards/packsSlice';
-import React, {FC, memo} from 'react';
+import { PackTableCell } from "./PackTableCell";
+import { PackResponseType } from "features/cards/packsSlice";
+import React, { FC, memo } from "react";
 import {
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow
-} from '@mui/material';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import {EmptyList} from '../../emptyList/EmptyList';
-import {TableSkeleton} from '../../skeletons/TableSkeleton';
-import {sortToggle} from '../../../utils';
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
+} from "@mui/material";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import { EmptyList } from "../emptyList/EmptyList";
+import { TableSkeleton } from "common/components/skeletons/TableSkeleton";
 
 type PropsType = {
     cardPacks: PackResponseType[]

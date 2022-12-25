@@ -10,7 +10,7 @@ export const Main = () => {
   const isAuth = useAppSelector(selectCurrentUser);
 
   return (
-    <Grid container component="main" sx={{ height: "100vh" }}>
+    <Grid container component="main">
       {
         isAuth
           ? <Outlet />
