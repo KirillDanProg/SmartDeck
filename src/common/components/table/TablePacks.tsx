@@ -51,7 +51,6 @@ export const TablePacks: FC<PropsType> = memo(({ cardPacks, isFetching }) => {
             </TableBody>
           </Table>
       }
-
     </TableContainer>
   );
 });
