@@ -70,4 +70,5 @@ const closeIconStyle = {
     color: 'white',
     width: '50px',
     height: '50px',
+    cursor: 'pointer'
 }

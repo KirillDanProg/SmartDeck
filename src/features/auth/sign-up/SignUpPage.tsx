@@ -3,12 +3,12 @@ import { PATH } from "layout/AppRoutes/routes";
 import { useRedirectTo } from "common/hooks";
 import { Form } from "common/components/form/Form";
 import { CustomGridContainer } from "common/components";
-import { SignupSkeleton } from "common/components/skeletons/SignUpSkeleton";
 import { IRegisterRequest } from "../authModels";
 import { useRegisterMutation } from "../authApi";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
+import {SignupSkeleton} from "../../../common/components/Skeletons/SignUpSkeleton";
 
 export const SignUpPage = () => {
 

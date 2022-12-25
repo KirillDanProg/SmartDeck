@@ -30,6 +30,7 @@ export interface IChangeNameCardResponse {
 export interface IChangeNameCardRequest {
     _id: string
     question: string
+    answer: string
 }
 
 export interface IGetCardsResponse {

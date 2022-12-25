@@ -13,3 +13,14 @@ export const validationSchema = yup.object({
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
 }, );
+
+export const validationSchemaForCreateCardModal = yup.object({
+  question: yup
+      .string()
+      .min(7, 'question should be of minimum 7 characters length')
+      .required('question is required'),
+  answer: yup
+      .string()
+      .min(7, 'answer should be of minimum 7 characters length')
+      .required('answer is required'),
+}, );

@@ -15,6 +15,11 @@ export type QueryParams = {
     pageCount?: string
     user_id?: string
 }
+
+export type CreateNewPackRequestType = {
+  name: string,
+  privateValue: boolean,
+}
 export const packsApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     getPacks: build.query<IGetPacksResponse, ParamsType>({
@@ -24,14 +29,14 @@ export const packsApi = apiSlice.injectEndpoints({
       }),
       providesTags: result => [{type: 'Packs'}]
     }),
-    createNewPack: build.mutation<{}, string>({
+    createNewPack: build.mutation<{}, CreateNewPackRequestType>({
       query: (body) => ({
         url: '/cards/pack',
         method: 'POST',
         body: {
           cardsPack: {
-            name: body,
-            private: false
+            name: body.name,
+            private: body.privateValue,
           }
         }
       }),
