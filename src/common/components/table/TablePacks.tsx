@@ -1,5 +1,5 @@
 import { PackTableCell } from "./PackTableCell";
-import { PackResponseType } from "../../../../features/cards/packsSlice";
+import { PackResponseType } from "../../../features/cards/packsSlice";
 import React, { FC, memo } from "react";
 import {
   Paper,
@@ -11,8 +11,8 @@ import {
   TableRow
 } from "@mui/material";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import { EmptyList } from "../../emptyList/EmptyList";
-import { TableSkeleton } from "../../skeletons/TableSkeleton";
+import { EmptyList } from "../emptyList/EmptyList";
+import { TableSkeleton } from "../skeletons/TableSkeleton";
 
 type PropsType = {
   cardPacks: PackResponseType[]
@@ -24,7 +24,7 @@ export const TablePacks: FC<PropsType> = memo(({ cardPacks, isFetching }) => {
     <TableContainer component={Paper}>
       {
         isFetching ?
-          <TableSkeleton/>
+          <TableSkeleton />
           : <Table size="small" aria-label="a dense table">
             <TableHead>
               <TableRow hover style={{ backgroundColor: "#EFEFEF" }}>
@@ -43,8 +43,7 @@ export const TablePacks: FC<PropsType> = memo(({ cardPacks, isFetching }) => {
               {
                 cardPacks.length > 0
                   ? cardPacks.map((data) => (
-                    <PackTableCell disabled={isFetching}
-                                   key={data._id}
+                    <PackTableCell key={data._id}
                                    packData={data} />
                   ))
                   : <EmptyList />

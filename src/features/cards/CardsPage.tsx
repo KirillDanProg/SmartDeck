@@ -13,7 +13,7 @@ import {
 } from "common/components";
 import { IGetCardsResponse } from "./cardsApi/cardsSlice";
 import { useGetCardsQuery } from "./cardsApi/cardsApi";
-import { ReturnComponent } from "../../common/components/returnComponent/ReturnComponent";
+import { ReturnComponent } from "common/components/returnComponent/ReturnComponent";
 
 
 export const CardsPage = () => {

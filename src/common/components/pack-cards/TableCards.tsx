@@ -3,8 +3,8 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import { CardTableCell } from "./CardTableCell";
 import { useGetCardsQuery } from "features/cards/cardsApi/cardsApi";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import { CardResponseType, IGetCardsResponse } from "features/cards/cardsApi/cardsSlice";
-import { EmptyList } from "common/components";
+import { CardType, IGetCardsResponse } from "features/cards/cardsApi/cardsSlice";
+import { EmptyList } from "../emptyList/EmptyList";
 import { getUrlParams } from "common/utils";
 import { useQueryParams } from "common/hooks";
 import { TableSkeleton } from "common/components/skeletons/TableSkeleton";
@@ -18,6 +18,8 @@ export const TableCards = () => {
 
   const { data = {} as IGetCardsResponse, isLoading } = useGetCardsQuery(paramsObject);
 
+  const cards = data.cards;
+
   let sortCards = searchParams.get("sortCards") || "";
 
   //todo: super function
@@ -30,7 +32,6 @@ export const TableCards = () => {
     setParam("sortCards", sortCards);
   };
 
-  const cards = data.cards;
 
   return (
     <TableContainer component={Paper}>
@@ -56,7 +57,7 @@ export const TableCards = () => {
             <TableBody>
               {
                 cards.length > 0
-                  ? cards.map((card: CardResponseType) => (
+                  ? cards.map((card: CardType) => (
                     <CardTableCell key={card._id}
                       cardData={card} />
                   ))
