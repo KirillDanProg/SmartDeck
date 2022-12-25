@@ -25,7 +25,8 @@ export const AddNewPack = () => {
     return (
         <>
             <BasicModalPacksList title={"Edit pack"} open={addPackModalOpen} closeModal={closeModalAddPack}>
-                <ChildEditPack/>
+                <ChildEditPack cb={addNewPackHandler}/>
+
                 <BtnForModal closeModal={closeModalAddPack} cb={addNewPackHandler}/>
             </BasicModalPacksList>
             <Button

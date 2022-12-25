@@ -7,7 +7,7 @@ import { CardResponseType, IGetCardsResponse } from "features/cards/cardsApi/car
 import { EmptyList } from "common/components";
 import { getUrlParams } from "common/utils";
 import { useQueryParams } from "common/hooks";
-import { TableSkeleton } from "common/components/skeletons/TableSkeleton";
+import {TableSkeleton} from "../../Skeletons/TableSkeleton";
 
 
 export const TableCards = () => {

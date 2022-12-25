@@ -6,10 +6,10 @@ import {LogoutBtn} from './Button/LogoutBtn'
 import {useChangeNameMutation, useLogoutMutation} from '../auth/authApi';
 import {CustomGridContainer} from "common/components";
 import Typography from '@mui/material/Typography'
-import {ProfileSkeleton} from "common/components/skeletons/ProfileSkeleton";
 import {ReturnComponent} from 'common/components/returnComponent/ReturnComponent';
 import Box from '@mui/material/Box'
 import { useAppSelector } from "../../common/hooks";
+import {ProfileSkeleton} from "../../common/components/Skeletons/ProfileSkeleton";
 
 
 export const Profile = () => {
