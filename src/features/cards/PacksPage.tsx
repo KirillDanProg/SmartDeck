@@ -1,5 +1,5 @@
 import React from "react";
-import { getUrlParams } from "common/utils";
+import {getUrlParams, sortToggle} from 'common/utils';
 import { useGetPacksQuery } from "./packsApi";
 import { IGetPacksResponse } from "./packsSlice";
 import { useQueryParams } from "common/hooks/useQueryParams";
@@ -28,6 +28,7 @@ export const PacksPage = () => {
 
   const cardPacks = data.cardPacks;
 
+  let sortPacks = searchParams.get('sortPacks') || '';
   return (
     <PacksPageContainer>
 
@@ -51,7 +52,7 @@ export const PacksPage = () => {
 
       </TableFiltersContainer>
 
-      <TablePacks isFetching={isFetching} cardPacks={cardPacks} />
+      <TablePacks isFetching={isFetching} cardPacks={cardPacks} sortPacks={sortPacks} setParam={setParam} sortToggle={sortToggle} />
 
       <PacksPagination data={data} />
 

@@ -5,9 +5,9 @@ import { useGetCardsQuery } from "features/cards/cardsApi/cardsApi";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import { CardType, IGetCardsResponse } from "features/cards/cardsApi/cardsSlice";
 import { EmptyList } from "../emptyList/EmptyList";
-import { getUrlParams } from "common/utils";
+import {getUrlParams, sortToggle} from 'common/utils';
 import { useQueryParams } from "common/hooks";
-import { TableSkeleton } from "common/components/skeletons/TableSkeleton";
+import {TableSkeleton} from '../skeletons/TableSkeleton';
 
 
 export const TableCards = () => {

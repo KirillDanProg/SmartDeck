@@ -15,6 +15,7 @@ import { useAppSelector } from "../../hooks";
 
 type PropsType = {
   packData: PackResponseType
+  disabled:boolean
 }
 
 export const PackTableCell: FC<PropsType> = ({ packData }) => {

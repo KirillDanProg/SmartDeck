@@ -23,7 +23,6 @@ import { ReturnComponent } from "common/components/returnComponent/ReturnCompone
 
 export const CardsPage = () => {
 
-  const [searchParams, setParam, deleteParam] = useQueryParams();
   const [searchParams] = useQueryParams();
   const paramsObject = getUrlParams(searchParams);
 
