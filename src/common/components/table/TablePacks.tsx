@@ -1,5 +1,5 @@
 import { PackTableCell } from "./PackTableCell";
-import { PackResponseType } from "../../../features/cards/packsSlice";
+import { PackResponseType } from "features/cards/packsSlice";
 import React, { FC, memo } from "react";
 import {
   Paper,
@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import { EmptyList } from "../emptyList/EmptyList";
-import { TableSkeleton } from "../skeletons/TableSkeleton";
+import { TableSkeleton } from "common/components/skeletons/TableSkeleton";
 
 type PropsType = {
   cardPacks: PackResponseType[]
