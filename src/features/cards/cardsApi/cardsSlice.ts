@@ -43,6 +43,8 @@ export interface IGetCardsResponse {
   packUserId: string;
   status: "loading" | "failed" | "succeeded";
   error: null | string;
+  packCreated:string;
+  packName:string
 }
 
 export type CardType = {
@@ -72,7 +74,9 @@ const initialState: InitialStateType = {
   pageCount: 4,
   packUserId: "",
   status: "loading",
-  error: null
+  error: null,
+  packCreated:'',
+  packName:''
 };
 
 export const cardsSlice = createSlice({
@@ -103,18 +107,6 @@ export const cardsSlice = createSlice({
           state.packUserId = payload.packUserId;
         }
       )
-      // .addMatcher(cardsApi.endpoints.createNewCard.matchFulfilled,
-      //   (state, { payload }) => {
-      //
-      //   })
-      // .addMatcher(cardsApi.endpoints.deleteCard.matchFulfilled,
-      //   (state, { payload }) => {
-      //
-      //   })
-      // .addMatcher(cardsApi.endpoints.changeCardName.matchFulfilled,
-      //   (state, { payload }) => {
-      //
-      //   });
   }
 });
 
