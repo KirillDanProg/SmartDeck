@@ -11,7 +11,6 @@ type ParamsType = {
     max?: string
     user_id?: string
 }
-
 export const cardsApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
         getCards: build.query<IGetCardsResponse, ParamsType>({
@@ -19,7 +18,7 @@ export const cardsApi = apiSlice.injectEndpoints({
                 url: `/cards/card`,
                 params
             }),
-            providesTags: result => [{type: 'Cards'}]
+            providesTags: () => [{type: 'Cards'}]
         }),
         //todo: fix any type
         createNewCard: build.mutation<{}, any>({
@@ -34,14 +33,14 @@ export const cardsApi = apiSlice.injectEndpoints({
                     }
                 }
             }),
-            invalidatesTags: result => [{type: 'Cards'}]
+            invalidatesTags: () => [{type: 'Cards'}]
         }),
         deleteCard: build.mutation<{}, string>({
             query: (body) => ({
                 url: `/cards/card?id=${body}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: result => [{type: 'Cards'}]
+            invalidatesTags: () => [{type: 'Cards'}]
         }),
         changeCardName: build.mutation<IChangeNameCardResponse, IChangeNameCardRequest>({
             query: (body) => ({
@@ -54,8 +53,18 @@ export const cardsApi = apiSlice.injectEndpoints({
                     }
                 }
             }),
-            invalidatesTags: result => [{type: 'Cards'}]
+            invalidatesTags: () => [{type: 'Cards'}]
         }),
+        gradeCard: build.mutation<any, { card_id: string, grade: number }>({
+            query: ({card_id, grade }) => ({
+                url: `cards/grade`,
+                method: "PUT",
+                body: {
+                    grade,
+                    card_id
+                }
+            }),
+        })
     }),
 });
 
@@ -64,5 +73,6 @@ export const {
     useGetCardsQuery,
     useCreateNewCardMutation,
     useDeleteCardMutation,
-    useChangeCardNameMutation
+    useChangeCardNameMutation,
+    useGradeCardMutation
 } = cardsApi;

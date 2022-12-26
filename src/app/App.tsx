@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { serverErrorHandler } from "common/utils";
 import { useAppSelector } from "common/hooks";
-import { selectCurrentError } from "features/auth/authSlice";
+import { selectCurrentError, selectCurrentStatus } from "features/auth/authSlice";
 import { useAuthMeMutation } from "features/auth/authApi";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ErrorSnackbar, Preloader } from "common/components";
@@ -10,12 +10,19 @@ import "./App.css";
 
 function App() {
 
+    const firstMount = useRef(true)
+
   const error = useAppSelector(selectCurrentError);
 
-  const [authMe, { isLoading }] = useAuthMeMutation();
+  const status = useAppSelector(selectCurrentStatus)
+
+  const [authMe] = useAuthMeMutation();
 
   useEffect(() => {
-    authMe("").unwrap();
+      //todo: how to use async await with useEffect
+     authMe("").then(() => {
+         firstMount.current = false
+     })
   }, []);
 
   return (
@@ -24,7 +31,8 @@ function App() {
       {
         error && <ErrorSnackbar errorMessage={serverErrorHandler(error)} />
       }
-      {isLoading
+      {
+          firstMount.current && status === "loading"
         ? <Preloader />
         : <>
           <Header />

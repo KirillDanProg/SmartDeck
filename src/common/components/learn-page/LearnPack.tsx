@@ -1,67 +1,83 @@
 import React, { useEffect, useState } from "react";
 import {
-  IGetCardsResponse,
-  removeCard, selectCurrentCard, selectCurrentCards, setCards, setCurrentCard
+    CardType,
+    IGetCardsResponse,
+    removeCard, selectCurrentCard, selectCurrentCards, setCards, setCurrentCard
 } from "features/cards/cardsApi/cardsSlice";
-import { useGetCardsQuery } from "features/cards/cardsApi/cardsApi";
+import { useGetCardsQuery, useGradeCardMutation } from "features/cards/cardsApi/cardsApi";
 import { useAppDispatch, useAppSelector, useQueryParams } from "../../hooks";
 import Button from "@mui/material/Button";
 import { getRandomCard } from "../../utils/getRandomCard";
 import { LearnPackCompleted } from "./LearnPackCompleted";
 import { LoginSkeleton } from "../skeletons/LoginSkeleton";
+import { ColorRadioButtons } from "../radio-group/GrageCardRadio";
 
 export const LearnPack = () => {
 
-  const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
-  const [searchParams] = useQueryParams()
+    const [searchParams] = useQueryParams();
 
-  const [isNewAttempt, setNewAttempt] = useState(false)
+    const [gradeCard] = useGradeCardMutation();
 
-  const packId = searchParams.get("cardsPack_id") || ""
+    const [isNewAttempt, setNewAttempt] = useState(false);
 
-  const unexploredCards = useAppSelector(selectCurrentCards);
+    const [grade, setGrade] = React.useState("");
 
-  const currentCard = useAppSelector(selectCurrentCard);
+    const packId = searchParams.get("cardsPack_id") || "";
 
-  const {data = {} as IGetCardsResponse, isLoading } = useGetCardsQuery({ cardsPack_id: packId, pageCount: "100" });
+    const unexploredCards = useAppSelector(selectCurrentCards);
 
-  const goToNextCardHandler = () => {
-    const randomCard = getRandomCard(unexploredCards);
-    dispatch(setCurrentCard(randomCard));
-    dispatch(removeCard(randomCard._id));
-  };
+    const currentCard = useAppSelector(selectCurrentCard) || {} as CardType;
 
-  useEffect(() => {
-    if(data.cards && data.cards.length) {
-      dispatch(setCards(data.cards))
-      dispatch(setCurrentCard(null))
-    }
-    setNewAttempt(false)
-  }, [isNewAttempt])
+    const { data = {} as IGetCardsResponse, isLoading } = useGetCardsQuery({ cardsPack_id: packId, pageCount: "100" });
 
-  useEffect(() => {
-    return () => {
-      dispatch(setCurrentCard(null))
-    }
-  }, [])
+    const goToNextCardHandler = () => {
+        const randomCard = getRandomCard(unexploredCards);
+        dispatch(setCurrentCard(randomCard));
+        dispatch(removeCard(randomCard._id));
+        if (currentCard._id && grade) gradeCardHandler(+grade);
+        setGrade("");
+    };
 
-  return (
-    <>
-      {
-        isLoading ? <LoginSkeleton />
-          : unexploredCards.length > 0
-            ? <>
-              <h1>
-                {isLoading ? "...loading" : currentCard?.answer}
-              </h1>
-              <Button onClick={goToNextCardHandler}>
-                next
-              </Button>
-            </>
-            : <LearnPackCompleted packId={packId} setNewAttempt={setNewAttempt}/>
-      }
-    </>
-  );
+    const gradeCardHandler = async (grade: number) => {
+        const data = {
+            card_id: currentCard._id,
+            grade
+        };
+        await gradeCard(data);
+    };
+
+    useEffect(() => {
+        if (data.cards && data.cards.length) {
+            dispatch(setCards(data.cards));
+            dispatch(setCurrentCard(null));
+        }
+        setNewAttempt(false);
+
+        return () => {
+            dispatch(setCurrentCard(null));
+        };
+    }, [isNewAttempt]);
+
+
+    return (
+        <>
+            {
+                isLoading ? <LoginSkeleton />
+                    : unexploredCards.length > 0
+                        ? <>
+                            <h1>
+                                {isLoading ? "...loading" : currentCard?.answer}
+                            </h1>
+                            <ColorRadioButtons value={grade} setValue={setGrade} />
+                            <Button onClick={goToNextCardHandler}>
+                                next
+                            </Button>
+                        </>
+                        : <LearnPackCompleted packId={packId} setNewAttempt={setNewAttempt} />
+            }
+        </>
+    );
 };
 

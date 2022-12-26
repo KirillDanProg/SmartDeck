@@ -50,7 +50,8 @@ export const CardTableCell: FC<PropsType> = ({ cardData }) => {
           style={tableCellStyle}
           to={"/"}>
         </NavLink>
-        <Rating name="size-large" defaultValue={2} size="large" />
+          {/*todo: rating should be uncontrolled */}
+        <Rating name="size-large" value={cardData.grade} size="medium" />
         {packOwner && <>
           <ModeEditIcon onClick={editeNameChangeHandler} />
           <DeleteOutlineIcon onClick={deleteCardHandler} />
