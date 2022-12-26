@@ -27,7 +27,7 @@ export const LearnPackCompleted: FC<PropsType> = ({packId, setNewAttempt}) => {
 
   return (
     <CustomGridContainer>
-      <CardMedia component="img" src={completed} />
+      <CardMedia component="img" src={completed} sx={{height: "270px"}}/>
 
       <Typography component={"h4"} variant={"h4"}>
         You are done !!!

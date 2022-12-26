@@ -1,6 +1,6 @@
 import * as React from "react";
 import Radio from "@mui/material/Radio";
-import { FormControl, FormLabel, RadioGroup } from "@mui/material";
+import { FormControl, RadioGroup } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { FC } from "react";
 
@@ -16,7 +16,6 @@ export const ColorRadioButtons: FC<PropsType> = ({value, setValue}) => {
 
     return (
         <FormControl sx={styleRadio}>
-            <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
             <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
                 name="radio-buttons-group"
