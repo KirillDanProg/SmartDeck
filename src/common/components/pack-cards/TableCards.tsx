@@ -31,7 +31,6 @@ export const TableCards = () => {
 
     return (
         <TableContainer component={Paper}>
-
             {
                 isLoading
                     ? <TableSkeleton/>
