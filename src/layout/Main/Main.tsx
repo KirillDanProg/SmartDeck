@@ -3,20 +3,20 @@ import { useAppSelector } from "../../common/hooks";
 import { selectCurrentUser } from "../../features/auth/authSlice";
 import { Navigate, Outlet } from "react-router-dom";
 import React from "react";
-import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 export const Main = () => {
 
   const isAuth = useAppSelector(selectCurrentUser);
 
   return (
-    <Grid container component="main">
+    <Box component="main">
       {
         isAuth
           ? <Outlet />
           : <Navigate to={PATH.LOGIN} />
       }
-    </Grid>
+    </Box>
   );
 };
 

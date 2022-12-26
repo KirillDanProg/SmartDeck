@@ -20,5 +20,5 @@ export {CardTableCell} from "./pack-cards/CardTableCell"
 export {PasswordVisibleIcon} from "./PasswordVisible"
 export {CustomGridContainer} from "./CustomGridContainer"
 export {ErrorSnackbar} from "./snackbar/ErrorSnackbar"
-export {Preloader} from "./Preloader"
+export {Preloader} from "./preloader/Preloader"
 
