@@ -1,67 +1,62 @@
-import React from "react";
-import { getUrlParams } from "common/utils";
-import { useQueryParams } from "common/hooks";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import React from 'react';
+import {getUrlParams} from 'common/utils';
+import {useQueryParams} from 'common/hooks';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import {
-  SearchPacksCard,
-  TableFiltersContainer,
-  NumberOfCards,
-  TablePacks,
-  AddNewPack,
-  FiltersReset,
   AddNewCard,
-  PacksPagination,
   PacksPageContainer,
+  PacksPagination,
+  SearchPacksCard,
   TableCards,
-  ShowPacksCards
-} from "common/components";
-import { IGetCardsResponse } from "./cardsApi/cardsSlice";
-import { useGetCardsQuery } from "./cardsApi/cardsApi";
-import { ReturnComponent } from "common/components/returnComponent/ReturnComponent";
+  TableFiltersContainer
+} from 'common/components';
+import {IGetCardsResponse} from './cardsApi/cardsSlice';
+import {useGetCardsQuery} from './cardsApi/cardsApi';
+import {ReturnComponent} from 'common/components/returnComponent/ReturnComponent';
 
 
 export const CardsPage = () => {
 
-  const [searchParams] = useQueryParams();
-  const paramsObject = getUrlParams(searchParams);
+    const [searchParams] = useQueryParams();
+    const paramsObject = getUrlParams(searchParams);
 
-  const { data = {} as IGetCardsResponse } = useGetCardsQuery(paramsObject);
+    const {data = {} as IGetCardsResponse} = useGetCardsQuery(paramsObject);
 
-  const packId = searchParams.get("cardsPack_id") || "";
+    const packId = searchParams.get('cardsPack_id') || '';
 
-  return (
-    <PacksPageContainer>
+    return (
+        <PacksPageContainer>
 
-      <ReturnComponent/>
+            <ReturnComponent/>
 
-      <Box sx={style}>
+            <Box sx={style}>
 
-        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-          My pack
-        </Typography>
+                <Typography variant="h5" sx={{fontWeight: 'bold'}}>
+                  {data.packName}
+                </Typography>
 
-        <AddNewCard packId={packId} />
+                <AddNewCard packId={packId}/>
 
-      </Box>
+            </Box>
 
-        <TableFiltersContainer>
+            <TableFiltersContainer>
 
-          <SearchPacksCard />
+                <SearchPacksCard/>
 
-        </TableFiltersContainer>
+            </TableFiltersContainer>
 
-        <TableCards />
+            <TableCards/>
 
-        <PacksPagination data={data} />
+            <PacksPagination data={data}/>
 
-    </PacksPageContainer>
-  );
+        </PacksPageContainer>
+    );
 };
 
 const style = {
-  width: "100%",
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "space-between"
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
 };
