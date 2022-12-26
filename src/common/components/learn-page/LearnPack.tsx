@@ -44,6 +44,7 @@ export const LearnPack = () => {
     const goToNextCardHandler = () => {
         const randomCard = getRandomCard(unexploredCards);
         dispatch(setCurrentCard(randomCard));
+        //todo: remove if test infinite
         dispatch(removeCard(randomCard._id));
         if (currentCard._id && grade) gradeCardHandler(+grade);
         setGrade("");

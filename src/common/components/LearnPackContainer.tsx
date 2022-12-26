@@ -18,7 +18,8 @@ export const LearnPackContainer: FC<GridContainerT> = ({ children, packName }) =
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                padding: "50px 0"
+                padding: "50px 0",
+                textAlign: "center"
             }}
         >
             <Typography  sx={{
