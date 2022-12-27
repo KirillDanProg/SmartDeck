@@ -12,7 +12,6 @@ import {CreatePassword} from '../../common/components/reset-password/createPassw
 import {ForgotPassword} from '../../common/components/reset-password/forgotPassword/ForgotPassword';
 import {DevPage} from '../devPage/DevPage';
 import { LearnPack } from "../../common/components/learn-page/LearnPack";
-import { TableCards } from "../../common/components";
 import { CardsPage } from "../../features/cards/CardsPage";
 
 
@@ -24,7 +23,7 @@ export const AppRoutes = () => {
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
                     <Route path={PATH.PACK_LISTS} element={<PacksPage/>}/>
                     <Route path={PATH.CARDS} element={<CardsPage/>}/>
-                    <Route path={PATH.LEARN_PACK} element={<LearnPack/>}/>
+                    <Route path={`${PATH.LEARN_PACK}`} element={<LearnPack/>}/>
                 </Route>
 
                 <Route path={PATH.SIGN_UP} element={<SignUpPage/>}/>

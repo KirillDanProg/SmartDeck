@@ -34,6 +34,7 @@ export const Profile = () => {
                 :
                 <>
                     <ReturnComponent/>
+
                     <CustomGridContainer>
                         <Typography className={s.title}>
                             Personal Information

@@ -1,30 +1,31 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {cardsApi} from './cardsApi';
-import {RootState} from '../../../app/store';
-import {GenericAsyncThunk} from '../../auth/authSlice';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { cardsApi } from "./cardsApi";
+import { RootState } from "../../../app/store";
 
 
 export type CreateNewCardRequestT = {
-    cardsPack_id: string
-    question?: string
-    answer?: string
+  cardsPack_id: string
+  question?: string
+  answer?: string
 }
 
-export interface IGetCardRequest {
-    cardAnswer?:string
-    cardQuestion?:string
-    cardsPack_id:string
-    min?:string
-    max?:string
-    sortCards?:string
-    page?:string
-    pageCount?:string
-}
+//todo: remove unused types
+
+// export interface IGetCardRequest {
+//   cardAnswer?: string;
+//   cardQuestion?: string;
+//   cardsPack_id: string;
+//   min?: string;
+//   max?: string;
+//   sortCards?: string;
+//   page?: string;
+//   pageCount?: string;
+// }
 
 export interface IChangeNameCardResponse {
-    updatedCard: CardResponseType;
-    token: string;
-    tokenDeathTime: number;
+  updatedCard: CardType;
+  token: string;
+  tokenDeathTime: number;
 }
 
 export interface IChangeNameCardRequest {
@@ -34,88 +35,83 @@ export interface IChangeNameCardRequest {
 }
 
 export interface IGetCardsResponse {
-    cards: CardResponseType[];
-    cardsTotalCount: number
-    maxGrade: number
-    minGrade: number
-    page: number
-    pageCount: number
-    packUserId: string
-    status:null | 'loading' | 'failed' | 'succeeded'
-    error:null | string
+  cards: CardType[];
+  cardsTotalCount: number;
+  maxGrade: number;
+  minGrade: number;
+  page: number;
+  pageCount: number;
+  packUserId: string;
+  status: "loading" | "failed" | "succeeded";
+  error: null | string;
+  packCreated:string;
+  packName:string
 }
 
-export type CardResponseType = {
-    answer: string
-    question: string
-    cardsPack_id: string
-    grade: number
-    shots: number
-    user_id: string
-    created: string
-    updated: string
-    _id: string
+export type CardType = {
+  answer: string
+  question: string
+  cardsPack_id: string
+  grade: number
+  shots: number
+  user_id: string
+  created: string
+  updated: string
+  _id: string
 }
 
-const initialState: IGetCardsResponse = {
-    cards: [] as CardResponseType[],
-    cardsTotalCount: 3,
-    maxGrade: 4,
-    minGrade: 1,
-    page: 1,
-    pageCount: 4,
-    packUserId: '',
-    status:null,
-    error:null
+type InitialStateType = IGetCardsResponse & {
+  currentCard: CardType | null,
 }
+
+//todo: fix initial state
+const initialState: InitialStateType = {
+  cards: [] as CardType[],
+  currentCard: {} as CardType,
+  cardsTotalCount: 3,
+  maxGrade: 4,
+  minGrade: 1,
+  page: 1,
+  pageCount: 4,
+  packUserId: "",
+  status: "loading",
+  error: null,
+  packCreated:'',
+  packName:''
+};
 
 export const cardsSlice = createSlice({
-    name: 'cards',
-    initialState,
-    reducers: {},
-    extraReducers: builder => {
-        builder
-            .addMatcher(
-                (action): action is GenericAsyncThunk => action.type.endsWith('/pending'),
-                (state) => {
-                    state.status = 'loading'
-                    state.error = null
-                }
-            )
-            .addMatcher(
-                (action): action is GenericAsyncThunk => action.type.endsWith('/rejected'),
-                (state, action) => {
-                    state.status = 'failed'
-                    state.error = action.payload.data.error
-                }
-            )
-            .addMatcher(
-                (action): action is GenericAsyncThunk => action.type.endsWith('/fulfilled'),
-                (state) => {
-                    state.status = 'succeeded'
-                    state.error = null
-                }
-            )
-            .addMatcher(cardsApi.endpoints.getCards.matchFulfilled,
-                (state, {payload}) => {
-                    const {cards} = payload
-                    state.cards = cards
-                    state.packUserId = payload.packUserId
-                }
-            )
-            .addMatcher(cardsApi.endpoints.createNewCard.matchFulfilled,
-                (state, {payload}) => {
-
-                })
-            .addMatcher(cardsApi.endpoints.deleteCard.matchFulfilled,
-                (state, {payload}) => {
-
-                })
-            .addMatcher(cardsApi.endpoints.changeCardName.matchFulfilled,
-                (state, {payload}) => {
-
-                })
+  name: "cards",
+  initialState,
+  reducers: {
+    setCurrentCard: (state, action: PayloadAction<CardType | null>) => {
+      state.currentCard = action.payload;
+    },
+    setCards: (state, action: PayloadAction<CardType[]>) => {
+      state.cards = action.payload;
+    },
+    removeCard: (state, action: PayloadAction<string>) => {
+      const card = state.cards.find(c => c._id === action.payload);
+      if (card) {
+        const index = state.cards.indexOf(card);
+        state.cards.splice(index, 1);
+      }
     }
-})
 
-export const selectCardsPackID = (state: RootState) => state.cards.packUserId;
+  },
+  extraReducers: builder => {
+    builder
+      .addMatcher(cardsApi.endpoints.getCards.matchFulfilled,
+        (state, { payload }) => {
+          const { cards } = payload;
+          state.cards = cards;
+          state.packUserId = payload.packUserId;
+        }
+      )
+  }
+});
+
+export const { setCurrentCard, removeCard, setCards } = cardsSlice.actions;
+
+export const selectCurrentCard = (state: RootState) => state.cards.currentCard;
+export const selectCurrentCards = (state: RootState) => state.cards.cards

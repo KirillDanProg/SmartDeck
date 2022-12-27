@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import TablePagination from "@mui/material/TablePagination";
 import Pagination from "@mui/material/Pagination";
 import Box from "@mui/material/Box";
-import { IGetPacksResponse } from "features/cards/packsSlice";
 import { useQueryParams } from "common/hooks";
 
 //todo fix data for pagination

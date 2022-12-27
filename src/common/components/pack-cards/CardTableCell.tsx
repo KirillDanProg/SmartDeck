@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import {Rating, TableCell, TableRow} from "@mui/material";
-import {CardResponseType} from "features/cards/cardsApi/cardsSlice";
+import {CardType} from "features/cards/cardsApi/cardsSlice";
 import {NavLink} from "react-router-dom";
 import {
     RequestCreateNewCardT,
@@ -16,7 +16,7 @@ import {BasicModalPacksList} from "../../modal/BasicModal";
 import {CreateNewCardModal} from "../../modal/CreateNewCardModal/CreateNewcardModal";
 
 type PropsType = {
-    cardData: CardResponseType
+  cardData: CardType
 }
 
 export const CardTableCell: FC<PropsType> = ({cardData}) => {

@@ -1,20 +1,29 @@
 import {apiSlice} from '../../../app/api/apiSlice';
-import {IChangeNameCardRequest, IChangeNameCardResponse, IGetCardRequest, IGetCardsResponse} from './cardsSlice';
+import {IChangeNameCardRequest, IChangeNameCardResponse, IGetCardsResponse} from './cardsSlice';
 
+type ParamsType = {
+    page?: string
+    pageCount?: string
+    cardsPack_id?: string
+    sortCards?: string;
+    packName?: string
+    min?: string
+    max?: string
+    user_id?: string
+}
 export type RequestCreateNewCardT = {
     cardsPack_id: string
     question: string
     answer: string
 }
-
 export const cardsApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        getCards: build.query<IGetCardsResponse, any>({
-            query: (params:IGetCardRequest) => ({
+        getCards: build.query<IGetCardsResponse, ParamsType>({
+            query: (params) => ({
                 url: `/cards/card`,
                 params
             }),
-            providesTags: result => [{type: 'Cards'}]
+            providesTags: () => [{type: 'Cards'}]
         }),
         createNewCard: build.mutation<{}, RequestCreateNewCardT>({
             query: (body) => ({
@@ -28,14 +37,14 @@ export const cardsApi = apiSlice.injectEndpoints({
                     }
                 }
             }),
-            invalidatesTags: result => [{type: 'Cards'}]
+            invalidatesTags: () => [{type: 'Cards'}]
         }),
         deleteCard: build.mutation<{}, string>({
             query: (body) => ({
                 url: `/cards/card?id=${body}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: result => [{type: 'Cards'}]
+            invalidatesTags: () => [{type: 'Cards'}]
         }),
         changeCardName: build.mutation<IChangeNameCardResponse, IChangeNameCardRequest>({
             query: (body) => ({
@@ -49,8 +58,20 @@ export const cardsApi = apiSlice.injectEndpoints({
                     }
                 }
             }),
-            invalidatesTags: result => [{type: 'Cards'}]
+            invalidatesTags: () => [{type: 'Cards'}]
         }),
+        gradeCard: build.mutation<any, { card_id: string, grade: number }>({
+            query: ({card_id, grade }) => ({
+                url: `cards/grade`,
+                method: "PUT",
+                body: {
+                    grade,
+                    card_id
+                }
+            }),
+            //todo: remove if test not infinite
+            invalidatesTags: () => [{type: 'Cards'}]
+        })
     }),
 });
 
@@ -59,5 +80,6 @@ export const {
     useGetCardsQuery,
     useCreateNewCardMutation,
     useDeleteCardMutation,
-    useChangeCardNameMutation
+    useChangeCardNameMutation,
+    useGradeCardMutation
 } = cardsApi;
