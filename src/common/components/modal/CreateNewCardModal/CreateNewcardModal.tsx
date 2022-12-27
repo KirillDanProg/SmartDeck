@@ -4,19 +4,19 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {useFormik} from "formik";
 import {validationSchemaForCreateCardModal} from "../../form/yupValidation";
-import {RequestCreateNewCardT, useCreateNewCardMutation} from "../../../../features/cards/cardsApi/cardsApi";
+import {RequestCreateNewCardT} from "../../../../features/cards/cardsApi/cardsApi";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
-import {CardResponseType} from "../../../../features/cards/cardsApi/cardsSlice";
+import {CardType} from "../../../../features/cards/cardsApi/cardsSlice";
 
 type ChildEditPack = {
     closeModal: () => void
     packId?: string
     disabled: boolean
     cb: (data: RequestCreateNewCardT) => void
-    cardData?: CardResponseType
+    cardData?: CardType
 }
 
 export const CreateNewCardModal: FC<ChildEditPack> = ({

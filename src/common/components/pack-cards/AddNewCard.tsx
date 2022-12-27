@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import Button from '@mui/material/Button';
-import {BasicModalPacksList} from "../../modal/BasicModal";
-import {CreateNewCardModal} from "../../modal/CreateNewCardModal/CreateNewcardModal";
-import {RequestCreateNewCardT, useCreateNewCardMutation} from "../../../../features/cards/cardsApi/cardsApi";
+import {CreateNewCardModal} from "../modal/CreateNewCardModal/CreateNewcardModal";
+import {BasicModalPacksList} from "../modal/BasicModal";
+import {RequestCreateNewCardT, useCreateNewCardMutation} from "../../../features/cards/cardsApi/cardsApi";
 
 type AddCardType = {
     packId: string

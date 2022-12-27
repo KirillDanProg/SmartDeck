@@ -1,9 +1,8 @@
-import {CreateNewPackRequestType, useCreateNewPackMutation} from '../../../features/cards/packsApi';
 import React, {useState} from 'react'
 import Button from '@mui/material/Button';
-import {BasicModalPacksList} from "../modal/BasicModal";
-import {BtnForModal} from "../modal/BtnForModal";
-import {ChildCreatePack} from '../modal/ChildCreatePack';
+import {BasicModalPacksList} from "./modal/BasicModal";
+import {ChildCreatePack} from "./modal/ChildCreatePack";
+import {CreateNewPackRequestType, useCreateNewPackMutation} from "../../features/cards/packsApi";
 
 
 export const AddNewPack = () => {

@@ -1,10 +1,9 @@
 import React  from "react";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { CardTableCell } from "./CardTableCell";
 import { useGetCardsQuery } from "features/cards/cardsApi/cardsApi";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import { CardResponseType, IGetCardsResponse } from "features/cards/cardsApi/cardsSlice";
-import { EmptyList } from "common/components";
+import { CardType, IGetCardsResponse } from "features/cards/cardsApi/cardsSlice";
+import {CardTableCell, EmptyList} from "common/components";
 import { getUrlParams } from "common/utils";
 import { useQueryParams } from "common/hooks";
 import {TableSkeleton} from "../../Skeletons/TableSkeleton";
@@ -56,7 +55,7 @@ export const TableCards = () => {
             <TableBody>
               {
                 cards.length > 0
-                  ? cards.map((card: CardResponseType) => (
+                  ? cards.map((card: CardType) => (
                     <CardTableCell key={card._id}
                       cardData={card} />
                   ))

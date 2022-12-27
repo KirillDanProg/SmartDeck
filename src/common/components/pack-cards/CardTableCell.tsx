@@ -9,11 +9,11 @@ import {
 } from "features/cards/cardsApi/cardsApi";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import {useAppSelector} from "../../../hooks";
-import {selectCurrentUser} from "features/auth/authSlice";
-import {DeletePackModal} from "../../modal/deletePack/deletePackModal";
-import {BasicModalPacksList} from "../../modal/BasicModal";
-import {CreateNewCardModal} from "../../modal/CreateNewCardModal/CreateNewcardModal";
+import {CreateNewCardModal} from "../modal/CreateNewCardModal/CreateNewcardModal";
+import {BasicModalPacksList} from "../modal/BasicModal";
+import {useAppSelector} from "../../hooks";
+import {DeletePackModal} from "../modal/deletePack/deletePackModal";
+import {selectCurrentUser} from "../../../features/auth/authSlice";
 
 type PropsType = {
   cardData: CardType
