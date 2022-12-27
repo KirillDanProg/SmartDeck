@@ -32,6 +32,7 @@ export const ChildCreatePack: FC<ChildEditPack> = ({closeModal, cb, inputValueSt
     const onChangeInputCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setInputChecked(e.currentTarget.checked)
     }
+
     return (
         <>
             <Box
