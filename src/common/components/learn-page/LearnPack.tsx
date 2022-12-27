@@ -61,6 +61,7 @@ export const LearnPack = () => {
 
     //todo: hide useEffect
     useEffect(() => {
+
         if (data.cards && data.cards.length) {
             dispatch(setCards(data.cards));
             const randomCard = getRandomCard(unexploredCards);
@@ -72,7 +73,10 @@ export const LearnPack = () => {
         return () => {
             dispatch(setCurrentCard(null));
         };
-    }, [isNewAttempt]);
+    }, [isNewAttempt, data]);
+
+
+
 
     return (
         <PreloaderContainer condition={isLoading}
