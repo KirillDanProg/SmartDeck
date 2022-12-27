@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import { EmptyList } from "../emptyList/EmptyList";
-import {TableSkeleton} from "../Skeletons/TableSkeleton";
+import { TableSkeleton } from "../skeletons/TableSkeleton";
 
 type PropsType = {
     cardPacks: PackResponseType[]

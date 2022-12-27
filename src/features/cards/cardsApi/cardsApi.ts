@@ -69,8 +69,6 @@ export const cardsApi = apiSlice.injectEndpoints({
                     card_id
                 }
             }),
-            //todo: remove if test not infinite
-            invalidatesTags: () => [{type: 'Cards'}]
         })
     }),
 });

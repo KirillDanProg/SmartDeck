@@ -6,7 +6,7 @@ import { CardType, IGetCardsResponse } from "features/cards/cardsApi/cardsSlice"
 import {CardTableCell, EmptyList} from "common/components";
 import { getUrlParams } from "common/utils";
 import { useQueryParams } from "common/hooks";
-import {TableSkeleton} from "../../Skeletons/TableSkeleton";
+import { TableSkeleton } from "../../skeletons/TableSkeleton";
 
 
 export const TableCards = () => {
