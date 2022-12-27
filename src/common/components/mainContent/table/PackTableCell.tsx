@@ -1,16 +1,23 @@
 import {useAppSelector} from '../../../hooks';
 import {selectCurrentUser} from '../../../../features/auth/authSlice';
-import {useChangeNamePackMutation, useDeletePackMutation} from '../../../../features/cards/packsApi';
+import {
+    CreateNewPackRequestType,
+    useChangeNamePackMutation,
+    useDeletePackMutation
+} from '../../../../features/cards/packsApi';
 import {PackResponseType} from '../../../../features/cards/packsSlice';
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {TableCell, TableRow} from '@mui/material';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {NavLink, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {PATH} from '../../../../layout/AppRoutes/routes';
 import {convertedDate} from "../../../utils/convertedDate";
 import s from "../../../../features/cards/CardsPage.module.css"
+import {BasicModalPacksList} from "../../modal/BasicModal";
+import {DeletePackModal} from "../../modal/deletePack/deletePackModal";
+import {ChildCreatePack} from "../../modal/ChildCreatePack";
 
 type PropsType = {
     packData: PackResponseType
@@ -19,19 +26,22 @@ type PropsType = {
 
 export const PackTableCell: FC<PropsType> = ({packData, disabled}) => {
     const [deletePack] = useDeletePackMutation()
-    const [changeName] = useChangeNamePackMutation()
+    const [changeName, {isLoading}] = useChangeNamePackMutation()
     const navigate = useNavigate()
+    const [openDeletePackModal, setOpenDeletePackModal] = useState(false)
+    const [openEditePackModal, setOpenEditePackModal] = useState(false)
 
     const userId = useAppSelector(selectCurrentUser)
     const packOwner = userId === packData.user_id
 
     const deletePackHandler = async () => {
         await deletePack(packData._id)
+        setOpenDeletePackModal(false)
     }
 
-    const editeNameChangeHandler = async () => {
+    const editeNameChangeHandler = async (e: CreateNewPackRequestType) => {
         await changeName({
-            name: 'Pack\'s name changed',
+            name: e.name,
             _id: packData._id
         })
     }
@@ -40,15 +50,22 @@ export const PackTableCell: FC<PropsType> = ({packData, disabled}) => {
         navigate(`${PATH.CARDS}?cardsPack_id=${packData._id}`)
     }
 
+    const toggleDeletePackModalHandler = () => {
+        setOpenDeletePackModal(!openDeletePackModal)
+    }
+    const toggleEditePackModalHandler = () => {
+        setOpenEditePackModal(!openEditePackModal)
+    }
+
     return (
         <TableRow
             key={packData._id}
             sx={{'&:last-child td, &:last-child th': {border: 0}}}
         >
-                <TableCell onClick={redirectToPackCardHandle} align="left"
-                           style={{cursor: 'pointer'}}>
-                    {packData.name}
-                </TableCell>
+            <TableCell onClick={redirectToPackCardHandle} align="left"
+                       style={{cursor: 'pointer'}}>
+                {packData.name}
+            </TableCell>
             <TableCell align="center">{packData.cardsCount}</TableCell>
             <TableCell align="center">{convertedDate(packData.updated)}</TableCell>
             <TableCell align="right">{packData.user_name}</TableCell>
@@ -65,12 +82,11 @@ export const PackTableCell: FC<PropsType> = ({packData, disabled}) => {
                                 <>
                                     {packData.cardsCount ? <SchoolOutlinedIcon className={s.forIcons}/> :
                                         <SchoolOutlinedIcon className={s.forIconsDisabled}/>}
-                                        <ModeEditIcon className={s.forIcons} onClick={editeNameChangeHandler}/>
-                                        <DeleteOutlineIcon className={s.forIcons} onClick={deletePackHandler}/>
+                                    <ModeEditIcon className={s.forIcons} onClick={toggleEditePackModalHandler}/>
+                                    <DeleteOutlineIcon className={s.forIcons} onClick={toggleDeletePackModalHandler}/>
                                 </>
                         }
                         </>
-
                         : <>
                             {disabled ? <SchoolOutlinedIcon className={s.forIconsDisabled}/>
                                 : <> {packData.cardsCount ? <SchoolOutlinedIcon className={s.forIcons}/>
@@ -81,6 +97,14 @@ export const PackTableCell: FC<PropsType> = ({packData, disabled}) => {
                         </>
                 }
             </TableCell>
+            <BasicModalPacksList title={"Edite pack"} open={openEditePackModal} closeModal={toggleEditePackModalHandler}>
+                <ChildCreatePack disabled={isLoading} inputValueStart={packData.name} closeModal={toggleEditePackModalHandler} cb={editeNameChangeHandler}/>
+            </BasicModalPacksList>
+            <BasicModalPacksList title={"Delete pack"} open={openDeletePackModal}
+                                 closeModal={toggleDeletePackModalHandler}>
+                <DeletePackModal cb={deletePackHandler} closeModal={toggleDeletePackModalHandler}
+                                 title={packData.name}/>
+            </BasicModalPacksList>
         </TableRow>
     );
 };

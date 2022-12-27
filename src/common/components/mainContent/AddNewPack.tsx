@@ -1,17 +1,20 @@
-import {useCreateNewPackMutation} from '../../../features/cards/packsApi';
+import {CreateNewPackRequestType, useCreateNewPackMutation} from '../../../features/cards/packsApi';
 import React, {useState} from 'react'
 import Button from '@mui/material/Button';
 import {BasicModalPacksList} from "../modal/BasicModal";
 import {BtnForModal} from "../modal/BtnForModal";
-import {ChildEditPack} from '../modal/ChildEditPack';
+import {ChildCreatePack} from '../modal/ChildCreatePack';
 
 
 export const AddNewPack = () => {
     const [addPackModalOpen, setAddPackModalOpen] = useState(false)
     const [addNewPack, {}] = useCreateNewPackMutation()
 
-    const addNewPackHandler = async () => {
-        addNewPack('Kirill, add new pack')
+    const addNewPackHandler = async (e: CreateNewPackRequestType) => {
+        addNewPack({
+            name: e.name,
+            privateValue: e.privateValue
+        })
         setAddPackModalOpen(false)
     }
 
@@ -24,10 +27,8 @@ export const AddNewPack = () => {
 
     return (
         <>
-            <BasicModalPacksList title={"Edit pack"} open={addPackModalOpen} closeModal={closeModalAddPack}>
-                <ChildEditPack cb={addNewPackHandler}/>
-
-                <BtnForModal closeModal={closeModalAddPack} cb={addNewPackHandler}/>
+            <BasicModalPacksList title={"Add new pack"} open={addPackModalOpen} closeModal={closeModalAddPack}>
+                <ChildCreatePack closeModal={closeModalAddPack} cb={addNewPackHandler}/>
             </BasicModalPacksList>
             <Button
                 disabled={false}

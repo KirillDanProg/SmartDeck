@@ -1,6 +1,12 @@
 import {apiSlice} from '../../../app/api/apiSlice';
 import {IChangeNameCardRequest, IChangeNameCardResponse, IGetCardRequest, IGetCardsResponse} from './cardsSlice';
 
+export type RequestCreateNewCardT = {
+    cardsPack_id: string
+    question: string
+    answer: string
+}
+
 export const cardsApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
         getCards: build.query<IGetCardsResponse, any>({
@@ -10,7 +16,7 @@ export const cardsApi = apiSlice.injectEndpoints({
             }),
             providesTags: result => [{type: 'Cards'}]
         }),
-        createNewCard: build.mutation<{}, any>({
+        createNewCard: build.mutation<{}, RequestCreateNewCardT>({
             query: (body) => ({
                 url: `/cards/card`,
                 method: 'POST',
@@ -38,7 +44,8 @@ export const cardsApi = apiSlice.injectEndpoints({
                 body: {
                     card: {
                         _id: body._id,
-                        question: body.question
+                        question: body.question,
+                        answer: body.answer
                     }
                 }
             }),

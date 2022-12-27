@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
 import Button from '@mui/material/Button';
-import {useCreateNewCardMutation} from '../../../../features/cards/cardsApi/cardsApi';
-import {CreateNewCardRequestT} from '../../../../features/cards/cardsApi/cardsSlice';
-import {useFormik} from 'formik';
-import TextField from '@mui/material/TextField';
+import {BasicModalPacksList} from "../../modal/BasicModal";
+import {CreateNewCardModal} from "../../modal/CreateNewCardModal/CreateNewcardModal";
+import {RequestCreateNewCardT, useCreateNewCardMutation} from "../../../../features/cards/cardsApi/cardsApi";
 
 type AddCardType = {
     packId: string
@@ -11,46 +10,37 @@ type AddCardType = {
 
 export const AddNewCard: React.FC<AddCardType> = ({packId, ...props}) => {
     const [addCardModalOpen, setAddCardModalOpen] = useState(false)
-    const [addNewCard, {}] = useCreateNewCardMutation();
-    const card: CreateNewCardRequestT = {
-        cardsPack_id:packId,
-        question: 'How are you?',
-        answer: 'GOOD!'
+    const [addNewCard, {isLoading}] = useCreateNewCardMutation();
+
+    const addNewCardHandler = async (data: RequestCreateNewCardT) => {
+        await addNewCard({
+            cardsPack_id: packId,
+            question: data.question,
+            answer: data.answer
+        });
+        setAddCardModalOpen(false)
     }
 
-    const openModalAddCard = () => {
-        setAddCardModalOpen(true)
+    const toggleModalAddCard = () => {
+        setAddCardModalOpen(!addCardModalOpen)
     }
-    const closeModalAddPack = (e: boolean) => {
-        setAddCardModalOpen(e)
-    }
-
-
-    const formik = useFormik({
-        initialValues: {
-            question: ''
-        },
-        onSubmit: values => {
-            addNewCard(
-                card
-            );
-            formik.resetForm();
-        },
-    });
 
     return (
         <>
-            <form onSubmit={formik.handleSubmit}>
+            <BasicModalPacksList title={"Add new card"} open={addCardModalOpen} closeModal={toggleModalAddCard}>
+                <CreateNewCardModal
+                    cb={addNewCardHandler}
+                    disabled={isLoading}
+                    packId={packId}
+                    closeModal={toggleModalAddCard}
+                />
+            </BasicModalPacksList>
                 <Button
-                    type="submit"
                     disabled={false}
+                    onClick={toggleModalAddCard}
                 >
                     Add new card
                 </Button>
-                <TextField
-                    {...formik.getFieldProps('question')}
-                />
-            </form>
         </>
     )
 }
