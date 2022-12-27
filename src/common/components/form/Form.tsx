@@ -45,6 +45,7 @@ export const Form: FC<FormPropsType> = ({ callback, formType }) => {
         helperText={formik.touched.email && formik.errors.email}
         id="email"
         label="Email Address"
+        autoComplete={"off"}
         {...formik.getFieldProps("email")}
       />
       <TextField
@@ -56,6 +57,7 @@ export const Form: FC<FormPropsType> = ({ callback, formType }) => {
         label="Password"
         type={passwordType}
         id="password"
+        autoComplete={"off"}
         {...formik.getFieldProps("password")}
         InputProps={{
           endAdornment: (

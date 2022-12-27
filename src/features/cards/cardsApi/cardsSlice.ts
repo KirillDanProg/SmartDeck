@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { cardsApi } from "./cardsApi";
 import { RootState } from "../../../app/store";
+import { AppStatusType } from "../../../common/types/common-types";
 
 
 export type CreateNewCardRequestT = {
@@ -41,8 +42,6 @@ export interface IGetCardsResponse {
   page: number;
   pageCount: number;
   packUserId: string;
-  status: "loading" | "failed" | "succeeded";
-  error: null | string;
 }
 
 export type CardType = {
@@ -57,8 +56,10 @@ export type CardType = {
   _id: string
 }
 
-type InitialStateType = IGetCardsResponse & {
-  currentCard: CardType | null,
+type InitialStateType = Pick<IGetCardsResponse, "cards" | "cardsTotalCount"> & {
+    currentCard: CardType | null
+    status: AppStatusType
+    error: string | null
 }
 
 //todo: fix initial state
@@ -66,11 +67,6 @@ const initialState: InitialStateType = {
   cards: [] as CardType[],
   currentCard: {} as CardType,
   cardsTotalCount: 3,
-  maxGrade: 4,
-  minGrade: 1,
-  page: 1,
-  pageCount: 4,
-  packUserId: "",
   status: "loading",
   error: null
 };
@@ -98,9 +94,7 @@ export const cardsSlice = createSlice({
     builder
       .addMatcher(cardsApi.endpoints.getCards.matchFulfilled,
         (state, { payload }) => {
-          const { cards } = payload;
-          state.cards = cards;
-          state.packUserId = payload.packUserId;
+          state.cards = payload;
         }
       )
       // .addMatcher(cardsApi.endpoints.createNewCard.matchFulfilled,

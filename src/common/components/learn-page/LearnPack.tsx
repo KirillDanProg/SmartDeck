@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
     CardType,
-    IGetCardsResponse,
     removeCard, selectCurrentCard, selectCurrentCards, setCards, setCurrentCard
 } from "features/cards/cardsApi/cardsSlice";
 import { useGetCardsQuery, useGradeCardMutation } from "features/cards/cardsApi/cardsApi";
@@ -30,7 +29,7 @@ export const LearnPack = () => {
 
     const currentCard = useAppSelector(selectCurrentCard) || {} as CardType;
 
-    const { data = {} as IGetCardsResponse, isLoading } = useGetCardsQuery({ cardsPack_id: packId, pageCount: "100" });
+    const { data = [] as CardType[], isLoading } = useGetCardsQuery({ cardsPack_id: packId, pageCount: "100" });
 
     const goToNextCardHandler = () => {
         const randomCard = getRandomCard(unexploredCards);
@@ -49,8 +48,8 @@ export const LearnPack = () => {
     };
 
     useEffect(() => {
-        if (data.cards && data.cards.length) {
-            dispatch(setCards(data.cards));
+        if (data && data.length) {
+            dispatch(setCards(data));
             dispatch(setCurrentCard(null));
         }
         setNewAttempt(false);

@@ -1,0 +1,1 @@
+export type AppStatusType = "loading" | "failed" | "succeeded" | "idle";
