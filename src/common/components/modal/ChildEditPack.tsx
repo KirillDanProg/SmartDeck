@@ -5,17 +5,31 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
+import {CreateNewPackRequestType} from "../../../features/cards/packsApi";
 
 type ChildEditPack = {
-    cb: (e: string) => void
+    cb: (e:CreateNewPackRequestType) => void,
+    closeModal: (e: boolean) => void
+    inputValueStart?: string
+    disabled?: boolean
 }
 
-export const ChildEditPack: FC<ChildEditPack> = ({cb}) => {
-    const [inputValue, setInputValue] = useState('')
+export const ChildEditPack: FC<ChildEditPack> = ({closeModal, cb, inputValueStart = '', disabled= false}) => {
+    const [inputValue, setInputValue] = useState(inputValueStart)
+    const [inputChecked, setInputChecked] = useState(false)
 
     const changeInputValue = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setInputValue(e.currentTarget.value)
-        if (inputValue.trim().length) cb(inputValue)
+    }
+
+    const clickSaveHandler = () => {
+        if (inputValue.trim().length) cb({name: inputValue, privateValue: inputChecked})
+
+    }
+    const closeModalHandler = () => closeModal(false)
+
+    const onChangeInputCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputChecked(e.currentTarget.checked)
     }
 
     return (
@@ -69,5 +83,19 @@ const mainContainerStyle = {
     flexDirection: 'column',
     gap: '20px',
     justifyContent: 'space-between',
+}
+
+const styleBtnContainer = {display: 'flex', gap: '40px'}
+
+const styleLeftBtn = {
+    borderRadius: '30px',
+    color: 'black',
+    background: 'white',
+    width: '127px',
+}
+
+const styleRightBtn = {
+    borderRadius: '30px',
+    width: '127px',
 }
 
