@@ -14,8 +14,8 @@ import {
 import {IGetCardsResponse} from './cardsSlice';
 import {useGetCardsQuery} from './cardsApi';
 import {ReturnComponent} from 'common/components/returnComponent/ReturnComponent';
-import {ModalForMyPack} from "../../common/components/modal/ModalForMyPack";
-import {CreateNewPackRequestType, useChangeNamePackMutation} from "./packsApi";
+import {ModalForMyPack} from "../../../common/components/modal/ModalForMyPack";
+import {CreateNewPackRequestType, useChangeNamePackMutation} from "../packs/packsApi";
 
 
 export const CardsPage = () => {
@@ -32,7 +32,6 @@ export const CardsPage = () => {
     }
 
     const {data = {} as IGetCardsResponse} = useGetCardsQuery(paramsObject);
-    debugger
     const packId = searchParams.get('cardsPack_id') || '';
     const packName = data.packName
 
