@@ -7,12 +7,12 @@ import {Main} from '../Main/Main';
 import {Profile} from '../../features/profile/Profile';
 import {CheckEmailPage} from '../../common/components/reset-password/check-email/CheckEmailPage';
 import {SignUpPage} from '../../features/auth/sign-up/SignUpPage';
-import {PacksPage} from '../../features/cards/PacksPage';
+import {PacksPage} from '../../features/packs-cards/packs/PacksPage';
 import {CreatePassword} from '../../common/components/reset-password/createPassword/CreatePassword';
 import {ForgotPassword} from '../../common/components/reset-password/forgotPassword/ForgotPassword';
 import {DevPage} from '../devPage/DevPage';
 import { LearnPack } from "../../common/components/learn-page/LearnPack";
-import { CardsPage } from "../../features/cards/CardsPage";
+import { CardsPage } from "../../features/packs-cards/cards/CardsPage";
 
 
 export const AppRoutes = () => {

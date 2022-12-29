@@ -1,7 +1,7 @@
 import { selectCurrentUser } from "features/auth/authSlice";
-import { CreateNewPackRequestType, useChangeNamePackMutation, useDeletePackMutation } from "features/cards/packsApi";
-import { PackResponseType } from "features/cards/packsSlice";
-import s from "features/cards/CardsPage.module.css";
+import { CreateNewPackRequestType, useChangeNamePackMutation, useDeletePackMutation } from "features/packs-cards/packs/packsApi";
+import { PackResponseType } from "features/packs-cards/packs/packsSlice";
+import s from "features/packs-cards/cards/CardsPage.module.css";
 
 import React, { FC, useState } from "react";
 import { TableCell, TableRow } from "@mui/material";

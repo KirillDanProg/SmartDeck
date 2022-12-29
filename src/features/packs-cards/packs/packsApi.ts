@@ -3,8 +3,8 @@ import {
   IChangeNamePackResponse,
   IGetPacksResponse,
 } from './packsSlice';
-import {apiSlice} from '../../app/api/apiSlice';
-import { ParamsType } from "../../common/utils/getUrlParams";
+import {apiSlice} from '../../../app/api/apiSlice';
+import { ParamsType } from "../../../common/utils/getUrlParams";
 
 export type QueryParams = {
     packName?: string

@@ -2,7 +2,7 @@ import React, { FC, memo, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Slider } from "@mui/material";
-import { IGetPacksResponse } from "features/cards/packsSlice";
+import { IGetPacksResponse } from "features/packs-cards/packs/packsSlice";
 import { useQueryParams } from "../../hooks";
 
 type PropsType = {
