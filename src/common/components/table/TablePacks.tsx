@@ -1,5 +1,5 @@
 import { PackTableCell } from "./PackTableCell";
-import { PackResponseType } from "features/cards/packsSlice";
+import { PackResponseType } from "features/packs-cards/packs/packsSlice";
 import React, { FC, memo } from "react";
 import {
   Paper,

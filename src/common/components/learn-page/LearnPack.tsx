@@ -4,12 +4,12 @@ import { getRandomCard } from "../../utils/getRandomCard";
 import { LearnPackCompleted } from "./LearnPackCompleted";
 import { LearnPackContainer } from "../LearnPackContainer";
 import { useAppDispatch, useAppSelector, useQueryParams } from "../../hooks";
-import { useGradeCardMutation, useLazyGetCardsQuery } from "features/cards/cardsApi/cardsApi";
+import { useGradeCardMutation, useLazyGetCardsQuery } from "features/packs-cards/cards/cardsApi";
 import { Preloader } from "../preloader/Preloader";
 import {
     CardType, IGetCardsResponse,
     removeCard, selectCurrentCard, selectCards, setCards, setCurrentCard
-} from "features/cards/cardsApi/cardsSlice";
+} from "features/packs-cards/cards/cardsSlice";
 import { PreloaderContainer } from "../preloader/PreloaderContainer";
 import { ConditionalRender } from "../conditional-render/ConditionalRender";
 import { AnswerComponent } from "./AnswerComponent";

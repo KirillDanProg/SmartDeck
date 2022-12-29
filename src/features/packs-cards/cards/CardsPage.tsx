@@ -11,8 +11,8 @@ import {
   TableCards,
   TableFiltersContainer
 } from 'common/components';
-import {IGetCardsResponse} from './cardsApi/cardsSlice';
-import {useGetCardsQuery} from './cardsApi/cardsApi';
+import {IGetCardsResponse} from './cardsSlice';
+import {useGetCardsQuery} from './cardsApi';
 import {ReturnComponent} from 'common/components/returnComponent/ReturnComponent';
 
 

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Button from '@mui/material/Button';
 import {BasicModalPacksList} from "./modal/BasicModal";
 import {ChildCreatePack} from "./modal/ChildCreatePack";
-import {CreateNewPackRequestType, useCreateNewPackMutation} from "../../features/cards/packsApi";
+import {CreateNewPackRequestType, useCreateNewPackMutation} from "../../features/packs-cards/packs/packsApi";
 
 
 export const AddNewPack = () => {

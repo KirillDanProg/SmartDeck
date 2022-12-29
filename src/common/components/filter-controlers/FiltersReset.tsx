@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
 import Box from "@mui/material/Box";
-import s from "../../../features/cards/CardsPage.module.css"
+import s from "../../../features/packs-cards/cards/CardsPage.module.css"
 
 type PropsType = {
   params: URLSearchParams

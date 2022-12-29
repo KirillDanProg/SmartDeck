@@ -2,8 +2,8 @@ import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit";
 import {authSlice} from "../features/auth/authSlice";
 import {apiSlice} from "./api/apiSlice";
 import {profileSlice} from "../features/profile/profileSlice";
-import {cardsSlice} from '../features/cards/cardsApi/cardsSlice';
-import {packsSlice} from '../features/cards/packsSlice';
+import {cardsSlice} from '../features/packs-cards/cards/cardsSlice';
+import {packsSlice} from '../features/packs-cards/packs/packsSlice';
 
 export const store = configureStore({
     reducer: {

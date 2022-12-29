@@ -1,9 +1,9 @@
 import React from 'react';
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material';
 import {CardTableCell} from './CardTableCell';
-import {useGetCardsQuery} from 'features/cards/cardsApi/cardsApi';
+import {useGetCardsQuery} from 'features/packs-cards/cards/cardsApi';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import {CardType, IGetCardsResponse} from 'features/cards/cardsApi/cardsSlice';
+import {CardType, IGetCardsResponse} from 'features/packs-cards/cards/cardsSlice';
 import {EmptyList} from '../emptyList/EmptyList';
 import {getUrlParams, sortToggle} from 'common/utils';
 import {useQueryParams} from 'common/hooks';

@@ -1,12 +1,12 @@
 import React, {FC, useState} from "react";
 import {Rating, TableCell, TableRow} from "@mui/material";
-import {CardType} from "features/cards/cardsApi/cardsSlice";
+import {CardType} from "features/packs-cards/cards/cardsSlice";
 import {NavLink} from "react-router-dom";
 import {
     RequestCreateNewCardT,
     useChangeCardNameMutation,
     useDeleteCardMutation
-} from "features/cards/cardsApi/cardsApi";
+} from "features/packs-cards/cards/cardsApi";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {CreateNewCardModal} from "../modal/CreateNewCardModal/CreateNewcardModal";
