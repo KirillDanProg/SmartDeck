@@ -4,26 +4,37 @@ import {useQueryParams} from 'common/hooks';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {
-  AddNewCard,
-  PacksPageContainer,
-  PacksPagination,
-  SearchPacksCard,
-  TableCards,
-  TableFiltersContainer
+    AddNewCard,
+    PacksPageContainer,
+    PacksPagination,
+    SearchPacksCard,
+    TableCards,
+    TableFiltersContainer
 } from 'common/components';
 import {IGetCardsResponse} from './cardsApi/cardsSlice';
 import {useGetCardsQuery} from './cardsApi/cardsApi';
 import {ReturnComponent} from 'common/components/returnComponent/ReturnComponent';
+import {ModalForMyPack} from "../../common/components/modal/ModalForMyPack";
+import {CreateNewPackRequestType, useChangeNamePackMutation} from "./packsApi";
 
 
 export const CardsPage = () => {
 
     const [searchParams] = useQueryParams();
     const paramsObject = getUrlParams(searchParams);
+    const [changeName, {isLoading}] = useChangeNamePackMutation()
+
+    const editeHandler = async(e: CreateNewPackRequestType) => {
+        await changeName({
+            name: e.name,
+            _id: packId,
+        });
+    }
 
     const {data = {} as IGetCardsResponse} = useGetCardsQuery(paramsObject);
-
+    debugger
     const packId = searchParams.get('cardsPack_id') || '';
+    const packName = data.packName
 
     return (
         <PacksPageContainer>
@@ -32,8 +43,9 @@ export const CardsPage = () => {
 
             <Box sx={style}>
 
-                <Typography variant="h5" sx={{fontWeight: 'bold'}}>
-                  {data.packName}
+                <Typography variant="h5" sx={{display: 'flex', alignItems: 'center', fontWeight: 'bold'}}>
+                    {packName}
+                    <ModalForMyPack isLoading={isLoading} cb={editeHandler} packId={packId} packName={packName}/>
                 </Typography>
 
                 <AddNewCard packId={packId}/>
