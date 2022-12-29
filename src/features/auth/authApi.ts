@@ -3,9 +3,8 @@ import { apiSlice } from "app/api/apiSlice";
 import { resetPasswordHTMLGeneration } from "common/utils";
 
 export interface IRegisterResponse {
-  addedUser: UserType;
+    addedUser: UserType;
 }
-
 
 export type AuthResponseType = {
   _id: string
@@ -34,9 +33,7 @@ export interface IRegisterRequest {
   password: string;
 }
 
-export interface ILoginRequest {
-  email: string;
-  password: string;
+export type ILoginRequest  = IRegisterRequest & {
   rememberMe: boolean;
 }
 

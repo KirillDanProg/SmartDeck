@@ -9,39 +9,41 @@ import { useNavigate } from "react-router-dom";
 import { PATH } from "../../../layout/AppRoutes/routes";
 
 type PropsType = {
-  packId: string
-  setNewAttempt: (value: boolean) => void
+    packId: string
+    setNewAttempt: (value: boolean) => void
+    tryAgain: () => void
 }
-export const LearnPackCompleted: FC<PropsType> = ({packId, setNewAttempt}) => {
+export const LearnPackCompleted: FC<PropsType> = ({ packId, setNewAttempt, tryAgain}) => {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const tryAgainHandler = () => {
-    setNewAttempt(true)
-    navigate(`${PATH.LEARN_PACK}?cardsPack_id=${packId}`);
-  };
+    const tryAgainHandler = () => {
+        tryAgain()
+        setNewAttempt(true);
+        navigate(`${PATH.LEARN_PACK}?cardsPack_id=${packId}`);
+    };
 
-  const backToCardsHandler = () => {
-    navigate(`${PATH.CARDS}?cardsPack_id=${packId}`);
-  };
+    const backToCardsHandler = () => {
+        navigate(`${PATH.CARDS}?cardsPack_id=${packId}`);
+    };
 
-  return (
-    <CustomGridContainer>
-      <CardMedia component="img" src={completed} sx={{height: "270px"}}/>
+    return (
+        <CustomGridContainer>
+            <CardMedia component="img" src={completed} sx={{ height: "270px" }} />
 
-      <Typography component={"h4"} variant={"h4"}>
-        You are done !!!
-      </Typography>
+            <Typography component={"h4"} variant={"h4"}>
+                You are done !!!
+            </Typography>
 
-      <ButtonGroup>
+            <ButtonGroup>
 
-        <Button onClick={tryAgainHandler}>try again</Button>
+                <Button onClick={tryAgainHandler}>try again</Button>
 
-        <Button onClick={backToCardsHandler}>Back to cards</Button>
+                <Button onClick={backToCardsHandler}>Back to cards</Button>
 
-      </ButtonGroup>
+            </ButtonGroup>
 
-    </CustomGridContainer>
-  );
+        </CustomGridContainer>
+    );
 };
 
