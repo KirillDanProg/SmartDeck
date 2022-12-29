@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import { getRandomCard } from "../../utils/getRandomCard";
 import { LearnPackCompleted } from "./LearnPackCompleted";
 import { LearnPackContainer } from "../LearnPackContainer";
 import { useAppDispatch, useAppSelector, useQueryParams } from "../../hooks";
-import { ColorRadioButtons } from "../radio-group/GrageCardRadio";
-import { useGetCardsQuery, useGradeCardMutation } from "features/cards/cardsApi/cardsApi";
+import { useGradeCardMutation, useLazyGetCardsQuery } from "features/cards/cardsApi/cardsApi";
 import { Preloader } from "../preloader/Preloader";
 import {
     CardType, IGetCardsResponse,
-    removeCard, selectCurrentCard, selectCurrentCards, setCards, setCurrentCard
+    removeCard, selectCurrentCard, selectCards, setCards, setCurrentCard
 } from "features/cards/cardsApi/cardsSlice";
 import { PreloaderContainer } from "../preloader/PreloaderContainer";
 import { ConditionalRender } from "../conditional-render/ConditionalRender";
+import { AnswerComponent } from "./AnswerComponent";
+import { QuestionComponent } from "./QuestionComponent";
 
+// todo: render optimization
 export const LearnPack = () => {
-
     const dispatch = useAppDispatch();
 
-    const [isNewAttempt, setNewAttempt] = useState(true);
+    const [isNewAttempt, setNewAttempt] = useState(false);
 
-    const [grade, setGrade] = React.useState("");
+    const [grade, setGrade] = React.useState(0);
 
     const [showAnswer, setShowAnswer] = useState(false);
 
@@ -29,46 +29,53 @@ export const LearnPack = () => {
 
     const packId = searchParams.get("cardsPack_id") || "";
 
-    const unexploredCards = useAppSelector(selectCurrentCards) || [] as CardType[];
+    const unexploredCards = useAppSelector(selectCards) || [] as CardType[];
 
     const currentCard = useAppSelector(selectCurrentCard) || {} as CardType;
 
     const [gradeCard] = useGradeCardMutation();
-    //todo: refactor params
-    const { data = {} as IGetCardsResponse, isLoading } = useGetCardsQuery({ cardsPack_id: packId, pageCount: "100" });
 
+    const [getCardsTrigger, { data = {} as IGetCardsResponse, isFetching }] = useLazyGetCardsQuery();
     const showAnswerToggle = () => {
         setShowAnswer(!showAnswer);
     };
 
     const goToNextCardHandler = () => {
+
+        dispatch(removeCard(currentCard._id));
+
         const randomCard = getRandomCard(unexploredCards);
+
         dispatch(setCurrentCard(randomCard));
-        //todo: remove if test infinite
-        dispatch(removeCard(randomCard._id));
-        if (currentCard._id && grade) gradeCardHandler(+grade);
-        setGrade("");
+
+        if (currentCard._id && grade) gradeCardHandler(grade);
+
+        setGrade(0);
         showAnswerToggle();
     };
 
     const gradeCardHandler = async (grade: number) => {
-        const data = {
-            card_id: currentCard._id,
-            grade
-        };
+        const data = { card_id: currentCard._id, grade };
         await gradeCard(data);
     };
 
-    //todo: hide useEffect
-    useEffect(() => {
+    const tryAgain = async () => {
+        await getCardsTrigger({ cardsPack_id: packId, pageCount: "100" });
+    };
 
+    //todo: hide effects
+    useEffect(() => {
+        tryAgain();
+    }, []);
+
+    useEffect(() => {
         if (data.cards && data.cards.length) {
             dispatch(setCards(data.cards));
             const randomCard = getRandomCard(unexploredCards);
             dispatch(setCurrentCard(randomCard));
         }
 
-        setNewAttempt(false);
+        isNewAttempt && setNewAttempt(false);
 
         return () => {
             dispatch(setCurrentCard(null));
@@ -76,42 +83,35 @@ export const LearnPack = () => {
     }, [isNewAttempt, data]);
 
 
-
-
     return (
-        <PreloaderContainer condition={isLoading}
+        <PreloaderContainer condition={isFetching}
                             loader={<Preloader />}
         >
             {
                 unexploredCards.length > 0
                     ? <LearnPackContainer packName={data.packName}>
-                        <Typography component="h1" variant="h5">
-                            {`Question:${currentCard.question}`}
-                        </Typography>
-                        <Typography component="p">
-                            {`Number of attempts: ${currentCard.shots}`}
-                        </Typography>
-                        <ConditionalRender condition={showAnswer}>
-                            <>
-                                <Typography component="p" variant="h5">
-                                    {`Answer: ${currentCard.answer}`}
-                                </Typography>
-                                <ColorRadioButtons value={grade} setValue={setGrade} />
 
-                                <Button onClick={goToNextCardHandler}>
-                                    next
-                                </Button>
-                            </>
-                            <Button
-                                disabled={false}
-                                variant={"contained"}
-                                onClick={showAnswerToggle}
+                        <QuestionComponent question={currentCard.question}
+                                           shots={currentCard.shots}
+                        />
+
+                        <ConditionalRender condition={showAnswer}>
+                            <AnswerComponent answer={currentCard.answer}
+                                             grade={grade}
+                                             setGrade={setGrade}
+                                             goToNextCardHandler={goToNextCardHandler}
+                            />
+
+                            <Button disabled={false}
+                                    variant={"contained"}
+                                    onClick={showAnswerToggle}
                             >
                                 Show answer
                             </Button>
                         </ConditionalRender>
+
                     </LearnPackContainer>
-                    : <LearnPackCompleted packId={packId} setNewAttempt={setNewAttempt} />
+                    : <LearnPackCompleted packId={packId} setNewAttempt={setNewAttempt} tryAgain={tryAgain} />
             }
 
         </PreloaderContainer>
