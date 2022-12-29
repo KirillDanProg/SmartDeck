@@ -75,6 +75,7 @@ export const cardsApi = apiSlice.injectEndpoints({
 
 
 export const {
+    useLazyGetCardsQuery,
     useGetCardsQuery,
     useCreateNewCardMutation,
     useDeleteCardMutation,

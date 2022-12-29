@@ -5,13 +5,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { FC } from "react";
 
 type PropsType = {
-    value: string
-    setValue: (value: string) => void
+    value: number
+    setValue: (value: number) => void
 }
-export const ColorRadioButtons: FC<PropsType> = ({value, setValue}) => {
+export const GradeCardRadioButtons: FC<PropsType> = ({value, setValue}) => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
+        setValue(+e.target.value);
     };
 
     return (
