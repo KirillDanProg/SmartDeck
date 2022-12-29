@@ -6,12 +6,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import {
-    CreateNewPackRequestType,
-    useDeletePackMutation
-} from "../../../features/cards/packsApi";
 import {ChildCreatePack} from "./ChildCreatePack";
 import {BasicModalPacksList} from "./BasicModal";
+import {CreateNewPackRequestType, useDeletePackMutation} from "features/packs-cards/packs/packsApi";
 
 type ModalForMyPackType = {
     packId: string

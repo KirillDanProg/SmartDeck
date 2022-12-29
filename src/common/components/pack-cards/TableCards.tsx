@@ -7,7 +7,7 @@ import {CardType, IGetCardsResponse} from 'features/packs-cards/cards/cardsSlice
 import {EmptyList} from '../emptyList/EmptyList';
 import {getUrlParams, sortToggle} from 'common/utils';
 import {useQueryParams} from 'common/hooks';
-import {TableSkeleton} from "../Skeletons/TableSkeleton";
+import {TableSkeleton} from "../skeletons/TableSkeleton";
 
 
 export const TableCards = () => {

@@ -60,7 +60,7 @@ export const packsApi = apiSlice.injectEndpoints({
           }
         }
       }),
-      invalidatesTags: () =>  [{type: 'Packs'}]
+      invalidatesTags: () =>  [{type: 'Cards'}]
     }),
   }),
 });
