@@ -20,16 +20,25 @@ const cardTypeExample = {
     _id: '',
 }
 
-export const CreateNewCardModalExample = () => <BasicModalPacksList title={"Modal example"} open={true}
+export const CreateNewCardModalExample = () => <BasicModalPacksList title={"Modal example"}
+                                                                    open={true}
                                                                     closeModal={action('close modal window')}>
-    <CreateNewCardModal cardData={cardTypeExample} closeModal={action('return back and close modal window')}
+    <CreateNewCardModal cardData={cardTypeExample}
+                        closeModal={action('return back and close modal window')}
                         cb={action('new card created')}
-                        packId={'1sdsd'} disabled={false}/>
+                        packId={'1sdsd'}
+                        disabled={false}
+    />
 </BasicModalPacksList>;
 
-export const CreateNewCardModalExampleWithDisabled = () => <BasicModalPacksList title={"Modal example when 'isLoading' in progress"}
-                                                                                open={true}
-                                                                                closeModal={action('close modal window')}>
-    <CreateNewCardModal cardData={cardTypeExample} closeModal={action('return back and close modal window')} cb={() => {
-    }} packId={'1sdsd'} disabled={true}/>
+export const CreateNewCardModalExampleWithDisabled = () => <BasicModalPacksList
+    title={"Modal example when 'isLoading' in progress"}
+    open={true}
+    closeModal={action('close modal window')}>
+    <CreateNewCardModal cardData={cardTypeExample}
+                        closeModal={action('return back and close modal window')}
+                        cb={() => {}}
+                        packId={'1sdsd'}
+                        disabled={true}
+    />
 </BasicModalPacksList>;
