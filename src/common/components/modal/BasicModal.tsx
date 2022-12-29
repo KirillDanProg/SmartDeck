@@ -64,11 +64,11 @@ const styleBoxCoverChild = {
 }
 
 const closeIconStyle = {
-    position: "absolute",
-    top: '-74px',
-    left: '367px',
-    color: 'white',
-    width: '50px',
-    height: '50px',
+    // position: "absolute",
+    // top: '-74px',
+    // left: '367px',
+    // color: 'white',
+    // width: '50px',
+    // height: '50px',
     cursor: 'pointer'
 }

@@ -8,7 +8,7 @@ import { useRegisterMutation } from "../authApi";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-import { SignupSkeleton } from "../../../common/components/skeletons/SignUpSkeleton";
+import {SignupSkeleton} from "../../../common/components/Skeletons/SignUpSkeleton";
 
 export const SignUpPage = () => {
 
