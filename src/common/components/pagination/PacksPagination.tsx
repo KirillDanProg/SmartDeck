@@ -3,19 +3,20 @@ import TablePagination from "@mui/material/TablePagination";
 import Pagination from "@mui/material/Pagination";
 import Box from "@mui/material/Box";
 import { useQueryParams } from "common/hooks";
+import {IGetPacksResponse} from "../../../features/packs-cards/packs/packsSlice";
 
 //todo fix data for pagination
 type PropsType = {
-  data: any
+  data: IGetPacksResponse
 }
 
 export const PacksPagination: FC<PropsType> = ({ data }) => {
 
   const [searchParams, setParam] = useQueryParams();
 
-  const page = searchParams.get("page") || 1;
-  const pageCount = searchParams.get("pageCount") || 1;
-  const cardPacksTotalCount = data.cardPacksTotalCount || 1;
+  const page = searchParams.get("page") || data.page;
+  const pageCount = searchParams.get("pageCount") || data.pageCount;
+  const cardPacksTotalCount = data.cardPacksTotalCount;
 
   const totalCountPages = Math.round(cardPacksTotalCount / +pageCount);
 
