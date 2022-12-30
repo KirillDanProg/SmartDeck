@@ -54,7 +54,10 @@ export const PacksPage = () => {
 
       <TablePacks isFetching={isFetching} cardPacks={cardPacks} sortPacks={sortPacks} setParam={setParam} sortToggle={sortToggle} />
 
-      <PacksPagination data={data} />
+      <PacksPagination pageProps={data.page}
+                       pageCountProps={data.pageCount}
+                       totalCount={data.cardPacksTotalCount}
+      />
 
     </PacksPageContainer>
   );

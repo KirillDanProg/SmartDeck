@@ -5,7 +5,6 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
-import {bool} from "yup";
 import {CreateNewPackRequestType} from "../../../features/packs-cards/packs/packsApi";
 
 type ChildEditPack = {
@@ -41,6 +40,7 @@ export const ChildCreatePack: FC<ChildEditPack> = ({closeModal, cb, inputValueSt
                 <TextField
                     autoFocus
                     onChange={changeInputValue}
+
                     value={inputValue}
                     label="Name pack"
                     variant="standard"

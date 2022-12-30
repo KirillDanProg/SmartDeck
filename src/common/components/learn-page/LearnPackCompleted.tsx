@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { ButtonGroup } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { PATH } from "../../../layout/AppRoutes/routes";
+import { to } from "../../navigateRoutes/navigateRoutes";
 
 type PropsType = {
     packId: string
@@ -20,11 +20,11 @@ export const LearnPackCompleted: FC<PropsType> = ({ packId, setNewAttempt, tryAg
     const tryAgainHandler = () => {
         tryAgain()
         setNewAttempt(true);
-        navigate(`${PATH.LEARN_PACK}?cardsPack_id=${packId}`);
+        navigate(to.learnPack(packId));
     };
 
     const backToCardsHandler = () => {
-        navigate(`${PATH.CARDS}?cardsPack_id=${packId}`);
+        navigate(to.pack(packId));
     };
 
     return (

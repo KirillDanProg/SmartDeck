@@ -1,14 +1,16 @@
-import React, {FC, useState} from 'react';
+import React, { FC, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import IconButton from "@mui/material/IconButton";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import {ChildCreatePack} from "./ChildCreatePack";
-import {BasicModalPacksList} from "./BasicModal";
-import {CreateNewPackRequestType, useDeletePackMutation} from "features/packs-cards/packs/packsApi";
+import { ChildCreatePack } from "./ChildCreatePack";
+import { BasicModalPacksList } from "./BasicModal";
+import { CreateNewPackRequestType, useDeletePackMutation } from "features/packs-cards/packs/packsApi";
+import { useNavigate } from "react-router-dom";
+import { to } from "../../navigateRoutes/navigateRoutes";
 
 type ModalForMyPackType = {
     packId: string
@@ -17,30 +19,40 @@ type ModalForMyPackType = {
     isLoading: boolean
 }
 
-export const ModalForMyPack: FC<ModalForMyPackType> = ({isLoading,cb,packId, packName}) => {
-    const [deletePack] = useDeletePackMutation()
+export const ModalForMyPack: FC<ModalForMyPackType> = ({ isLoading, cb, packId, packName }) => {
+    const navigate = useNavigate();
+
+    const [deletePack] = useDeletePackMutation();
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
-    const [openEditePackModal, setOpenEditePackModal] = useState(false)
+
+    const [openEditePackModal, setOpenEditePackModal] = useState(false);
+
     const toggleEditePackModalHandler = () => {
         setOpenEditePackModal(!openEditePackModal);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
 
     const deleteHandler = async () => {
-        await deletePack(packId)
-        window.history.back()
-    }
+        await deletePack(packId);
+        window.history.back();
+    };
 
-    const editeHandler = async(e: CreateNewPackRequestType) => {
-        await cb(e)
+    const editeHandler = async (e: CreateNewPackRequestType) => {
+        await cb(e);
         setOpenEditePackModal(!openEditePackModal);
-    }
+    };
+
+    const learnPackHandler = () => {
+        navigate(to.learnPack(packId));
+    };
 
     return (
         <div>
@@ -52,17 +64,17 @@ export const ModalForMyPack: FC<ModalForMyPackType> = ({isLoading,cb,packId, pac
                 onClick={handleMenu}
                 color="inherit"
             >
-                <MoreVertIcon/>
+                <MoreVertIcon />
             </IconButton>
             <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
                     vertical: "top",
-                    horizontal: "right",
+                    horizontal: "right"
                 }}
                 sx={{
-                    marginTop: '30px'
+                    marginTop: "30px"
                 }}
                 keepMounted
                 transformOrigin={{
@@ -72,31 +84,34 @@ export const ModalForMyPack: FC<ModalForMyPackType> = ({isLoading,cb,packId, pac
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={() => {
-                }}>
-                    <SchoolOutlinedIcon sx={forIcons}/>
+                <MenuItem onClick={learnPackHandler}>
+                    <SchoolOutlinedIcon sx={forIcons} />
                     Learn
                 </MenuItem>
                 <MenuItem onClick={toggleEditePackModalHandler}>
-                    <ModeEditIcon sx={forIcons} onClick={toggleEditePackModalHandler}/>
-                    Edit </MenuItem>
-            <MenuItem onClick={deleteHandler}>
-                <DeleteOutlineIcon sx={forIcons} onClick={deleteHandler}/>
-                    Delete </MenuItem>
+                    <ModeEditIcon sx={forIcons} />
+                    Edit
+                </MenuItem>
+                <MenuItem onClick={deleteHandler} >
+                    <DeleteOutlineIcon sx={forIcons} />
+                    Delete
+                </MenuItem>
             </Menu>
-            <BasicModalPacksList title={"Edite pack"} open={openEditePackModal} closeModal={toggleEditePackModalHandler}>
-                <ChildCreatePack disabled={isLoading} inputValueStart={packName} closeModal={toggleEditePackModalHandler} cb={editeHandler}/>
+            <BasicModalPacksList title={"Edite pack"} open={openEditePackModal}
+                                 closeModal={toggleEditePackModalHandler}>
+                <ChildCreatePack disabled={isLoading} inputValueStart={packName}
+                                 closeModal={toggleEditePackModalHandler} cb={editeHandler} />
             </BasicModalPacksList>
         </div>
     );
 };
 
 const forIcons = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '20px',
-    height: '20px',
-    cursor: 'pointer',
-    padding: '5px'
-}
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "20px",
+    height: "20px",
+    cursor: "pointer",
+    padding: "5px"
+};

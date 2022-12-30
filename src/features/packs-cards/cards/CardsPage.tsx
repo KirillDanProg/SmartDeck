@@ -59,7 +59,10 @@ export const CardsPage = () => {
 
             <TableCards/>
 
-            <PacksPagination data={data}/>
+            <PacksPagination pageProps={data.page}
+                             pageCountProps={data.pageCount}
+                             totalCount={data.cardsTotalCount}
+            />
 
         </PacksPageContainer>
     );

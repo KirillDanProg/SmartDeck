@@ -15,6 +15,7 @@ import { useAppSelector } from "../../hooks";
 import { BasicModalPacksList } from "../modal/BasicModal";
 import { ChildCreatePack } from "../modal/ChildCreatePack";
 import { DeletePackModal } from "../modal/deletePack/deletePackModal";
+import { to } from "../../navigateRoutes/navigateRoutes";
 
 type PropsType = {
     packData: PackResponseType
@@ -53,7 +54,7 @@ export const PackTableCell: FC<PropsType> = ({ packData }) => {
 
     const learnPackHandler = () => {
         if (packData.cardsCount) {
-            navigate(`${PATH.LEARN_PACK}?cardsPack_id=${packData._id}`);
+            navigate(to.learnPack(packData._id));
         }
     };
 
