@@ -17,7 +17,7 @@ import {TableSkeleton} from "../skeletons/TableSkeleton";
 type PropsType = {
     cardPacks: PackResponseType[]
     isFetching: boolean
-    sortToggle: (sortBy: any, sortParam: any, setParam: any, paramKey: string) => void
+    sortToggle: (sortBy: string, sortParam: string, setParam: (paramKey:string, sortBy:string)=>void, paramKey: string) => void
     sortPacks: string
     setParam:any
 }

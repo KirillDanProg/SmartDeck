@@ -14,6 +14,7 @@ import {BasicModalPacksList} from "../modal/BasicModal";
 import {useAppSelector} from "../../hooks";
 import {DeletePackModal} from "../modal/deletePack/deletePackModal";
 import {selectCurrentUser} from "../../../features/auth/authSlice";
+import {convertedDate} from '../../utils';
 
 type PropsType = {
   cardData: CardType
@@ -54,26 +55,13 @@ export const CardTableCell: FC<PropsType> = ({cardData}) => {
             key={cardData._id}
             sx={{
                 "&:last-child td, &:last-child th": {border: 0},
-                cursor: "pointer"
+                tableCellStyle
             }}>
-            <TableCell align="left" style={{width: "30%"}}>
-                <NavLink style={tableCellStyle}
-                         to={"/"}>{cardData.question}</NavLink>
-            </TableCell>
-            <TableCell style={{width: "30%"}} align="center">
-                <NavLink
-                    to={"/"}>{cardData.answer}
-                </NavLink>
-            </TableCell>
-            <TableCell style={{width: "20%"}} align="center"><NavLink
-                style={tableCellStyle}
-                to={"/"}>{cardData.updated}</NavLink></TableCell>
+            <TableCell align="left" style={{width: "30%"}}>{cardData.question}</TableCell>
+            <TableCell style={{width: "30%"}} align="center">{cardData.answer}</TableCell>
+            <TableCell style={{width: "20%"}} align="center">{convertedDate(cardData.updated)}</TableCell>
             <TableCell style={{width: "20%"}} align="right">
-                <NavLink
-                    style={tableCellStyle}
-                    to={"/"}>
-                </NavLink>
-                <Rating name="size-large" defaultValue={2} size="large"/>
+                <Rating name="size-large" defaultValue={2} size="large" value={cardData.grade}/>
                 {packOwner && <>
                     <ModeEditIcon onClick={toggleEditePackModalHandler}/>
                     <DeleteOutlineIcon onClick={toggleDeletePackModalHandler}/>

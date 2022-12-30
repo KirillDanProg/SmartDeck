@@ -38,6 +38,7 @@ export const AddNewCard: React.FC<AddCardType> = ({packId, ...props}) => {
                 <Button
                     disabled={false}
                     onClick={toggleModalAddCard}
+                    variant={'contained'}
                 >
                     Add new card
                 </Button>
