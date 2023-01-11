@@ -23,6 +23,11 @@ export const SignInPage = () => {
     <CustomGridContainer>
       <Box sx={style}>
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }} />
+          <Typography component="p" >
+              Test login data: <br/>
+              EMAIL: testEmail@data.com <br/>
+              PASSWORD: testPassword
+          </Typography>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
