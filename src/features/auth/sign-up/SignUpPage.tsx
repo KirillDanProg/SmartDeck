@@ -19,7 +19,7 @@ export const SignUpPage = () => {
     await register(data).unwrap();
   }
 
-  useRedirectTo(`${PATH.LOGIN}`, isSuccess, [isSuccess]);
+  useRedirectTo(PATH.LOGIN, isSuccess, [isSuccess]);
 
   return (
     <>

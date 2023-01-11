@@ -19,6 +19,7 @@ export const SignInPage = () => {
   }
 
   useRedirectTo(PATH.PACK_LISTS, !!isAuth, [isAuth]);
+
   return (
     <CustomGridContainer>
       <Box sx={style}>
