@@ -25,7 +25,7 @@ export const CustomGridContainer:FC<GridContainerT> = ({children}) => {
           mt: 7,
           p: 3,
           width: 450,
-          minHeight: 500,
+          height: 700,
         }}
       >
         <Stack sx={{alignItems: 'center',justifyContent: 'space-around', }}>
