@@ -26,11 +26,12 @@ function App() {
         });
     }, []);
 
+    const errorCondition = !firstMount.current && error;
     return (
         <ColorModelContextProvider>
             <CssBaseline />
             {
-                error && <ErrorSnackbar errorMessage={serverErrorHandler(error)} />
+                errorCondition && <ErrorSnackbar errorMessage={serverErrorHandler(error)} />
             }
             <PreloaderContainer
                 condition={firstMount.current && status === "loading"}
