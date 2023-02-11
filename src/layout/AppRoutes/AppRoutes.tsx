@@ -16,6 +16,7 @@ const Profile = lazy(() => import("../../features/profile"))
 const CardsPage = lazy(() => import("../../features/packs-cards/cards"))
 const PacksPage = lazy(() => import("../../features/packs-cards/packs"))
 const CreatePassword = lazy(() => import("../../common/components/reset-password/createPassword"))
+
 export const AppRoutes = () => {
     return (
         <>
