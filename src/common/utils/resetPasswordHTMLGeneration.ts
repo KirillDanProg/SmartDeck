@@ -1,7 +1,6 @@
-import {PATH} from '../../layout/AppRoutes/routes';
+import {PATH} from "../../layout/AppRoutes/routes";
 
 export const resetPasswordHTMLGeneration = () => {
-
   return `<body style="font-size: 1.25rem;font-family: 'Roboto', sans-serif;padding-left:20px;padding-right:20px;padding-top:20px;padding-bottom:20px; background-color: #FAFAFA; width: 75%; max-width: 1280px; min-width: 600px; margin-right: auto; margin-left: auto">
 <table cellpadding="12" cellspacing="0" width="100%" bgcolor="#FAFAFA" style="border-collapse: collapse;margin: auto">
 <thead>
@@ -47,6 +46,5 @@ export const resetPasswordHTMLGeneration = () => {
 </tr>
 </tfoot>
 </table>
-</body>`
-}
-
+</body>`;
+};

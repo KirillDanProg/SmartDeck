@@ -1,11 +1,10 @@
 import s from "../../../features/profile/Profile.module.css";
-import { PATH } from "../../../layout/AppRoutes/routes";
+import {PATH} from "../../../layout/AppRoutes/routes";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Box from "@mui/material/Box";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 export const ReturnComponent = () => {
-
   return (
     <Box sx={boxStyle}>
       <ArrowBackIosIcon />

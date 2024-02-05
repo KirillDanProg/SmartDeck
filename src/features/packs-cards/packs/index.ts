@@ -1,1 +1,1 @@
-export {PacksPage as default} from "./PacksPage"
+export {PacksPage as default} from "./PacksPage";

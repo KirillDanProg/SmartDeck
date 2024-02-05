@@ -1,1 +1,1 @@
-export {CreatePassword as default} from "./CreatePassword"
+export {CreatePassword as default} from "./CreatePassword";

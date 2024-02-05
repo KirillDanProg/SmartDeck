@@ -1,16 +1,15 @@
-import React, { FC, memo, useState } from "react";
+import React, {FC, memo, useState} from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { Slider } from "@mui/material";
-import { IGetPacksResponse } from "features/packs-cards/packs/packsSlice";
-import { useQueryParams } from "../../hooks";
+import {Slider} from "@mui/material";
+import {IGetPacksResponse} from "features/packs-cards/packs/packsSlice";
+import {useQueryParams} from "../../hooks";
 
 type PropsType = {
-  data: IGetPacksResponse
-}
+  data: IGetPacksResponse;
+};
 
-export const NumberOfCards: FC<PropsType> = memo(({ data }) => {
-
+export const NumberOfCards: FC<PropsType> = memo(({data}) => {
   const [searchParams, setParam] = useQueryParams();
 
   const minCardsCount = data.minCardsCount;
@@ -21,6 +20,7 @@ export const NumberOfCards: FC<PropsType> = memo(({ data }) => {
   let max = searchParams.get("max") || maxCardsCount;
 
   const [range, setRange] = useState([+min, +max]);
+  s;
 
   const handleChange = (event: Event, value: number | number[]) => {
     const newRange = value as number[];
@@ -46,7 +46,7 @@ export const NumberOfCards: FC<PropsType> = memo(({ data }) => {
 
         <Slider
           disabled={false}
-          sx={{ width: "155px" }}
+          sx={{width: "155px"}}
           getAriaLabel={() => "range"}
           value={range}
           onChange={handleChange}
@@ -78,3 +78,5 @@ const containerStyle = {
   flexDirection: "row",
   alignItems: "center"
 };
+
+NumberOfCards.displayName = "NumberOfCards";

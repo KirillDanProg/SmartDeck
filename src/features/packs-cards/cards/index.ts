@@ -1,1 +1,1 @@
-export {CardsPage as default} from "./CardsPage"
+export {CardsPage as default} from "./CardsPage";

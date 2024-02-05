@@ -1,26 +1,28 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 import TablePagination from "@mui/material/TablePagination";
 import Pagination from "@mui/material/Pagination";
 import Box from "@mui/material/Box";
-import { useQueryParams } from "common/hooks";
+import {useQueryParams} from "common/hooks";
 
 //todo fix data for pagination
 type PropsType = {
-    pageProps: number
-    pageCountProps: number
-    totalCount: number
-}
+  pageProps: number;
+  pageCountProps: number;
+  totalCount: number;
+};
 
-export const PacksPagination: FC<PropsType> = ({ pageProps,  pageCountProps, totalCount}) => {
+export const PacksPagination: FC<PropsType> = ({
+  pageProps,
+  pageCountProps,
+  totalCount
+}) => {
+  const [searchParams, setParam] = useQueryParams();
 
-    const [searchParams, setParam] = useQueryParams();
+  const page = searchParams.get("page") || pageProps;
+  const pageCount = searchParams.get("pageCount") || pageCountProps;
+  const cardPacksTotalCount = totalCount;
 
-    const page = searchParams.get("page") || pageProps;
-    const pageCount = searchParams.get("pageCount") || pageCountProps;
-    const cardPacksTotalCount = totalCount;
-
-
-    const totalCountPages = Math.round(cardPacksTotalCount / +pageCount);
+  const totalCountPages = Math.round(cardPacksTotalCount / +pageCount);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -35,7 +37,10 @@ export const PacksPagination: FC<PropsType> = ({ pageProps,  pageCountProps, tot
     setParam("pageCount", String(event.target.value));
   };
 
-  const currentPageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
+  const currentPageHandler = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
     setParam("page", String(page));
   };
 
@@ -52,7 +57,7 @@ export const PacksPagination: FC<PropsType> = ({ pageProps,  pageCountProps, tot
         onChange={currentPageHandler}
       />
       <TablePagination
-        sx={{ mt: -1 }}
+        sx={{mt: -1}}
         component="div"
         count={cardPacksTotalCount}
         page={+page}
@@ -65,4 +70,4 @@ export const PacksPagination: FC<PropsType> = ({ pageProps,  pageCountProps, tot
   );
 };
 
-const style = { display: "flex", width: "100%", margin: "10px auto" };
+const style = {display: "flex", width: "100%", margin: "10px auto"};

@@ -1,25 +1,23 @@
-import { validationSchema } from "./yupValidation";
-import { PasswordVisibleIcon } from "../PasswordVisible";
-import { PATH } from "../../../layout/AppRoutes/routes";
-import React, { FC, useState } from "react";
-import { InputAdornment } from "@mui/material";
+import {validationSchema} from "./yupValidation";
+import {PasswordVisibleIcon} from "../PasswordVisible";
+import {PATH} from "../../../layout/AppRoutes/routes";
+import React, {FC, useState} from "react";
+import {InputAdornment} from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { useFormik } from "formik";
+import {useFormik} from "formik";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
-
+import {Link} from "react-router-dom";
 
 type FormPropsType = {
   //todo: fix types
-  callback: (data: any) => void
-  formType?: string
-}
-export const Form: FC<FormPropsType> = ({ callback, formType }) => {
-
+  callback: (data: any) => void;
+  formType?: string;
+};
+export const Form: FC<FormPropsType> = ({callback, formType}) => {
   const [isShown, setIsShown] = useState(false);
 
   const passwordType = isShown ? "text" : "password";
@@ -36,7 +34,7 @@ export const Form: FC<FormPropsType> = ({ callback, formType }) => {
     }
   });
   return (
-    <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
+    <Box component="form" onSubmit={formik.handleSubmit} sx={{mt: 1}}>
       <TextField
         margin="normal"
         required
@@ -65,46 +63,43 @@ export const Form: FC<FormPropsType> = ({ callback, formType }) => {
           )
         }}
       />
-      {
-        formType === "sign-up" &&
+      {formType === "sign-up" && (
         <TextField
           margin="normal"
           required
           fullWidth
-          error={formik.touched.passwordConfirm && Boolean(formik.errors.passwordConfirm)}
-          helperText={formik.touched.passwordConfirm && formik.errors.passwordConfirm}
+          error={
+            formik.touched.passwordConfirm &&
+            Boolean(formik.errors.passwordConfirm)
+          }
+          helperText={
+            formik.touched.passwordConfirm && formik.errors.passwordConfirm
+          }
           label="Confirm password"
           type={passwordType}
           id="passwordConfirm"
           {...formik.getFieldProps("passwordConfirm")}
         />
-      }
+      )}
       <FormControlLabel
-        control={<Checkbox value="remember" color="primary"/>}
+        control={<Checkbox value="remember" color="primary" />}
         label="Remember me"
       />
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        sx={{mt: 3, mb: 2}}
-      >
+      <Button type="submit" fullWidth variant="contained" sx={{mt: 3, mb: 2}}>
         Sign In
       </Button>
       <Grid container>
-        {
-          formType === "sign-in" &&
+        {formType === "sign-in" && (
           <Grid item xs>
             <Button component={Link} to={PATH.FORGOT_PASSWORD}>
               {" Forgot password?"}
             </Button>
           </Grid>
-        }
+        )}
         <Grid item>
-          <Button component={Link}
-                  to={formType === "sign-in"
-                    ? PATH.SIGN_UP
-                    : PATH.LOGIN}
+          <Button
+            component={Link}
+            to={formType === "sign-in" ? PATH.SIGN_UP : PATH.LOGIN}
           >
             {formType === "sign-in"
               ? "Don't have an account? Sign Up"

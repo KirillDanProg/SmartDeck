@@ -1,83 +1,83 @@
-import styles from '../forgotPassword/ForgotPassword.module.css';
-import {PasswordVisibleIcon} from 'common/components/PasswordVisible';
-import {useSetNewPasswordMutation} from 'features/auth/authApi';
+import styles from "../forgotPassword/ForgotPassword.module.css";
+import {PasswordVisibleIcon} from "common/components/PasswordVisible";
+import {useSetNewPasswordMutation} from "features/auth/authApi";
 import {useRedirectTo} from "common/hooks";
-import {PATH} from 'layout/AppRoutes/routes';
-import React, {useState} from 'react';
-import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import {InputAdornment} from '@mui/material';
-import {useFormik} from 'formik';
-import {useParams} from 'react-router-dom';
-import * as yup from 'yup';
+import {PATH} from "layout/AppRoutes/routes";
+import React, {useState} from "react";
+import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import {InputAdornment} from "@mui/material";
+import {useFormik} from "formik";
+import {useParams} from "react-router-dom";
+import * as yup from "yup";
 
 type InitialValuesType = {
-    password: string
-}
+  password: string;
+};
 const validationSchema = yup.object().shape({
   password: yup
     .string()
-    .min(7, 'Password should be of minimum 7 characters length')
-    .required('Password is required'),
+    .min(7, "Password should be of minimum 7 characters length")
+    .required("Password is required")
 });
 
-
 export const CreatePassword = () => {
-  const [isShown, setIsShown] = useState(false)
+  const [isShown, setIsShown] = useState(false);
 
-  const {resetPasswordToken} = useParams()
+  const {resetPasswordToken} = useParams();
 
-  const [setNewPassword, {isSuccess}] = useSetNewPasswordMutation()
+  const [setNewPassword, {isSuccess}] = useSetNewPasswordMutation();
 
-  const passwordType = isShown ? 'text' : 'password'
+  const passwordType = isShown ? "text" : "password";
 
   const onSubmitHandler = async ({password}: InitialValuesType) => {
     if (resetPasswordToken) {
       const setNewPasswordData = {
         password,
         resetPasswordToken
-      }
-      await setNewPassword(setNewPasswordData)
-      formik.resetForm()
+      };
+      await setNewPassword(setNewPasswordData);
+      formik.resetForm();
     }
-  }
+  };
 
   const formik = useFormik({
     initialValues: {
-      password: '',
+      password: ""
     },
     validationSchema,
-    onSubmit: onSubmitHandler,
-  })
+    onSubmit: onSubmitHandler
+  });
 
-  useRedirectTo(PATH.LOGIN, isSuccess, [isSuccess])
+  useRedirectTo(PATH.LOGIN, isSuccess, [isSuccess]);
 
   return (
     <Container
       maxWidth="sm"
       sx={{
-        display: 'flex',
-        height: '100vh',
-        justifyContent: 'center',
+        display: "flex",
+        height: "100vh",
+        justifyContent: "center"
       }}
     >
-      <Paper sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        mt: 7,
-        p: 3,
-        width: 400,
-        height: 350,
-      }}
+      <Paper
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          mt: 7,
+          p: 3,
+          width: 400,
+          height: 350
+        }}
       >
-        <Stack sx={{alignItems: 'center'}}
-          className={styles.container}
-        >
-          <Typography variant={'inherit'} className={styles.title}>Create new password</Typography>
+        <Stack sx={{alignItems: "center"}} className={styles.container}>
+          <Typography variant={"inherit"} className={styles.title}>
+            Create new password
+          </Typography>
           <TextField
             margin="normal"
             required
@@ -88,28 +88,26 @@ export const CreatePassword = () => {
             type={passwordType}
             id="password"
             variant="standard"
-            {...formik.getFieldProps('password')}
+            {...formik.getFieldProps("password")}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <PasswordVisibleIcon isShown={isShown} setShown={setIsShown}/>
+                  <PasswordVisibleIcon
+                    isShown={isShown}
+                    setShown={setIsShown}
+                  />
                 </InputAdornment>
               )
             }}
           />
-          <Typography variant={'inherit'}
-            className={styles.textAfterEmail}>
-                        Create new password and we will send you
-            <br/>
-                        further instructions to email
+          <Typography variant={"inherit"} className={styles.textAfterEmail}>
+            Create new password and we will send you
+            <br />
+            further instructions to email
           </Typography>
           <form onSubmit={formik.handleSubmit}>
-            <Button
-              type="submit"
-              variant={'contained'}
-              color={'primary'}
-            >
-                            Create new password
+            <Button type="submit" variant={"contained"} color={"primary"}>
+              Create new password
             </Button>
           </form>
         </Stack>
@@ -117,4 +115,3 @@ export const CreatePassword = () => {
     </Container>
   );
 };
-

@@ -1,30 +1,30 @@
 export const saveToLocalStorage = (key: string, value: unknown) => {
   try {
-    localStorage.setItem(key, JSON.stringify(value))
+    localStorage.setItem(key, JSON.stringify(value));
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
 
 export const getFromLocalStorage = (key: string) => {
   try {
-    const storedValue = localStorage.getItem(key)
+    const storedValue = localStorage.getItem(key);
 
     if (storedValue) {
-      return JSON.parse(storedValue)
+      return JSON.parse(storedValue);
     }
 
-    return undefined
+    return undefined;
   } catch (e) {
-    console.log(e)
-    return undefined
+    console.log(e);
+    return undefined;
   }
-}
+};
 
-export const removeFromLocalStorage =  (key: string) => {
+export const removeFromLocalStorage = (key: string) => {
   try {
-    localStorage.removeItem(key)
+    localStorage.removeItem(key);
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
