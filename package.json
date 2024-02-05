@@ -37,11 +37,11 @@
     "lint": "eslint -c .eslintrc --ext .ts,.tsx . --fix && prettier --write --config-precedence prefer-file \"src/**/*.ts\" \"src/**/*.tsx\"",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "precommit": "npm run lint && npm test"
+    "pre-commit": "npm run lint && npm test"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run precommit"
+      "pre-commit": "npm run pre-commit"
     }
   },
   "browserslist": {
