@@ -27,7 +27,7 @@ export const packsApi = apiSlice.injectEndpoints({
         url: "/cards/pack",
         params
       }),
-      providesTags: (result) => [{type: "Packs"}]
+      providesTags: () => [{type: "Packs"}]
     }),
     createNewPack: build.mutation<{}, CreateNewPackRequestType>({
       query: (body) => ({
@@ -47,7 +47,7 @@ export const packsApi = apiSlice.injectEndpoints({
         url: `/cards/pack?id=${body}`,
         method: "DELETE"
       }),
-      invalidatesTags: (result) => [{type: "Packs"}]
+      invalidatesTags: () => [{type: "Packs"}]
     }),
     changeNamePack: build.mutation<
       IChangeNamePackResponse,

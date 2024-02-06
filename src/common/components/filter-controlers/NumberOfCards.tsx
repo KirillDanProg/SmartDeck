@@ -20,7 +20,6 @@ export const NumberOfCards: FC<PropsType> = memo(({data}) => {
   let max = searchParams.get("max") || maxCardsCount;
 
   const [range, setRange] = useState([+min, +max]);
-  s;
 
   const handleChange = (event: Event, value: number | number[]) => {
     const newRange = value as number[];

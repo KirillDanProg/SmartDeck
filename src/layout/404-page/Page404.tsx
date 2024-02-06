@@ -4,8 +4,6 @@ import oops from "../../assets/pages/Group 752.svg";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
-import {useRedirectTo} from "../../common/hooks/useRedirectTo";
 import {PATH} from "../AppRoutes/routes";
 import {useNavigate} from "react-router-dom";
 

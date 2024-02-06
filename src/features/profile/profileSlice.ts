@@ -13,7 +13,7 @@ const initialState: InitialStateType = {
 
 export const changeNameTC = createAsyncThunk(
   "profile/changeName",
-  async (newName: string, thunkAPI) => {
+  async (newName: string) => {
     //todo: make right response with rules rtk query
     return {newName: newName};
   }

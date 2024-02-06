@@ -27,11 +27,11 @@ import {Divider, ListItem} from "@mui/material";
 export const Header = () => {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [logout, {}] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
-  const {mode, toggleColorMode} = useContext(ColorModelContext);
+  const {toggleColorMode} = useContext(ColorModelContext);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
