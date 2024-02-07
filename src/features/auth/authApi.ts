@@ -1,41 +1,39 @@
-import { IResetPasswordData } from "./authModels";
-import { apiSlice } from "app/api/apiSlice";
-import { resetPasswordHTMLGeneration } from "common/utils";
+import {IResetPasswordData} from "./authModels";
+import {apiSlice} from "app/api/apiSlice";
+import {resetPasswordHTMLGeneration} from "common/utils";
 
 export interface IRegisterResponse {
-    addedUser: UserType;
+  addedUser: UserType;
 }
 
 export type AuthResponseType = {
-  _id: string
-  email: string
-  rememberMe: boolean
-  isAdmin: boolean
-  name: string
-  verified: boolean
-  publicCardPacksCount: number
-  created: string
-  updated: string
-  __v: number
-  token: string
-  tokenDeathTime: number
-}
+  _id: string;
+  email: string;
+  rememberMe: boolean;
+  isAdmin: boolean;
+  name: string;
+  verified: boolean;
+  publicCardPacksCount: number;
+  created: string;
+  updated: string;
+  __v: number;
+  token: string;
+  tokenDeathTime: number;
+};
 
 export type UpdatedUserType = {
-  updatedUser: UserType & { avatar: string | null }
-}
-export type UserType = Omit<AuthResponseType,
-  "token" |
-  "tokenDeathTime">
+  updatedUser: UserType & {avatar: string | null};
+};
+export type UserType = Omit<AuthResponseType, "token" | "tokenDeathTime">;
 
 export interface IRegisterRequest {
   email: string;
   password: string;
 }
 
-export type ILoginRequest  = IRegisterRequest & {
+export type ILoginRequest = IRegisterRequest & {
   rememberMe: boolean;
-}
+};
 
 export interface IGeneralResponse {
   info: string;
@@ -69,7 +67,7 @@ export const authApi = apiSlice.injectEndpoints({
       query: (token: string) => ({
         url: "auth/me",
         method: "POST",
-        body: { token }
+        body: {token}
       })
     }),
     setNewPassword: build.mutation<IGeneralResponse, IResetPasswordData>({

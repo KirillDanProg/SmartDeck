@@ -1,76 +1,80 @@
-import React from 'react';
-import {getUrlParams} from 'common/utils';
-import {useQueryParams} from 'common/hooks';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import React from "react";
+import {getUrlParams} from "common/utils";
+import {useQueryParams} from "common/hooks";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import {
-    AddNewCard,
-    PacksPageContainer,
-    PacksPagination,
-    SearchPacksCard,
-    TableCards,
-    TableFiltersContainer
-} from 'common/components';
-import {IGetCardsResponse} from './cardsSlice';
-import {useGetCardsQuery} from './cardsApi';
-import {ReturnComponent} from 'common/components/returnComponent/ReturnComponent';
+  AddNewCard,
+  PacksPageContainer,
+  PacksPagination,
+  SearchPacksCard,
+  TableCards,
+  TableFiltersContainer
+} from "common/components";
+import {IGetCardsResponse} from "./cardsSlice";
+import {useGetCardsQuery} from "./cardsApi";
+import {ReturnComponent} from "common/components/returnComponent/ReturnComponent";
 import {ModalForMyPack} from "../../../common/components/modal/ModalForMyPack";
-import {CreateNewPackRequestType, useChangeNamePackMutation} from "../packs/packsApi";
-
+import {
+  CreateNewPackRequestType,
+  useChangeNamePackMutation
+} from "../packs/packsApi";
 
 export const CardsPage = () => {
+  const [searchParams] = useQueryParams();
+  const paramsObject = getUrlParams(searchParams);
+  const [changeName, {isLoading}] = useChangeNamePackMutation();
 
-    const [searchParams] = useQueryParams();
-    const paramsObject = getUrlParams(searchParams);
-    const [changeName, {isLoading}] = useChangeNamePackMutation()
+  const editeHandler = async (e: CreateNewPackRequestType) => {
+    await changeName({
+      name: e.name,
+      _id: packId
+    });
+  };
 
-    const editeHandler = async(e: CreateNewPackRequestType) => {
-        await changeName({
-            name: e.name,
-            _id: packId,
-        });
-    }
+  const {data = {} as IGetCardsResponse} = useGetCardsQuery(paramsObject);
+  const packId = searchParams.get("cardsPack_id") || "";
+  const packName = data.packName;
 
-    const {data = {} as IGetCardsResponse} = useGetCardsQuery(paramsObject);
-    const packId = searchParams.get('cardsPack_id') || '';
-    const packName = data.packName
+  return (
+    <PacksPageContainer>
+      <ReturnComponent />
 
-    return (
-        <PacksPageContainer>
+      <Box sx={style}>
+        <Typography
+          variant="h5"
+          sx={{display: "flex", alignItems: "center", fontWeight: "bold"}}
+        >
+          {packName}
+          <ModalForMyPack
+            isLoading={isLoading}
+            cb={editeHandler}
+            packId={packId}
+            packName={packName}
+          />
+        </Typography>
 
-            <ReturnComponent/>
+        <AddNewCard packId={packId} />
+      </Box>
 
-            <Box sx={style}>
+      <TableFiltersContainer>
+        <SearchPacksCard />
+      </TableFiltersContainer>
 
-                <Typography variant="h5" sx={{display: 'flex', alignItems: 'center', fontWeight: 'bold'}}>
-                    {packName}
-                    <ModalForMyPack isLoading={isLoading} cb={editeHandler} packId={packId} packName={packName}/>
-                </Typography>
+      <TableCards />
 
-                <AddNewCard packId={packId}/>
-
-            </Box>
-
-            <TableFiltersContainer>
-
-                <SearchPacksCard/>
-
-            </TableFiltersContainer>
-
-            <TableCards/>
-
-            <PacksPagination pageProps={data.page}
-                             pageCountProps={data.pageCount}
-                             totalCount={data.cardsTotalCount}
-            />
-
-        </PacksPageContainer>
-    );
+      <PacksPagination
+        pageProps={data.page}
+        pageCountProps={data.pageCount}
+        totalCount={data.cardsTotalCount}
+      />
+    </PacksPageContainer>
+  );
 };
 
 const style = {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+  width: "100%",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between"
 };

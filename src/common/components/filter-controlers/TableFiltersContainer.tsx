@@ -1,22 +1,25 @@
-import React, {FC, memo} from 'react';
-import Box from '@mui/material/Box';
+import React, {FC, memo} from "react";
+import Box from "@mui/material/Box";
 
 type PropsType = {
-    children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 export const TableFiltersContainer: FC<PropsType> = memo(({children}) => {
   return (
-    <Box sx={{
-      marginTop: '30px',
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: "center",
-      justifyContent: 'space-between',
-      width: '100%',
-      marginBottom: '30px'
-    }}>
+    <Box
+      sx={{
+        marginTop: "30px",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "100%",
+        marginBottom: "30px"
+      }}
+    >
       {children}
     </Box>
   );
-})
+});
 
+TableFiltersContainer.displayName = "TableFiltersContainer";

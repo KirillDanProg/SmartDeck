@@ -1,14 +1,14 @@
-import { Form } from "../../../common/components/form/Form";
-import { ILoginRequest } from "../authModels";
-import { useLoginMutation } from "../authApi";
-import { CustomGridContainer } from "common/components";
+import {Form} from "../../../common/components/form/Form";
+import {ILoginRequest} from "../authModels";
+import {useLoginMutation} from "../authApi";
+import {CustomGridContainer} from "common/components";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import * as React from "react";
-import { useAppSelector, useRedirectTo } from "common/hooks";
-import { selectCurrentUser } from "../authSlice";
-import { PATH } from "layout/AppRoutes/routes";
+import {useAppSelector, useRedirectTo} from "common/hooks";
+import {selectCurrentUser} from "../authSlice";
+import {PATH} from "layout/AppRoutes/routes";
 
 export const SignInPage = () => {
   const [login] = useLoginMutation();
@@ -23,12 +23,7 @@ export const SignInPage = () => {
   return (
     <CustomGridContainer>
       <Box sx={style}>
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }} />
-          <Typography component="p" >
-              Test login data: <br/>
-              EMAIL: testEmail@data.com <br/>
-              PASSWORD: testPassword
-          </Typography>
+        <Avatar sx={{m: 1, bgcolor: "secondary.main"}} />
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
