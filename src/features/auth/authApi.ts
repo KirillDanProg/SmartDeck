@@ -1,4 +1,8 @@
-import {IResetPasswordData} from "./authModels";
+import {
+  ILoginRequest,
+  IRegisterRequest,
+  IResetPasswordData
+} from "./authModels";
 import {apiSlice} from "app/api/apiSlice";
 import {resetPasswordHTMLGeneration} from "common/utils";
 
@@ -25,15 +29,6 @@ export type UpdatedUserType = {
   updatedUser: UserType & {avatar: string | null};
 };
 export type UserType = Omit<AuthResponseType, "token" | "tokenDeathTime">;
-
-export interface IRegisterRequest {
-  email: string;
-  password: string;
-}
-
-export type ILoginRequest = IRegisterRequest & {
-  rememberMe: boolean;
-};
 
 export interface IGeneralResponse {
   info: string;

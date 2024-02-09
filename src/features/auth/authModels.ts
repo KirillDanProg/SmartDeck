@@ -45,5 +45,5 @@ export interface IRegisterRequest {
 export interface ILoginRequest {
   email: string;
   password: string;
-  rememberMe: boolean;
+  rememberMe?: boolean;
 }
