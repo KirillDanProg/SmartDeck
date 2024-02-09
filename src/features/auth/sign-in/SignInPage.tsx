@@ -5,20 +5,20 @@ import {CustomGridContainer} from "common/components";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import * as React from "react";
-import {useAppSelector, useRedirectTo} from "common/hooks";
-import {selectCurrentUser} from "../authSlice";
 import {PATH} from "layout/AppRoutes/routes";
+import {useNavigate} from "react-router-dom";
 
 export const SignInPage = () => {
-  const [login] = useLoginMutation();
-  const isAuth = useAppSelector(selectCurrentUser);
+  const [login, {error, isSuccess}] = useLoginMutation();
+  const navigate = useNavigate();
 
-  async function signInHandler(formData: ILoginRequest) {
-    await login(formData).unwrap();
+  if (isSuccess) {
+    navigate(PATH.MAIN, {replace: true});
   }
 
-  useRedirectTo(PATH.PACK_LISTS, !!isAuth, [isAuth]);
+  async function signInHandler(formData: ILoginRequest) {
+    await login(formData);
+  }
 
   return (
     <CustomGridContainer>
