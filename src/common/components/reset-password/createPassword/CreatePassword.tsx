@@ -1,9 +1,8 @@
 import styles from "../forgotPassword/ForgotPassword.module.css";
 import {PasswordVisibleIcon} from "common/components/PasswordVisible";
 import {useSetNewPasswordMutation} from "features/auth/authApi";
-import {useRedirectTo} from "common/hooks";
 import {PATH} from "layout/AppRoutes/routes";
-import React, {useState} from "react";
+import {useState} from "react";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
@@ -12,7 +11,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {InputAdornment} from "@mui/material";
 import {useFormik} from "formik";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import * as yup from "yup";
 
 type InitialValuesType = {
@@ -27,6 +26,7 @@ const validationSchema = yup.object().shape({
 
 export const CreatePassword = () => {
   const [isShown, setIsShown] = useState(false);
+  const navigate = useNavigate();
 
   const {resetPasswordToken} = useParams();
 
@@ -41,7 +41,7 @@ export const CreatePassword = () => {
         resetPasswordToken
       };
       await setNewPassword(setNewPasswordData);
-      formik.resetForm();
+      navigate(PATH.LOGIN);
     }
   };
 
@@ -52,8 +52,6 @@ export const CreatePassword = () => {
     validationSchema,
     onSubmit: onSubmitHandler
   });
-
-  useRedirectTo(PATH.LOGIN, isSuccess, [isSuccess]);
 
   return (
     <Container
