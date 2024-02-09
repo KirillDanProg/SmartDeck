@@ -13,7 +13,7 @@ import {
   useDeletePackMutation
 } from "features/packs-cards/packs/packsApi";
 import {useNavigate} from "react-router-dom";
-import {to} from "../../navigate-to-card-helper/pathToSpecificPack";
+import {pathToSpecificPack} from "../../navigate-to-card-helper/pathToSpecificPack";
 
 type ModalForMyPackType = {
   packId: string;
@@ -59,7 +59,7 @@ export const ModalForMyPack: FC<ModalForMyPackType> = ({
   };
 
   const learnPackHandler = () => {
-    navigate(to.learnPack(packId));
+    navigate(pathToSpecificPack.learnPack(packId));
   };
 
   return (
