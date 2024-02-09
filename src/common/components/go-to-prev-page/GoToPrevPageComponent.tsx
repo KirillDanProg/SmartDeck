@@ -1,16 +1,21 @@
 import s from "../../../features/profile/Profile.module.css";
 import {PATH} from "../../../layout/AppRoutes/routes";
 import React from "react";
-import {NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-export const ReturnComponent = () => {
+import {Button} from "@mui/material";
+
+export const GoToPrevPageComponent = () => {
+  const navigate = useNavigate();
+  const onGoToPrevPage = () => {
+    navigate(-1);
+  };
   return (
     <Box sx={boxStyle}>
-      <ArrowBackIosIcon />
-      <NavLink to={PATH.PACK_LISTS} className={s.link}>
-        Back to Packs List
-      </NavLink>
+      <Button onClick={onGoToPrevPage}>
+        <ArrowBackIosIcon />
+      </Button>
     </Box>
   );
 };

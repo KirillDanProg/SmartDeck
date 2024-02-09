@@ -10,5 +10,5 @@ export const PreloaderContainer: FC<PropsType> = ({
   children,
   condition
 }) => {
-  return <div>{condition ? loader : children}</div>;
+  return <>{condition ? loader : children}</>;
 };

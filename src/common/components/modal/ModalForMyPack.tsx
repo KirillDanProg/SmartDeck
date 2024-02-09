@@ -13,7 +13,7 @@ import {
   useDeletePackMutation
 } from "features/packs-cards/packs/packsApi";
 import {useNavigate} from "react-router-dom";
-import {to} from "../../navigateRoutes/navigateRoutes";
+import {to} from "../../navigate-to-card-helper/pathToSpecificPack";
 
 type ModalForMyPackType = {
   packId: string;
@@ -54,7 +54,7 @@ export const ModalForMyPack: FC<ModalForMyPackType> = ({
   };
 
   const editeHandler = async (e: CreateNewPackRequestType) => {
-    await cb(e);
+    cb(e);
     setOpenEditePackModal(!openEditePackModal);
   };
 

@@ -11,7 +11,7 @@ import {
   TableRow
 } from "@mui/material";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import {EmptyList} from "../emptyList/EmptyList";
+import {EmptyList} from "../empty-list/EmptyList";
 import {TableSkeleton} from "../skeletons/TableSkeleton";
 
 type PropsType = {

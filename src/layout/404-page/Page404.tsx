@@ -11,8 +11,7 @@ export const Page404 = () => {
   // const returnBtn = useRedirectTo
   const navigate = useNavigate();
   const returnHomeHandler = () => {
-    navigate(PATH.PACK_LISTS);
-    // returnBtn(PATH.PACK_LISTS, true, [true])
+    navigate(PATH.PACKS_LIST);
   };
 
   return (

@@ -1,6 +1,6 @@
 import {PATH} from "../../layout/AppRoutes/routes";
 
-export const to = {
+export const pathToSpecificPack = {
   learnPack: (packId: string) => {
     return `${PATH.LEARN_PACK}?cardsPack_id=${packId}`;
   },

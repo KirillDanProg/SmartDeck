@@ -13,7 +13,7 @@ import {
 } from "common/components";
 import {IGetCardsResponse} from "./cardsSlice";
 import {useGetCardsQuery} from "./cardsApi";
-import {ReturnComponent} from "common/components/returnComponent/ReturnComponent";
+import {GoToPrevPageComponent} from "common/components/go-to-prev-page/GoToPrevPageComponent";
 import {ModalForMyPack} from "../../../common/components/modal/ModalForMyPack";
 import {
   CreateNewPackRequestType,
@@ -38,7 +38,7 @@ export const CardsPage = () => {
 
   return (
     <PacksPageContainer>
-      <ReturnComponent />
+      <GoToPrevPageComponent />
 
       <Box sx={style}>
         <Typography

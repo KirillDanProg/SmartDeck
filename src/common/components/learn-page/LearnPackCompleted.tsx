@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {ButtonGroup} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import {to} from "../../navigateRoutes/navigateRoutes";
+import {pathToSpecificPack} from "../../navigate-to-card-helper/pathToSpecificPack";
 
 type PropsType = {
   packId: string;
@@ -23,11 +23,11 @@ export const LearnPackCompleted: FC<PropsType> = ({
   const tryAgainHandler = () => {
     tryAgain();
     setNewAttempt(true);
-    navigate(to.learnPack(packId));
+    navigate(pathToSpecificPack.learnPack(packId));
   };
 
   const backToCardsHandler = () => {
-    navigate(to.pack(packId));
+    navigate(pathToSpecificPack.pack(packId));
   };
 
   return (

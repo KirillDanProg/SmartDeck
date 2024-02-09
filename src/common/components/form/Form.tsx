@@ -11,10 +11,10 @@ import TextField from "@mui/material/TextField";
 import {useFormik} from "formik";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
+import {ILoginRequest} from "features/auth/authModels";
 
 type FormPropsType = {
-  //todo: fix types
-  callback: (data: any) => void;
+  callback: (data: ILoginRequest) => void;
   formType?: string;
 };
 export const Form: FC<FormPropsType> = ({callback, formType}) => {

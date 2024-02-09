@@ -5,9 +5,9 @@ export const PATH = {
   SIGN_UP: "/signup",
 
   PROFILE: "profile",
-  PACK_LISTS: "/pack-lists",
-  LEARN_PACK: "/learn-pack",
-  CARDS: "/cards",
+  PACKS_LIST: "packs-list",
+  LEARN_PACK: "learn-pack",
+  CARDS: "cards",
 
   CHECK_EMAIL: "/check",
   FORGOT_PASSWORD: "/forgot-password",

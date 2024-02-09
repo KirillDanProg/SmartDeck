@@ -1,5 +1,4 @@
-import {ReturnComponent} from "../returnComponent/ReturnComponent";
-import React from "react";
+import {GoToPrevPageComponent} from "../go-to-prev-page/GoToPrevPageComponent";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -25,7 +24,7 @@ export const NamePack = () => {
         spacing={{xs: 30}}
       >
         <Stack sx={{m: 3, alignItems: "center"}}>
-          <ReturnComponent />
+          <GoToPrevPageComponent />
           <Typography variant="h5">Name Pack</Typography>
         </Stack>
         <Stack

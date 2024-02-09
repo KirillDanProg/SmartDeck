@@ -6,7 +6,7 @@ import {LogoutBtn} from "./Button/LogoutBtn";
 import {useChangeNameMutation, useLogoutMutation} from "../auth/authApi";
 import {CustomGridContainer} from "common/components";
 import Typography from "@mui/material/Typography";
-import {ReturnComponent} from "common/components/returnComponent/ReturnComponent";
+import {GoToPrevPageComponent} from "common/components/go-to-prev-page/GoToPrevPageComponent";
 import Box from "@mui/material/Box";
 import {useAppSelector} from "../../common/hooks";
 import {ProfileSkeleton} from "../../common/components/skeletons/ProfileSkeleton";
@@ -33,7 +33,7 @@ export const Profile = () => {
         <ProfileSkeleton />
       ) : (
         <>
-          <ReturnComponent />
+          <GoToPrevPageComponent />
 
           <CustomGridContainer>
             <Typography className={s.title}>Personal Information</Typography>

@@ -19,12 +19,11 @@ function App() {
   const [authMe] = useAuthMeMutation();
 
   useEffect(() => {
-    //todo: how to use async await with useEffect
-    authMe("").then(() => {
+    (async function () {
+      await authMe("");
       firstMount.current = false;
-    });
+    })();
   }, []);
-  const a = 0;
 
   const errorCondition = !firstMount.current && error;
 

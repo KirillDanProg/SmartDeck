@@ -19,7 +19,7 @@ import {useAppSelector} from "../../hooks";
 import {BasicModalPacksList} from "../modal/BasicModal";
 import {ChildCreatePack} from "../modal/ChildCreatePack";
 import {DeletePackModal} from "../modal/deletePack/deletePackModal";
-import {to} from "../../navigateRoutes/navigateRoutes";
+import {pathToSpecificPack} from "../../navigate-to-card-helper/pathToSpecificPack";
 
 type PropsType = {
   packData: PackResponseType;
@@ -57,7 +57,7 @@ export const PackTableCell: FC<PropsType> = ({packData}) => {
 
   const learnPackHandler = () => {
     if (packData.cardsCount) {
-      navigate(to.learnPack(packData._id));
+      navigate(pathToSpecificPack.learnPack(packData._id));
     }
   };
 

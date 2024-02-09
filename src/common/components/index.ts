@@ -1,4 +1,4 @@
-export {EmptyList} from "./emptyList/EmptyList";
+export {EmptyList} from "./empty-list/EmptyList";
 export {PacksPagination} from "./pagination/PacksPagination";
 export {AddNewPack} from "./AddNewPack";
 

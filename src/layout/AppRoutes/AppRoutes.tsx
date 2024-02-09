@@ -21,8 +21,8 @@ export const AppRoutes = () => {
     <>
       <Routes>
         <Route path={PATH.MAIN} element={<Main />}>
+          <Route index element={<PacksPage />} />
           <Route path={PATH.PROFILE} element={<Profile />} />
-          <Route path={PATH.PACK_LISTS} element={<PacksPage />} />
           <Route path={PATH.CARDS} element={<CardsPage />} />
           <Route path={`${PATH.LEARN_PACK}`} element={<LearnPack />} />
         </Route>

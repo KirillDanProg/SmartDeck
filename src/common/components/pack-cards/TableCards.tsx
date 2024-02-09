@@ -15,7 +15,7 @@ import {
   CardType,
   IGetCardsResponse
 } from "features/packs-cards/cards/cardsSlice";
-import {EmptyList} from "../emptyList/EmptyList";
+import {EmptyList} from "../empty-list/EmptyList";
 import {getUrlParams, sortToggle} from "common/utils";
 import {useQueryParams} from "common/hooks";
 import {TableSkeleton} from "../skeletons/TableSkeleton";
