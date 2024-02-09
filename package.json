@@ -36,7 +36,9 @@
     "start": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "lint": "eslint -c .eslintrc --ext .ts,.tsx . --fix && prettier --write --config-precedence prefer-file \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "lint": "eslint . --ext .ts,.tsx . --fix",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.+(js|jsx|json|css|scss|md)\"",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "pre-commit": "yarn run lint"
@@ -76,6 +78,7 @@
     "@storybook/react": "^7.6.12",
     "@storybook/testing-library": "^0.0.13",
     "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.3",

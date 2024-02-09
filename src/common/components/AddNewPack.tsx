@@ -9,7 +9,7 @@ import {
 
 export const AddNewPack = () => {
   const [addPackModalOpen, setAddPackModalOpen] = useState(false);
-  const [addNewPack, {}] = useCreateNewPackMutation();
+  const [addNewPack] = useCreateNewPackMutation();
 
   const addNewPackHandler = async (e: CreateNewPackRequestType) => {
     addNewPack({
