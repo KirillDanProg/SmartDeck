@@ -1,36 +1,33 @@
 import {DarkModeSwitch} from "./DarkModeSwitch";
-import s from "./Header.module.css";
 import {ColorModelContext} from "./ColorModeContext";
 import incubatorLogo from "../../assets/logo/incubatorLogo.png";
 import {useLogoutMutation} from "../../features/auth/authApi";
 import {PATH} from "../AppRoutes/routes";
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  FormGroup,
+  Menu,
+  MenuItem,
+  CardMedia,
+  IconButton
+} from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import FormGroup from "@mui/material/FormGroup";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import CardMedia from "@mui/material/CardMedia";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import TransgenderIcon from "@mui/icons-material/Transgender";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
-import Link from "@mui/material/Link";
-import List from "@mui/material/List";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import {ChevronLeft} from "@mui/icons-material";
-import {Divider, ListItem} from "@mui/material";
+import {useSelector} from "react-redux";
+import {selectCurrentUser} from "features/auth/authSlice";
 
 export const Header = () => {
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [logout] = useLogoutMutation();
-  const [open, setOpen] = useState(false);
-
   const navigate = useNavigate();
+  const userId = useSelector(selectCurrentUser);
+
   const {toggleColorMode} = useContext(ColorModelContext);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -43,25 +40,19 @@ export const Header = () => {
   };
 
   const logOutHandler = async () => {
-    await logout().unwrap();
-    setAuth(false);
+    await logout();
   };
-  //==============burger menu=========================
-  const navigationLinks = [
-    {name: "About developers", href: PATH.DEV_PAGE},
-    {name: "About application", href: ""}
-  ];
 
   return (
     <Box sx={{flexGrow: 1}}>
       <AppBar position="static">
         <Toolbar>
-          <NavLink to={PATH.PACKS_LIST}>
+          <NavLink to={PATH.MAIN}>
             <CardMedia
               component="img"
               sx={{
-                width: 209,
-                height: 48
+                width: 184,
+                height: 42
               }}
               src={incubatorLogo}
             />
@@ -71,7 +62,7 @@ export const Header = () => {
             <DarkModeSwitch onClick={toggleColorMode} />
           </FormGroup>
 
-          {auth && (
+          {userId && (
             <div>
               <IconButton
                 size="large"
@@ -90,7 +81,6 @@ export const Header = () => {
                   vertical: "top",
                   horizontal: "right"
                 }}
-                keepMounted
                 transformOrigin={{
                   vertical: "top",
                   horizontal: "right"
@@ -99,51 +89,17 @@ export const Header = () => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>
-                  <TransgenderIcon
-                    fontSize={"small"}
-                    sx={{
-                      paddingRight: 1
-                    }}
-                  />
+                  <TransgenderIcon fontSize={"small"} />
                   Profile
                 </MenuItem>
                 <MenuItem onClick={logOutHandler}>
-                  <DirectionsRunIcon
-                    fontSize={"small"}
-                    sx={{
-                      paddingRight: 1
-                    }}
-                  />
+                  <DirectionsRunIcon fontSize={"small"} />
                   Log out
                 </MenuItem>
               </Menu>
             </div>
           )}
         </Toolbar>
-        <SwipeableDrawer
-          open={open}
-          onOpen={() => setOpen(true)}
-          onClose={() => setOpen(false)}
-        >
-          <IconButton onClick={() => setOpen(false)}>
-            <ChevronLeft />
-          </IconButton>
-          <Divider />
-          <List>
-            {navigationLinks.map((l, i) => (
-              <ListItem key={l.name + i}>
-                <Link
-                  color={"textPrimary"}
-                  variant={"button"}
-                  className={s.burgerMenuLinks}
-                  href={l.href}
-                >
-                  {l.name}
-                </Link>
-              </ListItem>
-            ))}
-          </List>
-        </SwipeableDrawer>
       </AppBar>
     </Box>
   );
