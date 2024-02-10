@@ -4,6 +4,7 @@ import {removeFromLocalStorage, saveToLocalStorage} from "common/utils";
 import {AsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 type StatusType = "idle" | "loading" | "succeeded" | "failed";
+
 type InitialStateType = {
   userData: UserType;
   token: string | null;
@@ -26,9 +27,9 @@ const initialState: InitialStateType = {
   userData: {} as UserType,
   token: null,
   userId: null,
-  status: "loading",
+  status: "idle",
   error: null,
-  userName: "new name",
+  userName: "",
   email: "",
   avatar: ""
 };
@@ -79,7 +80,6 @@ export const authSlice = createSlice({
           }
         }
       )
-      //login
       .addMatcher(
         authApi.endpoints.login.matchFulfilled,
         (state: InitialStateType, {payload}) => {
