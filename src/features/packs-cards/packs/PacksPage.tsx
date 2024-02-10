@@ -1,10 +1,8 @@
-import React from "react";
 import {getUrlParams, sortToggle} from "common/utils";
 import {useGetPacksQuery} from "./packsApi";
 import {IGetPacksResponse} from "./packsSlice";
 import {useQueryParams} from "common/hooks/useQueryParams";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import {Typography, Box} from "@mui/material";
 import {
   SearchPacksCard,
   TableFiltersContainer,
@@ -19,8 +17,8 @@ import {
 
 export const PacksPage = () => {
   const [searchParams, setParam, deleteParam] = useQueryParams();
-
   const paramsObject = getUrlParams(searchParams);
+  let sortPacks = searchParams.get("sortPacks") || "";
 
   const {
     data = {} as IGetPacksResponse,
@@ -30,7 +28,6 @@ export const PacksPage = () => {
 
   const cardPacks = data.cardPacks;
 
-  let sortPacks = searchParams.get("sortPacks") || "";
   return (
     <PacksPageContainer>
       <Box sx={style}>
@@ -43,7 +40,6 @@ export const PacksPage = () => {
 
       <TableFiltersContainer>
         <SearchPacksCard />
-
         <ShowPacksCards />
         {!isLoading && <NumberOfCards data={data} />}
         <FiltersReset deleteParam={deleteParam} params={searchParams} />
@@ -57,11 +53,13 @@ export const PacksPage = () => {
         sortToggle={sortToggle}
       />
 
-      <PacksPagination
-        pageProps={data.page}
-        pageCountProps={data.pageCount}
-        totalCount={data.cardPacksTotalCount}
-      />
+      {!isLoading && (
+        <PacksPagination
+          pageProps={data.page}
+          pageCountProps={data.pageCount}
+          totalCount={data.cardPacksTotalCount}
+        />
+      )}
     </PacksPageContainer>
   );
 };
