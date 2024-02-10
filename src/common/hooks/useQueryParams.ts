@@ -14,13 +14,11 @@ export const useQueryParams = (): ReturnType => {
     searchParams.set(key, value);
     setSearchParams(searchParams);
   };
-
-  const debouncedSetParam = useDebouncedCallback(setParam, 500);
-
   const deleteParam = (key: string) => {
     searchParams.delete(key);
     setSearchParams(searchParams);
   };
+  const debouncedSetParam = useDebouncedCallback(setParam, 500);
 
   return [searchParams, debouncedSetParam, deleteParam];
 };
