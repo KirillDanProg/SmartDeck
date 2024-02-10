@@ -1,12 +1,10 @@
 import React, {FC, useState} from "react";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import IconButton from "@mui/material/IconButton";
+import {IconButton, Menu, MenuItem} from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import {ChildCreatePack} from "./ChildCreatePack";
+import {EditPackModal} from "./EditPackModal";
 import {BasicModalPacksList} from "./BasicModal";
 import {
   CreateNewPackRequestType,
@@ -15,55 +13,48 @@ import {
 import {useNavigate} from "react-router-dom";
 import {pathToSpecificPack} from "../../navigate-to-card-helper/pathToSpecificPack";
 
-type ModalForMyPackType = {
+type PackOptionsMenuType = {
   packId: string;
   packName: string;
   cb: (e: CreateNewPackRequestType) => void;
-  isLoading: boolean;
+  isOwner: boolean;
 };
 
-export const ModalForMyPack: FC<ModalForMyPackType> = ({
-  isLoading,
+export const PackOptionsMenu: FC<PackOptionsMenuType> = ({
   cb,
   packId,
-  packName
+  packName,
+  isOwner
 }) => {
   const navigate = useNavigate();
-
   const [deletePack] = useDeletePackMutation();
-
+  const [openEditePackModal, setOpenEditePackModal] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const [openEditePackModal, setOpenEditePackModal] = useState(false);
-
   const toggleEditePackModalHandler = () => {
     setOpenEditePackModal(!openEditePackModal);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const deleteHandler = async () => {
     await deletePack(packId);
-    window.history.back();
   };
-
   const editeHandler = async (e: CreateNewPackRequestType) => {
     cb(e);
     setOpenEditePackModal(!openEditePackModal);
   };
-
   const learnPackHandler = () => {
+    console.log(pathToSpecificPack.learnPack(packId));
+
     navigate(pathToSpecificPack.learnPack(packId));
   };
 
   return (
-    <div>
+    <>
       <IconButton
         size="large"
         aria-label="account of current user"
@@ -79,45 +70,46 @@ export const ModalForMyPack: FC<ModalForMyPackType> = ({
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "right"
-        }}
-        sx={{
-          marginTop: "30px"
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right"
+          horizontal: "left"
         }}
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={learnPackHandler}>
-          <SchoolOutlinedIcon sx={forIcons} />
-          Learn
-        </MenuItem>
-        <MenuItem onClick={toggleEditePackModalHandler}>
-          <ModeEditIcon sx={forIcons} />
-          Edit
-        </MenuItem>
-        <MenuItem onClick={deleteHandler}>
-          <DeleteOutlineIcon sx={forIcons} />
-          Delete
-        </MenuItem>
+        {isOwner ? (
+          <>
+            <MenuItem onClick={learnPackHandler}>
+              <SchoolOutlinedIcon sx={forIcons} />
+              Learn
+            </MenuItem>
+            <MenuItem onClick={toggleEditePackModalHandler}>
+              <ModeEditIcon sx={forIcons} />
+              Edit
+            </MenuItem>
+            <MenuItem onClick={deleteHandler}>
+              <DeleteOutlineIcon sx={forIcons} />
+              Delete
+            </MenuItem>
+          </>
+        ) : (
+          <MenuItem onClick={learnPackHandler}>
+            <SchoolOutlinedIcon sx={forIcons} />
+            Learn
+          </MenuItem>
+        )}
       </Menu>
+
       <BasicModalPacksList
         title={"Edite pack"}
         open={openEditePackModal}
         closeModal={toggleEditePackModalHandler}
       >
-        <ChildCreatePack
-          disabled={isLoading}
-          inputValueStart={packName}
+        <EditPackModal
+          initialValue={packName}
           closeModal={toggleEditePackModalHandler}
           cb={editeHandler}
         />
       </BasicModalPacksList>
-    </div>
+    </>
   );
 };
 

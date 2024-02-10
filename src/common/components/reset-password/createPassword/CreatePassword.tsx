@@ -41,7 +41,7 @@ export const CreatePassword = () => {
         resetPasswordToken
       };
       await setNewPassword(setNewPasswordData);
-      navigate(PATH.LOGIN);
+      navigate(PATH.SIGN_IN);
     }
   };
 

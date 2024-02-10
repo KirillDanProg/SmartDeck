@@ -1,13 +1,10 @@
-import * as React from "react";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import s from "./CheckEmailPage.module.css";
 import checkEmail from "assets/icons/checkEmail.png";
 import {getFromLocalStorage, getRefFromEmail} from "../../../utils";
-import {CustomGridContainer} from "../../CustomGridContainer";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import CssBaseline from "@mui/material/CssBaseline";
+import {FlexContainer} from "../../FlexContainer";
+import {Typography, Grid, CssBaseline} from "@mui/material";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 
 export const CheckEmailPage = () => {
@@ -28,7 +25,7 @@ export const CheckEmailPage = () => {
   return (
     <Grid container component="main" sx={{height: "80vh"}}>
       <CssBaseline />
-      <CustomGridContainer>
+      <FlexContainer>
         <Typography variant="inherit" className={s.title}>
           Check email
         </Typography>
@@ -62,7 +59,7 @@ export const CheckEmailPage = () => {
           <AlternateEmailIcon fontSize={"small"} />
           Check your email
         </a>
-      </CustomGridContainer>
+      </FlexContainer>
     </Grid>
   );
 };

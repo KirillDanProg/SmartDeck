@@ -1,14 +1,11 @@
-import React from "react";
+import * as yup from "yup";
 import s from "./ForgotPassword.module.css";
 import {useForgotPasswordMutation} from "features/auth/authApi";
 import {PATH} from "layout/AppRoutes/routes";
 import {saveToLocalStorage} from "common/utils";
-import {CustomGridContainer} from "common/components/CustomGridContainer";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import {FlexContainer} from "common/components/FlexContainer";
+import {Typography, Button, TextField} from "@mui/material";
 import {NavLink, useNavigate} from "react-router-dom";
-import * as yup from "yup";
 import {useFormik} from "formik";
 
 export const validationSchema = yup.object({
@@ -34,7 +31,7 @@ export const ForgotPassword = () => {
   });
   return (
     <form onSubmit={formik.handleSubmit}>
-      <CustomGridContainer>
+      <FlexContainer>
         <Typography variant={"inherit"} className={s.title}>
           Forgot your password?
         </Typography>
@@ -59,7 +56,7 @@ export const ForgotPassword = () => {
         <NavLink to={"/login"} className={s.pToLogin} onClick={() => {}}>
           Try logging in
         </NavLink>
-      </CustomGridContainer>
+      </FlexContainer>
     </form>
   );
 };

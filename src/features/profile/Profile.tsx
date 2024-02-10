@@ -1,13 +1,11 @@
-import React from "react";
 import s from "./Profile.module.css";
 import {UserAvatar} from "./User/UserAvatar/UserAvatar";
 import {UserName} from "./User/UserName/UserName";
 import {LogoutBtn} from "./Button/LogoutBtn";
 import {useChangeNameMutation, useLogoutMutation} from "../auth/authApi";
-import {CustomGridContainer} from "common/components";
-import Typography from "@mui/material/Typography";
+import {FlexContainer} from "common/components";
+import {Typography, Box} from "@mui/material";
 import {GoToPrevPageComponent} from "common/components/go-to-prev-page/GoToPrevPageComponent";
-import Box from "@mui/material/Box";
 import {useAppSelector} from "../../common/hooks";
 import {ProfileSkeleton} from "../../common/components/skeletons/ProfileSkeleton";
 
@@ -35,7 +33,7 @@ export const Profile = () => {
         <>
           <GoToPrevPageComponent />
 
-          <CustomGridContainer>
+          <FlexContainer>
             <Typography className={s.title}>Personal Information</Typography>
             <Box marginTop={2} marginBottom={2}>
               <UserAvatar />
@@ -44,7 +42,7 @@ export const Profile = () => {
             <Typography className={s.email}>{email}</Typography>
             <br />
             <LogoutBtn callBack={logoutHandler} />
-          </CustomGridContainer>
+          </FlexContainer>
         </>
       )}
     </>

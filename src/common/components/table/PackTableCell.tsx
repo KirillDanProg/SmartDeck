@@ -17,7 +17,7 @@ import {PATH} from "layout/AppRoutes/routes";
 import {convertedDate} from "../../utils";
 import {useAppSelector} from "../../hooks";
 import {BasicModalPacksList} from "../modal/BasicModal";
-import {ChildCreatePack} from "../modal/ChildCreatePack";
+import {EditPackModal} from "../modal/EditPackModal";
 import {DeletePackModal} from "../modal/deletePack/deletePackModal";
 import {pathToSpecificPack} from "../../navigate-to-card-helper/pathToSpecificPack";
 
@@ -27,14 +27,13 @@ type PropsType = {
 };
 
 export const PackTableCell: FC<PropsType> = ({packData}) => {
-  const [deletePack] = useDeletePackMutation();
-  const [changeName, {isLoading}] = useChangeNamePackMutation();
   const navigate = useNavigate();
+  const [deletePack] = useDeletePackMutation();
+  const [changeName] = useChangeNamePackMutation();
   const [openDeletePackModal, setOpenDeletePackModal] = useState(false);
   const [openEditePackModal, setOpenEditePackModal] = useState(false);
 
   const userId = useAppSelector(selectCurrentUser);
-
   const packOwner = userId === packData.user_id;
 
   const deletePackHandler = async () => {
@@ -104,9 +103,8 @@ export const PackTableCell: FC<PropsType> = ({packData}) => {
         open={openEditePackModal}
         closeModal={toggleEditePackModalHandler}
       >
-        <ChildCreatePack
-          disabled={isLoading}
-          inputValueStart={packData.name}
+        <EditPackModal
+          initialValue={packData.name}
           closeModal={toggleEditePackModalHandler}
           cb={editeNameChangeHandler}
         />

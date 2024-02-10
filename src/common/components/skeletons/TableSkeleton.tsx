@@ -1,7 +1,4 @@
-import React from "react";
-import Skeleton from "@mui/material/Skeleton";
-import Box from "@mui/material/Box";
-import {Table} from "@mui/material";
+import {Table, Box, Skeleton} from "@mui/material";
 
 export const TableSkeleton = () => {
   return (

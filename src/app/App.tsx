@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import {useEffect, useRef} from "react";
 import {serverErrorHandler} from "common/utils";
 import {useAppSelector} from "common/hooks";
 import {selectCurrentError, selectCurrentStatus} from "features/auth/authSlice";
@@ -11,11 +11,8 @@ import {PreloaderContainer} from "../common/components/preloader/PreloaderContai
 
 function App() {
   const firstMount = useRef(true);
-
   const error = useAppSelector(selectCurrentError);
-
   const status = useAppSelector(selectCurrentStatus);
-
   const [authMe] = useAuthMeMutation();
 
   useEffect(() => {

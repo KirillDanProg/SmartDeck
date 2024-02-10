@@ -1,6 +1,6 @@
 import {PackTableCell} from "./PackTableCell";
 import {PackResponseType} from "features/packs-cards/packs/packsSlice";
-import React, {FC, memo} from "react";
+import {FC, memo} from "react";
 import {
   Paper,
   Table,
@@ -8,9 +8,9 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow,
+  TableSortLabel
 } from "@mui/material";
-import TableSortLabel from "@mui/material/TableSortLabel";
 import {EmptyList} from "../empty-list/EmptyList";
 import {TableSkeleton} from "../skeletons/TableSkeleton";
 
@@ -26,6 +26,7 @@ type PropsType = {
   sortPacks: string;
   setParam: any;
 };
+
 export const TablePacks: FC<PropsType> = memo(
   ({cardPacks, isFetching, sortPacks, sortToggle, setParam}) => {
     return (

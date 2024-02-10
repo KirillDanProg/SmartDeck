@@ -1,10 +1,7 @@
 import React, {FC} from "react";
-import {CustomGridContainer} from "../CustomGridContainer";
-import CardMedia from "@mui/material/CardMedia";
+import {FlexContainer} from "../FlexContainer";
 import completed from "assets/images/Checklist.jpg";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import {ButtonGroup} from "@mui/material";
+import {ButtonGroup, CardMedia, Button, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {pathToSpecificPack} from "../../navigate-to-card-helper/pathToSpecificPack";
 
@@ -31,7 +28,7 @@ export const LearnPackCompleted: FC<PropsType> = ({
   };
 
   return (
-    <CustomGridContainer>
+    <FlexContainer>
       <CardMedia component="img" src={completed} sx={{height: "270px"}} />
 
       <Typography component={"h4"} variant={"h4"}>
@@ -43,6 +40,6 @@ export const LearnPackCompleted: FC<PropsType> = ({
 
         <Button onClick={backToCardsHandler}>Back to cards</Button>
       </ButtonGroup>
-    </CustomGridContainer>
+    </FlexContainer>
   );
 };

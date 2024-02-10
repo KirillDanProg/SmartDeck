@@ -1,19 +1,16 @@
 import React, {FC} from "react";
-import Paper from "@mui/material/Paper";
-import Container from "@mui/material/Container";
-import Stack from "@mui/material/Stack";
+import {Stack, Container, Paper} from "@mui/material";
 
-type GridContainerT = {
+type FlexContainerType = {
   children: React.ReactNode;
 };
 
-export const CustomGridContainer: FC<GridContainerT> = ({children}) => {
+export const FlexContainer: FC<FlexContainerType> = ({children}) => {
   return (
     <Container
       maxWidth="sm"
       sx={{
         display: "flex",
-        minHeight: "90vh",
         justifyContent: "center"
       }}
     >
@@ -24,10 +21,10 @@ export const CustomGridContainer: FC<GridContainerT> = ({children}) => {
           mt: 7,
           p: 3,
           width: 450,
-          height: 700
+          height: 500
         }}
       >
-        <Stack sx={{alignItems: "center", justifyContent: "space-around"}}>
+        <Stack sx={{alignItems: "center", justifyContent: "center"}}>
           {children}
         </Stack>
       </Paper>

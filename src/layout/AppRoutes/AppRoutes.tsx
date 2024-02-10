@@ -1,4 +1,4 @@
-import React, {lazy} from "react";
+import {lazy} from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {PATH} from "./routes";
 import {Page404} from "../404-page/Page404";
@@ -28,7 +28,7 @@ export const AppRoutes = () => {
         </Route>
 
         <Route path={PATH.SIGN_UP} element={<SignUpPage />} />
-        <Route path={PATH.LOGIN} element={<SignInPage />} />
+        <Route path={PATH.SIGN_IN} element={<SignInPage />} />
         <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage />} />
         <Route
           path={`${PATH.SET_PASSWORD}/:resetPasswordToken`}

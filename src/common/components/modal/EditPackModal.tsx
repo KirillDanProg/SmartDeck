@@ -7,21 +7,21 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import {CreateNewPackRequestType} from "../../../features/packs-cards/packs/packsApi";
 
-type ChildEditPack = {
+type EditPackType = {
   cb: (e: CreateNewPackRequestType) => void;
   closeModal: (e: boolean) => void;
-  inputValueStart?: string;
+  initialValue?: string;
   disabled?: boolean;
 };
 
-export const ChildCreatePack: FC<ChildEditPack> = ({
+export const EditPackModal: FC<EditPackType> = ({
   closeModal,
   cb,
-  inputValueStart = "",
+  initialValue = "",
   disabled = false
 }) => {
-  const [inputValue, setInputValue] = useState(inputValueStart);
-  const [inputChecked, setInputChecked] = useState(false);
+  const [inputValue, setInputValue] = useState(initialValue);
+  const [isChecked, setIsChecked] = useState(false);
 
   const changeInputValue = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -29,14 +29,14 @@ export const ChildCreatePack: FC<ChildEditPack> = ({
     setInputValue(e.currentTarget.value);
   };
 
-  const clickSaveHandler = () => {
+  const onSaveHandler = () => {
     if (inputValue.trim().length)
-      cb({name: inputValue, privateValue: inputChecked});
+      cb({name: inputValue, privateValue: isChecked});
   };
   const closeModalHandler = () => closeModal(false);
 
-  const onChangeInputCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputChecked(e.currentTarget.checked);
+  const onChangeCheckboxHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(e.currentTarget.checked);
   };
 
   return (
@@ -53,8 +53,8 @@ export const ChildCreatePack: FC<ChildEditPack> = ({
           <FormControlLabel
             control={
               <Checkbox
-                onChange={onChangeInputCheckedHandler}
-                checked={inputChecked}
+                onChange={onChangeCheckboxHandler}
+                checked={isChecked}
               />
             }
             label="Private pack"
@@ -70,7 +70,7 @@ export const ChildCreatePack: FC<ChildEditPack> = ({
           Cancel
         </Button>
         <Button
-          onClick={clickSaveHandler}
+          onClick={onSaveHandler}
           sx={styleRightBtn}
           variant="contained"
           disabled={disabled}

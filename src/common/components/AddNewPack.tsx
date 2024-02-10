@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Button from "@mui/material/Button";
 import {BasicModalPacksList} from "./modal/BasicModal";
-import {ChildCreatePack} from "./modal/ChildCreatePack";
+import {EditPackModal} from "./modal/EditPackModal";
 import {
   CreateNewPackRequestType,
   useCreateNewPackMutation
@@ -33,10 +33,7 @@ export const AddNewPack = () => {
         open={addPackModalOpen}
         closeModal={closeModalAddPack}
       >
-        <ChildCreatePack
-          closeModal={closeModalAddPack}
-          cb={addNewPackHandler}
-        />
+        <EditPackModal closeModal={closeModalAddPack} cb={addNewPackHandler} />
       </BasicModalPacksList>
       <Button disabled={false} onClick={openModalAddPack} variant={"contained"}>
         Add new pack

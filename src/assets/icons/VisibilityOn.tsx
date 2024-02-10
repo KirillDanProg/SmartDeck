@@ -1,11 +1,5 @@
-import React from "react";
-
 export const VisibilityOn = () => {
   const style = {
-    top: "50%",
-    Position: "absolute",
-    right: "4px",
-    transform: "translate(-50%)",
     width: "25px"
   };
   return (

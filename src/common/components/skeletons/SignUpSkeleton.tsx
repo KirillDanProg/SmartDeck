@@ -1,14 +1,12 @@
-import * as React from "react";
-import Skeleton from "@mui/material/Skeleton";
-import Box from "@mui/material/Box";
-import {CustomGridContainer} from "../CustomGridContainer";
+import {Box, Skeleton} from "@mui/material";
+import {FlexContainer} from "../FlexContainer";
 import {HeaderSkeleton} from "./HeaderSkeleton";
 
 export const SignupSkeleton = () => {
   return (
     <>
       <HeaderSkeleton />
-      <CustomGridContainer>
+      <FlexContainer>
         <Box
           sx={{
             my: 8,
@@ -48,7 +46,7 @@ export const SignupSkeleton = () => {
             sx={{marginTop: "20px", height: "40px", width: "150px"}}
           />
         </Box>
-      </CustomGridContainer>
+      </FlexContainer>
     </>
   );
 };

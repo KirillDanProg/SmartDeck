@@ -18,6 +18,9 @@ export {CardsPageContainer} from "./pack-cards/CardsPageContainer";
 export {CardTableCell} from "./pack-cards/CardTableCell";
 
 export {PasswordVisibleIcon} from "./PasswordVisible";
-export {CustomGridContainer} from "./CustomGridContainer";
+export {FlexContainer} from "./FlexContainer";
 export {ErrorSnackbar} from "./snackbar/ErrorSnackbar";
 export {Preloader} from "./preloader/Preloader";
+
+export {GoToPrevPageComponent} from "./go-to-prev-page/GoToPrevPageComponent";
+export {PackOptionsMenu} from "./modal/PackOptionsMenu";

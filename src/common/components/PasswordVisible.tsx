@@ -1,6 +1,5 @@
 import {VisibilityOn} from "../../assets/icons/VisibilityOn";
 import {VisibilityOff} from "../../assets/icons/VisibilityOff";
-import React from "react";
 
 export const PasswordVisibleIcon = (props: {
   isShown: boolean;
@@ -11,7 +10,10 @@ export const PasswordVisibleIcon = (props: {
   };
 
   return (
-    <span onClick={onClickHandler} style={{cursor: "pointer"}}>
+    <span
+      onClick={onClickHandler}
+      style={{cursor: "pointer", display: "flex", alignItems: "center"}}
+    >
       {props.isShown ? <VisibilityOff /> : <VisibilityOn />}
     </span>
   );

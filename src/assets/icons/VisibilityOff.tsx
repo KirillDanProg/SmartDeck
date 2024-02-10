@@ -2,10 +2,6 @@ import React from "react";
 
 export const VisibilityOff = () => {
   const style = {
-    top: "50%",
-    Position: "absolute",
-    right: "4px",
-    transform: "translate(-50%)",
     width: "25px"
   };
 

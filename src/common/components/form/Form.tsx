@@ -1,7 +1,7 @@
 import {validationSchema} from "./yupValidation";
 import {PasswordVisibleIcon} from "../PasswordVisible";
 import {PATH} from "../../../layout/AppRoutes/routes";
-import React, {FC, useState} from "react";
+import {FC, useState} from "react";
 import {InputAdornment} from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -30,7 +30,7 @@ export const Form: FC<FormPropsType> = ({callback, formType}) => {
     },
     validationSchema,
     onSubmit: async (data) => {
-      await callback(data);
+      callback(data);
     }
   });
   return (
@@ -46,7 +46,6 @@ export const Form: FC<FormPropsType> = ({callback, formType}) => {
         {...formik.getFieldProps("email")}
       />
       <TextField
-        margin="normal"
         required
         fullWidth
         error={formik.touched.password && Boolean(formik.errors.password)}
@@ -99,7 +98,7 @@ export const Form: FC<FormPropsType> = ({callback, formType}) => {
         <Grid item>
           <Button
             component={Link}
-            to={formType === "sign-in" ? PATH.SIGN_UP : PATH.LOGIN}
+            to={formType === "sign-in" ? PATH.SIGN_UP : PATH.SIGN_IN}
           >
             {formType === "sign-in"
               ? "Don't have an account? Sign Up"
