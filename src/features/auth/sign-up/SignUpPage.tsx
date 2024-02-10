@@ -2,7 +2,7 @@ import * as React from "react";
 import {PATH} from "layout/AppRoutes/routes";
 import {useRedirectTo} from "common/hooks";
 import {Form} from "common/components/form/Form";
-import {CustomGridContainer} from "common/components";
+import {FlexContainer} from "common/components";
 import {IRegisterRequest} from "../authModels";
 import {useRegisterMutation} from "../authApi";
 import Typography from "@mui/material/Typography";
@@ -18,14 +18,14 @@ export const SignUpPage = () => {
     await register(data).unwrap();
   }
 
-  useRedirectTo(PATH.LOGIN, isSuccess, [isSuccess]);
+  useRedirectTo(PATH.SIGN_IN, isSuccess, [isSuccess]);
 
   return (
     <>
       {isLoading ? (
         <SignupSkeleton />
       ) : (
-        <CustomGridContainer>
+        <FlexContainer>
           <Box sx={style}>
             <Avatar sx={{m: 1, bgcolor: "secondary.main"}} />
             <Typography component="h1" variant="h5">
@@ -33,7 +33,7 @@ export const SignUpPage = () => {
             </Typography>
             <Form formType="sign-up" callback={signUpHandler} />
           </Box>
-        </CustomGridContainer>
+        </FlexContainer>
       )}
     </>
   );

@@ -8,10 +8,9 @@ import {PATH} from "../AppRoutes/routes";
 import {useNavigate} from "react-router-dom";
 
 export const Page404 = () => {
-  // const returnBtn = useRedirectTo
   const navigate = useNavigate();
   const returnHomeHandler = () => {
-    navigate(PATH.PACKS_LIST);
+    navigate(PATH.MAIN);
   };
 
   return (
@@ -20,8 +19,7 @@ export const Page404 = () => {
         <Box sx={{display: "flex", flexDirection: "column", gap: "24px"}}>
           <img style={imageOops} src={oops} />
           <Button variant={"contained"} onClick={returnHomeHandler}>
-            {" "}
-            Back to home page{" "}
+            Back to home page
           </Button>
         </Box>
         <img style={image404} src={page404} />
